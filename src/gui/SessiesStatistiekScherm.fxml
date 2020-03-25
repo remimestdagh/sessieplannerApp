@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="683.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessiesStatistiekSchermController">
+   <children>
+      <Pane prefHeight="683.0" prefWidth="905.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text layoutX="78.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessies Statistieken">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnStatistiek" layoutX="315.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleStatistiekAction" text="Terug naar Statistieken" />
+            <TableView fx:id="tblView" layoutX="78.0" layoutY="108.0" prefHeight="430.0" prefWidth="595.0" />
+            <Button fx:id="btnAanwezigheden" layoutX="538.0" layoutY="584.0" mnemonicParsing="false" onAction="#handleAanwezighedenAction" text="Bekijk Aanwezigheden" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

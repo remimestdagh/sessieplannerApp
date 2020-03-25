@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikersSchermController">
+   <children>
+      <Pane prefHeight="555.0" prefWidth="698.0">
+         <children>
+            <Label layoutX="43.0" layoutY="21.0" prefHeight="27.0" prefWidth="149.0" text="Beheer gebruikers">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Button fx:id="btnHoofmenu" layoutX="506.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" prefHeight="25.0" prefWidth="149.0" text="Terug naar Hoofdmenu" />
+            <Button fx:id="btnEdit" layoutX="468.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleEditGegevensAction" prefHeight="25.0" prefWidth="149.0" text="Beheer gebruiker" />
+            <Button layoutX="275.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleDeleteGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Delete gebruiker" />
+            <Button fx:id="btnCreate" layoutX="75.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Voeg gebruiker toe" />
+            <TableView fx:id="tblView" layoutX="60.0" layoutY="138.0" prefHeight="319.0" prefWidth="578.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

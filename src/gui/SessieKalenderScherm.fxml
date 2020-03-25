@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="678.0" prefWidth="911.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessieKalenderSchermController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text layoutX="56.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessie Kalender">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tblView" layoutX="56.0" layoutY="94.0" prefHeight="438.0" prefWidth="827.0" />
+            <Button fx:id="btnHoofdmenu" layoutX="227.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" text="Terug naar Sessie Kalenders" />
+            <Button fx:id="btnSessieToevoegen" layoutX="78.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleSessieToevoegenAction" text="Sessie Toevoegen" />
+            <Button fx:id="btnBeheerSessie" layoutX="227.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleBeheerSessieAction" text="Beheer Sessie" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -19,13 +19,15 @@ public class Main extends Application {
 	public void start(Stage stage) throws IOException{
 		
 		DomeinController dc = new DomeinController();
-		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginScherm.fxml"));
 		Parent root = (Parent)loader.load();
         LoginSchermController test = loader.getController();
         test.setDomainController(dc);
-		
         Scene scene = new Scene(root);
+        
+        //styling toevoegen
+        scene.getStylesheets().add("application/loginScherm.css");
+        
         stage.setScene(scene);
         stage.show();
 	}

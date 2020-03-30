@@ -20,6 +20,7 @@ public class Feedback {
 	private String feedbackAuteur;
 
 	// CONSTRUCTORS
+	protected Feedback() {}
 	public Feedback(String auteur, String tekst) {
 		setFeedbackAuteur(auteur);
 		setFeedbackTekst(tekst);

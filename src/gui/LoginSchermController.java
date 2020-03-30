@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 public class LoginSchermController extends AnchorPane implements Initializable, SchermController{
 	
+	//PARAMETERS
 	private DomeinController dc;
 	
 	@FXML
@@ -36,12 +37,16 @@ public class LoginSchermController extends AnchorPane implements Initializable, 
 	@FXML
 	private Text errorText;
     
+	//METHODS
     @FXML
+    /*
+     * LoginScherm -> Hoofdscherm
+     */
     private void handleLoginButtonAction(ActionEvent event) throws IOException {
     	try {
     	dc.login(emailVeld.getText(), wachtwoordVeld.getText());
     	//dc.login("@", "p");
-    		
+    	//vanuit dc.login kan verkeerdeInfo-error geworpen worden dus alles hieronder halen we niet noodzakelijk
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
 		Parent root = (Parent)loader.load();
         SchermController test = loader.getController();
@@ -50,7 +55,7 @@ public class LoginSchermController extends AnchorPane implements Initializable, 
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    	}catch(IllegalArgumentException e) {
+    	}catch(IllegalArgumentException e) { //errors vanuit persistentiedummy geworpen met corresponderende tekst.
     		errorText.setText(e.getMessage());
     	}catch(IllegalAccessError e){
     		errorText.setText(e.getMessage());

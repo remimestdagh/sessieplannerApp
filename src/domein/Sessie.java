@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,13 +15,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity(name="Sessies")
-@Table(name = "sessies")
-public class Sessie implements Serializable{
+@Entity
+@Table(name = "Sessie")
+public class Sessie {
 	// PARAMETERS
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -48,13 +50,18 @@ public class Sessie implements Serializable{
 	@OneToMany
 	@JoinColumn(name = "sessieId")
 	private List<Feedback> geplaatstFeedback;
-	@ManyToMany
+	@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
 	private List<Gebruiker> ingeschrevenGebruikers;
+	@OneToMany
+	@JoinColumn(name = "sessieId")
 	private List<Gebruiker> aanwezigeGebruikers;
 	
 	//private boolean stuurtHerinnering;
 	//private List<Herinnering> herinneringen; is dit nodig?
 
+	
+	//CONSTRUCTOR
+	protected Sessie() {}
 	public Sessie(String titel, String naamGastspreker,
 			String lokaalCode, int MAX_CAPACITEIT,
 			Date startDatum, Date eindDatum,

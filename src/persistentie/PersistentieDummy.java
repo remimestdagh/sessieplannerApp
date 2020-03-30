@@ -12,10 +12,12 @@ import domein.GebruikerStatus;
 
 public class PersistentieDummy {
 	
+	//PARAMETERS
 	private List<Gebruiker> gebruikers;
 	private List<Sessie> sessies;
 	private List<SessieKalender> sessieKalenders;
 	
+	//CONSTRUCTOR
 	public PersistentieDummy() {
 		sessies = new ArrayList();
 		gebruikers = new ArrayList<>();
@@ -88,6 +90,7 @@ public class PersistentieDummy {
 		sessieKalenders.add(sk);
 	}
 	
+	//METHODS
 	public List<Sessie> getSessies(){
 		return sessies;
 	}
@@ -96,8 +99,11 @@ public class PersistentieDummy {
 		return sessieKalenders;
 	}
 	
+	
+	/*
+	 * Op gekregen email en passwoord returnen we het account of werpen we error met text.
+	 */
 	public Gebruiker getGebruiker(String emailadres, String password) {
-		
 		for(Gebruiker geb: gebruikers){
 			if(geb.getEmailadres().equals(emailadres) && geb.getWachtwoord().equals(password)) {
 				return geb;
@@ -106,6 +112,10 @@ public class PersistentieDummy {
 		throw new IllegalArgumentException("Email of password verkeerd!");
 	}
 	
+	
+	/*
+	 * 
+	 */
 	public Gebruiker getGebruikerByName(String name) {
 		for(Gebruiker geb: gebruikers){
 			if(geb.getNaam().equals(name)) {

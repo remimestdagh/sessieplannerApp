@@ -25,6 +25,7 @@ public class Herinnering {
 	
 	
 	//CONSTRUCTOR
+	protected Herinnering() {}
 	public Herinnering(String bericht, int tijdstipOfVoorhand) {
 		this.bericht = bericht;
 		this.tijdstipOfVoorhand = tijdstipOfVoorhand;

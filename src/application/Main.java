@@ -4,7 +4,6 @@ package application;
 import java.io.IOException;
 
 import domein.DomeinController;
-import gui.LoginScherm;
 import gui.LoginSchermController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

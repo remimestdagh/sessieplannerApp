@@ -24,7 +24,7 @@ public class Aankondiging {
 
 	
 	//CONSTRUCTOR
-	
+	protected Aankondiging() {}
 	public Aankondiging(String inhoud, Gebruiker auteur, Date publicatieDatum) {
 		this.inhoud = inhoud;
 		this.auteur = auteur;

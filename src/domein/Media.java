@@ -19,6 +19,7 @@ public class Media {
 	
 	
 	//CONSTRUCTOR
+	protected Media() {}
 	public Media(String type) {
 		this.type = type;
 	}

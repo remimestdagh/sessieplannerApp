@@ -54,6 +54,7 @@ public class Seeder {
 		em.getTransaction().begin();
 		
 		Stream.of(s1).forEach(em::persist);
+		em.persist(s1.getSessieAanmaker());
 		s1.setHerinneringen(Arrays.asList(h1,h2)); //herinneringen toevoegen
 		Stream.of(h1,h2).forEach(em::persist);
 		s1.setMedia(Arrays.asList(m1));
@@ -63,10 +64,11 @@ public class Seeder {
 		s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
 		Stream.of(f1,f2).forEach(em::persist);
 		
+		
 		//de transactie verifyen
 		em.getTransaction().commit();
 		
-		//de persistentie tools weer afsluiten
+		//--Persistence tools afsluiten--
 		em.close();
 		emf.close();
 		/*

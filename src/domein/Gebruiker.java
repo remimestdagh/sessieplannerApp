@@ -14,11 +14,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="Gebruikers")
+@Table(name="Gebruiker")
 public class Gebruiker {
 	
 	//PARAMETERS
@@ -38,14 +40,18 @@ public class Gebruiker {
 	@Column(name = "Type")
 	private GebruikerType type;
 	//relation mapping
-	@ManyToMany(mappedBy="ingeschrevenGebruikers",cascade=CascadeType.ALL)
+	@JoinTable(name="GebruikerSessie") //ter herbenoeming tussentabel (match met dotnet)
+	@ManyToMany //Tussentabel!
 	private List<Sessie> sessiesWaarvoorIngeschreven;
 	
-	private List<Sessie> sessiesWaarvoorAanwezig;
 	//private String profielFoto;
 	//private Date inschrijvingsDatum;
+	@Transient //voorlopig niet gemapt, moet eigenlijk corresponderen met wasAanwezig in tussentabel!
+	private List<Sessie> sessiesWaarvoorAanwezig; 
+
 	
 	//CONSTRUCTOR
+	protected Gebruiker() {}
 	public Gebruiker(String naam,String naamChamilo, String emailadres, String wachtwoord,
 			GebruikerStatus status, GebruikerType type) {
 		
@@ -82,7 +88,7 @@ public class Gebruiker {
 		sessiesWaarvoorIngeschreven.add(sessie);
 	}
 	public void addAanwezigheid(Sessie sessie) {
-		sessiesWaarvoorAanwezig.add(sessie);
+		//sessiesWaarvoorAanwezig.add(sessie);
 	}
 	public void editGeselecteerdeGebruiker(String naam, String naamChamilo, String email, String status, String type) {
 		setNaam(naam);

@@ -21,7 +21,7 @@ public class DomeinController {
 	//CONSTRUCTOR
 	public DomeinController()
 	{
-		Seeder.seedDatabase(); //locaal opvullen van een fictieve database.
+		//Seeder.seedDatabase(); //locaal opvullen van een fictieve database.
 		pd = new PersistentieDummy();
 	}
 	
@@ -33,6 +33,10 @@ public class DomeinController {
 		return false;
 	}
 	
+	/*
+	 * tracht een account met doorgekregen info uit de persistentie op te halen. error vanuit persistentiedummy geworpen
+	 * lukt het wel, dan stellen we de ingelogde gebruiker in
+	 */
 	public void login(String emailadres, String password){
 		Gebruiker gebruiker = pd.getGebruiker(emailadres, password);
 		if(gebruiker.getType() == GebruikerType.Gewone_Gebruiker) {

@@ -1,9 +1,12 @@
 package gui;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Main;
 import domein.DomeinController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -36,7 +39,12 @@ public class LoginSchermController extends AnchorPane implements Initializable, 
 	
 	@FXML
 	private Text errorText;
-    
+	
+	//CONSTRUCTOR
+	public LoginSchermController() 
+	{
+		
+	}
 	//METHODS
     @FXML
     /*
@@ -64,6 +72,7 @@ public class LoginSchermController extends AnchorPane implements Initializable, 
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		errorText.setStyle(" -fx-background-color: #3B0902; -fx-background-radius: 10;-fx-text-fill: #FAE1A7 ;-fx-font-size:30;-fx-font-family: '../fonts/FatWandalsPersonalUse-9Vj7';");
 	}
 
 	public void setDomainController(DomeinController dc) {

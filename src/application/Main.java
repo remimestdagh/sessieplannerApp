@@ -1,6 +1,9 @@
 package application;
 	
 
+
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.io.IOException;
 
 import domein.DomeinController;
@@ -16,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws IOException{
+		
 		
 		//domeincontroller
 		DomeinController dc = new DomeinController();

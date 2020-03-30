@@ -12,7 +12,7 @@
    <children>
       <Pane layoutY="-3.0" prefHeight="614.0" prefWidth="802.0">
          <children>
-            <Text layoutX="297.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welkom op de HoGent sessieplanner!" wrappingWidth="207.7366943359375" />
+            <Text layoutX="297.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welkom op de HoGent sessieplanner!" wrappingWidth="207.7366943359375" style="-fx-font-family: 'Windlass'" />          
             <TextField fx:id="emailVeld" layoutX="275.0" layoutY="161.0" prefHeight="25.0" prefWidth="253.0" promptText="voornaam.famillienaam@student.hogent.be" />
             <PasswordField fx:id="wachtwoordVeld" layoutX="275.0" layoutY="245.0" prefHeight="25.0" prefWidth="253.0" />
             <Button fx:id="loginButton" layoutX="352.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="25.0" prefWidth="99.0" text="Login" />

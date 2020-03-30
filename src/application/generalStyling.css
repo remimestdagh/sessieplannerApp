@@ -1,51 +1,16 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
-
-
-.text{
-	
-}
-
-.titel { 
-	-fx-fill: white;
-	-fx-font-size:30;
-}
-.vboxtextfield{
-	-fx-max-width: 300;
-}
-
-
-.label{
-
+/*Chamillo font*/
+@font-face {
+    font-family: Chamillo;
+    src: url('../fonts/yagora.ttf');
 }
 
 .root{
 	-fx-spacing: 40;
 	-fx-alignment: baseline_center;
     -fx-font-size: 10pt;
-    -fx-font-family: "Tahoma";
+    -fx-font-family: Chamillo;
     -fx-base: white;
     -fx-background: #406E8E;
     -fx-focus-color: white;   
 }
-
-.text-field{
-    -fx-max-width: 300;
-    -fx-min-height: 40;
-    -fx-text-fill: grey;
-}
-
-.button {
-    -fx-background-color: #337AB7;
-    -fx-max-width: 200;
-    -fx-min-height: 40;
-    -fx-border-color: black;
-    -fx-text-fill: white;
-    -fx-background-radius: 0.5em;
-    -fx-border-radius: 0.5em;
-}
-
-
-
-
-
 

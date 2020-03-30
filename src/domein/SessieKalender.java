@@ -6,22 +6,21 @@ import java.util.List;
 
 public class SessieKalender {
 	
+	//PARAMETERS
 	private String academiejaar;
-	
 	private Date startdatum;
 	private Date einddatum;
-	
 	private List<Sessie> sessieList;
 
+	//CONSTRUCTOR
 	public SessieKalender(String academiejaar, Date startdatum, Date einddatum) {
 		setAcademiejaar(academiejaar);
 		setStartdatum(startdatum);
 		setEinddatum(einddatum);
-		
 		sessieList = new ArrayList();
 	}
-	//Methodes
 	
+	//METHODS
 	public void addSessie(Sessie sessie) {
 		sessieList.add(sessie);
 	}
@@ -34,8 +33,8 @@ public class SessieKalender {
 		setEinddatum(einddatum);
 	}
 	
-	//Getters en Setters
-	
+
+	//GETTERS AND SETTERS
 	public String getAcademiejaar() {
 		return academiejaar;
 	}

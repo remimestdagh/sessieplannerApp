@@ -12,9 +12,12 @@ import persistentie.Seeder;
 
 public class DomeinController {
 	
+	
 	//PARAMETERS
 	private Gebruiker ingelogdeGebruiker;
 	private PersistentieDummy pd;
+	
+	
 	
 	//CONSTRUCTOR
 	public DomeinController()
@@ -23,7 +26,6 @@ public class DomeinController {
 	}
 	
 	//METHODES
-	
 	public boolean gebruikerIsHoofdverantwoordelijke() {
 		if(ingelogdeGebruiker.getType() == GebruikerType.HoofdVerantwoordelijke) {
 			return true;

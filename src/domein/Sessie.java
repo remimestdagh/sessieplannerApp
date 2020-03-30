@@ -1,28 +1,54 @@
 package domein;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Sessie {
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity(name="Sessies")
+@Table(name = "sessies")
+public class Sessie implements Serializable{
 	// PARAMETERS
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int sessieId;
 	private String titel;
 	private String naamGastspreker;
 	private String lokaalCode;
-	
 	private int MAX_CAPACITEIT;
-	
 	private Date startDatum;
 	private Date eindDatum;
-	
 	private Gebruiker sessieAanmaker;
+	//relaties 
+	@Enumerated(EnumType.STRING)
 	private SessieStatus status;// Aangemaakt, Geopent, Gestart, Gesloten
-	
+	@OneToMany
+	@JoinColumn(name = "sessieId") //(Joincolumn, anders automatisch tussentabel bij OneToMany)
 	private List<Media> gebruikteMedia;
+	@OneToMany
+	@JoinColumn(name = "sessieId")
+	private List<Herinnering> herinneringen;
+	@OneToMany
+	@JoinColumn(name = "sessieId")
 	private List<Aankondiging> geplaatsteAankondigingen;
+	@OneToMany
+	@JoinColumn(name = "sessieId")
 	private List<Feedback> geplaatstFeedback;
+	@ManyToMany
 	private List<Gebruiker> ingeschrevenGebruikers;
 	private List<Gebruiker> aanwezigeGebruikers;
 	
@@ -78,6 +104,14 @@ public class Sessie {
 	
 	public void addInschrijving(Gebruiker gebruiker) {
 		ingeschrevenGebruikers.add(gebruiker);
+	}
+	
+	/**
+	 * Initialiseert de lijst van herinneringen
+	 */
+	public void setHerinneringen(List<Herinnering> herinneringen)
+	{
+		this.herinneringen = herinneringen;
 	}
 	
 	public void addAanwezigheid(Gebruiker gebruiker) {

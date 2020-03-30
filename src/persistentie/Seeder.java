@@ -1,32 +1,67 @@
 package persistentie;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import domein.Aankondiging;
+import domein.Feedback;
+import domein.Gebruiker;
+import domein.GebruikerStatus;
+import domein.GebruikerType;
+import domein.Herinnering;
+import domein.Media;
 import domein.Sessie;
 import util.JPAUtil;
 
 public class Seeder {
-
-	
 	//METHODS
 	public static void seedDatabase()
 	{
-
-		//te storen data
-		//Sessie s1 = new Sessie("Netacad discussion session", "Ryan Jaunzemis","Jens Joostssens",true,true, 100, true, "B.0.1");
-		//Sessie s2 = new Sessie("Competitive Packet-tracing", "Ethan klein","Hubert Jeannine", true, false, 25, true, "B.0.1");
+		////--Eerste Gebruikers--
+		Gebruiker g1 = new Gebruiker("Maxim Van Cauwenberge", "862687mv", "maxim.vancauwenberge@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Verantwoordelijke);
+		Gebruiker g2 = new Gebruiker("Alexander De Baene", "862656ad", "alexander.debaene@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
+		Gebruiker g3 = new Gebruiker("Admin", "admin", "@", "p", GebruikerStatus.ACTIEF, GebruikerType.HoofdVerantwoordelijke);
+		Gebruiker g4 = new Gebruiker("Jef Seys", "640431js", "jef.seys.y0431@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
+		Gebruiker g5 = new Gebruiker("Remi Mestdagh", "757957rm", "remi.mestdagh@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
+		Gebruiker g6 = new Gebruiker("Bert Suffys", "861835bs", "bert.suffys@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
 		
-		// persistentie tools ophalen
+		//--Eerste Sessies--
+		Sessie s1 = new Sessie("Github for dummys", "Frederik Haesbrouk", "B3.31", 20, new Date(2020,2,13,12,30), new Date(2020,2,13,13,30), g1);
+		Sessie s2 = new Sessie("Scrum is the truth", "Frederik Haesbrouk", "B2.17", 50, new Date(2020,2,15,12,30), new Date(2020,2,15,13,30), g1);
+		Sessie s3 = new Sessie("Linux Sucks", "Alexander De Baene", "B3.33", 25, new Date(2020,3,13,14,30), new Date(2020,3,13,17,0), g2);
+		
+		//--Eerste Sessie--
+		Herinnering h1 = new Herinnering("Het zal fijn worden!", 1);
+		Herinnering h2 = new Herinnering("Wees op tijd!", 2);
+		Media m1 = new Media("Playstation 3");
+		Aankondiging a1 = new Aankondiging("Gedurende de eerste 30 minuten maken we groepjes!",g1,new Date(2020,2,13,12,30));
+		Feedback f1 = new Feedback("Ruben Vandermeersch", "Heel boeiend!!");
+		Feedback f2 = new Feedback("Elias Vervaecke", "Ik vond de spreker goed gearticuleerd!");
+		
+
+
+		//--Persistentie tools ophalen--
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory(); //Persistence unit naam is "school", zie de xml file.
 		EntityManager em = emf.createEntityManager();
 		
+		
 		// de te storen data effectief storen
 		em.getTransaction().begin();
-		//Stream.of(s1,s2).forEach(em::persist);
+		
+		Stream.of(s1).forEach(em::persist);
+		s1.setHerinneringen(Arrays.asList(h1,h2)); //herinneringen toevoegen
+		Stream.of(h1,h2).forEach(em::persist);
+		s1.setMedia(Arrays.asList(m1));
+		em.persist(m1);
+		s1.setGeplaatsteAankondigingen(Arrays.asList(a1));
+		em.persist(a1);
+		s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
+		Stream.of(f1,f2).forEach(em::persist);
 		
 		//de transactie verifyen
 		em.getTransaction().commit();

@@ -18,10 +18,10 @@ public class DomeinController {
 	private PersistentieDummy pd;
 	
 	
-	
 	//CONSTRUCTOR
 	public DomeinController()
 	{
+		Seeder.seedDatabase(); //locaal opvullen van een fictieve database.
 		pd = new PersistentieDummy();
 	}
 	

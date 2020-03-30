@@ -6,20 +6,42 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Gebruikers")
 public class Gebruiker {
 	
 	//PARAMETERS
+	@Id
+	@Column(name = "HerinerringId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int gebruikerId;
 	private String naam;
 	private String naamChamilo;
 	private String emailadres;
 	private String wachtwoord;
-	
+	//enum mapping
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "GebruikerStatus")
 	private GebruikerStatus status;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "Type")
 	private GebruikerType type;
-	
+	//relation mapping
+	@ManyToMany(mappedBy="ingeschrevenGebruikers",cascade=CascadeType.ALL)
 	private List<Sessie> sessiesWaarvoorIngeschreven;
-	private List<Sessie> sessiesWaarvoorAanwezig;
 	
+	private List<Sessie> sessiesWaarvoorAanwezig;
 	//private String profielFoto;
 	//private Date inschrijvingsDatum;
 	
@@ -97,7 +119,6 @@ public class Gebruiker {
 	}
 	
 	//GETTERS AND SETTERS
-	
 	public String getNaam() {
 		return naam;
 	}

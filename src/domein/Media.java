@@ -13,8 +13,16 @@ public class Media {
 	@Id
 	@Column(name = "Type")
 	private String type;
+
+
+	
+	
 	
 	//CONSTRUCTOR
+	public Media(String type) {
+		this.type = type;
+	}
+	
 	
 	//METHODS
 	

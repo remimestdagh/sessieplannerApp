@@ -41,7 +41,7 @@ public class Gebruiker {
 	private GebruikerType type;
 	//relation mapping
 	@JoinTable(name="GebruikerSessie") //ter herbenoeming tussentabel (match met dotnet)
-	@ManyToMany //Tussentabel!
+	@ManyToMany(cascade = CascadeType.PERSIST) //Tussentabel!
 	private List<Sessie> sessiesWaarvoorIngeschreven;
 	
 	//private String profielFoto;

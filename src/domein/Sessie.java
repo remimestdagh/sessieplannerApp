@@ -36,9 +36,8 @@ public class Sessie {
 	private int MAX_CAPACITEIT;
 	private Date startDatum;
 	private Date eindDatum;
+	private String sessieAanmaker;
 	//relaties 
-	@Transient
-	private Gebruiker sessieAanmaker;
 	@Enumerated
 	private SessieStatus status;// Aangemaakt, Geopent, Gestart, Gesloten
 	@OneToMany(cascade = CascadeType.PERSIST)
@@ -47,10 +46,10 @@ public class Sessie {
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
 	private List<Herinnering> herinneringen;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
 	private List<Aankondiging> geplaatsteAankondigingen;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
 	private List<Feedback> geplaatstFeedback;
 	@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
@@ -68,7 +67,7 @@ public class Sessie {
 	public Sessie(String titel, String naamGastspreker,
 			String lokaalCode, int MAX_CAPACITEIT,
 			Date startDatum, Date eindDatum,
-			Gebruiker sessieAanmaker) {
+			String sessieAanmaker) {
 		
 		setTitel(titel);
 		setNaamGastspreker(naamGastspreker);
@@ -100,8 +99,8 @@ public class Sessie {
 
 	// METHODS
 	
-	public String getNaamVerantwoordelijke() {
-		return sessieAanmaker.getNaam();
+	public String getNaamAanmaker() {
+		return sessieAanmaker;
 	}
 	
 	public String getAanwezigenOrVrijePlaatsen() {
@@ -241,10 +240,10 @@ public class Sessie {
 		}
 		this.titel = titel;
 	}
-	public Gebruiker getSessieAanmaker() {
+	public String getSessieAanmaker() {
 		return sessieAanmaker;
 	}
-	public void setSessieAanmaker(Gebruiker sessieAanmaker) {
+	public void setSessieAanmaker(String sessieAanmaker) {
 		this.sessieAanmaker = sessieAanmaker;
 	}
 	public Date getStartDatum() {

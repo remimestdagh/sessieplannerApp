@@ -79,7 +79,7 @@ public class DomeinController {
 	public void addSessie(String titel, String naamGastspreker,
 			String lokaalCode, int MAX_CAPACITEIT,
 			String startDatum, String eindDatum) {
-		Sessie sessie = new Sessie(titel,naamGastspreker,lokaalCode,MAX_CAPACITEIT,new Date(startDatum),new Date(eindDatum),ingelogdeGebruiker);
+		Sessie sessie = new Sessie(titel,naamGastspreker,lokaalCode,MAX_CAPACITEIT,new Date(startDatum),new Date(eindDatum),ingelogdeGebruiker.getNaam());
 		pd.addSessie(sessie);
 	}
 	
@@ -139,7 +139,7 @@ public class DomeinController {
 		return geselecteerdeSessie.getEindDatum().toGMTString();
 	}
 	public String getGeselecteerdeSessieSessieAanmaker() {
-		return geselecteerdeSessie.getSessieAanmaker().getNaam();
+		return geselecteerdeSessie.getSessieAanmaker();
 	}
 	public String getGeselecteerdeSessieStatus() {
 		return geselecteerdeSessie.getStatus().toString();
@@ -183,7 +183,7 @@ public class DomeinController {
 	public void addSessieToGeselecteerdeSessieKalender(String titel, String naamGastspreker,
 			String lokaalCode, int MAX_CAPACITEIT,
 			String startDatum, String eindDatum) {
-		Sessie sessie = new Sessie(titel,naamGastspreker,lokaalCode,MAX_CAPACITEIT,new Date(startDatum),new Date(eindDatum),ingelogdeGebruiker);
+		Sessie sessie = new Sessie(titel,naamGastspreker,lokaalCode,MAX_CAPACITEIT,new Date(startDatum),new Date(eindDatum),ingelogdeGebruiker.getNaam());
 		geselecteerdeSessieKalender.addSessie(sessie);
 	}
 	public ObservableList<Sessie> getSessiesfromGeselecteerdeSessieKalender(){

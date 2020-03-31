@@ -18,7 +18,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Sessie")
@@ -34,14 +36,15 @@ public class Sessie {
 	private int MAX_CAPACITEIT;
 	private Date startDatum;
 	private Date eindDatum;
-	private Gebruiker sessieAanmaker;
 	//relaties 
-	@Enumerated(EnumType.STRING)
+	@Transient
+	private Gebruiker sessieAanmaker;
+	@Enumerated
 	private SessieStatus status;// Aangemaakt, Geopent, Gestart, Gesloten
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId") //(Joincolumn, anders automatisch tussentabel bij OneToMany)
 	private List<Media> gebruikteMedia;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
 	private List<Herinnering> herinneringen;
 	@OneToMany

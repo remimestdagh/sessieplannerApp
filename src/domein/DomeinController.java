@@ -21,7 +21,7 @@ public class DomeinController {
 	//CONSTRUCTOR
 	public DomeinController()
 	{
-		//Seeder.seedDatabase(); //locaal opvullen van een fictieve database.
+		Seeder.seedDatabase(); //locaal opvullen van een fictieve database.
 		pd = new PersistentieDummy();
 	}
 	
@@ -148,7 +148,7 @@ public class DomeinController {
 		geselecteerdeSessie.editSessie(titel, naamGastspreker, lokaalCode, plaatsen, startDatum, eindDatum, status);
 	}
 	public void addAankondigingToGeselecteerdeSessie(String inhoud) {
-		geselecteerdeSessie.addAankondiging(new Aankondiging(inhoud, ingelogdeGebruiker, new Date()));
+		geselecteerdeSessie.addAankondiging(new Aankondiging(inhoud, ingelogdeGebruiker.getNaam(), new Date()));
 	}
 	public ObservableList<Aankondiging> getAankondigingenfromGeselecteerdeSessie(){
 		List<Aankondiging> aankondigingen = geselecteerdeSessie.getGeplaatsteAankondigingen();

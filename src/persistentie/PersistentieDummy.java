@@ -34,9 +34,9 @@ public class PersistentieDummy {
 		Sessie s2 = new Sessie("Scrum is the truth", "Frederik Haesbrouk", "B2.17", 50, new Date(2020,2,15,12,30), new Date(2020,2,15,13,30), g1);
 		Sessie s3 = new Sessie("Linux Sucks", "Alexander De Baene", "B3.33", 25, new Date(2020,3,13,14,30), new Date(2020,3,13,17,0), g2);
 		
-		s1.addAankondiging(new Aankondiging("Een sessie voor dummys die github onder de knie willen krijgen", g1, new Date()));
-		s2.addAankondiging(new Aankondiging("Een uurtje Frederik horen zagen over Scrum", g1, new Date()));
-		s3.addAankondiging(new Aankondiging("Niet voor Linux fans", g1, new Date()));
+		s1.addAankondiging(new Aankondiging("Een sessie voor dummys die github onder de knie willen krijgen", g1.getNaam(), new Date()));
+		s2.addAankondiging(new Aankondiging("Een uurtje Frederik horen zagen over Scrum", g1.getNaam(), new Date()));
+		s3.addAankondiging(new Aankondiging("Niet voor Linux fans", g1.getNaam(), new Date()));
 		
 		SessieKalender sk = new SessieKalender("2019-2020", new Date(), new Date());
 		

@@ -20,12 +20,12 @@ public class Aankondiging {
 	private int aankondigingId;
 	private Date publicatieDatum;
 	private String inhoud;
-	private Gebruiker auteur;
+	private String auteur;
 
 	
 	//CONSTRUCTOR
 	protected Aankondiging() {}
-	public Aankondiging(String inhoud, Gebruiker auteur, Date publicatieDatum) {
+	public Aankondiging(String inhoud, String auteur, Date publicatieDatum) {
 		this.inhoud = inhoud;
 		this.auteur = auteur;
 		this.publicatieDatum = publicatieDatum;
@@ -34,7 +34,7 @@ public class Aankondiging {
 	//METHODS
 	
 	public String getAuteurNaam() {
-		return auteur.getNaam();
+		return auteur;
 	}
 	
 	//GETTERS AND SETTERS
@@ -45,10 +45,10 @@ public class Aankondiging {
 	public void setInhoud(String inhoud) {
 		this.inhoud = inhoud;
 	}
-	public Gebruiker getAuteur() {
+	public String getAuteur() {
 		return auteur;
 	}
-	public void setAuteur(Gebruiker auteur) {
+	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
 	public Date getPublicatieDatum() {

@@ -38,22 +38,33 @@ public class Seeder {
 		//--Eerste Sessie--
 		Herinnering h1 = new Herinnering("Het zal fijn worden!", 1);
 		Herinnering h2 = new Herinnering("Wees op tijd!", 2);
+		Herinnering h3 = new Herinnering("Deze sessie is verplicht!", 2);
 		Media m1 = new Media("Playstation 3");
-		Aankondiging a1 = new Aankondiging("Gedurende de eerste 30 minuten maken we groepjes!",g1,new Date(2020,2,13,12,30));
+		Media m2 = new Media("Tablet");
+		Aankondiging a1 = new Aankondiging("Gedurende de eerste 30 minuten maken we groepjes!",g1.getNaam(),new Date(2020,2,13,12,30));
 		Feedback f1 = new Feedback("Ruben Vandermeersch", "Heel boeiend!!");
 		Feedback f2 = new Feedback("Elias Vervaecke", "Ik vond de spreker goed gearticuleerd!");
 		
 
-
+		//sessie opbouwen met alles er in, en dan enkel sessie storen?
+		s2.setHerinneringen(Arrays.asList(h3));
+		s2.setMedia(Arrays.asList(m2));
+		
 		//--Persistentie tools ophalen--
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory(); //Persistence unit naam is "school", zie de xml file.
 		EntityManager em = emf.createEntityManager();
 		
 		
-		// de te storen data effectief storen
+		/*
+		 * De transactie starten
+		 * 
+		 */
 		em.getTransaction().begin();
 		
-		Stream.of(s1).forEach(em::persist);
+		Stream.of(s1,s2).forEach(em::persist);
+		//em.persist(h3);
+		//em.persist(m2);
+		
 		em.persist(s1.getSessieAanmaker());
 		s1.setHerinneringen(Arrays.asList(h1,h2)); //herinneringen toevoegen
 		Stream.of(h1,h2).forEach(em::persist);
@@ -63,6 +74,10 @@ public class Seeder {
 		em.persist(a1);
 		s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
 		Stream.of(f1,f2).forEach(em::persist);
+		
+
+		
+		
 		
 		
 		//de transactie verifyen

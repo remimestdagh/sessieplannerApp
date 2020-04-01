@@ -244,6 +244,9 @@ public class Sessie {
 		return sessieAanmaker;
 	}
 	public void setSessieAanmaker(String sessieAanmaker) {
+		if(sessieAanmaker.isBlank()||sessieAanmaker.isEmpty()){
+			throw new IllegalArgumentException("De aanmaker mag niet leeg zijn");
+		}
 		this.sessieAanmaker = sessieAanmaker;
 	}
 	public Date getStartDatum() {

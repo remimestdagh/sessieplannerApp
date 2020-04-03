@@ -20,9 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class SessieKalendersSchermController extends AnchorPane implements Initializable,SchermController{
-	
-	private DomeinController dc;
+public class SessieKalendersSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnHoofdmenu;
@@ -34,20 +32,10 @@ public class SessieKalendersSchermController extends AnchorPane implements Initi
 	private TableView tblView;
 
 	@Override
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
+	public void setDomeinController(DomeinController dc) {
+		super.setDomeinController(dc);
 		
-		TableColumn<SessieKalender, String> academiejaarColumn = new TableColumn<>("Academiejaar");
-		academiejaarColumn.setCellValueFactory(new PropertyValueFactory<>("academiejaar"));
-		
-		TableColumn<SessieKalender, String> startdatumColumn = new TableColumn<>("Start Datum");
-		startdatumColumn.setCellValueFactory(new PropertyValueFactory<>("startdatum"));
-		
-		TableColumn<SessieKalender, String> einddatumColumn = new TableColumn<>("Eind Datum");
-		einddatumColumn.setCellValueFactory(new PropertyValueFactory<>("einddatum"));
-		
-		tblView.setItems(dc.getSessieKalenders());
-		tblView.getColumns().addAll(academiejaarColumn, startdatumColumn, einddatumColumn);
+		maakKalenderTable(tblView, getDC().getSessieKalenders());
 	}
 
 	@Override
@@ -58,27 +46,14 @@ public class SessieKalendersSchermController extends AnchorPane implements Initi
 	
 	@FXML
     private void handleHoofdmenuAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnHoofdmenu.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnHoofdmenu, "Hoofd");
     }
 	
 	@FXML
     private void handleEditSessieKalenderAction(ActionEvent event) throws IOException {
-		dc.setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());
-		
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SessieKalenderScherm.fxml"));
-		Parent root = (Parent)loader.load();
-		SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnEdit.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+		getDC().setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());
+        
+        verranderScherm(btnEdit, "SessieKalender");
     }
 }

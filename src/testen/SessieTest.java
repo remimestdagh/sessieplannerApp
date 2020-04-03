@@ -22,6 +22,7 @@ public class SessieTest {
 				->new Sessie(titel,"gastspreker","lokaalcode",100,new Date(),new Date(),"aanmaker"));
 		
 	}
+	
 	@ParameterizedTest
 	@ValueSource(strings = {})
 	public void sessieAanmakenGeenDatumGeeftException(String date) {

@@ -23,10 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class LoginSchermController extends AnchorPane implements Initializable, SchermController{
-	
-	//PARAMETERS
-	private DomeinController dc;
+public class LoginSchermController extends SchermController implements Initializable{
 	
 	@FXML
     private TextField emailVeld;
@@ -52,17 +49,12 @@ public class LoginSchermController extends AnchorPane implements Initializable, 
      */
     private void handleLoginButtonAction(ActionEvent event) throws IOException {
     	try {
-    	dc.login(emailVeld.getText(), wachtwoordVeld.getText());
-    	//dc.login("@", "p");
-    	//vanuit dc.login kan verkeerdeInfo-error geworpen worden dus alles hieronder halen we niet noodzakelijk
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) loginButton.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    		getDC().login(emailVeld.getText(), wachtwoordVeld.getText());
+    		//dc.login("@", "p");
+    		
+    		//vanuit dc.login kan verkeerdeInfo-error geworpen worden dus alles hieronder halen we niet noodzakelijk
+    		verranderScherm(loginButton, "Hoofd");
+    		
     	}catch(IllegalArgumentException e) { //errors vanuit persistentiedummy geworpen met corresponderende tekst.
     		errorText.setText(e.getMessage());
     	}catch(IllegalAccessError e){
@@ -73,10 +65,6 @@ public class LoginSchermController extends AnchorPane implements Initializable, 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		errorText.setStyle(" -fx-background-color: #3B0902; -fx-background-radius: 10;-fx-text-fill: #FAE1A7 ;-fx-font-size:30;-fx-font-family: '../fonts/FatWandalsPersonalUse-9Vj7';");
-	}
-
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
 	}
 	
 }

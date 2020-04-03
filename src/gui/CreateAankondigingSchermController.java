@@ -23,9 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CreateAankondigingSchermController extends AnchorPane implements Initializable,SchermController{
-	
-	private DomeinController dc;
+public class CreateAankondigingSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnCancel;
@@ -40,21 +38,11 @@ public class CreateAankondigingSchermController extends AnchorPane implements In
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 	}
-
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
-	}
 	
 	@FXML
     private void handleCancelAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerSessieScherm.fxml"));
-		Parent root = (Parent)loader.load();
-		SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnCancel.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnCancel, "BeheerSessie");
     }
 	
 	@FXML
@@ -62,15 +50,8 @@ public class CreateAankondigingSchermController extends AnchorPane implements In
 		
 		String inhoud = txaInhoud.getText();
 		
-		dc.addAankondigingToGeselecteerdeSessie(inhoud);
-		
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerSessieScherm.fxml"));
-		Parent root = (Parent)loader.load();
-		SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnCancel.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+		getDC().addAankondigingToGeselecteerdeSessie(inhoud);
+        
+        verranderScherm(btnCancel, "BeheerSessie");
     }
 }

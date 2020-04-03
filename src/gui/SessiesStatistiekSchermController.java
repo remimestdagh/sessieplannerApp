@@ -19,9 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class SessiesStatistiekSchermController extends AnchorPane implements Initializable,SchermController{
-	
-	private DomeinController dc;
+public class SessiesStatistiekSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnStatistiek;
@@ -37,54 +35,24 @@ public class SessiesStatistiekSchermController extends AnchorPane implements Ini
 		
 	}
 
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
+	@Override
+	public void setDomeinController(DomeinController dc) {
+		super.setDomeinController(dc);
 		
-		TableColumn<Sessie, String> verantwoordelijkeColumn = new TableColumn<>("Naam verantwoordelijke");
-		verantwoordelijkeColumn.setCellValueFactory(new PropertyValueFactory<>("naamVerantwoordelijke"));
-		
-		TableColumn<Sessie, String> titelColumn = new TableColumn<>("Titel");
-		titelColumn.setCellValueFactory(new PropertyValueFactory<>("titel"));
-		
-		TableColumn<Sessie, String> startDatumColumn = new TableColumn<>("Start datum");
-		startDatumColumn.setCellValueFactory(new PropertyValueFactory<>("startDatum"));
-		
-		TableColumn<Sessie, String> eindDatumColumn = new TableColumn<>("Eind datum");
-		eindDatumColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
-		
-		TableColumn<Sessie, String> plaatsenColumn = new TableColumn<>("Aanwezigen / Vrije plaatsen");
-		plaatsenColumn.setCellValueFactory(new PropertyValueFactory<>("aanwezigenOrVrijePlaatsen"));
-		
-		tblView.setItems(dc.getSessies());
-		tblView.getColumns().addAll(verantwoordelijkeColumn, titelColumn, startDatumColumn, eindDatumColumn, plaatsenColumn);
-		tblView.getSortOrder().addAll(startDatumColumn,verantwoordelijkeColumn);
-		tblView.sort();
+		maakSessieTable(tblView, getDC().getSessies());
 	}
 	
 	@FXML
     private void handleStatistiekAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/StatistiekScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnStatistiek.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnStatistiek, "Statistiek");
     }
 	
 	@FXML
     private void handleAanwezighedenAction(ActionEvent event) throws IOException {
-		dc.setGeselecteerdeSessie((Sessie)tblView.getSelectionModel().getSelectedItem());
-		
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SessieStatistiekScherm.fxml"));
-		Parent root = (Parent)loader.load();
-		SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnAanwezigheden.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+		getDC().setGeselecteerdeSessie((Sessie)tblView.getSelectionModel().getSelectedItem());
+        
+        verranderScherm(btnAanwezigheden, "SessieStatistiek");
     }
 }
 

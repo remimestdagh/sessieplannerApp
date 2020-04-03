@@ -21,9 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class GebruikerStatistiekSchermController extends AnchorPane implements Initializable,SchermController{
-	
-	private DomeinController dc;
+public class GebruikerStatistiekSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnGebruikers;
@@ -36,39 +34,16 @@ public class GebruikerStatistiekSchermController extends AnchorPane implements I
 		
 	}
 
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
+	@Override
+	public void setDomeinController(DomeinController dc) {
+		super.setDomeinController(dc);
 		
-		TableColumn<Sessie, String> verantwoordelijkeColumn = new TableColumn<>("Naam verantwoordelijke");
-		verantwoordelijkeColumn.setCellValueFactory(new PropertyValueFactory<>("naamVerantwoordelijke"));
-		
-		TableColumn<Sessie, String> titelColumn = new TableColumn<>("Titel");
-		titelColumn.setCellValueFactory(new PropertyValueFactory<>("titel"));
-		
-		TableColumn<Sessie, String> startDatumColumn = new TableColumn<>("Start datum");
-		startDatumColumn.setCellValueFactory(new PropertyValueFactory<>("startDatum"));
-		
-		TableColumn<Sessie, String> eindDatumColumn = new TableColumn<>("Eind datum");
-		eindDatumColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
-		
-		TableColumn<Sessie, String> plaatsenColumn = new TableColumn<>("Aanwezigen / Vrije plaatsen");
-		plaatsenColumn.setCellValueFactory(new PropertyValueFactory<>("aanwezigenOrVrijePlaatsen"));
-		
-		tblView.setItems(dc.getSessiesfromGeselecteerdeGebruiker());
-		tblView.getColumns().addAll(verantwoordelijkeColumn, titelColumn, startDatumColumn, eindDatumColumn, plaatsenColumn);
-		tblView.getSortOrder().addAll(startDatumColumn,verantwoordelijkeColumn);
-		tblView.sort();
+		maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeGebruiker());
 	}
 	
 	@FXML
     private void handleGebruikersAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GebruikersStatistiekScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnGebruikers.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnGebruikers, "GebruikersStatistiek");
     }
 }

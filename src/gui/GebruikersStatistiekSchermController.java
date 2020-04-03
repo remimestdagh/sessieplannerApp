@@ -20,9 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class GebruikersStatistiekSchermController extends AnchorPane implements Initializable,SchermController{
-	
-	private DomeinController dc;
+public class GebruikersStatistiekSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnStatistiek;
@@ -38,49 +36,24 @@ public class GebruikersStatistiekSchermController extends AnchorPane implements 
 		
 	}
 
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
+	@Override
+	public void setDomeinController(DomeinController dc) {
+		super.setDomeinController(dc);
 		
-		TableColumn<Gebruiker, String> naamColumn = new TableColumn<>("Naam");
-		naamColumn.setCellValueFactory(new PropertyValueFactory<>("naam"));
-		
-		TableColumn<Gebruiker, String> chamiloColumn = new TableColumn<>("Naam Chamilo");
-		chamiloColumn.setCellValueFactory(new PropertyValueFactory<>("naamChamilo"));
-		
-		TableColumn<Gebruiker, String> emailColumn = new TableColumn<>("E-mail adres");
-		emailColumn.setCellValueFactory(new PropertyValueFactory<>("emailadres"));
-		
-		TableColumn<Gebruiker, String> statusColumn = new TableColumn<>("Status");
-		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-		
-		tblView.setItems(dc.getGebruikers());
-		tblView.getColumns().addAll(naamColumn, chamiloColumn, emailColumn, statusColumn);
+		maakGebruikerTable(tblView, getDC().getGebruikers());
 	}
 	
 	@FXML
     private void handleStatistiekAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/StatistiekScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnStatistiek.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnStatistiek, "Statistiek");
     }
 	
 	@FXML
     private void handleAanwezighedenAction(ActionEvent event) throws IOException {
-		dc.setGeselecteerdeGebruiker((Gebruiker)tblView.getSelectionModel().getSelectedItem());
-		
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GebruikerStatistiekScherm.fxml"));
-		Parent root = (Parent)loader.load();
-		SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnAanwezigheden.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+		getDC().setGeselecteerdeGebruiker((Gebruiker)tblView.getSelectionModel().getSelectedItem());
+        
+        verranderScherm(btnAanwezigheden, "GebruikerStatistiek");
     }
 }
 

@@ -28,9 +28,7 @@ import javafx.scene.control.Label;
 	import javafx.scene.text.Text;
 	import javafx.stage.Stage;
 
-	public class CreateGebruikerSchermController extends AnchorPane implements Initializable, SchermController{
-		
-		private DomeinController dc;
+	public class CreateGebruikerSchermController extends SchermController implements Initializable{
 		
 		@FXML
 		private Button btnCreate;
@@ -62,8 +60,9 @@ import javafx.scene.control.Label;
 			
 		}
 
-		public void setDomainController(DomeinController dc) {
-			this.dc = dc;
+		@Override
+		public void setDomeinController(DomeinController dc) {
+			super.setDomeinController(dc);
 			
 			cbStatus.getItems().addAll("ACTIEF","GEBLOKKEERD","NIET_ACTIEF");
 			cbStatus.setValue("ACTIEF");
@@ -80,29 +79,15 @@ import javafx.scene.control.Label;
 			String wachtwoord = txPassword.getText();
 			String status = (String) cbStatus.getValue();
 			String type = (String) cbType.getValue();
-	    	dc.addGebruiker(naam, chamilo, email, wachtwoord, status, type);
-	    	
-	    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikersScherm.fxml"));
-			Parent root = (Parent)loader.load();
-			SchermController test = loader.getController();
-	        test.setDomainController(dc);
-	        Stage stage = (Stage) btnCreate.getScene().getWindow();
-	        Scene scene = new Scene(root);
-	        stage.setScene(scene);
-	        stage.show();
+	    	getDC().addGebruiker(naam, chamilo, email, wachtwoord, status, type);
+	        
+	        verranderScherm(btnCreate, "BeheerGebruikers");
 	    }
 		
 		@FXML
 		private void handleCancelAction(ActionEvent event) throws IOException{
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikersScherm.fxml"));
-			Parent root = (Parent)loader.load();
-			SchermController test = loader.getController();
-	        test.setDomainController(dc);
-	        Stage stage = (Stage) btnCancel.getScene().getWindow();
-	        Scene scene = new Scene(root);
-	        stage.setScene(scene);
-	        stage.show();
+	        
+	        verranderScherm(btnCancel, "BeheerGebruikers");
 	    }
 		
 	}

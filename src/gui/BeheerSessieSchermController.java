@@ -22,9 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class BeheerSessieSchermController  extends AnchorPane implements Initializable,SchermController{
-	
-	private DomeinController dc;
+public class BeheerSessieSchermController  extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnKalender;
@@ -67,20 +65,11 @@ public class BeheerSessieSchermController  extends AnchorPane implements Initial
 		
 	}
 
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
+	@Override
+	public void setDomeinController(DomeinController dc) {
+		super.setDomeinController(dc);
 		
-		TableColumn<Aankondiging, String> inhoudColumn = new TableColumn<>("Inhoud");
-		inhoudColumn.setCellValueFactory(new PropertyValueFactory<>("inhoud"));
-		
-		TableColumn<Aankondiging, String> auteurColumn = new TableColumn<>("Auteur");
-		auteurColumn.setCellValueFactory(new PropertyValueFactory<>("auteurNaam"));
-		
-		TableColumn<Aankondiging, String> publicatieDatumColumn = new TableColumn<>("Publicatie Datum");
-		publicatieDatumColumn.setCellValueFactory(new PropertyValueFactory<>("publicatieDatum"));
-		
-		tblView.setItems(dc.getAankondigingenfromGeselecteerdeSessie());
-		tblView.getColumns().addAll(inhoudColumn, auteurColumn, publicatieDatumColumn);
+		maakAankondigingTable(tblView, getDC().getAankondigingenfromGeselecteerdeSessie());
 		
 		txtTitel.setText(dc.getGeselecteerdeSessieTitel());
 		txtVerantwoordelijke.setText(dc.getGeselecteerdeSessieSessieAanmaker());
@@ -96,27 +85,14 @@ public class BeheerSessieSchermController  extends AnchorPane implements Initial
 	
 	@FXML
     private void handleKalenderAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SessieKalenderScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnKalender.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnKalender, "SessieKalender");
     }
 	
 	@FXML
     private void handleAankondigingAction(ActionEvent event) throws IOException {
-		
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/CreateAankondigingScherm.fxml"));
-		Parent root = (Parent)loader.load();
-		SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnAankondiging.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnAankondiging, "CreateAankondiging");
     }
 	
 	@FXML
@@ -130,16 +106,9 @@ public class BeheerSessieSchermController  extends AnchorPane implements Initial
 		String lokaal = txtLokaal.getText();
 		String status = (String) cbStatus.getValue();
 		
-		dc.editGeselecteerdeSessie(titel, spreker, lokaal, capaciteit, startDatum, eindDatum, status);
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SessieKalenderScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnEditSessie.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+		getDC().editGeselecteerdeSessie(titel, spreker, lokaal, capaciteit, startDatum, eindDatum, status);
+        
+        verranderScherm(btnEditSessie, "SessieKalender");
     }
 }
 

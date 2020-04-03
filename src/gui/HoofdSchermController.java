@@ -20,9 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class HoofdSchermController extends AnchorPane implements Initializable, SchermController{
-	
-	private DomeinController dc;
+public class HoofdSchermController extends SchermController implements Initializable{
 	
 	@FXML
     private Text textName;
@@ -41,47 +39,30 @@ public class HoofdSchermController extends AnchorPane implements Initializable, 
 		
 	}
 
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
+	@Override
+	public void setDomeinController(DomeinController dc) {
+		super.setDomeinController(dc);
 		textName.setText(dc.getNaamIngelogdeGebruiker());
 	}
 	
 	@FXML
     private void handleBeheerGebruikersButtonAction(ActionEvent event) throws IOException {
-		if(dc.gebruikerIsHoofdverantwoordelijke()) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikersScherm.fxml"));
-			Parent root = (Parent)loader.load();
-			SchermController scherm = loader.getController();
-			scherm.setDomainController(dc);
-			Stage stage = (Stage) btnBeheerGebruikers.getScene().getWindow();
-			Scene scene = new Scene(root);
-        	stage.setScene(scene);
-        	stage.show();
+		if(getDC().gebruikerIsHoofdverantwoordelijke()) {
+        	
+        	verranderScherm(btnBeheerGebruikers, "BeheerGebruikers");
 		}
 	}
 	
 	@FXML
     private void handleStatistiekButtonAction(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/StatistiekScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController scherm = loader.getController();
-        scherm.setDomainController(dc);
-        Stage stage = (Stage) btnStat.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnStat, "Statistiek");
 	}
 	
 	@FXML
     private void handleSessieKalenderButtonAction(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SessieKalendersScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController scherm = loader.getController();
-        scherm.setDomainController(dc);
-        Stage stage = (Stage) btnKalender.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnKalender, "SessieKalenders");
 	}
 	
 }

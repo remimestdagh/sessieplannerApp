@@ -16,9 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class StatistiekSchermController extends AnchorPane implements Initializable, SchermController{
-	
-	private DomeinController dc;
+public class StatistiekSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnHoofdmenu;
@@ -33,45 +31,23 @@ public class StatistiekSchermController extends AnchorPane implements Initializa
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 	}
-
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
-	}
 	
 	@FXML
     private void handleHoofdmenuAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnHoofdmenu.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnHoofdmenu, "Hoofd");
     }
 	
 	@FXML
     private void handleGebruikersAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GebruikersStatistiekScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnGebruikers.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnGebruikers, "GebruikersStatistiek");
     }
 	
 	@FXML
     private void handleSessiesAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SessiesStatistiekScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnSessies.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnSessies, "SessiesStatistiek");
     }
 	
 }

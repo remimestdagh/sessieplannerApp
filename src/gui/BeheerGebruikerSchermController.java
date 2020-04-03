@@ -21,9 +21,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class BeheerGebruikerSchermController extends AnchorPane implements Initializable,SchermController{
+public class BeheerGebruikerSchermController extends SchermController implements Initializable{
 	
-	private DomeinController dc;
 	
 	@FXML
 	private Button btnTerug;
@@ -50,28 +49,10 @@ public class BeheerGebruikerSchermController extends AnchorPane implements Initi
 	private TableView tblView;
 
 	@Override
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
+	public void setDomeinController(DomeinController dc) {
+		super.setDomeinController(dc);
 		
-		TableColumn<Sessie, String> verantwoordelijkeColumn = new TableColumn<>("Naam verantwoordelijke");
-		verantwoordelijkeColumn.setCellValueFactory(new PropertyValueFactory<>("naamVerantwoordelijke"));
-		
-		TableColumn<Sessie, String> titelColumn = new TableColumn<>("Titel");
-		titelColumn.setCellValueFactory(new PropertyValueFactory<>("titel"));
-		
-		TableColumn<Sessie, String> startDatumColumn = new TableColumn<>("Start datum");
-		startDatumColumn.setCellValueFactory(new PropertyValueFactory<>("startDatum"));
-		
-		TableColumn<Sessie, String> eindDatumColumn = new TableColumn<>("Eind datum");
-		eindDatumColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
-		
-		TableColumn<Sessie, String> plaatsenColumn = new TableColumn<>("Aanwezigen / Vrije plaatsen");
-		plaatsenColumn.setCellValueFactory(new PropertyValueFactory<>("aanwezigenOrVrijePlaatsen"));
-		
-		tblView.setItems(dc.getSessiesfromGeselecteerdeGebruiker());
-		tblView.getColumns().addAll(verantwoordelijkeColumn, titelColumn, startDatumColumn, eindDatumColumn, plaatsenColumn);
-		tblView.getSortOrder().addAll(startDatumColumn,verantwoordelijkeColumn);
-		tblView.sort();
+		maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeGebruiker());
 		
 		cbStatus.getItems().addAll("ACTIEF","GEBLOKKEERD","NIET_ACTIEF");
 		cbStatus.setValue(dc.getGeselecteerdeGebruikerStatus());
@@ -92,14 +73,8 @@ public class BeheerGebruikerSchermController extends AnchorPane implements Initi
 	
 	@FXML
     private void handleTerugAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikersScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnTerug.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnTerug, "BeheerGebruikers");
     }
 	
 	@FXML
@@ -110,15 +85,8 @@ public class BeheerGebruikerSchermController extends AnchorPane implements Initi
 		String status = (String) cbStatus.getValue();
 		String type = (String) cbType.getValue();
 		
-		dc.editGeselecteerdeGebruiker(naam, naamChamilo, email, status, type);
-		
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikersScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnEdit.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+		getDC().editGeselecteerdeGebruiker(naam, naamChamilo, email, status, type);
+        
+        verranderScherm(btnEdit, "BeheerGebruikers");
     }
 }

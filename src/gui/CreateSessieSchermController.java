@@ -16,9 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CreateSessieSchermController extends AnchorPane implements Initializable,SchermController{
-	
-	private DomeinController dc;
+public class CreateSessieSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnCancel;
@@ -48,21 +46,11 @@ public class CreateSessieSchermController extends AnchorPane implements Initiali
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 	}
-
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
-	}
 	
 	@FXML
     private void handleCancelAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SessieKalenderScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnCancel.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnCancel, "SessieKalender");
     }
 	
 	@FXML
@@ -74,15 +62,8 @@ public class CreateSessieSchermController extends AnchorPane implements Initiali
 		String startDatum = txtStartDatum.getText();
 		String eindDatum = txtEindDatum.getText();
 		
-		dc.addSessieToGeselecteerdeSessieKalender(titel, gastspreker, lokaal, maxCapaciteit, startDatum, eindDatum);
-		
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SessieKalenderScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnToevoegen.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+		getDC().addSessieToGeselecteerdeSessieKalender(titel, gastspreker, lokaal, maxCapaciteit, startDatum, eindDatum);
+        
+        verranderScherm(btnToevoegen, "SessieKalender");
     }
 }

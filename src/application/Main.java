@@ -28,7 +28,7 @@ public class Main extends Application {
 		Parent root = (Parent)loader.load();
 		//eerste scherm initialiseren en domeincontroller meegeven
         LoginSchermController test = loader.getController();
-        test.setDomainController(dc);
+        test.setDomeinController(dc);
         Scene scene = new Scene(root);
         
         //styling toevoegen

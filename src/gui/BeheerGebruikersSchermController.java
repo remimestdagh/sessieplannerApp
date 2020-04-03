@@ -31,9 +31,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class BeheerGebruikersSchermController extends AnchorPane implements Initializable,SchermController{
-	
-	private DomeinController dc;
+public class BeheerGebruikersSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private TableView tblView;
@@ -53,74 +51,37 @@ public class BeheerGebruikersSchermController extends AnchorPane implements Init
 		
 	}
 
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
-		updateTable();
-	}
-	
-	private void updateTable() {
-		tblView.getColumns().clear();
-		
-		TableColumn<Gebruiker, String> naamColumn = new TableColumn<>("Naam");
-		naamColumn.setCellValueFactory(new PropertyValueFactory<>("naam"));
-		
-		TableColumn<Gebruiker, String> chamiloColumn = new TableColumn<>("Naam Chamilo");
-		chamiloColumn.setCellValueFactory(new PropertyValueFactory<>("naamChamilo"));
-		
-		TableColumn<Gebruiker, String> emailColumn = new TableColumn<>("E-mail adres");
-		emailColumn.setCellValueFactory(new PropertyValueFactory<>("emailadres"));
-		
-		TableColumn<Gebruiker, String> statusColumn = new TableColumn<>("Status");
-		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-		
-		tblView.setItems(dc.getGebruikers());
-		tblView.getColumns().addAll(naamColumn, chamiloColumn, emailColumn, statusColumn);
+	@Override
+	public void setDomeinController(DomeinController dc) {
+		super.setDomeinController(dc);
+		maakGebruikerTable(tblView, getDC().getGebruikers());
 	}
 	
 	@FXML
     private void handleHoofdmenuAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnHoofmenu.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+        verranderScherm(btnHoofmenu, "Hoofd");
     }
 	
 	@FXML
     private void handleEditGegevensAction(ActionEvent event) throws IOException{
 		Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
-		dc.setGeselecteerdeGebruiker(gebruiker);
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikerScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnHoofmenu.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+		getDC().setGeselecteerdeGebruiker(gebruiker);
+        
+        verranderScherm(btnEdit, "BeheerGebruiker");
     }
 	
 	@FXML
     private void handleDeleteGebruikerAction(ActionEvent event){
     	Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
-    	dc.verwijderGebruiker(gebruiker.getNaam());
-    	updateTable();
+    	getDC().verwijderGebruiker(gebruiker.getNaam());
+    	maakGebruikerTable(tblView, getDC().getGebruikers());
     }
 	
 	@FXML
 	private void handleCreateGebruikerAction(ActionEvent event) throws IOException{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/CreateGebruikerScherm.fxml"));
-		Parent root = (Parent)loader.load();
-		SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnCreate.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnCreate, "CreateGebruiker");
     }
 	
 }

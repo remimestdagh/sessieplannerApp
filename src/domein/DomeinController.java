@@ -21,7 +21,7 @@ public class DomeinController {
 	//CONSTRUCTOR
 	public DomeinController()
 	{
-		Seeder.seedDatabase(); //locaal opvullen van een fictieve database.
+		//Seeder.seedDatabase(); //locaal opvullen van een fictieve database.
 		pd = new PersistentieDummy();
 	}
 	

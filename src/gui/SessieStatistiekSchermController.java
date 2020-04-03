@@ -20,9 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class SessieStatistiekSchermController extends AnchorPane implements Initializable,SchermController{
-	
-	private DomeinController dc;
+public class SessieStatistiekSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnSessies;
@@ -35,34 +33,16 @@ public class SessieStatistiekSchermController extends AnchorPane implements Init
 		
 	}
 
-	public void setDomainController(DomeinController dc) {
-		this.dc = dc;
+	@Override
+	public void setDomeinController(DomeinController dc) {
+		super.setDomeinController(dc);
 		
-		TableColumn<Gebruiker, String> naamColumn = new TableColumn<>("Naam");
-		naamColumn.setCellValueFactory(new PropertyValueFactory<>("naam"));
-		
-		TableColumn<Gebruiker, String> chamiloColumn = new TableColumn<>("Naam Chamilo");
-		chamiloColumn.setCellValueFactory(new PropertyValueFactory<>("naamChamilo"));
-		
-		TableColumn<Gebruiker, String> emailColumn = new TableColumn<>("E-mail adres");
-		emailColumn.setCellValueFactory(new PropertyValueFactory<>("emailadres"));
-		
-		TableColumn<Gebruiker, String> statusColumn = new TableColumn<>("Status");
-		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-		
-		tblView.setItems(dc.getGebruikersFromGeselecteerdeSessie());
-		tblView.getColumns().addAll(naamColumn, chamiloColumn, emailColumn, statusColumn);
+		maakGebruikerTable(tblView, getDC().getGebruikersFromGeselecteerdeSessie());
 	}
 	
 	@FXML
     private void handleSessiesAction(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SessiesStatistiekScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController test = loader.getController();
-        test.setDomainController(dc);
-        Stage stage = (Stage) btnSessies.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        
+        verranderScherm(btnSessies, "SessiesStatistiek");
     }
 }

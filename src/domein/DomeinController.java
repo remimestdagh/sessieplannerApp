@@ -34,21 +34,9 @@ public class DomeinController {
 	public DomeinController(){
 		
 		if(USE_DUMMY) {
-			// nieuwe dummy aanmaken en de dummy daos initialiseren
-			PersistentieDummy pd = new PersistentieDummy();
-		
-			DummyGebruikerDao gebruikerDao = new DummyGebruikerDao();
-			gebruikerDao.setPD(pd);
-		
-			DummySessieDao sessieDao = new DummySessieDao();
-			sessieDao.setPD(pd);
-		
-			DummySessieKalenderDao sessieKalenderDao = new DummySessieKalenderDao();
-			sessieKalenderDao.setPD(pd);
-		
-			this.gebruikerDao = gebruikerDao;
-			this.sessieDao = sessieDao;
-			this.sessieKalenderDao = sessieKalenderDao;
+			this.gebruikerDao = new DummyGebruikerDao();
+			this.sessieDao = new DummySessieDao();
+			this.sessieKalenderDao = new DummySessieKalenderDao();
 		}
 		
 		if(USE_JPA) {
@@ -86,21 +74,15 @@ public class DomeinController {
 	}
 	
 	public ObservableList<Sessie> getSessies(){
-		List<Sessie> sessies = sessieDao.findAll();
-		ObservableList<Sessie> obsList = FXCollections.<Sessie>observableArrayList(sessies);
-		return obsList;
+		return sessieDao.findAll();
 	}
 	
 	public ObservableList<Gebruiker> getGebruikers(){
-		List<Gebruiker> gebruikers = gebruikerDao.findAll();
-		ObservableList<Gebruiker> obsList = FXCollections.<Gebruiker>observableArrayList(gebruikers);
-		return obsList;
+		return gebruikerDao.findAll();
 	}
 	
 	public ObservableList<SessieKalender> getSessieKalenders(){
-		List<SessieKalender> sessieKalenders = sessieKalenderDao.findAll();
-		ObservableList<SessieKalender> obsList = FXCollections.<SessieKalender>observableArrayList(sessieKalenders);
-		return obsList;
+		return sessieKalenderDao.findAll();
 	}
 	
 	public void verwijderGebruiker(Gebruiker gebruiker) {
@@ -219,8 +201,8 @@ public class DomeinController {
 	}
 	public void addSessieToGeselecteerdeSessieKalender(String titel, String naamGastspreker,
 			String lokaalCode, int MAX_CAPACITEIT,
-			String startDatum, String eindDatum) {
-		Sessie sessie = new Sessie(titel,naamGastspreker,lokaalCode,MAX_CAPACITEIT,new Date(startDatum),new Date(eindDatum),ingelogdeGebruiker.getNaam());
+			Date startDatum, Date eindDatum) {
+		Sessie sessie = new Sessie(titel,naamGastspreker,lokaalCode,MAX_CAPACITEIT,startDatum,eindDatum,ingelogdeGebruiker.getNaam());
 		geselecteerdeSessieKalender.addSessie(sessie);
 		
 		sessieKalenderDao.update(geselecteerdeSessieKalender);

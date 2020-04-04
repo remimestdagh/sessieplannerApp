@@ -8,18 +8,22 @@ import domein.Gebruiker;
 import domein.GebruikerType;
 import domein.Sessie;
 import domein.SessieKalender;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import domein.GebruikerStatus;
 
 public class PersistentieDummy {
 	
 	//PARAMETERS
-	private List<Gebruiker> gebruikers;
-	private List<SessieKalender> sessieKalenders;
+	private static PersistentieDummy uniqueInstance;
+	
+	private ObservableList<Gebruiker> gebruikers;
+	private ObservableList<SessieKalender> sessieKalenders;
 	
 	//CONSTRUCTOR
-	public PersistentieDummy() {
-		gebruikers = new ArrayList<>();
-		sessieKalenders = new ArrayList();
+	private PersistentieDummy() {
+		gebruikers = FXCollections.<Gebruiker>observableArrayList();
+		sessieKalenders = FXCollections.<SessieKalender>observableArrayList();
 		
 		Gebruiker g1 = new Gebruiker("Maxim Van Cauwenberge", "862687mv", "maxim.vancauwenberge@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Verantwoordelijke);
 		Gebruiker g2 = new Gebruiker("Alexander De Baene", "862656ad", "alexander.debaene@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
@@ -90,10 +94,17 @@ public class PersistentieDummy {
 	
 	//METHODS
 	
+	public static PersistentieDummy getInstance() {
+		if(uniqueInstance == null) {
+			uniqueInstance = new PersistentieDummy();
+		}
+		return uniqueInstance;
+	}
+	
 	// Sessie methodes
 	
-	public List<Sessie> getSessies(){
-		List<Sessie> sessies = new ArrayList();
+	public ObservableList<Sessie> getSessies(){
+		ObservableList<Sessie> sessies = FXCollections.<Sessie>observableArrayList();
 		for(SessieKalender kalender: sessieKalenders) {
 			sessies.addAll(kalender.getSessieList());
 		}
@@ -106,7 +117,7 @@ public class PersistentieDummy {
 	
 	// Sessie Kalender methodes
 	
-	public List<SessieKalender> getSessieKalenders(){
+	public ObservableList<SessieKalender> getSessieKalenders(){
 		return sessieKalenders;
 	}
 	
@@ -124,7 +135,7 @@ public class PersistentieDummy {
 		throw new IllegalArgumentException("Email niet gekend!");
 	}
 	
-	public List<Gebruiker> getGebruikers(){
+	public ObservableList<Gebruiker> getGebruikers(){
 		return gebruikers;
 	}
 	

@@ -2,6 +2,8 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
@@ -12,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -34,10 +37,10 @@ public class CreateSessieSchermController extends SchermController implements In
 	private TextField txtLokaal;
 	
 	@FXML
-	private TextField txtStartDatum;
+	private DatePicker dateStartDatum;
 	
 	@FXML
-	private TextField txtEindDatum;
+	private DatePicker dateEindDatum;
 	
 	@FXML
 	private Button btnToevoegen;
@@ -59,8 +62,8 @@ public class CreateSessieSchermController extends SchermController implements In
 		String gastspreker = txtGastspreker.getText();
 		int maxCapaciteit = Integer.parseInt(txtMaxCapaciteit.getText());
 		String lokaal = txtLokaal.getText();
-		String startDatum = txtStartDatum.getText();
-		String eindDatum = txtEindDatum.getText();
+		Date startDatum = java.sql.Date.valueOf(dateStartDatum.getValue());
+		Date eindDatum = java.sql.Date.valueOf(dateEindDatum.getValue());
 		
 		getDC().addSessieToGeselecteerdeSessieKalender(titel, gastspreker, lokaal, maxCapaciteit, startDatum, eindDatum);
         

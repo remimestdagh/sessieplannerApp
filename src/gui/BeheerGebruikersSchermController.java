@@ -74,7 +74,7 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	@FXML
     private void handleDeleteGebruikerAction(ActionEvent event){
     	Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
-    	getDC().verwijderGebruiker(gebruiker.getNaam());
+    	getDC().verwijderGebruiker(gebruiker);
     	maakGebruikerTable(tblView, getDC().getGebruikers());
     }
 	

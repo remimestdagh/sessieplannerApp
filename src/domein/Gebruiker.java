@@ -88,7 +88,7 @@ public class Gebruiker {
 		sessiesWaarvoorIngeschreven.add(sessie);
 	}
 	public void addAanwezigheid(Sessie sessie) {
-		//sessiesWaarvoorAanwezig.add(sessie);
+		sessiesWaarvoorAanwezig.add(sessie);
 	}
 	public void editGeselecteerdeGebruiker(String naam, String naamChamilo, String email, String status, String type) {
 		setNaam(naam);

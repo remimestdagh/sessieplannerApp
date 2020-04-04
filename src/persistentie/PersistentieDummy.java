@@ -14,12 +14,10 @@ public class PersistentieDummy {
 	
 	//PARAMETERS
 	private List<Gebruiker> gebruikers;
-	private List<Sessie> sessies;
 	private List<SessieKalender> sessieKalenders;
 	
 	//CONSTRUCTOR
 	public PersistentieDummy() {
-		sessies = new ArrayList();
 		gebruikers = new ArrayList<>();
 		sessieKalenders = new ArrayList();
 		
@@ -38,7 +36,9 @@ public class PersistentieDummy {
 		s2.addAankondiging(new Aankondiging("Een uurtje Frederik horen zagen over Scrum", g1.getNaam(), new Date()));
 		s3.addAankondiging(new Aankondiging("Niet voor Linux fans", g1.getNaam(), new Date()));
 		
-		SessieKalender sk = new SessieKalender("2019-2020", new Date(), new Date());
+		SessieKalender sk = new SessieKalender("2019-2020", new Date(2019,8,1,12,0), new Date(2020,6,1,12,0));
+		SessieKalender sk2 = new SessieKalender("2018-2019", new Date(2018,8,1,12,0), new Date(2019,6,1,12,0));
+		SessieKalender sk3 = new SessieKalender("2020-2021", new Date(2020,8,1,12,0), new Date(2021,6,1,12,0));
 		
 		sk.addSessie(s1);
 		sk.addSessie(s2);
@@ -76,10 +76,6 @@ public class PersistentieDummy {
 		g6.addAanwezigheid(s1);g6.addInschrijving(s1);
 		g6.addAanwezigheid(s2);g6.addInschrijving(s2);
 		
-		sessies.add(s1);
-		sessies.add(s2);
-		sessies.add(s3);
-		
 		gebruikers.add(g1);
 		gebruikers.add(g2);
 		gebruikers.add(g3);
@@ -88,89 +84,64 @@ public class PersistentieDummy {
 		gebruikers.add(g6);
 		
 		sessieKalenders.add(sk);
+		sessieKalenders.add(sk2);
+		sessieKalenders.add(sk3);
 	}
 	
 	//METHODS
+	
+	// Sessie methodes
+	
 	public List<Sessie> getSessies(){
+		List<Sessie> sessies = new ArrayList();
+		for(SessieKalender kalender: sessieKalenders) {
+			sessies.addAll(kalender.getSessieList());
+		}
 		return sessies;
 	}
+	
+	public void addSessieToKalender(Sessie sessie, SessieKalender kalender) {
+		kalender.addSessie(sessie);
+	}
+	
+	// Sessie Kalender methodes
 	
 	public List<SessieKalender> getSessieKalenders(){
 		return sessieKalenders;
 	}
 	
+	// Gebruikers methodes
 	
 	/*
 	 * Op gekregen email en passwoord returnen we het account of werpen we error met text.
 	 */
-	public Gebruiker getGebruiker(String emailadres, String password) {
+	public Gebruiker getGebruikerByEmail(String emailadres) {
 		for(Gebruiker geb: gebruikers){
-			if(geb.getEmailadres().equals(emailadres) && geb.getWachtwoord().equals(password)) {
+			if(geb.getEmailadres().equals(emailadres)) {
 				return geb;
 			}
 		}
-		throw new IllegalArgumentException("Email of password verkeerd!");
-	}
-	
-	
-	/*
-	 * 
-	 */
-	public Gebruiker getGebruikerByName(String name) {
-		for(Gebruiker geb: gebruikers){
-			if(geb.getNaam().equals(name)) {
-				return geb;
-			}
-		}
-		throw new IllegalArgumentException("Geen gebruiker met die naam!");
+		throw new IllegalArgumentException("Email niet gekend!");
 	}
 	
 	public List<Gebruiker> getGebruikers(){
 		return gebruikers;
 	}
 	
-	public void verwijderGebruiker(String naam) {
-		Gebruiker teverwijderen = null;
-		for(Gebruiker geb: gebruikers){
-			if(geb.getNaam().equals(naam)) {
-				teverwijderen = geb;
-			}
-		}
-		if(teverwijderen != null) {
-			gebruikers.remove(teverwijderen);
-		}
+	public void verwijderGebruiker(Gebruiker gebruiker) {
+		gebruikers.remove(gebruiker);
 	}
 	
 	public void addGebruiker(Gebruiker gebruiker) {
 		gebruikers.add(gebruiker);
 	}
 	
-	public void addSessie(Sessie sessie) {
-		sessies.add(sessie);
-	}
-	
-	public void editGebruiker(String naam, String chamiloNaam, String status, String type) {
-		Gebruiker gebruiker = null;
-		for(Gebruiker geb: gebruikers){
-			if(geb.getNaam().equals(naam)) {
-				gebruiker = geb;
+	public SessieKalender getHuidigeSessieKalender() {
+		for(SessieKalender kalender: sessieKalenders) {
+			if(kalender.getStartdatum().before(new Date()) && kalender.getEinddatum().after(new Date())) {
+				return kalender;
 			}
 		}
-		if(gebruiker != null) {
-			gebruiker.setNaamChamilo(chamiloNaam);
-			switch(status.toUpperCase()) {
-			case "GEBLOKKEERD":
-				gebruiker.setStatus(GebruikerStatus.GEBLOKKEERD);
-				break;
-			case "NIET_ACTIEF":
-				gebruiker.setStatus(GebruikerStatus.NIET_ACTIEF);
-				break;
-			case "ACTIEF":
-			default:
-				gebruiker.setStatus(GebruikerStatus.ACTIEF);
-				break;
-			}
-			
-		}
+		throw new IllegalArgumentException("Huidige kalender niet gevonden!");
 	}
 }

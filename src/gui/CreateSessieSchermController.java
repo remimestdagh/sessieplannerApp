@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -53,7 +54,11 @@ public class CreateSessieSchermController extends SchermController implements In
 	@FXML
     private void handleCancelAction(ActionEvent event) throws IOException {
         
-        verranderScherm(btnCancel, "SessieKalender");
+        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
+        	verranderScherm(btnCancel, "SessieKalender");
+        }else {
+        	verranderScherm(btnCancel, "VerantwoordelijkeBeheerSessies");
+        }
     }
 	
 	@FXML
@@ -62,11 +67,15 @@ public class CreateSessieSchermController extends SchermController implements In
 		String gastspreker = txtGastspreker.getText();
 		int maxCapaciteit = Integer.parseInt(txtMaxCapaciteit.getText());
 		String lokaal = txtLokaal.getText();
-		Date startDatum = java.sql.Date.valueOf(dateStartDatum.getValue());
-		Date eindDatum = java.sql.Date.valueOf(dateEindDatum.getValue());
+		LocalDateTime startDatum = dateStartDatum.getValue().atStartOfDay();
+		LocalDateTime eindDatum = dateEindDatum.getValue().atStartOfDay();
 		
 		getDC().addSessieToGeselecteerdeSessieKalender(titel, gastspreker, lokaal, maxCapaciteit, startDatum, eindDatum);
         
-        verranderScherm(btnToevoegen, "SessieKalender");
+        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
+        	verranderScherm(btnToevoegen, "SessieKalender");
+        }else {
+        	verranderScherm(btnToevoegen, "VerantwoordelijkeBeheerSessies");
+        }
     }
 }

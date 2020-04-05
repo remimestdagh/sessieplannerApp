@@ -1,6 +1,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,8 +35,8 @@ public class Sessie {
 	private String naamGastspreker;
 	private String lokaalCode;
 	private int MAX_CAPACITEIT;
-	private Date startDatum;
-	private Date eindDatum;
+	private LocalDateTime startDatum;
+	private LocalDateTime eindDatum;
 	private String sessieAanmaker;
 	//relaties 
 	@Enumerated
@@ -66,7 +67,7 @@ public class Sessie {
 	protected Sessie() {}
 	public Sessie(String titel, String naamGastspreker,
 			String lokaalCode, int MAX_CAPACITEIT,
-			Date startDatum, Date eindDatum,
+			LocalDateTime startDatum, LocalDateTime eindDatum,
 			String sessieAanmaker) {
 		
 		setTitel(titel);
@@ -208,8 +209,8 @@ public class Sessie {
 			setNaamGastspreker(naamGastspreker);
 			setLokaalCode(lokaalCode);
 			setMAX_CAPACITEIT(plaatsen);
-			setStartDatum(new Date(startDatum));
-			setEindDatum(new Date(eindDatum));
+			setStartDatum( LocalDateTime.parse(startDatum));
+			setEindDatum(LocalDateTime.parse(eindDatum));
 
 			switch(status) {
 			case"AANGEMAAKT":
@@ -249,19 +250,19 @@ public class Sessie {
 		}
 		this.sessieAanmaker = sessieAanmaker;
 	}
-	public Date getStartDatum() {
+	public LocalDateTime getStartDatum() {
 		return startDatum;
 	}
-	protected void setStartDatum(Date startDatum) {
+	protected void setStartDatum(LocalDateTime startDatum) {
 		if (startDatum == null) {
 			throw new IllegalArgumentException("De startdatum moet ingevuld worden");
 		}
 		this.startDatum = startDatum;
 	}
-	public Date getEindDatum() {
+	public LocalDateTime getEindDatum() {
 		return eindDatum;
 	}
-	protected void setEindDatum(Date eindDatum) {
+	protected void setEindDatum(LocalDateTime eindDatum) {
 		if (eindDatum == null) {
 			throw new IllegalArgumentException("De einddatum moet ingevuld worden");
 		}

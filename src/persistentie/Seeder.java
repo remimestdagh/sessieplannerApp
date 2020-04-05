@@ -1,6 +1,7 @@
 package persistentie;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.stream.Stream;
@@ -31,12 +32,12 @@ public class Seeder {
 		Gebruiker g6 = new Gebruiker("Bert Suffys", "861835bs", "bert.suffys@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
 		
 		//--Sessies--
-		Sessie s1 = new Sessie("Github for dummys", "Frederik Haesbrouk", "B3.31", 20, new Date(2020,2,13,12,30), new Date(2020,2,13,13,30), g1.getNaam());
-		Sessie s2 = new Sessie("Scrum is the truth", "Frederik Haesbrouk", "B2.17", 50, new Date(2020,2,15,12,30), new Date(2020,2,15,13,30), g6.getNaam());
-		Sessie s3 = new Sessie("Linux Sucks", "Alexander De Baene", "B3.33", 25, new Date(2020,3,13,14,30), new Date(2020,3,13,17,0), g2.getNaam());
-		Sessie s4 = new Sessie("Linux Is Just Amazing!", "Bert Suffys", "B0.00", 25, new Date(2020,3,13,14,30), new Date(2020,3,13,17,0), g3.getNaam());
-		Sessie s5 = new Sessie("Linux Is pretty average", "Alexander De Baene", "B3.33", 25, new Date(2020,3,13,14,30), new Date(2020,3,13,17,0), g4.getNaam());
-		Sessie s6 = new Sessie("The saddening history of Ubuntu", "Hugh Mungus", "B6.66", 25, new Date(2020,3,13,14,30), new Date(2020,3,13,17,0), g5.getNaam());
+		Sessie s1 = new Sessie("Github for dummys", "Frederik Haesbrouk", "B3.31", 20, LocalDateTime.of(2020,2,13,12,30), LocalDateTime.of(2020,2,13,13,30), g1.getNaam());
+		Sessie s2 = new Sessie("Scrum is the truth", "Frederik Haesbrouk", "B2.17", 50, LocalDateTime.of(2020,2,15,12,30), LocalDateTime.of(2020,2,15,13,30), g6.getNaam());
+		Sessie s3 = new Sessie("Linux Sucks", "Alexander De Baene", "B3.33", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g2.getNaam());
+		Sessie s4 = new Sessie("Linux Is Just Amazing!", "Bert Suffys", "B0.00", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g3.getNaam());
+		Sessie s5 = new Sessie("Linux Is pretty average", "Alexander De Baene", "B3.33", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g4.getNaam());
+		Sessie s6 = new Sessie("The saddening history of Ubuntu", "Hugh Mungus", "B6.66", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g5.getNaam());
 		
 		//--Sessie relaties--
 		Herinnering h1 = new Herinnering("Het zal fijn worden!", 1);

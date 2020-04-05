@@ -1,5 +1,6 @@
 package persistentie;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,17 +33,17 @@ public class PersistentieDummy {
 		Gebruiker g5 = new Gebruiker("Remi Mestdagh", "757957rm", "remi.mestdagh@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
 		Gebruiker g6 = new Gebruiker("Bert Suffys", "861835bs", "bert.suffys@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
 		
-		Sessie s1 = new Sessie("Github for dummys", "Frederik Haesbrouk", "B3.31", 20, new Date(2020,2,13,12,30), new Date(2020,2,13,13,30), g1.getNaam());
-		Sessie s2 = new Sessie("Scrum is the truth", "Frederik Haesbrouk", "B2.17", 50, new Date(2020,2,15,12,30), new Date(2020,2,15,13,30), g1.getNaam());
-		Sessie s3 = new Sessie("Linux Sucks", "Alexander De Baene", "B3.33", 25, new Date(2020,3,13,14,30), new Date(2020,3,13,17,0), g2.getNaam());
+		Sessie s1 = new Sessie("Github for dummys", "Frederik Haesbrouk", "B3.31", 20, LocalDateTime.of(2020,2,13,12,30), LocalDateTime.of(2020,2,13,13,30), g1.getNaam());
+		Sessie s2 = new Sessie("Scrum is the truth", "Frederik Haesbrouk", "B2.17", 50, LocalDateTime.of(2020,2,15,12,30), LocalDateTime.of(2020,2,15,13,30), g1.getNaam());
+		Sessie s3 = new Sessie("Linux Sucks", "Alexander De Baene", "B3.33", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g2.getNaam());
 		
 		s1.addAankondiging(new Aankondiging("Een sessie voor dummys die github onder de knie willen krijgen", g1.getNaam(), new Date()));
 		s2.addAankondiging(new Aankondiging("Een uurtje Frederik horen zagen over Scrum", g1.getNaam(), new Date()));
 		s3.addAankondiging(new Aankondiging("Niet voor Linux fans", g1.getNaam(), new Date()));
 		
-		SessieKalender sk = new SessieKalender("2019-2020", new Date(2019,8,1,12,0), new Date(2020,6,1,12,0));
-		SessieKalender sk2 = new SessieKalender("2018-2019", new Date(2018,8,1,12,0), new Date(2019,6,1,12,0));
-		SessieKalender sk3 = new SessieKalender("2020-2021", new Date(2020,8,1,12,0), new Date(2021,6,1,12,0));
+		SessieKalender sk = new SessieKalender("2019-2020", LocalDateTime.of(2019,8,1,12,0), LocalDateTime.of(2020,6,1,12,0));
+		SessieKalender sk2 = new SessieKalender("2018-2019", LocalDateTime.of(2018,8,1,12,0), LocalDateTime.of(2019,6,1,12,0));
+		SessieKalender sk3 = new SessieKalender("2020-2021", LocalDateTime.of(2020,8,1,12,0), LocalDateTime.of(2021,6,1,12,0));
 		
 		sk.addSessie(s1);
 		sk.addSessie(s2);
@@ -149,10 +150,23 @@ public class PersistentieDummy {
 	
 	public SessieKalender getHuidigeSessieKalender() {
 		for(SessieKalender kalender: sessieKalenders) {
-			if(kalender.getStartdatum().before(new Date()) && kalender.getEinddatum().after(new Date())) {
+			LocalDateTime nu = LocalDateTime.now();
+			if(kalender.getStartdatum().isBefore(nu) && kalender.getEinddatum().isAfter(nu)) {
 				return kalender;
 			}
 		}
 		throw new IllegalArgumentException("Huidige kalender niet gevonden!");
+	}
+	
+	public ObservableList<Sessie> getSessiesFromVerantwoordelijke(String naamVerantwoordelijke) {
+		ObservableList<Sessie> sessies = FXCollections.<Sessie>observableArrayList();
+		
+		for(Sessie sessie: getSessies()) {
+			if(sessie.getNaamAanmaker().equals(naamVerantwoordelijke)) {
+				sessies.add(sessie);
+			}
+		}
+		
+		return sessies;
 	}
 }

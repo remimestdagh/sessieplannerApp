@@ -86,7 +86,11 @@ public class BeheerSessieSchermController  extends SchermController implements I
 	@FXML
     private void handleKalenderAction(ActionEvent event) throws IOException {
         
-        verranderScherm(btnKalender, "SessieKalender");
+        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
+        	verranderScherm(btnKalender, "SessieKalender");
+        }else {
+        	verranderScherm(btnKalender, "VerantwoordelijkeBeheerSessies");
+        }
     }
 	
 	@FXML
@@ -108,7 +112,11 @@ public class BeheerSessieSchermController  extends SchermController implements I
 		
 		getDC().editGeselecteerdeSessie(titel, spreker, lokaal, capaciteit, startDatum, eindDatum, status);
         
-        verranderScherm(btnEditSessie, "SessieKalender");
+        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
+        	verranderScherm(btnEditSessie, "SessieKalender");
+        }else {
+        	verranderScherm(btnEditSessie, "VerantwoordelijkeBeheerSessies");
+        }
     }
 }
 

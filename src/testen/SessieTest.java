@@ -2,6 +2,7 @@ package testen;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +20,7 @@ public class SessieTest {
 	@ValueSource(strings = {"       ",""," "})
 	public void sessieAanmakenLegeTitelGeeftException(String titel) {
 		Assertions.assertThrows(IllegalArgumentException.class,()
-				->new Sessie(titel,"gastspreker","lokaalcode",100,new Date(),new Date(),"aanmaker"));
+				->new Sessie(titel,"gastspreker","lokaalcode",100,LocalDateTime.now(),LocalDateTime.now(),"aanmaker"));
 		
 	}
 	
@@ -32,14 +33,14 @@ public class SessieTest {
 	@ValueSource(strings = {"       ",""," "})
 	public void sessieAanmakenLegeLokaalCodeGeeftException(String lokaalcode) {
 		Assertions.assertThrows(IllegalArgumentException.class,()
-				->new Sessie("titel","gastspreker",lokaalcode,100,new Date(),new Date(),"aanmaker"));
+				->new Sessie("titel","gastspreker",lokaalcode,100,LocalDateTime.now(),LocalDateTime.now(),"aanmaker"));
 		
 	}
 	@ParameterizedTest
 	@ValueSource(strings = {"       ",""," "})
 	public void sessieAanmakenLegeAanmakerGeeftException(String aanmaker) {
 		Assertions.assertThrows(IllegalArgumentException.class,()
-				->new Sessie("titel","gastspreker","lokaalcode",100,new Date(),new Date(),aanmaker));
+				->new Sessie("titel","gastspreker","lokaalcode",100,LocalDateTime.now(),LocalDateTime.now(),aanmaker));
 		
 	}
 	
@@ -48,7 +49,7 @@ public class SessieTest {
 	@ValueSource(ints= {-1,0,-100})
 	public void sessieAanmakenLegeMaxCapacitietGeeftException(int getal) {
 		Assertions.assertThrows(IllegalArgumentException.class,()
-				->new Sessie("titel","gastspreker","lokaalcode",getal,new Date(),new Date(),"aanmaker"));
+				->new Sessie("titel","gastspreker","lokaalcode",getal,LocalDateTime.now(),LocalDateTime.now(),"aanmaker"));
 		
 	}
 	

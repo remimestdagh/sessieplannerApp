@@ -1,5 +1,6 @@
 package domein;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,12 +9,12 @@ public class SessieKalender {
 	
 	//PARAMETERS
 	private String academiejaar;
-	private Date startdatum;
-	private Date einddatum;
+	private LocalDateTime startdatum;
+	private LocalDateTime einddatum;
 	private List<Sessie> sessieList;
 
 	//CONSTRUCTOR
-	public SessieKalender(String academiejaar, Date startdatum, Date einddatum) {
+	public SessieKalender(String academiejaar, LocalDateTime startdatum, LocalDateTime einddatum) {
 		setAcademiejaar(academiejaar);
 		setStartdatum(startdatum);
 		setEinddatum(einddatum);
@@ -27,7 +28,7 @@ public class SessieKalender {
 	public void removeSessie(Sessie sessie) {
 		sessieList.remove(sessie);
 	}
-	public void editSessieKalender(String academiejaar, Date startdatum, Date einddatum) {
+	public void editSessieKalender(String academiejaar, LocalDateTime startdatum, LocalDateTime einddatum) {
 		setAcademiejaar(academiejaar);
 		setStartdatum(startdatum);
 		setEinddatum(einddatum);
@@ -41,16 +42,16 @@ public class SessieKalender {
 	public void setAcademiejaar(String academiejaar) {
 		this.academiejaar = academiejaar;
 	}
-	public Date getStartdatum() {
+	public LocalDateTime getStartdatum() {
 		return startdatum;
 	}
-	public void setStartdatum(Date startdatum) {
+	public void setStartdatum(LocalDateTime startdatum) {
 		this.startdatum = startdatum;
 	}
-	public Date getEinddatum() {
+	public LocalDateTime getEinddatum() {
 		return einddatum;
 	}
-	public void setEinddatum(Date einddatum) {
+	public void setEinddatum(LocalDateTime einddatum) {
 		this.einddatum = einddatum;
 	}
 	public List<Sessie> getSessieList() {

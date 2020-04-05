@@ -62,7 +62,11 @@ public class HoofdSchermController extends SchermController implements Initializ
 	@FXML
     private void handleSessieKalenderButtonAction(ActionEvent event) throws IOException {
         
-        verranderScherm(btnKalender, "SessieKalenders");
+        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
+        	verranderScherm(btnKalender, "SessieKalenders");
+        }else {
+        	verranderScherm(btnKalender, "VerantwoordelijkeBeheerSessies");
+        }
 	}
 	
 }

@@ -1,5 +1,6 @@
 package domein;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,6 +53,10 @@ public class DomeinController {
 			return true;
 		}
 		return false;
+	}
+	
+	public ObservableList<Sessie> getSessiesFromVerantwoordelijke() {
+		return sessieDao.getSessiesFromVerantwoordelijke(ingelogdeGebruiker.getNaam());
 	}
 	
 	/*
@@ -146,10 +151,10 @@ public class DomeinController {
 		return ""+geselecteerdeSessie.getMAX_CAPACITEIT();
 	}
 	public String getGeselecteerdeSessieStartDatum() {
-		return geselecteerdeSessie.getStartDatum().toGMTString();
+		return geselecteerdeSessie.getStartDatum().toString();
 	}
 	public String getGeselecteerdeSessieEindDatum() {
-		return geselecteerdeSessie.getEindDatum().toGMTString();
+		return geselecteerdeSessie.getEindDatum().toString();
 	}
 	public String getGeselecteerdeSessieSessieAanmaker() {
 		return geselecteerdeSessie.getSessieAanmaker();
@@ -189,19 +194,23 @@ public class DomeinController {
 		return geselecteerdeSessieKalender.getAcademiejaar();
 	}
 	public String getGeselecteerdeSessieKalenderStartdatum() {
-		return geselecteerdeSessieKalender.getStartdatum().toGMTString();
+		return geselecteerdeSessieKalender.getStartdatum().toString();
 	}
 	public String getGeselecteerdeSessieKalenderEinddatum() {
-		return geselecteerdeSessieKalender.getEinddatum().toGMTString();
+		return geselecteerdeSessieKalender.getEinddatum().toString();
 	}
 	public void editGeselecteerdeSessieKalender(String academiejaar, String startdatum, String einddatum) {
-		geselecteerdeSessieKalender.editSessieKalender(academiejaar, new Date(startdatum), new Date(einddatum));
+		geselecteerdeSessieKalender.editSessieKalender(academiejaar, LocalDateTime.parse(startdatum), LocalDateTime.parse(einddatum));
 		
 		sessieKalenderDao.update(geselecteerdeSessieKalender);
 	}
 	public void addSessieToGeselecteerdeSessieKalender(String titel, String naamGastspreker,
 			String lokaalCode, int MAX_CAPACITEIT,
-			Date startDatum, Date eindDatum) {
+			LocalDateTime startDatum, LocalDateTime eindDatum) {
+		
+		if(!gebruikerIsHoofdverantwoordelijke()) {
+			geselecteerdeSessieKalender = sessieKalenderDao.getHuidigeSessieKalender();
+		}
 		Sessie sessie = new Sessie(titel,naamGastspreker,lokaalCode,MAX_CAPACITEIT,startDatum,eindDatum,ingelogdeGebruiker.getNaam());
 		geselecteerdeSessieKalender.addSessie(sessie);
 		

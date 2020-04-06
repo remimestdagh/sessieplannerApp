@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 import domein.Aankondiging;
 import domein.DomeinController;
+import domein.Gebruiker;
+import domein.Media;
 import domein.Sessie;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,45 +22,25 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class BeheerSessieSchermController  extends SchermController implements Initializable{
 	
 	@FXML
-	private Button btnKalender;
+	private Button btnEditSessie, btnAankondiging, btnCreateMedia, btnDeleteMedia;
 	
 	@FXML
-	private TableView tblView;
+	private TableView tblAankondigingen, tblGebruikers, tblMedia;
 	
 	@FXML
-	private Button btnAankondiging;
+	private TextField txtLokaal, txtCapaciteit, txtSpreker, txtEindDatum, txtStartDatum, txtVerantwoordelijke, txtTitel;
 	
 	@FXML
-	private Button btnEditSessie;
+	private ChoiceBox<String> cbStatus;
 	
 	@FXML
-	private TextField txtLokaal;
-	
-	@FXML
-	private TextField txtCapaciteit;
-	
-	@FXML
-	private TextField txtSpreker;
-	
-	@FXML
-	private TextField txtEindDatum;
-	
-	@FXML
-	private TextField txtStartDatum;
-	
-	@FXML
-	private TextField txtVerantwoordelijke;
-	
-	@FXML
-	private TextField txtTitel;
-	
-	@FXML
-	private ChoiceBox cbStatus;
+	private Text txtGebruikers, txtAankondigingen;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -69,7 +51,9 @@ public class BeheerSessieSchermController  extends SchermController implements I
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
 		
-		maakAankondigingTable(tblView, getDC().getAankondigingenfromGeselecteerdeSessie());
+		maakAankondigingTable(tblAankondigingen, getDC().getAankondigingenfromGeselecteerdeSessie());
+		maakMediaTable(tblMedia, getDC().getMediafromGeselecteerdeSessie());
+		maakGebruikerTable(tblGebruikers, getDC().getGebruikersFromGeselecteerdeSessie());
 		
 		txtTitel.setText(dc.getGeselecteerdeSessieTitel());
 		txtVerantwoordelijke.setText(dc.getGeselecteerdeSessieSessieAanmaker());
@@ -84,19 +68,22 @@ public class BeheerSessieSchermController  extends SchermController implements I
 	}
 	
 	@FXML
-    private void handleKalenderAction(ActionEvent event) throws IOException {
+    private void handleCreateMediaAction(ActionEvent event) throws IOException {
         
-        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
-        	verranderScherm(btnKalender, "SessieKalender");
-        }else {
-        	verranderScherm(btnKalender, "VerantwoordelijkeBeheerSessies");
-        }
+        creëerScherm("CreateMedia");
+    }
+	
+	@FXML
+    private void handleDeleteMediaAction(ActionEvent event) throws IOException {
+		Media media = (Media) tblMedia.getSelectionModel().getSelectedItem();
+    	getDC().verwijderMediaFromGeselecteerdeSessie(media);
+    	maakMediaTable(tblMedia, getDC().getMediafromGeselecteerdeSessie());
     }
 	
 	@FXML
     private void handleAankondigingAction(ActionEvent event) throws IOException {
         
-        verranderScherm(btnAankondiging, "CreateAankondiging");
+        creëerScherm("CreateAankondiging");
     }
 	
 	@FXML
@@ -112,11 +99,6 @@ public class BeheerSessieSchermController  extends SchermController implements I
 		
 		getDC().editGeselecteerdeSessie(titel, spreker, lokaal, capaciteit, startDatum, eindDatum, status);
         
-        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
-        	verranderScherm(btnEditSessie, "SessieKalender");
-        }else {
-        	verranderScherm(btnEditSessie, "VerantwoordelijkeBeheerSessies");
-        }
     }
 }
 

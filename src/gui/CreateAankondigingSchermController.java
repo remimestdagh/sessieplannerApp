@@ -42,7 +42,7 @@ public class CreateAankondigingSchermController extends SchermController impleme
 	@FXML
     private void handleCancelAction(ActionEvent event) throws IOException {
         
-        verranderScherm(btnCancel, "BeheerSessie");
+        sluitScherm(btnCancel);
     }
 	
 	@FXML
@@ -52,6 +52,6 @@ public class CreateAankondigingSchermController extends SchermController impleme
 		
 		getDC().addAankondigingToGeselecteerdeSessie(inhoud);
         
-        verranderScherm(btnCancel, "BeheerSessie");
+        sluitScherm(btnToevoegen);
     }
 }

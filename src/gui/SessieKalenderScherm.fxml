@@ -3,24 +3,38 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="678.0" prefWidth="911.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessieKalenderSchermController">
+<AnchorPane prefHeight="678.0" prefWidth="1406.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessieKalenderSchermController">
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Text layoutX="56.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessie Kalender">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <TableView fx:id="tblView" layoutX="56.0" layoutY="94.0" prefHeight="438.0" prefWidth="827.0" />
-            <Button fx:id="btnHoofdmenu" layoutX="227.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" text="Terug naar Sessie Kalenders" />
-            <Button fx:id="btnSessieToevoegen" layoutX="78.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleSessieToevoegenAction" text="Sessie Toevoegen" />
-            <Button fx:id="btnBeheerSessie" layoutX="227.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleBeheerSessieAction" text="Beheer Sessie" />
-         </children>
-      </Pane>
+      <BorderPane fx:id="borderPane" prefHeight="678.0" prefWidth="1406.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <Pane prefHeight="595.0" prefWidth="402.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView fx:id="tblView" layoutX="23.0" layoutY="49.0" onMouseClicked="#handleBeheerSessieAction" prefHeight="430.0" prefWidth="366.0" />
+                  <Button fx:id="btnSessieToevoegen" layoutX="55.0" layoutY="507.0" mnemonicParsing="false" onAction="#handleSessieToevoegenAction" text="Sessie Toevoegen" />
+                  <Text layoutX="23.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessies" />
+               </children>
+            </Pane>
+         </left>
+         <top>
+            <Pane prefHeight="83.0" prefWidth="911.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="44.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessie Kalender">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="btnHoofdmenu" layoutX="209.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" text="Terug naar Sessie Kalenders" />
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import domein.Aankondiging;
 import domein.DomeinController;
 import domein.Gebruiker;
+import domein.Media;
 import domein.Sessie;
 import domein.SessieKalender;
 import javafx.collections.ObservableList;
@@ -30,14 +31,30 @@ public abstract class SchermController extends AnchorPane {
 		return dc;
 	}
 	
+	public void sluitScherm(Button button) {
+		Stage stage = (Stage) button.getScene().getWindow();
+        stage.close();
+	}
+	
+	public void creëerScherm(String scherm) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/" + scherm + "Scherm.fxml"));
+		Parent root = (Parent)loader.load();
+        SchermController schermController = loader.getController();
+        schermController.setDomeinController(getDC());
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+	}
+	
 	public void verranderScherm(Button button, String scherm) throws IOException {
-		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/" + scherm + "Scherm.fxml"));
 		Parent root = (Parent)loader.load();
         SchermController schermController = loader.getController();
         schermController.setDomeinController(dc);
         Stage stage = (Stage) button.getScene().getWindow();
         Scene scene = new Scene(root);
+        //stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
 	}
@@ -99,6 +116,16 @@ public abstract class SchermController extends AnchorPane {
 		
 		tblView.setItems(list);
 		tblView.getColumns().addAll(inhoudColumn, auteurColumn, publicatieDatumColumn);
+	}
+	
+	public void maakMediaTable(TableView tblView, ObservableList<Media> list) {
+		tblView.getColumns().clear();
+		
+		TableColumn<Media, String> typeColumn = new TableColumn<>("Type");
+		typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+		
+		tblView.setItems(list);
+		tblView.getColumns().addAll(typeColumn);
 	}
 	
 	public void maakKalenderTable(TableView tblView, ObservableList<SessieKalender> list) {

@@ -25,8 +25,17 @@ public class Media {
 	}
 	
 	
+	
 	//METHODS
 	
 	//GETTERS AND SETTERS
+	
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 }

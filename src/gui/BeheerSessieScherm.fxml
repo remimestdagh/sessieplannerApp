@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerSessieSchermController">
+<AnchorPane prefHeight="700.0" prefWidth="1111.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerSessieSchermController">
    <children>
       <Pane prefHeight="700.0" prefWidth="913.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -19,31 +19,44 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <TableView fx:id="tblView" layoutX="50.0" layoutY="334.0" prefHeight="253.0" prefWidth="703.0" />
-            <Button fx:id="btnKalender" layoutX="242.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleKalenderAction" text="Terug naar Sessie Kalender" />
-            <Text layoutX="50.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aankondigingen">
+            <TableView fx:id="tblAankondigingen" layoutX="545.0" layoutY="410.0" prefHeight="253.0" prefWidth="525.0" />
+            <Text fx:id="txtAankondigingen" layoutX="555.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aankondigingen">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
             <TextField fx:id="txtTitel" layoutX="50.0" layoutY="113.0" />
-            <TextField fx:id="txtVerantwoordelijke" layoutX="269.0" layoutY="113.0" />
-            <TextField fx:id="txtStartDatum" layoutX="465.0" layoutY="113.0" />
-            <TextField fx:id="txtEindDatum" layoutX="679.0" layoutY="113.0" />
+            <TextField fx:id="txtVerantwoordelijke" layoutX="199.0" layoutY="113.0" />
+            <TextField fx:id="txtStartDatum" layoutX="50.0" layoutY="245.0" />
+            <TextField fx:id="txtEindDatum" layoutX="199.0" layoutY="245.0" />
             <TextField fx:id="txtSpreker" layoutX="50.0" layoutY="180.0" />
-            <TextField fx:id="txtCapaciteit" layoutX="269.0" layoutY="180.0" />
-            <TextField fx:id="txtLokaal" layoutX="465.0" layoutY="180.0" />
+            <TextField fx:id="txtCapaciteit" layoutX="199.0" layoutY="180.0" />
+            <TextField fx:id="txtLokaal" layoutX="50.0" layoutY="315.0" />
             <Label layoutX="50.0" layoutY="96.0" text="Titel" />
-            <Label layoutX="269.0" layoutY="96.0" text="Verantwoordelijke" />
-            <Label layoutX="465.0" layoutY="96.0" text="Start datum" />
-            <Label layoutX="679.0" layoutY="96.0" text="Eind datum" />
+            <Label layoutX="203.0" layoutY="96.0" text="Verantwoordelijke" />
+            <Label layoutX="50.0" layoutY="231.0" text="Start datum" />
+            <Label layoutX="203.0" layoutY="231.0" text="Eind datum" />
             <Label layoutX="50.0" layoutY="163.0" text="Gastspreker" />
-            <Label layoutX="269.0" layoutY="163.0" text="Max capaciteit" />
-            <Label layoutX="465.0" layoutY="163.0" text="Lokaal" />
-            <Button fx:id="btnEditSessie" layoutX="717.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleEditSessieAction" text="Edit sessie" />
-            <Button fx:id="btnAankondiging" layoutX="205.0" layoutY="303.0" mnemonicParsing="false" onAction="#handleAankondigingAction" text="Voeg aankondiging toe" />
-            <ChoiceBox fx:id="cbStatus" layoutX="678.0" layoutY="180.0" prefWidth="150.0" />
-            <Label layoutX="679.0" layoutY="163.0" text="Status" />
+            <Label layoutX="203.0" layoutY="163.0" text="Max capaciteit" />
+            <Label layoutX="55.0" layoutY="298.0" text="Lokaal" />
+            <Button fx:id="btnEditSessie" layoutX="216.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleEditSessieAction" text="Verranderingen opslaan" />
+            <Button fx:id="btnAankondiging" layoutX="677.0" layoutY="385.0" mnemonicParsing="false" onAction="#handleAankondigingAction" text="Voeg aankondiging toe" />
+            <ChoiceBox fx:id="cbStatus" layoutX="198.0" layoutY="315.0" prefWidth="150.0" />
+            <Label layoutX="203.0" layoutY="298.0" text="Status" />
+            <TableView fx:id="tblGebruikers" layoutX="41.0" layoutY="410.0" prefHeight="253.0" prefWidth="490.0" />
+            <TableView fx:id="tblMedia" layoutX="545.0" layoutY="72.0" prefHeight="253.0" prefWidth="525.0" />
+            <Text fx:id="txtGebruikers" layoutX="44.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingeschreven Gebruikers">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="555.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Media">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnCreateMedia" layoutX="677.0" layoutY="45.0" mnemonicParsing="false" onAction="#handleCreateMediaAction" text="Voeg media toe" />
+            <Button fx:id="btnDeleteMedia" layoutX="852.0" layoutY="45.0" mnemonicParsing="false" onAction="#handleDeleteMediaAction" text="Verwijder media" />
          </children>
       </Pane>
    </children>

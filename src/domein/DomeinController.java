@@ -172,6 +172,19 @@ public class DomeinController {
 		
 		sessieDao.update(geselecteerdeSessie);
 	}
+	public void addMediaToGeselecteerdeSessie(String type) {
+		geselecteerdeSessie.addMedia(new Media(type));
+		
+		sessieDao.update(geselecteerdeSessie);
+	}
+	public void verwijderMediaFromGeselecteerdeSessie(Media media) {
+		geselecteerdeSessie.removeMedia(media);
+		
+		sessieDao.update(geselecteerdeSessie);
+	}
+	public ObservableList<Media> getMediafromGeselecteerdeSessie(){
+		return (ObservableList<Media>) geselecteerdeSessie.getGebruikteMedia();
+	}
 	public ObservableList<Aankondiging> getAankondigingenfromGeselecteerdeSessie(){
 		List<Aankondiging> aankondigingen = geselecteerdeSessie.getGeplaatsteAankondigingen();
 		ObservableList<Aankondiging> obsList = FXCollections.<Aankondiging>observableArrayList(aankondigingen);

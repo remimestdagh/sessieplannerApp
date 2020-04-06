@@ -28,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -37,13 +38,10 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	private TableView tblView;
 	
 	@FXML
-	private Button btnHoofmenu;
+	private Button btnHoofmenu, btnCreate, btnEdit;
 	
 	@FXML
-	private Button btnEdit;
-	
-	@FXML
-	private Button btnCreate;
+	private BorderPane borderPane;
 	
 
 	@Override
@@ -64,11 +62,17 @@ public class BeheerGebruikersSchermController extends SchermController implement
     }
 	
 	@FXML
-    private void handleEditGegevensAction(ActionEvent event) throws IOException{
+    private void handleEditGegevensAction(MouseEvent event) throws IOException{
 		Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
 		getDC().setGeselecteerdeGebruiker(gebruiker);
         
-        verranderScherm(btnEdit, "BeheerGebruiker");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikerScherm.fxml"));
+		Parent root = (Parent)loader.load();
+        SchermController schermController = loader.getController();
+        schermController.setDomeinController(getDC());
+        
+        borderPane.setCenter(root);
+        
     }
 	
 	@FXML
@@ -80,8 +84,7 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	
 	@FXML
 	private void handleCreateGebruikerAction(ActionEvent event) throws IOException{
-        
-        verranderScherm(btnCreate, "CreateGebruiker");
+        creëerScherm("CreateGebruiker");
     }
 	
 }

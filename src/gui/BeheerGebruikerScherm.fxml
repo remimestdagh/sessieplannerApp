@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="687.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikerSchermController">
+<AnchorPane prefHeight="523.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikerSchermController">
    <children>
       <Pane prefHeight="687.0" prefWidth="898.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -29,10 +29,9 @@
             <Label layoutX="62.0" layoutY="243.0" text="Email adres" />
             <Label layoutX="62.0" layoutY="314.0" text="Status" />
             <Label layoutX="62.0" layoutY="385.0" text="Type" />
-            <Button fx:id="btnTerug" layoutX="330.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleTerugAction" text="Terug naar Gebruikers" />
             <Button fx:id="btnEdit" layoutX="83.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleEditAction" text="Edit gebruiker" />
-            <TableView fx:id="tblView" layoutX="307.0" layoutY="128.0" prefHeight="227.0" prefWidth="555.0" />
-            <Label layoutX="307.0" layoutY="111.0" text="Sessies waarvoor gebruiker aanwezig was:" />
+            <TableView fx:id="tblView" layoutX="269.0" layoutY="130.0" prefHeight="227.0" prefWidth="555.0" />
+            <Label layoutX="269.0" layoutY="111.0" text="Sessies waarvoor gebruiker aanwezig was:" />
          </children>
       </Pane>
    </children>

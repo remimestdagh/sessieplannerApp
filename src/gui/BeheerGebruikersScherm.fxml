@@ -4,23 +4,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikersSchermController">
+<AnchorPane prefHeight="691.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikersSchermController">
    <children>
-      <Pane prefHeight="555.0" prefWidth="698.0">
-         <children>
-            <Label layoutX="43.0" layoutY="21.0" prefHeight="27.0" prefWidth="149.0" text="Beheer gebruikers">
-               <font>
-                  <Font size="18.0" />
-               </font></Label>
-            <Button fx:id="btnHoofmenu" layoutX="506.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" prefHeight="25.0" prefWidth="149.0" text="Terug naar Hoofdmenu" />
-            <Button fx:id="btnEdit" layoutX="468.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleEditGegevensAction" prefHeight="25.0" prefWidth="149.0" text="Beheer gebruiker" />
-            <Button layoutX="275.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleDeleteGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Delete gebruiker" />
-            <Button fx:id="btnCreate" layoutX="75.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Voeg gebruiker toe" />
-            <TableView fx:id="tblView" layoutX="60.0" layoutY="138.0" prefHeight="319.0" prefWidth="578.0" />
-         </children>
-      </Pane>
+      <BorderPane fx:id="borderPane" prefHeight="691.0" prefWidth="961.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <Pane prefHeight="623.0" prefWidth="343.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutX="23.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleDeleteGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Delete gebruiker" />
+                  <Button fx:id="btnCreate" layoutX="23.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Voeg gebruiker toe" />
+                  <TableView fx:id="tblView" layoutX="14.0" layoutY="41.0" onMouseClicked="#handleEditGegevensAction" prefHeight="467.0" prefWidth="304.0" />
+               </children>
+            </Pane>
+         </left>
+         <top>
+            <Pane prefHeight="62.0" prefWidth="698.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="46.0" layoutY="18.0" prefHeight="27.0" prefWidth="149.0" text="Beheer gebruikers">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnHoofmenu" layoutX="235.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" prefHeight="25.0" prefWidth="149.0" text="Terug naar Hoofdmenu" />
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

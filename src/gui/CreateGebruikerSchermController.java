@@ -31,29 +31,13 @@ import javafx.scene.control.Label;
 	public class CreateGebruikerSchermController extends SchermController implements Initializable{
 		
 		@FXML
-		private Button btnCreate;
+		private Button btnCreate, btnCancel;
 		
 		@FXML
-		private Button btnCancel;
+		private TextField txNaam, txChamilo, txEmail, txPassword;
 		
 		@FXML
-		private TextField txNaam;
-		
-		@FXML
-		private TextField txChamilo;
-		
-		@FXML
-		private TextField txEmail;
-		
-		@FXML
-		private TextField txPassword;
-		
-		@FXML
-		private ChoiceBox cbType;
-		
-		@FXML
-		private ChoiceBox cbStatus;
-		
+		private ChoiceBox<String> cbType, cbStatus;
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
@@ -81,13 +65,12 @@ import javafx.scene.control.Label;
 			String type = (String) cbType.getValue();
 	    	getDC().addGebruiker(naam, chamilo, email, wachtwoord, status, type);
 	        
-	        verranderScherm(btnCreate, "BeheerGebruikers");
+	        sluitScherm(btnCreate);
 	    }
 		
 		@FXML
 		private void handleCancelAction(ActionEvent event) throws IOException{
-	        
-	        verranderScherm(btnCancel, "BeheerGebruikers");
+	        sluitScherm(btnCancel);
 	    }
 		
 	}

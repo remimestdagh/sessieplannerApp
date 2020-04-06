@@ -53,12 +53,7 @@ public class CreateSessieSchermController extends SchermController implements In
 	
 	@FXML
     private void handleCancelAction(ActionEvent event) throws IOException {
-        
-        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
-        	verranderScherm(btnCancel, "SessieKalender");
-        }else {
-        	verranderScherm(btnCancel, "VerantwoordelijkeBeheerSessies");
-        }
+        sluitScherm(btnCancel);
     }
 	
 	@FXML
@@ -72,10 +67,6 @@ public class CreateSessieSchermController extends SchermController implements In
 		
 		getDC().addSessieToGeselecteerdeSessieKalender(titel, gastspreker, lokaal, maxCapaciteit, startDatum, eindDatum);
         
-        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
-        	verranderScherm(btnToevoegen, "SessieKalender");
-        }else {
-        	verranderScherm(btnToevoegen, "VerantwoordelijkeBeheerSessies");
-        }
+        sluitScherm(btnToevoegen);
     }
 }

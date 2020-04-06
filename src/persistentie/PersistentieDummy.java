@@ -125,7 +125,7 @@ public class PersistentieDummy {
 	// Gebruikers methodes
 	
 	/*
-	 * Op gekregen email en passwoord returnen we het account of werpen we error met text.
+	 * Op gekregen email returnen we het account of werpen we error met text.
 	 */
 	public Gebruiker getGebruikerByEmail(String emailadres) {
 		for(Gebruiker geb: gebruikers){

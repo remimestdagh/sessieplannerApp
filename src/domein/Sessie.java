@@ -23,6 +23,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import javafx.collections.FXCollections;
+
 @Entity
 @Table(name = "Sessie")
 public class Sessie {
@@ -82,9 +84,9 @@ public class Sessie {
 		this.sessieAanmaker = sessieAanmaker;
 		status = SessieStatus.AANGEMAAKT;
 		
-		gebruikteMedia = new ArrayList<>();
-		geplaatsteAankondigingen = new ArrayList<>();
-		geplaatstFeedback = new ArrayList<>();
+		gebruikteMedia = FXCollections.<Media>observableArrayList();
+		geplaatsteAankondigingen = FXCollections.<Aankondiging>observableArrayList();
+		geplaatstFeedback = FXCollections.<Feedback>observableArrayList();
 		ingeschrevenGebruikers = new ArrayList<>();
 		aanwezigeGebruikers = new ArrayList<>();
 		

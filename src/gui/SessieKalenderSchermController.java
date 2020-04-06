@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
+import domein.Gebruiker;
 import domein.Sessie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +21,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -30,13 +33,10 @@ public class SessieKalenderSchermController extends SchermController implements 
 	private TableView tblView;
 	
 	@FXML
-	private Button btnHoofdmenu;
+	private Button btnHoofdmenu, btnSessieToevoegen;
 	
 	@FXML
-	private Button btnSessieToevoegen;
-	
-	@FXML
-	private Button btnBeheerSessie;
+	private BorderPane borderPane;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -53,19 +53,23 @@ public class SessieKalenderSchermController extends SchermController implements 
 	@FXML
     private void handleHoofdmenuAction(ActionEvent event) throws IOException {
         
-        verranderScherm(btnHoofdmenu, "SessieKalenders"); //Hoofd?
+        verranderScherm(btnHoofdmenu, "SessieKalenders");
     }
 	
 	@FXML
     private void handleSessieToevoegenAction(ActionEvent event) throws IOException {
-        
-        verranderScherm(btnSessieToevoegen, "CreateSessie");
+        creëerScherm("CreateSessie");
     }
 	
 	@FXML
-    private void handleBeheerSessieAction(ActionEvent event) throws IOException {
+    private void handleBeheerSessieAction(MouseEvent event) throws IOException {
 		getDC().setGeselecteerdeSessie((Sessie)tblView.getSelectionModel().getSelectedItem());
         
-        verranderScherm(btnBeheerSessie, "BeheerSessie");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerSessieScherm.fxml"));
+		Parent root = (Parent)loader.load();
+        SchermController schermController = loader.getController();
+        schermController.setDomeinController(getDC());
+        
+        borderPane.setCenter(root);
     }
 }

@@ -72,12 +72,6 @@ public class BeheerGebruikerSchermController extends SchermController implements
 	}
 	
 	@FXML
-    private void handleTerugAction(ActionEvent event) throws IOException {
-        
-        verranderScherm(btnTerug, "BeheerGebruikers");
-    }
-	
-	@FXML
     private void handleEditAction(ActionEvent event) throws IOException {
 		String naam = txtNaam.getText();
 		String naamChamilo = txtChamilo.getText();
@@ -86,7 +80,5 @@ public class BeheerGebruikerSchermController extends SchermController implements
 		String type = (String) cbType.getValue();
 		
 		getDC().editGeselecteerdeGebruiker(naam, naamChamilo, email, status, type);
-        
-        verranderScherm(btnEdit, "BeheerGebruikers");
     }
 }

@@ -17,19 +17,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class SessieKalendersSchermController extends SchermController implements Initializable{
 	
 	@FXML
-	private Button btnHoofdmenu;
-	
-	@FXML
-	private Button btnEdit;
+	private Button btnHoofdmenu, btnEdit;
 	
 	@FXML
 	private TableView tblView;
+	
+	@FXML
+	private BorderPane borderPane;
 
 	@Override
 	public void setDomeinController(DomeinController dc) {
@@ -51,7 +53,19 @@ public class SessieKalendersSchermController extends SchermController implements
     }
 	
 	@FXML
-    private void handleEditSessieKalenderAction(ActionEvent event) throws IOException {
+    private void handleBeheerSessieKalenderAction(MouseEvent event) throws IOException {
+		getDC().setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerSessieKalenderScherm.fxml"));
+		Parent root = (Parent)loader.load();
+        SchermController schermController = loader.getController();
+        schermController.setDomeinController(getDC());
+        
+        borderPane.setCenter(root);
+    }
+	
+	@FXML
+    private void handleBeheerSessiesAction(ActionEvent event) throws IOException {
 		getDC().setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());
         
         verranderScherm(btnEdit, "SessieKalender");

@@ -5,20 +5,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class SessieKalender {
 	
 	//PARAMETERS
 	private String academiejaar;
 	private LocalDateTime startdatum;
 	private LocalDateTime einddatum;
-	private List<Sessie> sessieList;
+	private ObservableList<Sessie> sessieList;
 
 	//CONSTRUCTOR
 	public SessieKalender(String academiejaar, LocalDateTime startdatum, LocalDateTime einddatum) {
 		setAcademiejaar(academiejaar);
 		setStartdatum(startdatum);
 		setEinddatum(einddatum);
-		sessieList = new ArrayList();
+		sessieList = FXCollections.<Sessie>observableArrayList();
 	}
 	
 	//METHODS
@@ -54,10 +57,10 @@ public class SessieKalender {
 	public void setEinddatum(LocalDateTime einddatum) {
 		this.einddatum = einddatum;
 	}
-	public List<Sessie> getSessieList() {
+	public ObservableList<Sessie> getSessieList() {
 		return sessieList;
 	}
-	public void setSessieList(List<Sessie> sessieList) {
+	public void setSessieList(ObservableList<Sessie> sessieList) {
 		this.sessieList = sessieList;
 	}
 }

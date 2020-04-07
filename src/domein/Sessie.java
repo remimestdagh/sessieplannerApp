@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 @Entity
 @Table(name = "Sessie")
@@ -45,13 +46,13 @@ public class Sessie {
 	private SessieStatus status;// Aangemaakt, Geopent, Gestart, Gesloten
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId") //(Joincolumn, anders automatisch tussentabel bij OneToMany)
-	private List<Media> gebruikteMedia;
+	private ObservableList<Media> gebruikteMedia;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
 	private List<Herinnering> herinneringen;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
-	private List<Aankondiging> geplaatsteAankondigingen;
+	private ObservableList<Aankondiging> geplaatsteAankondigingen;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
 	private List<Feedback> geplaatstFeedback;
@@ -144,7 +145,7 @@ public class Sessie {
 	/**
 	 * Overschrijft de gebruikte media met gekregenmedia
 	 */
-	public void setMedia(List<Media> media) {
+	public void setMedia(ObservableList<Media> media) {
 		gebruikteMedia = media;
 	}
 
@@ -285,16 +286,16 @@ public class Sessie {
 		}
 		this.lokaalCode = lokaalCode;
 	}
-	public List<Media> getGebruikteMedia() {
+	public ObservableList<Media> getGebruikteMedia() {
 		return gebruikteMedia;
 	}
-	public void setGebruikteMedia(List<Media> gebruikteMedia) {
+	public void setGebruikteMedia(ObservableList<Media> gebruikteMedia) {
 		this.gebruikteMedia = gebruikteMedia;
 	}
-	public List<Aankondiging> getGeplaatsteAankondigingen() {
+	public ObservableList<Aankondiging> getGeplaatsteAankondigingen() {
 		return geplaatsteAankondigingen;
 	}
-	public void setGeplaatsteAankondigingen(List<Aankondiging> geplaatsteAankondigingen) {
+	public void setGeplaatsteAankondigingen(ObservableList<Aankondiging> geplaatsteAankondigingen) {
 		this.geplaatsteAankondigingen = geplaatsteAankondigingen;
 	}
 	public List<Feedback> getGeplaatstFeedback() {

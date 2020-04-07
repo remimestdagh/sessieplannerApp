@@ -54,7 +54,7 @@ public abstract class SchermController extends AnchorPane {
         schermController.setDomeinController(dc);
         Stage stage = (Stage) button.getScene().getWindow();
         Scene scene = new Scene(root);
-        //stage.setMaximized(true);
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
 	}

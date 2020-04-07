@@ -23,28 +23,13 @@ import javafx.stage.Stage;
 public class CreateSessieSchermController extends SchermController implements Initializable{
 	
 	@FXML
-	private Button btnCancel;
+	private Button btnCancel, btnToevoegen;
 	
 	@FXML
-	private TextField txtTitel;
+	private TextField txtTitel, txtGastspreker, txtMaxCapaciteit, txtLokaal;
 	
 	@FXML
-	private TextField txtGastspreker;
-	
-	@FXML
-	private TextField txtMaxCapaciteit;
-	
-	@FXML
-	private TextField txtLokaal;
-	
-	@FXML
-	private DatePicker dateStartDatum;
-	
-	@FXML
-	private DatePicker dateEindDatum;
-	
-	@FXML
-	private Button btnToevoegen;
+	private DatePicker dateStartDatum, dateEindDatum;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

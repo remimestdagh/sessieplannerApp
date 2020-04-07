@@ -20,11 +20,13 @@ public class PersistentieDummy {
 	
 	private ObservableList<Gebruiker> gebruikers;
 	private ObservableList<SessieKalender> sessieKalenders;
+	private ObservableList<Sessie> sessies;
 	
 	//CONSTRUCTOR
 	private PersistentieDummy() {
 		gebruikers = FXCollections.<Gebruiker>observableArrayList();
 		sessieKalenders = FXCollections.<SessieKalender>observableArrayList();
+		sessies = FXCollections.<Sessie>observableArrayList();
 		
 		Gebruiker g1 = new Gebruiker("Maxim Van Cauwenberge", "862687mv", "maxim.vancauwenberge@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Verantwoordelijke);
 		Gebruiker g2 = new Gebruiker("Alexander De Baene", "862656ad", "alexander.debaene@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
@@ -88,6 +90,10 @@ public class PersistentieDummy {
 		gebruikers.add(g5);
 		gebruikers.add(g6);
 		
+		sessies.add(s1);
+		sessies.add(s2);
+		sessies.add(s3);
+		
 		sessieKalenders.add(sk);
 		sessieKalenders.add(sk2);
 		sessieKalenders.add(sk3);
@@ -105,10 +111,6 @@ public class PersistentieDummy {
 	// Sessie methodes
 	
 	public ObservableList<Sessie> getSessies(){
-		ObservableList<Sessie> sessies = FXCollections.<Sessie>observableArrayList();
-		for(SessieKalender kalender: sessieKalenders) {
-			sessies.addAll(kalender.getSessieList());
-		}
 		return sessies;
 	}
 	
@@ -168,5 +170,13 @@ public class PersistentieDummy {
 		}
 		
 		return sessies;
+	}
+
+	public void updateSessieKalender(SessieKalender object) {
+		for(Sessie s: object.getSessieList()) {
+			if(!sessies.contains(s)) {
+				sessies.add(s);
+			}
+		}
 	}
 }

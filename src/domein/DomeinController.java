@@ -206,14 +206,14 @@ public class DomeinController {
 	public String getGeselecteerdeSessieKalenderAcademiejaar() {
 		return geselecteerdeSessieKalender.getAcademiejaar();
 	}
-	public String getGeselecteerdeSessieKalenderStartdatum() {
-		return geselecteerdeSessieKalender.getStartdatum().toString();
+	public LocalDateTime getGeselecteerdeSessieKalenderStartdatum() {
+		return geselecteerdeSessieKalender.getStartdatum();
 	}
-	public String getGeselecteerdeSessieKalenderEinddatum() {
-		return geselecteerdeSessieKalender.getEinddatum().toString();
+	public LocalDateTime getGeselecteerdeSessieKalenderEinddatum() {
+		return geselecteerdeSessieKalender.getEinddatum();
 	}
-	public void editGeselecteerdeSessieKalender(String academiejaar, String startdatum, String einddatum) {
-		geselecteerdeSessieKalender.editSessieKalender(academiejaar, LocalDateTime.parse(startdatum), LocalDateTime.parse(einddatum));
+	public void editGeselecteerdeSessieKalender(String academiejaar, LocalDateTime startdatum, LocalDateTime einddatum) {
+		geselecteerdeSessieKalender.editSessieKalender(academiejaar, startdatum, einddatum);
 		
 		sessieKalenderDao.update(geselecteerdeSessieKalender);
 	}

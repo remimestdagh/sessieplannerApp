@@ -47,13 +47,22 @@ public class SessieKalenderSchermController extends SchermController implements 
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
 		
-		maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeSessieKalender());
+		if(getDC().gebruikerIsHoofdverantwoordelijke()) {
+			maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeSessieKalender());
+		}else {
+			maakSessieTable(tblView, getDC().getSessiesFromVerantwoordelijke());
+			btnHoofdmenu.setText("Terug naar hoofdmenu");
+		}
 	}
 	
 	@FXML
     private void handleHoofdmenuAction(ActionEvent event) throws IOException {
-        
-        verranderScherm(btnHoofdmenu, "SessieKalenders");
+
+        if(getDC().gebruikerIsHoofdverantwoordelijke()) {
+        	verranderScherm(btnHoofdmenu, "SessieKalenders");
+        }else {
+        	verranderScherm(btnHoofdmenu, "Hoofd");
+        }
     }
 	
 	@FXML

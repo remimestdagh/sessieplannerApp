@@ -90,7 +90,7 @@ public class Sessie {
 		geplaatstFeedback = FXCollections.<Feedback>observableArrayList();
 		ingeschrevenGebruikers = new ArrayList<>();
 		aanwezigeGebruikers = new ArrayList<>();
-		
+		//todo controle op datum
 		/*
 		if (DateUtils.addDays(new Date(), 1).before(startDatum)) {
 			throw new IllegalArgumentException("De startdatum moet minstens een dag in de toekomst liggen");

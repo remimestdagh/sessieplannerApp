@@ -26,9 +26,9 @@ public class DomeinController {
 	
 	//PARAMETERS
 	private Gebruiker ingelogdeGebruiker;
-	private GebruikerDao gebruikerDao;
-	private SessieDao sessieDao;
-	private SessieKalenderDao sessieKalenderDao;
+	private GebruikerDao gebruikerDao;				//repo voor gebruikers
+	private SessieDao sessieDao;					//repo voor sessies
+	private SessieKalenderDao sessieKalenderDao;	//repo voor sessiekalenders
 	
 	
 	//CONSTRUCTOR
@@ -44,6 +44,7 @@ public class DomeinController {
 			this.gebruikerDao = new JPAGebruikerDao();
 			this.sessieDao = new JPASessieDao();
 			this.sessieKalenderDao = new JPASessieKalenderDao();
+			//Seeder.seedDatabase();
 		}
 	}
 	

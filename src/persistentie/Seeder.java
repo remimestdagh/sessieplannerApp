@@ -95,43 +95,6 @@ public class Seeder {
 		
 		
 		
-		/*
-		//Toe te voegen docenten
-		Docent a = new Docent( "Jan", "Baard", new BigDecimal(8000));
-		Docent b = new Docent( "Ros", "Beros", new BigDecimal(10000));
-		Docent c = new Docent( "Joris", "ZonderBaard", new BigDecimal(12000));
-		//op te vragen docent
-		Docent docent = new Docent("Bert", "Suffys", BigDecimal.TEN);
-		docent.opslag(BigDecimal.ONE);
-		
-		//factory maken en manager er uit halen
-		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory(); //Persistence unit naam is "school", zie de xml file.
-		EntityManager em = emf.createEntityManager();
-		
-		//transactie starten
-		em.getTransaction().begin();
-		//em.persist(a);
-		//em.persist(b);
-		//em.persist(c);
-		Stream.of(a,b,c).forEach(em::persist);
-		
-		//Nu gaan we iets zoeken
-		Docent x = em.find(Docent.class, docent.getId()); //zoekt in de database naar de entiteit en of die bestaat op de key = id?
-		if(x!=null) // ie zit er al in.
-		{ 
-			x.opslag(new BigDecimal(200)); // we voeren een update door.
-		} 
-		else // ie zat er nog niet in.
-		{
-		System.out.println("Docent 2 niet gevonden");
-		}
-		
-		em.getTransaction().commit();
-		
-		em.close();
-		emf.close();
-		*/
-		
 		
 	}
 	

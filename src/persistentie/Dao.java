@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
  * findAll-> Gebruikers,  findAll->Sessies, ...
  */
 
-
 public interface Dao<T> {
 	
 	public ObservableList<T> findAll();  

@@ -25,7 +25,7 @@ public class Gebruiker {
 	
 	//PARAMETERS
 	@Id
-	@Column(name = "HerinerringId")
+	@Column(name = "GebruikerId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int gebruikerId;
 	private String naam;

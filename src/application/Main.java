@@ -1,7 +1,4 @@
 package application;
-	
-
-
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.IOException;
@@ -14,7 +11,6 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-
 
 public class Main extends Application {
 	@Override

@@ -82,7 +82,7 @@ public class Sessie {
 		setStartDatum(startDatum);
 		setEindDatum(eindDatum);
 		
-		this.sessieAanmaker = sessieAanmaker;
+		setSessieAanmaker(sessieAanmaker);
 		status = SessieStatus.AANGEMAAKT;
 		
 		gebruikteMedia = FXCollections.<Media>observableArrayList();

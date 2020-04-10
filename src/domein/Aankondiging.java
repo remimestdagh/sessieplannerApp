@@ -26,9 +26,9 @@ public class Aankondiging {
 	//CONSTRUCTOR
 	protected Aankondiging() {}
 	public Aankondiging(String inhoud, String auteur, Date publicatieDatum) {
-		this.inhoud = inhoud;
-		this.auteur = auteur;
-		this.publicatieDatum = publicatieDatum;
+		setInhoud(inhoud);
+		setAuteur(auteur);
+		setPublicatieDatum(publicatieDatum);
 	}
 	
 	//METHODS
@@ -43,12 +43,18 @@ public class Aankondiging {
 		return inhoud;
 	}
 	public void setInhoud(String inhoud) {
+		if(inhoud.isEmpty()|inhoud.isBlank()) {
+			throw new IllegalArgumentException("De inhoud van de aankondiging moet ingevuld worden");
+		}
 		this.inhoud = inhoud;
 	}
 	public String getAuteur() {
 		return auteur;
 	}
 	public void setAuteur(String auteur) {
+		if(auteur.isEmpty()|auteur.isBlank()) {
+			throw new IllegalArgumentException("De auteur van de aankondiging kon niet opgehaald worden");
+		}
 		this.auteur = auteur;
 	}
 	public Date getPublicatieDatum() {

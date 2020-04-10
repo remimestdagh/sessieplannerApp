@@ -129,36 +129,54 @@ public class Gebruiker {
 		return naam;
 	}
 	public void setNaam(String naam) {
+		if(naam.isBlank()|naam.isEmpty()) {
+			throw new IllegalArgumentException("De naam van de gebruiker mag niet leeg zijn");
+		}
 		this.naam = naam;
 	}
 	public String getNaamChamilo() {
 		return naamChamilo;
 	}
 	public void setNaamChamilo(String naamChamilo) {
+		if(naamChamilo.isBlank()|naamChamilo.isEmpty()) {
+			throw new IllegalArgumentException("De gebruikersnaam mag niet leeg zijn");
+		}
 		this.naamChamilo = naamChamilo;
 	}
 	public String getEmailadres() {
 		return emailadres;
 	}
 	public void setEmailadres(String emailadres) {
+		if(emailadres.isBlank()|emailadres.isEmpty()) {
+			throw new IllegalArgumentException("Het emailadres mag niet leeg zijn");
+		}
 		this.emailadres = emailadres;
 	}
 	public String getWachtwoord() {
 		return wachtwoord;
 	}
 	public void setWachtwoord(String wachtwoord) {
+		if(wachtwoord.isBlank()|wachtwoord.isEmpty()) {
+			throw new IllegalArgumentException("Het wachtwoord mag niet leeg zijn");
+		}
 		this.wachtwoord = wachtwoord;
 	}
 	public GebruikerStatus getStatus() {
 		return status;
 	}
 	public void setStatus(GebruikerStatus status) {
+		if(status==null) {
+			throw new IllegalArgumentException("De status moet een waarde hebben");
+		}
 		this.status = status;
 	}
 	public GebruikerType getType() {
 		return type;
 	}
 	public void setType(GebruikerType type) {
+		if(type==null) {
+			throw new IllegalArgumentException("De gebruiker moet een type hebben");
+		}
 		this.type = type;
 	}
 	public List<Sessie> getSessiesWaarvoorIngeschreven() {

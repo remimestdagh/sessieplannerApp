@@ -15,13 +15,12 @@ import util.JPAUtil;
 public class JPAGebruikerDao implements GebruikerDao {
 
 	// PARAMETERS
-	EntityManagerFactory emf;
-	EntityManager em;
+	private EntitySingleton es; //em & emf stored in singleton
+	private EntityManager em;	//em uit de singleton gehaald. nodig voor bewerkingen
 
 	// CONSTRUCTOR
 	public JPAGebruikerDao() {
-		emf = JPAUtil.getEntityManagerFactory();
-		em = emf.createEntityManager();
+		this.em=es.getEntityManager();
 	}
 
 	// METHODS
@@ -70,7 +69,6 @@ public class JPAGebruikerDao implements GebruikerDao {
 	@Override
 	public void insert(Gebruiker object) {
 		em.persist(object);
-
 	}
 
 	/*
@@ -95,20 +93,19 @@ public class JPAGebruikerDao implements GebruikerDao {
 	}
 
 	public void closePersistency() {
-		em.close();
-		emf.close();
+		es.closePersistency();
 	}
 
 	public void startTransaction() {
-		em.getTransaction().begin();
+		es.startTransaction();
 	}
 
 	public void commitTransaction() {
-		em.getTransaction().commit();
+		es.commitTransaction();
 	}
 
 	public void rollbackTransaction() {
-		em.getTransaction().rollback();
+		es.rollbackTransaction();
 	}
 
 }

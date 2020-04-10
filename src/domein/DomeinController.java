@@ -8,17 +8,15 @@ import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import persistentie.Dao;
 import persistentie.DummyGebruikerDao;
 import persistentie.DummySessieDao;
 import persistentie.DummySessieKalenderDao;
-import persistentie.GebruikerDao;
 import persistentie.JPAGebruikerDao;
 import persistentie.JPASessieDao;
 import persistentie.JPASessieKalenderDao;
 import persistentie.PersistentieDummy;
 import persistentie.Seeder;
-import persistentie.SessieDao;
-import persistentie.SessieKalenderDao;
 import static domein.Config.*;
 
 public class DomeinController {
@@ -26,9 +24,9 @@ public class DomeinController {
 	
 	//PARAMETERS
 	private Gebruiker ingelogdeGebruiker;
-	private GebruikerDao gebruikerDao;				//repo voor gebruikers
-	private SessieDao sessieDao;					//repo voor sessies
-	private SessieKalenderDao sessieKalenderDao;	//repo voor sessiekalenders
+	private Dao gebruikerDao;				//repo voor gebruikers
+	private Dao sessieDao;					//repo voor sessies
+	private Dao sessieKalenderDao;	//repo voor sessiekalenders
 	
 	
 	//CONSTRUCTOR
@@ -57,7 +55,7 @@ public class DomeinController {
 	}
 	
 	public ObservableList<Sessie> getSessiesFromVerantwoordelijke() {
-		return sessieDao.getSessiesFromVerantwoordelijke(ingelogdeGebruiker.getNaam());
+		return ((DummySessieDao) sessieDao).getSessiesFromVerantwoordelijke(ingelogdeGebruiker.getNaam());
 	}
 	
 	/*
@@ -65,7 +63,7 @@ public class DomeinController {
 	 * lukt het wel, dan stellen we de ingelogde gebruiker in
 	 */
 	public void login(String emailadres, String password){
-		Gebruiker gebruiker = gebruikerDao.getGebruikerByEmail(emailadres);
+		Gebruiker gebruiker = ((JPAGebruikerDao) gebruikerDao).getGebruikerByEmail(emailadres);
 		if(!gebruiker.getWachtwoord().equals(password)) {
 			throw new IllegalArgumentException("Verkeerd wachtwoord!");
 		}
@@ -223,7 +221,7 @@ public class DomeinController {
 			LocalDateTime startDatum, LocalDateTime eindDatum) {
 		
 		if(!gebruikerIsHoofdverantwoordelijke()) {
-			geselecteerdeSessieKalender = sessieKalenderDao.getHuidigeSessieKalender();
+			geselecteerdeSessieKalender = ((DummySessieKalenderDao) sessieKalenderDao).getHuidigeSessieKalender();
 		}
 		Sessie sessie = new Sessie(titel,naamGastspreker,lokaalCode,MAX_CAPACITEIT,startDatum,eindDatum,ingelogdeGebruiker.getNaam());
 		geselecteerdeSessieKalender.addSessie(sessie);

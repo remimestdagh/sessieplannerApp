@@ -2,51 +2,29 @@ package persistentie;
 
 import java.util.List;
 
+import domein.Gebruiker;
 import domein.SessieKalender;
 import javafx.collections.ObservableList;
 
-public class JPASessieKalenderDao implements SessieKalenderDao{
+public class JPASessieKalenderDao extends JPADao{
 
-	@Override
-	public ObservableList<SessieKalender> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	// PARAMETERS
+
+	// CONSTRUCTOR
+	public JPASessieKalenderDao() {
+		super(Gebruiker.class);
 	}
 
-	@Override
-	public SessieKalender get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// METHODS
+	// Alle basis persistence methoden generiek in de parent gedefinieerd. Nu nog de
+	// Dao implementatie speciefieke:
+	/*
+	 * Vraagt de sessiekalender die matcht met huidige datum
+	 */
 
-	@Override
-	public SessieKalender update(SessieKalender object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(SessieKalender object) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void insert(SessieKalender object) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public SessieKalender getHuidigeSessieKalender() {
-		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

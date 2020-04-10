@@ -1,5 +1,6 @@
 package persistentie;
 
+import domein.Sessie;
 import javafx.collections.ObservableList;
 /*
  * Generieke interface Dao die definieert welke operaties zullen kunnen uitgevoerd worden op gepersisteerde items
@@ -20,4 +21,6 @@ public interface Dao<T> {
 	public void insert(T object);
 	
 	public boolean exists(Long id);
+
+	
 }

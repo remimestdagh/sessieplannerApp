@@ -5,12 +5,12 @@ import java.util.List;
 import domein.SessieKalender;
 import javafx.collections.ObservableList;
 
-public class DummySessieKalenderDao extends DummyDao{
+public class DummySessieKalenderDao extends DummyDao<SessieKalender>{
 
 	private PersistentieDummy pd;
 	
 	public DummySessieKalenderDao() {
-		super(SessieKalender.class);
+		//super(SessieKalender.class);
 		this.pd = PersistentieDummy.getInstance();
 	}
 	

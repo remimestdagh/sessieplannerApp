@@ -5,12 +5,12 @@ import java.util.List;
 import domein.Sessie;
 import javafx.collections.ObservableList;
 
-public class DummySessieDao extends DummyDao {
+public class DummySessieDao extends DummyDao<Sessie> {
 
 	private PersistentieDummy pd;
 	
 	public DummySessieDao() {
-		super(Sessie.class);
+		//super(Sessie.class);
 		this.pd = PersistentieDummy.getInstance();
 	}
 	

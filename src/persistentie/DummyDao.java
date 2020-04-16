@@ -4,12 +4,8 @@ import javafx.collections.ObservableList;
 
 public class DummyDao<T> implements Dao {
 
-	private final Class<T> type; // bijhouden welk implementatietype van de JPADao het is zodat we generiek de
-	// methoden kunnen afwerken
-
 	// CONSTRUCTOR
-	public DummyDao(Class<T> type) {
-		this.type = type;
+	public DummyDao() {
 	}
 
 	// METHODS

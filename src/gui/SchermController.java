@@ -92,14 +92,16 @@ public abstract class SchermController extends AnchorPane {
 		TableColumn<Gebruiker, String> chamiloColumn = new TableColumn<>("Naam Chamilo");
 		chamiloColumn.setCellValueFactory(new PropertyValueFactory<>("naamChamilo"));
 		
-		TableColumn<Gebruiker, String> emailColumn = new TableColumn<>("E-mail adres");
-		emailColumn.setCellValueFactory(new PropertyValueFactory<>("emailadres"));
 		
 		TableColumn<Gebruiker, String> statusColumn = new TableColumn<>("Status");
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		
+		TableColumn<Gebruiker,String> typeColumn = new TableColumn<>("Type");
+		typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+		
+		
 		tblView.setItems(list);
-		tblView.getColumns().addAll(naamColumn, chamiloColumn, emailColumn, statusColumn);
+		tblView.getColumns().addAll(naamColumn, chamiloColumn, statusColumn,typeColumn);
 	}
 	
 	public void maakAankondigingTable(TableView tblView, ObservableList<Aankondiging> list) {

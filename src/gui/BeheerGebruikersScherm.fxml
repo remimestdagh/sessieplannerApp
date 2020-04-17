@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="691.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikersSchermController">
+<AnchorPane prefHeight="691.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikersSchermController">
    <children>
       <BorderPane fx:id="borderPane" prefHeight="691.0" prefWidth="961.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <Pane prefHeight="623.0" prefWidth="343.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="629.0" prefWidth="482.0" BorderPane.alignment="CENTER">
                <children>
                   <Button layoutX="23.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleDeleteGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Delete gebruiker" />
                   <Button fx:id="btnCreate" layoutX="23.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Voeg gebruiker toe" />
-                  <TableView fx:id="tblView" layoutX="14.0" layoutY="41.0" onMouseClicked="#handleEditGegevensAction" prefHeight="467.0" prefWidth="304.0" />
+                  <TableView fx:id="tblView" layoutX="14.0" layoutY="41.0" onMouseClicked="#handleEditGegevensAction" prefHeight="467.0" prefWidth="452.0" />
                </children>
             </Pane>
          </left>
@@ -33,7 +33,7 @@
             </Pane>
          </top>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="629.0" prefWidth="396.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

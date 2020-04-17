@@ -173,4 +173,7 @@ public class Gebruiker {
 	public void setSessiesWaarvoorAanwezig(List<Sessie> sessieList) {
 		this.sessiesWaarvoorAanwezig = sessieList;
 	}
+	public String getTypeString() {
+		return this.type.toString();
+	}
 }

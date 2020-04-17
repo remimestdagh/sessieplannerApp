@@ -2,6 +2,7 @@ package persistentie;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import domein.Aankondiging;
@@ -139,7 +140,7 @@ public class PersistentieDummy {
 	}
 	
 	public ObservableList<Gebruiker> getGebruikers(){
-		return gebruikers;
+		return gebruikers.sorted(Comparator.comparing(Gebruiker::getNaam));
 	}
 	
 	public void verwijderGebruiker(Gebruiker gebruiker) {

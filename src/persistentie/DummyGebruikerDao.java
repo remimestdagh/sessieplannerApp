@@ -1,5 +1,8 @@
 package persistentie;
 
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 import domein.Gebruiker;
 import javafx.collections.ObservableList;
 

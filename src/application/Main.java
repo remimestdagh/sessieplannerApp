@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
@@ -28,8 +29,10 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         
         //styling toevoegen
-        scene.getStylesheets().add("application/generalStyling.css");
+        //scene.getStylesheets().add("application/generalStyling.css");
         
+        stage.getIcons().add(new Image("/fonts/windowicon.jpg"));
+        stage.setTitle("IT-Lab Sessieplanner");
         stage.setScene(scene);
         stage.show();
 	}

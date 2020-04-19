@@ -3,6 +3,8 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
+
 
 import domein.DomeinController;
 import javafx.application.Platform;
@@ -11,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class HoofdSchermController extends SchermController implements Initializable{
+
 	
 	@FXML
     private Text textName;
@@ -102,6 +106,10 @@ public class HoofdSchermController extends SchermController implements Initializ
 		btnKalender.setTooltip(tooltipKalender);
 		tooltipKalender.setShowDelay(Duration.seconds(0.2));
 		tooltipKalender.setStyle(tooltipStyling);
+		
+		
+
+
 	}
 	
 }

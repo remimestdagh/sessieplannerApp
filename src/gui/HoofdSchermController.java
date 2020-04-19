@@ -107,8 +107,6 @@ public class HoofdSchermController extends SchermController implements Initializ
 		tooltipKalender.setShowDelay(Duration.seconds(0.2));
 		tooltipKalender.setStyle(tooltipStyling);
 		
-		
-
 
 	}
 	

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane style="-fx-background-color: #406E8E" prefHeight="675.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessieKalendersSchermController">
+<AnchorPane prefHeight="675.0" prefWidth="907.0" style="-fx-background-color: #406E8E" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessieKalendersSchermController">
    <children>
       <BorderPane fx:id="borderPane" prefHeight="675.0" prefWidth="907.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -25,7 +25,7 @@
                      <font>
                         <Font name="Franklin Gothic Medium Italic" size="12.0" />
                      </font></Button>
-                  <Text fill="WHITE" layoutX="246.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welkom op het sessiekalender scherm!">
+                  <Text fill="WHITE" layoutX="226.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Sitka Text';" text="Welkom op het sessiekalender scherm!">
                      <font>
                         <Font name="Franklin Gothic Medium Italic" size="30.0" />
                      </font>

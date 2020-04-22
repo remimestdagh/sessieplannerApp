@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -36,6 +37,9 @@ public abstract class SchermController extends AnchorPane {
         stage.close();
 	}
 	
+	/*
+	 * Super method waarvan elk scherm erft. elk scherm dat een ander scherm oproept, roept deze methode aan.
+	 */
 	public void creëerScherm(String scherm) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/" + scherm + "Scherm.fxml"));
 		Parent root = (Parent)loader.load();
@@ -44,10 +48,18 @@ public abstract class SchermController extends AnchorPane {
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle(scherm+"Scherm");
+        stage.getIcons().add(new Image("/fonts/windowicon.jpg"));
+        //Nieuwe scherm een gepaste titel geven
+        switch (scherm)
+        {
+        case "CreateSessie" : stage.setTitle("Sessie Toevoegen");
+        }
         stage.show();
 	}
 	
+	/*
+	 * Super method waarvan elk scherm erft. elk scherm dat zichzelf van scherm doet veranderen roept dit aan.
+	 */
 	public void verranderScherm(Button button, String scherm) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/" + scherm + "Scherm.fxml"));
 		Parent root = (Parent)loader.load();
@@ -146,4 +158,7 @@ public abstract class SchermController extends AnchorPane {
 		tblView.setItems(list);
 		tblView.getColumns().addAll(academiejaarColumn, startdatumColumn, einddatumColumn);
 	}
+	
+	
+
 }

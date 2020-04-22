@@ -4,34 +4,67 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="690.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateSessieSchermController">
+<AnchorPane prefHeight="690.0" prefWidth="869.0" style="-fx-background-color: #406E8E" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateSessieSchermController">
    <children>
       <Pane prefHeight="214.0" prefWidth="215.20000000000005" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnCancel" layoutX="79.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleCancelAction" text="Cancel" />
-            <Text layoutX="79.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessie Toevoegen">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4d788f" height="370.0" layoutX="186.0" layoutY="181.0" stroke="#8fa8c7" strokeType="INSIDE" width="539.0" />
+            <Button fx:id="btnCancel" layoutY="664.0" mnemonicParsing="false" onAction="#handleCancelAction" text="Terug">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Button>
+            <Text fill="WHITE" layoutX="222.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Sitka Text';" text="Sessie Toevoegen">
+               <font>
+                  <Font name="System Italic" size="30.0" />
                </font>
             </Text>
-            <TextField fx:id="txtTitel" layoutX="79.0" layoutY="173.0" />
-            <TextField fx:id="txtGastspreker" layoutX="79.0" layoutY="375.0" />
-            <TextField fx:id="txtMaxCapaciteit" layoutX="79.0" layoutY="448.0" />
-            <TextField fx:id="txtLokaal" layoutX="79.0" layoutY="506.0" />
-            <Label layoutX="79.0" layoutY="156.0" text="Titel" />
-            <Label layoutX="81.0" layoutY="358.0" text="Naam gastspreker" />
-            <Label layoutX="78.0" layoutY="431.0" text="Maximu capaciteit lokaal" />
-            <Label layoutX="81.0" layoutY="489.0" text="Lokaal code" />
-            <Button fx:id="btnToevoegen" layoutX="79.0" layoutY="561.0" mnemonicParsing="false" onAction="#handleSessieToevoegenAction" text="Sessie toevogen" />
-            <Label layoutX="82.0" layoutY="288.0" text="Eind datum" />
-            <Label layoutX="81.0" layoutY="225.0" text="Start datum" />
-            <DatePicker fx:id="dateStartDatum" layoutX="78.0" layoutY="242.0" />
-            <DatePicker fx:id="dateEindDatum" layoutX="78.0" layoutY="305.0" />
+            <TextField fx:id="txtTitel" layoutX="227.0" layoutY="229.0" prefHeight="25.0" prefWidth="279.0" />
+            <TextField fx:id="txtGastspreker" layoutX="227.0" layoutY="303.0" prefHeight="25.0" prefWidth="174.0" />
+            <TextField fx:id="txtMaxCapaciteit" layoutX="228.0" layoutY="379.0" prefHeight="25.0" prefWidth="174.0" />
+            <TextField fx:id="txtLokaal" layoutX="228.0" layoutY="445.0" prefHeight="25.0" prefWidth="174.0" />
+            <Label layoutX="227.0" layoutY="212.0" text="Titel" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="229.0" layoutY="286.0" text="Naam gastspreker" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="230.0" layoutY="362.0" text="Maximum capaciteit lokaal" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="230.0" layoutY="428.0" text="Lokaal code" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <Button fx:id="btnToevoegen" layoutX="616.0" layoutY="519.0" mnemonicParsing="false" onAction="#handleSessieToevoegenAction" text="Sessie toevogen">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Button>
+            <Label layoutX="510.0" layoutY="425.0" text="Eind datum" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="509.0" layoutY="362.0" text="Start datum" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <DatePicker fx:id="dateStartDatum" layoutX="506.0" layoutY="379.0" />
+            <DatePicker fx:id="dateEindDatum" layoutX="506.0" layoutY="442.0" />
+            <ImageView fitHeight="40.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../fonts/itlablogoKlein.jpg" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

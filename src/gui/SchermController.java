@@ -44,6 +44,7 @@ public abstract class SchermController extends AnchorPane {
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle(scherm+"Scherm");
         stage.show();
 	}
 	

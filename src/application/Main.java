@@ -28,9 +28,7 @@ public class Main extends Application {
         test.setDomeinController(dc);
         Scene scene = new Scene(root);
         
-        //styling toevoegen
-        //scene.getStylesheets().add("application/generalStyling.css");
-        
+        stage.setMaximized(true);
         stage.getIcons().add(new Image("/fonts/windowicon.jpg"));
         stage.setTitle("IT-Lab Sessieplanner");
         stage.setScene(scene);

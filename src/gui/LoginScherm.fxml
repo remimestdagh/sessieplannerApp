@@ -14,7 +14,7 @@
 <AnchorPane prefHeight="606.0" prefWidth="802.0" style="-fx-background-color: #406E8E" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginSchermController">
 	<children>
 		<!-- Body -->
-		<Pane layoutY="121.0" prefHeight="300" prefWidth="802.0">
+		<Pane layoutY="121.0">
 			<children>
 				<TextField fx:id="emailVeld" layoutX="275.0" layoutY="161.0" prefHeight="25.0" prefWidth="253.0" promptText="voornaam.famillienaam@student.hogent.be" />
 				<PasswordField fx:id="wachtwoordVeld" layoutX="275.0" layoutY="245.0" prefHeight="25.0" prefWidth="253.0" />

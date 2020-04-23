@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -47,6 +48,11 @@ public class BeheerGebruikerSchermController extends SchermController implements
 	
 	@FXML
 	private TableView tblView;
+	
+	@FXML
+	private Label lblIntro;
+	
+	
 
 	@Override
 	public void setDomeinController(DomeinController dc) {
@@ -63,6 +69,8 @@ public class BeheerGebruikerSchermController extends SchermController implements
 		txtNaam.setText(dc.getGeselecteerdeGebruikerNaam());
 		txtChamilo.setText(dc.getGeselecteerdeGebruikerNaamChamilo());
 		txtEmail.setText(dc.getGeselecteerdeGebruikerEmailadres());
+		
+		lblIntro.setText("Sessies waarvoor "+ txtNaam.getText()+" aanwezig was:");
 	}
 
 	@Override

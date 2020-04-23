@@ -52,7 +52,8 @@ public abstract class SchermController extends AnchorPane {
         //Nieuwe scherm een gepaste titel geven
         switch (scherm)
         {
-        case "CreateSessie" : stage.setTitle("Sessie Toevoegen");
+        case "CreateSessie" : stage.setTitle("Sessie Toevoegen"); break;
+        case "CreateGebruiker" : stage.setTitle("Gebruiker Toevoegen");
         }
         stage.show();
 	}

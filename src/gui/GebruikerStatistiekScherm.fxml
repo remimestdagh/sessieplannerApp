@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="678.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GebruikerStatistiekSchermController">
    <children>
-      <Pane prefHeight="678.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="-3.0" layoutY="120.0" prefHeight="351.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300" AnchorPane.topAnchor="200">
          <children>
             <Text layoutX="84.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gebruiker Statistieken">
                <font>

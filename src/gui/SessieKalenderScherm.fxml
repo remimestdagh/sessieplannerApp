@@ -25,7 +25,7 @@
                      <font>
                         <Font name="Franklin Gothic Medium Italic" size="12.0" />
                      </font></Text>
-                  <Button fx:id="btnHoofdmenu" layoutY="569.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" text="Terug">
+                  <Button fx:id="btnHoofdmenu" alignment="BOTTOM_LEFT" layoutY="569.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" text="Terug">
                      <font>
                         <Font name="Franklin Gothic Medium Italic" size="12.0" />
                      </font></Button>
@@ -35,7 +35,7 @@
          <top>
             <Pane prefHeight="83.0" prefWidth="911.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" layoutX="296.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Sitka Text';" text="Welkom op de sessiekalender!">
+                  <Text fill="WHITE" layoutX="454.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Sitka Text';" text="Welkom op de sessiekalender!">
                      <font>
                         <Font name="System Italic" size="30.0" />
                      </font>

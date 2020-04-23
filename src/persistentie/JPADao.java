@@ -28,12 +28,15 @@ public class JPADao<T> implements Dao {
 				.getResultList();
 	}
 
+	
 	@Override
 	public Object get(Long id) {
 		T entity = em.find(type, id);
 		return entity;
 	}
 
+	
+	
 	@Override
 	public Object update(Object object) {
 		return em.merge(object);

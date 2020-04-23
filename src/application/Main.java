@@ -35,14 +35,14 @@ public class Main extends Application {
         stage.getIcons().add(new Image("/fonts/windowicon.jpg"));
         stage.setTitle("IT-Lab Sessieplanner");
         
-        //workaround maximization
+        //Maximizing screen
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
-
         stage.setX(bounds.getMinX());
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
+        
         
         stage.setScene(scene);
         stage.show();

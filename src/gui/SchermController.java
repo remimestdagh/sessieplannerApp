@@ -54,6 +54,8 @@ public abstract class SchermController extends AnchorPane {
         {
         case "CreateSessie" : stage.setTitle("Sessie Toevoegen"); break;
         case "CreateGebruiker" : stage.setTitle("Gebruiker Toevoegen");
+        case "CreateAankondiging" : stage.setTitle("Aankondiging Toevoegen"); break;
+        case "CreateMedia" : stage.setTitle("Media Toevoegen"); break;
         }
         stage.show();
 	}

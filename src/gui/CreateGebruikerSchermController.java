@@ -39,6 +39,9 @@ import javafx.scene.control.Label;
 		@FXML
 		private ChoiceBox<String> cbType, cbStatus;
 
+		@FXML
+		private Label errorText;
+		
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			
@@ -57,6 +60,8 @@ import javafx.scene.control.Label;
 		
 		@FXML
 		private void handleCreateGebruikerAction(ActionEvent event) throws IOException{
+			
+			try {
 			String naam = txNaam.getText();
 			String chamilo = txChamilo.getText();
 			String email = txEmail.getText();
@@ -64,8 +69,14 @@ import javafx.scene.control.Label;
 			String status = (String) cbStatus.getValue();
 			String type = (String) cbType.getValue();
 	    	getDC().addGebruiker(naam, chamilo, email, wachtwoord, status, type);
-	        
 	        sluitScherm(btnCreate);
+			}
+			catch(IllegalArgumentException e)
+			{
+				errorText.setText(e.getMessage());
+			}
+			
+			
 	    }
 		
 		@FXML

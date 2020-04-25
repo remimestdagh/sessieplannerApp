@@ -48,7 +48,7 @@
                <font>
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font></Button>
-            <Button fx:id="btnCancel" layoutY="395.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="25.0" prefWidth="76.0" text="Annuleren" >
+            <Button fx:id="btnCancel" layoutY="395.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="25.0" prefWidth="76.0" text="Annuleren">
 				               <font>
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font></Button>	           
@@ -63,6 +63,11 @@
                   <Image url="@../fonts/itlablogoKlein.jpg" />
                </image>
             </ImageView>
+            <Label fx:id="errorText" layoutX="123.0" layoutY="74.0" prefHeight="17.0" prefWidth="336.0" textFill="RED">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

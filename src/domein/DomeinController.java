@@ -93,7 +93,17 @@ public class DomeinController {
 		gebruikerDao.delete(gebruiker);
 	}
 	
+	/**
+	 * Voegt een nieuwe gebruiker toe indien opgegeven gegevens geldig zijn.
+	 */
 	public void addGebruiker(String naam,String naamChamilo, String emailadres, String wachtwoord, String status, String type) {
+		
+		String errorMessage ="";
+		if(naam.isEmpty() || naam.isBlank() || naamChamilo.isEmpty() || naamChamilo.isBlank() || emailadres.isEmpty() || emailadres.isBlank() || wachtwoord.isEmpty() || wachtwoord.isBlank())
+		{
+			throw new IllegalArgumentException("Vul alle velden in!");
+		}
+
 		Gebruiker gebruiker = new Gebruiker(naam,naamChamilo,emailadres,wachtwoord,status,type);
 		gebruikerDao.insert(gebruiker);
 	}
@@ -166,7 +176,16 @@ public class DomeinController {
 		
 		sessieDao.update(geselecteerdeSessie);
 	}
+	
+	
+	
 	public void addAankondigingToGeselecteerdeSessie(String inhoud) {
+		
+		if(inhoud.isBlank() || inhoud.isEmpty())
+		{
+			throw new IllegalArgumentException("Gelieve uw aankondiging te voorzien van tekst!");
+		}
+		
 		geselecteerdeSessie.addAankondiging(new Aankondiging(inhoud, ingelogdeGebruiker.getNaam(), new Date()));
 		
 		sessieDao.update(geselecteerdeSessie);

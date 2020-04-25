@@ -80,6 +80,10 @@ public class BeheerSessieSchermController  extends SchermController implements I
     	maakMediaTable(tblMedia, getDC().getMediafromGeselecteerdeSessie());
     }
 	
+	
+	/**
+	 * Button event dat het scherm ter aanmaak van aankondigingen opent
+	 */
 	@FXML
     private void handleAankondigingAction(ActionEvent event) throws IOException {
         

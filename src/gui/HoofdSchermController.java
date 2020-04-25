@@ -52,6 +52,9 @@ public class HoofdSchermController extends SchermController implements Initializ
 		textName.setText(dc.getNaamIngelogdeGebruiker());
 	}
 	
+	/**
+	 * Button event om naar beheer van gebruikers te gaan.
+	 */
 	@FXML
     private void handleBeheerGebruikersButtonAction(ActionEvent event) throws IOException {
 		if(getDC().gebruikerIsHoofdverantwoordelijke()) {
@@ -60,12 +63,18 @@ public class HoofdSchermController extends SchermController implements Initializ
 		}
 	}
 	
+	/**
+	 * Button event om naar statistieken te gaan
+	 */
 	@FXML
     private void handleStatistiekButtonAction(ActionEvent event) throws IOException {
         
         verranderScherm(btnStat, "Statistiek");
 	}
 	
+	/**
+	 * Button event om naar sessiekalenders te gaan
+	 */
 	@FXML
     private void handleSessieKalenderButtonAction(ActionEvent event) throws IOException {
         

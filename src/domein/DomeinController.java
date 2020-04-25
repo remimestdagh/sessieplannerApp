@@ -171,11 +171,20 @@ public class DomeinController {
 		
 		sessieDao.update(geselecteerdeSessie);
 	}
+	
+	/**
+	 * Deze methode voegt media toe aan een sessie en controleert of opgegeven string geldig is.
+	 */
 	public void addMediaToGeselecteerdeSessie(String type) {
+		if(type.isBlank() || type.isEmpty())
+		{
+			throw new IllegalArgumentException("Gelieve een naam voor het type media op te geven!");
+		}
 		geselecteerdeSessie.addMedia(new Media(type));
-		
 		sessieDao.update(geselecteerdeSessie);
 	}
+	
+	
 	public void verwijderMediaFromGeselecteerdeSessie(Media media) {
 		geselecteerdeSessie.removeMedia(media);
 		

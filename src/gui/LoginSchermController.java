@@ -42,6 +42,8 @@ public class LoginSchermController extends SchermController implements Initializ
 	{
 		
 	}
+	
+	
 	//METHODS
     @FXML
     /*
@@ -51,7 +53,6 @@ public class LoginSchermController extends SchermController implements Initializ
     	try {
     		getDC().login(emailVeld.getText(), wachtwoordVeld.getText());
     		//dc.login("@", "p");
-    		
     		//vanuit dc.login kan verkeerdeInfo-error geworpen worden dus alles hieronder halen we niet noodzakelijk
     		verranderScherm(loginButton, "Hoofd");
     		

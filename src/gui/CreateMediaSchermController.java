@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class CreateMediaSchermController extends SchermController implements Initializable{
@@ -18,6 +19,9 @@ public class CreateMediaSchermController extends SchermController implements Ini
 	@FXML
 	private TextField txtType;
 
+	@FXML
+	private Label lblWarning;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -31,11 +35,16 @@ public class CreateMediaSchermController extends SchermController implements Ini
 	
 	@FXML
     private void handleCreateMediaAction(ActionEvent event) throws IOException {
-		
 		String type = txtType.getText();
-		
+		try {
 		getDC().addMediaToGeselecteerdeSessie(type);
-        
         sluitScherm(btnCreate);
+		}
+		catch(IllegalArgumentException e)
+		{
+			lblWarning.setText(e.getMessage());
+		}
+        
+
     }
 }

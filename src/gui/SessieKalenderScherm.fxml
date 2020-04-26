@@ -21,7 +21,7 @@
                      <font>
                         <Font name="Franklin Gothic Medium Italic" size="12.0" />
                      </font></Button>
-                  <Text fill="WHITE" layoutX="23.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessies">
+                  <Text fx:id="geselecteerdeKalender" fill="WHITE" layoutX="23.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessies">
                      <font>
                         <Font name="Franklin Gothic Medium Italic" size="12.0" />
                      </font></Text>

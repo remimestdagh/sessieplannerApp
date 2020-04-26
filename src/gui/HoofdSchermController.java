@@ -40,6 +40,9 @@ public class HoofdSchermController extends SchermController implements Initializ
 	
 	@FXML
 	private Button btnKalender;
+	
+	@FXML
+	private Button btnLogUit;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -83,6 +86,15 @@ public class HoofdSchermController extends SchermController implements Initializ
         }else {
         	verranderScherm(btnKalender, "SessieKalender");
         }
+	}
+	
+	
+	/**
+	 * Button event om uit te loggen
+	 */
+	@FXML
+    private void logUitButtonAction(ActionEvent event) throws IOException {
+        	verranderScherm(btnLogUit, "Login");
 	}
 	
 	

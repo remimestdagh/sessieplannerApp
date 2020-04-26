@@ -90,6 +90,7 @@ public class BeheerGebruikerSchermController extends SchermController implements
 		String status = (String) cbStatus.getValue();
 		String type = (String) cbType.getValue();
 		getDC().editGeselecteerdeGebruiker(naam, naamChamilo, email, status, type);
+		lblError.setText("");
 		}catch(IllegalArgumentException e)
 		{
 			lblError.setText(e.getMessage());

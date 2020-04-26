@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import domein.Gebruiker;
 import javafx.collections.ObservableList;
 
-public class DummyGebruikerDao extends DummyDao<Gebruiker>{
+public class DummyGebruikerDao extends DummyDao<Gebruiker> implements GebruikerDao{
 
 	private PersistentieDummy pd;
 	

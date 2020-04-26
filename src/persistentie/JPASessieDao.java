@@ -8,7 +8,7 @@ import domein.Gebruiker;
 import domein.Sessie;
 import javafx.collections.ObservableList;
 
-public class JPASessieDao extends JPADao{
+public class JPASessieDao extends JPADao implements SessieDao{
 	// PARAMETERS
 
 	

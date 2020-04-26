@@ -6,7 +6,7 @@ import domein.Gebruiker;
 import domein.SessieKalender;
 import javafx.collections.ObservableList;
 
-public class JPASessieKalenderDao extends JPADao{
+public class JPASessieKalenderDao extends JPADao implements SessieKalenderDao{
 
 	// PARAMETERS
 

@@ -3,7 +3,7 @@ package persistentie;
 import javax.persistence.TypedQuery;
 import domein.Gebruiker;
 
-public class JPAGebruikerDao extends JPADao {
+public class JPAGebruikerDao extends JPADao implements GebruikerDao{
 
 	// PARAMETERS
 

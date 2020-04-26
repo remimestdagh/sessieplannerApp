@@ -5,7 +5,7 @@ import java.util.List;
 import domein.SessieKalender;
 import javafx.collections.ObservableList;
 
-public class DummySessieKalenderDao extends DummyDao<SessieKalender>{
+public class DummySessieKalenderDao extends DummyDao<SessieKalender> implements SessieKalenderDao{
 
 	private PersistentieDummy pd;
 	

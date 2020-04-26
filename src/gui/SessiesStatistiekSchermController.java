@@ -67,7 +67,9 @@ public class SessiesStatistiekSchermController extends SchermController implemen
     }
 	
 
-	
+	/**
+	 * Terugkeren
+	 */
 	@FXML
     private void handleStatistiekAction(ActionEvent event) throws IOException {
         verranderScherm(btnStatistiek, "Statistiek");

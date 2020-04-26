@@ -12,11 +12,15 @@ import persistentie.Dao;
 import persistentie.DummyGebruikerDao;
 import persistentie.DummySessieDao;
 import persistentie.DummySessieKalenderDao;
+import persistentie.GebruikerDao;
 import persistentie.JPAGebruikerDao;
 import persistentie.JPASessieDao;
 import persistentie.JPASessieKalenderDao;
 import persistentie.PersistentieDummy;
 import persistentie.Seeder;
+import persistentie.SessieDao;
+import persistentie.SessieKalenderDao;
+
 import static domein.Config.*;
 
 public class DomeinController {
@@ -24,9 +28,9 @@ public class DomeinController {
 	
 	//PARAMETERS
 	private Gebruiker ingelogdeGebruiker;
-	private DummyGebruikerDao gebruikerDao;				//repo voor gebruikers (finaal type Dao?)
-	private DummySessieDao sessieDao;					//repo voor sessies (finaal type Dao?)
-	private DummySessieKalenderDao sessieKalenderDao;	//repo voor sessiekalenders (finaal type Dao?)
+	private GebruikerDao gebruikerDao;				//repo voor gebruikers (finaal type Dao?)
+	private SessieDao sessieDao;					//repo voor sessies (finaal type Dao?)
+	private SessieKalenderDao sessieKalenderDao;	//repo voor sessiekalenders (finaal type Dao?)
 	
 	
 	//CONSTRUCTOR
@@ -39,10 +43,10 @@ public class DomeinController {
 		}
 		
 		if(USE_JPA) {
-			//this.gebruikerDao = new JPAGebruikerDao();
-			//this.sessieDao = new JPASessieDao();
-			//this.sessieKalenderDao = new JPASessieKalenderDao();
-			//Seeder.seedDatabase();
+			this.gebruikerDao = new JPAGebruikerDao();
+			this.sessieDao = new JPASessieDao();
+			this.sessieKalenderDao = new JPASessieKalenderDao();
+			//Seeder.seedDatabase();									//dummy for data
 		}
 	}
 	

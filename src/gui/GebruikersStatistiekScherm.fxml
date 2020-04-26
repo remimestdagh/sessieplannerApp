@@ -34,7 +34,7 @@
             <Pane prefHeight="775.0" prefWidth="611.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="btnStatistiek" layoutY="668.0" mnemonicParsing="false" onAction="#handleStatistiekAction" text="Terug" />
-                  <TableView fx:id="tblView" layoutX="28.0" layoutY="14.0" onMouseClicked="#handleAanwezighedenAction" prefHeight="511.0" prefWidth="555.0" />
+                  <TableView fx:id="tblView" layoutX="28.0" layoutY="14.0" onMouseClicked="#handleAanwezighedenAction" prefHeight="464.0" prefWidth="555.0" />
                   <Label layoutX="28.0" layoutY="-1.0" text="Gebruikers" textFill="WHITE">
                      <font>
                         <Font name="Franklin Gothic Medium Italic" size="12.0" />

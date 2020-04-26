@@ -68,7 +68,7 @@ public class SessiesStatistiekSchermController extends SchermController implemen
 	
 
 	/**
-	 * Terugkeren naar statistiek scherm //
+	 * Terugkeren naar statistiek scherm 
 	 */
 	@FXML
     private void handleStatistiekAction(ActionEvent event) throws IOException {

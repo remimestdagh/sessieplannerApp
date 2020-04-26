@@ -74,36 +74,7 @@ public class GebruikersStatistiekSchermController extends SchermController imple
         
     }
     
-	/*
-	@FXML
-    private void handleEditGegevensAction(MouseEvent event) throws IOException{
-		Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
-		getDC().setGeselecteerdeGebruiker(gebruiker);
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikerScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController schermController = loader.getController();
-        schermController.setDomeinController(getDC());
-        
-        borderPane.setCenter(root);
-        
-    }
-	 */
-	
-	/*
- 	@FXML
-    private void handleBeheerSessieKalenderAction(MouseEvent event) throws IOException {
-		getDC().setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerSessieKalenderScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController schermController = loader.getController();
-        schermController.setDomeinController(getDC());
-        
-        borderPane.setCenter(root);
-    }
-	
-	 */
+
 	
 }
 

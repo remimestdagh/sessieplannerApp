@@ -18,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class SessieStatistiekSchermController extends SchermController implements Initializable{
@@ -28,6 +29,9 @@ public class SessieStatistiekSchermController extends SchermController implement
 	@FXML
 	private TableView tblView;
 
+	@FXML
+	private Text txtTitel;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -38,6 +42,7 @@ public class SessieStatistiekSchermController extends SchermController implement
 		super.setDomeinController(dc);
 		
 		maakGebruikerTable(tblView, getDC().getGebruikersFromGeselecteerdeSessie());
+		txtTitel.setText("Aanwezige gebruikers voor sessie: "+getDC().getGeselecteerdeSessieTitel());
 	}
 	
 	@FXML

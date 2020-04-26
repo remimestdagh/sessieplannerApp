@@ -43,6 +43,7 @@ public class SessieKalendersSchermController extends SchermController implements
 		
 		maakKalenderTable(tblView, getDC().getSessieKalenders());
 
+
 	}
 
 	@Override

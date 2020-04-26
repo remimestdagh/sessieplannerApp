@@ -52,6 +52,9 @@ public class SessieKalendersSchermController extends SchermController implements
         verranderScherm(btnHoofdmenu, "Hoofd");
     }
 	
+	/**
+	 * Het selecteren van een sessie
+	 */
 	@FXML
     private void handleBeheerSessieKalenderAction(MouseEvent event) throws IOException {
 		getDC().setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());
@@ -64,6 +67,9 @@ public class SessieKalendersSchermController extends SchermController implements
         borderPane.setCenter(root);
     }
 	
+	/**
+	 * Het aanpassen van een sessiekalender
+	 */
 	@FXML
     private void handleBeheerSessiesAction(ActionEvent event) throws IOException {
 		getDC().setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());

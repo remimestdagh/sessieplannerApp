@@ -61,6 +61,9 @@ public class BeheerGebruikersSchermController extends SchermController implement
         verranderScherm(btnHoofmenu, "Hoofd");
     }
 	
+	/**
+	 * Selecteren van een gebruiker
+	 */
 	@FXML
     private void handleEditGegevensAction(MouseEvent event) throws IOException{
 		Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
@@ -75,6 +78,9 @@ public class BeheerGebruikersSchermController extends SchermController implement
         
     }
 	
+	/**
+	 * Verwijderen van een gebruiker
+	 */
 	@FXML
     private void handleDeleteGebruikerAction(ActionEvent event){
     	Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
@@ -82,6 +88,9 @@ public class BeheerGebruikersSchermController extends SchermController implement
     	maakGebruikerTable(tblView, getDC().getGebruikers());
     }
 	
+	/**
+	 * Aanmaken nieuwe gebruiker
+	 */
 	@FXML
 	private void handleCreateGebruikerAction(ActionEvent event) throws IOException{
         creëerScherm("CreateGebruiker");

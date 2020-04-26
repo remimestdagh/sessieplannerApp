@@ -19,6 +19,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+
+
 @Entity
 @Table(name="Gebruiker")
 public class Gebruiker {
@@ -91,6 +93,11 @@ public class Gebruiker {
 		sessiesWaarvoorAanwezig.add(sessie);
 	}
 	public void editGeselecteerdeGebruiker(String naam, String naamChamilo, String email, String status, String type) {
+		
+		if(naam.isEmpty() || naam.isBlank() || naamChamilo.isEmpty() || naamChamilo.isBlank()|| email.isEmpty() || email.isBlank())
+		{
+			throw new IllegalArgumentException("Vul alle velden in!");
+		}
 		setNaam(naam);
 		setNaamChamilo(naamChamilo);
 		setEmailadres(email);

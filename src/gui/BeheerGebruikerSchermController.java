@@ -52,6 +52,8 @@ public class BeheerGebruikerSchermController extends SchermController implements
 	@FXML
 	private Label lblIntro;
 	
+	@FXML
+	private Label lblError;
 	
 
 	@Override
@@ -81,12 +83,16 @@ public class BeheerGebruikerSchermController extends SchermController implements
 	
 	@FXML
     private void handleEditAction(ActionEvent event) throws IOException {
+		try {
 		String naam = txtNaam.getText();
 		String naamChamilo = txtChamilo.getText();
 		String email = txtEmail.getText();
 		String status = (String) cbStatus.getValue();
 		String type = (String) cbType.getValue();
-		
 		getDC().editGeselecteerdeGebruiker(naam, naamChamilo, email, status, type);
+		}catch(IllegalArgumentException e)
+		{
+			lblError.setText(e.getMessage());
+		}
     }
 }

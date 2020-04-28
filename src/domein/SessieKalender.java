@@ -34,6 +34,7 @@ public class SessieKalender implements ISessieKalender{
 	public void removeSessie(Sessie sessie) {
 		sessieList.remove(sessie);
 	}
+	
 	public void editSessieKalender(SessieKalenderDTO dto) {
 		if(dto.getEinddatum().isBefore(dto.getStartdatum())) {
 			throw new IllegalArgumentException("Startdatum moet voor einddatum plaatsvinden");

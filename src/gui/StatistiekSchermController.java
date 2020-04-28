@@ -54,6 +54,11 @@ public class StatistiekSchermController extends SchermController implements Init
         
         verranderScherm(btnSessies, "SessiesStatistiek");
     }
+
+	@FXML
+	private void handleGeavanceerdAction(ActionEvent event) throws IOException {
+		verranderScherm(btnGeavanceerd, "GeavanceerdStatistiek");
+	}
 	
 	private void initializeButtonTooltips()
 	{

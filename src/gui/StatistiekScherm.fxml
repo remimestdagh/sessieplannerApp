@@ -19,7 +19,7 @@
             </Label>
             <Button fx:id="btnGebruikers" layoutX="285.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleGebruikersAction" prefHeight="36.0" prefWidth="151.0" text="Gebruikers Statistieken" />
             <Button fx:id="btnSessies" layoutX="285.0" layoutY="374.0" mnemonicParsing="false" onAction="#handleSessiesAction" prefHeight="36.0" prefWidth="151.0" text="Sessies Statistieken" />
-            <Button fx:id="btnGeavanceerd" layoutX="285.0" layoutY="502.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="151.0" text="Geavanceerde Satistieken" />
+            <Button fx:id="btnGeavanceerd" layoutX="285.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleGeavanceerdAction" prefHeight="36.0" prefWidth="151.0" text="Geavanceerde Satistieken" />
          </children>
       </Pane>
       <Button fx:id="btnHoofdmenu" layoutY="772.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" prefHeight="25.0" prefWidth="86.0" text="Terug" />

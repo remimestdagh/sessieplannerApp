@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import persistentie.Dao;
 import persistentie.DummyGebruikerDao;
 import persistentie.DummySessieDao;
@@ -87,6 +89,10 @@ public class DomeinController {
 	
 	public ObservableList<Gebruiker> getGebruikers(){
 		return gebruikerDao.findAll();
+	}
+	
+	public ObservableList<Gebruiker> getGebruikersMetNaam(String naam){
+		return new FilteredList<Gebruiker>(gebruikerDao.findAll(), g -> g.getNaam().toLowerCase().contains(naam.toLowerCase()));
 	}
 	
 	public ObservableList<SessieKalender> getSessieKalenders(){

@@ -38,10 +38,13 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	private TableView tblView;
 	
 	@FXML
-	private Button btnHoofmenu, btnCreate, btnEdit;
+	private Button btnHoofmenu, btnCreate, btnEdit, btnZoekGebruiker;
 	
 	@FXML
 	private BorderPane borderPane;
+	
+	@FXML
+	private TextField txtZoekGebruiker;
 	
 
 	@Override
@@ -96,4 +99,11 @@ public class BeheerGebruikersSchermController extends SchermController implement
         creëerScherm("CreateGebruiker");
     }
 	
+	/**
+	 * Zoek gebruiker in lijst
+	 */
+	@FXML
+	private void handleZoekGebruikerAction(ActionEvent event) {
+		maakGebruikerTable(tblView, getDC().getGebruikersMetNaam(txtZoekGebruiker.getText()));
+	}
 }

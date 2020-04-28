@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -29,13 +30,16 @@ public class GebruikersStatistiekSchermController extends SchermController imple
 	private Button btnStatistiek;
 	
 	@FXML
-	private Button btnAanwezigheden;
+	private Button btnAanwezigheden, btnZoekGebruiker;
 	
 	@FXML
 	private TableView tblView;
 	
 	@FXML
 	private BorderPane borderPane;
+	
+	@FXML
+	private TextField txtZoekGebruiker;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -73,8 +77,13 @@ public class GebruikersStatistiekSchermController extends SchermController imple
         borderPane.setCenter(root);
         
     }
-    
-
 	
+	/**
+	 * Zoek gebruiker in lijst
+	 */
+	@FXML
+	private void handleZoekGebruikerAction(ActionEvent event) {
+		maakGebruikerTable(tblView, getDC().getGebruikersMetNaam(txtZoekGebruiker.getText()));
+	}
 }
 

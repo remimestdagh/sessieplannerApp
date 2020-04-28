@@ -88,9 +88,10 @@ public class DomeinController {
 		return gebruikerDao.findAll();
 	}
 	
-	public ObservableList<IGebruiker> getGebruikersMetNaam(String naam){
-		return (ObservableList<IGebruiker>)(Object)new FilteredList<Gebruiker>(gebruikerDao.findAll(), g -> g.getNaam().toLowerCase().contains(naam.toLowerCase()));
+	public ObservableList<Gebruiker> getGebruikersMetNaam(String naam){
+		return new FilteredList<Gebruiker>(gebruikerDao.findAll(), g -> g.getNaam().toLowerCase().contains(naam.toLowerCase()));
 	}
+	
 	
 	public ObservableList<ISessieKalender> getSessieKalenders(){
 		return sessieKalenderDao.findAll();

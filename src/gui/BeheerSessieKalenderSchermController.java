@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -25,6 +26,9 @@ public class BeheerSessieKalenderSchermController extends SchermController imple
 	
 	@FXML
 	private Button btnSave;
+	
+	@FXML
+	private Label lblError;
 
 
 	@Override
@@ -44,10 +48,17 @@ public class BeheerSessieKalenderSchermController extends SchermController imple
 	
 	@FXML
     private void handleEditSessieKalenderAction(ActionEvent event) throws IOException {
-		String academiejaar = txtJaar.getText();
-		LocalDateTime startDate = dateStart.getValue().atStartOfDay();
-		LocalDateTime eindDate = dateEind.getValue().atStartOfDay();
-		
-		getDC().editGeselecteerdeSessieKalender(academiejaar, startDate, eindDate);
+		try {
+			String academiejaar = txtJaar.getText();
+			LocalDateTime startDate = dateStart.getValue().atStartOfDay();
+			LocalDateTime eindDate = dateEind.getValue().atStartOfDay();
+			
+			getDC().editGeselecteerdeSessieKalender(academiejaar, startDate, eindDate);
+			lblError.setText("");
+			
+		}catch(IllegalArgumentException e)
+		{
+			lblError.setText(e.getMessage());
+		}
     }
 }

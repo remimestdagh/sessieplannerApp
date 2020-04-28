@@ -275,6 +275,9 @@ public class Sessie {
 		return naamGastspreker;
 	}
 	public void setNaamGastspreker(String naamGastspreker) {
+		if(naamGastspreker.isBlank()||naamGastspreker.isEmpty()){
+			throw new IllegalArgumentException("De gastspreker mag niet leeg zijn");
+		}
 		this.naamGastspreker = naamGastspreker;
 	}
 	public String getLokaalCode() {

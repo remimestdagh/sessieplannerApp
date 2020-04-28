@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -41,6 +42,9 @@ public class BeheerSessieSchermController  extends SchermController implements I
 	
 	@FXML
 	private Text txtGebruikers, txtAankondigingen;
+	
+	@FXML
+	private Label lblError;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -92,17 +96,23 @@ public class BeheerSessieSchermController  extends SchermController implements I
 	
 	@FXML
     private void handleEditSessieAction(ActionEvent event) throws IOException {
+try {
+	String titel = txtTitel.getText();
+	String startDatum = txtStartDatum.getText();
+	String eindDatum = txtEindDatum.getText();
+	String spreker = txtSpreker.getText();
+	int capaciteit = Integer.parseInt(txtCapaciteit.getText());
+	String lokaal = txtLokaal.getText();
+	String status = (String) cbStatus.getValue();
+	
+	getDC().editGeselecteerdeSessie(titel, spreker, lokaal, capaciteit, startDatum, eindDatum, status);
 
-		String titel = txtTitel.getText();
-		String startDatum = txtStartDatum.getText();
-		String eindDatum = txtEindDatum.getText();
-		String spreker = txtSpreker.getText();
-		int capaciteit = Integer.parseInt(txtCapaciteit.getText());
-		String lokaal = txtLokaal.getText();
-		String status = (String) cbStatus.getValue();
-		
-		getDC().editGeselecteerdeSessie(titel, spreker, lokaal, capaciteit, startDatum, eindDatum, status);
-        
+	lblError.setText("");
+	
+}catch(IllegalArgumentException e)
+{
+	lblError.setText(e.getMessage());
+}
     }
 }
 

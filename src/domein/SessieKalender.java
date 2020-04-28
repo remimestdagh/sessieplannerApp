@@ -32,6 +32,9 @@ public class SessieKalender {
 		sessieList.remove(sessie);
 	}
 	public void editSessieKalender(String academiejaar, LocalDateTime startdatum, LocalDateTime einddatum) {
+		if(einddatum.isBefore(startdatum)) {
+			throw new IllegalArgumentException("Startdatum moet voor einddatum plaatsvinden");
+		}
 		setAcademiejaar(academiejaar);
 		setStartdatum(startdatum);
 		setEinddatum(einddatum);
@@ -43,6 +46,9 @@ public class SessieKalender {
 		return academiejaar;
 	}
 	public void setAcademiejaar(String academiejaar) {
+		if(academiejaar.isEmpty() || academiejaar.isBlank()) {
+			throw new IllegalArgumentException("Vul alle velden in!");
+		}
 		this.academiejaar = academiejaar;
 	}
 	public LocalDateTime getStartdatum() {

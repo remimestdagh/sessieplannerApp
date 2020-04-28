@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
+import domein.GebruikerDTO;
+import domein.IGebruiker;
 import domein.Sessie;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,78 +24,65 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class BeheerGebruikerSchermController extends SchermController implements Initializable{
-	
-	
+public class BeheerGebruikerSchermController extends SchermController implements Initializable {
+
 	@FXML
-	private Button btnTerug;
-	
+	private Button btnTerug, btnEdit;
+
 	@FXML
-	private Button btnEdit;
-	
+	private TextField txtNaam, txtChamilo, txtEmail;
+
 	@FXML
-	private TextField txtNaam;
-	
-	@FXML
-	private TextField txtChamilo;
-	
-	@FXML
-	private TextField txtEmail;
-	
-	@FXML
-	private ChoiceBox cbStatus;
-	
-	@FXML
-	private ChoiceBox cbType;
-	
+	private ChoiceBox cbStatus, cbType;
+
 	@FXML
 	private TableView tblView;
-	
+
 	@FXML
-	private Label lblIntro;
-	
-	@FXML
-	private Label lblError;
-	
+	private Label lblIntro, lblError;
 
 	@Override
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
-		
+
 		maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeGebruiker());
-		
-		cbStatus.getItems().addAll("ACTIEF","GEBLOKKEERD","NIET_ACTIEF");
-		cbStatus.setValue(dc.getGeselecteerdeGebruikerStatus());
-		
-		cbType.getItems().addAll("HoofdVerantwoordelijke","Verantwoordelijke","Gewone_Gebruiker");
-		cbType.setValue(dc.getGeselecteerdeGebruikerType());
-		
-		txtNaam.setText(dc.getGeselecteerdeGebruikerNaam());
-		txtChamilo.setText(dc.getGeselecteerdeGebruikerNaamChamilo());
-		txtEmail.setText(dc.getGeselecteerdeGebruikerEmailadres());
-		
-		lblIntro.setText("Sessies waarvoor "+ txtNaam.getText()+" aanwezig was:");
+
+		IGebruiker gebruiker = dc.getGeselecteerdeGebruiker();
+
+		cbStatus.getItems().addAll("ACTIEF", "GEBLOKKEERD", "NIET_ACTIEF");
+		cbStatus.setValue(gebruiker.getStatus().toString());
+
+		cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "Gewone_Gebruiker");
+		cbType.setValue(gebruiker.getType().toString());
+
+		txtNaam.setText(gebruiker.getNaam());
+		txtChamilo.setText(gebruiker.getNaamChamilo());
+		txtEmail.setText(gebruiker.getEmailadres());
+
+		lblIntro.setText("Sessies waarvoor " + txtNaam.getText() + " aanwezig was:");
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	@FXML
-    private void handleEditAction(ActionEvent event) throws IOException {
+	private void handleEditAction(ActionEvent event) throws IOException {
 		try {
-		String naam = txtNaam.getText();
-		String naamChamilo = txtChamilo.getText();
-		String email = txtEmail.getText();
-		String status = (String) cbStatus.getValue();
-		String type = (String) cbType.getValue();
-		getDC().editGeselecteerdeGebruiker(naam, naamChamilo, email, status, type);
-		lblError.setText("");
-		}catch(IllegalArgumentException e)
-		{
+			GebruikerDTO dto = new GebruikerDTO();
+
+			dto.setNaam(txtNaam.getText());
+			dto.setNaamChamilo(txtChamilo.getText());
+			dto.setEmailadres(txtEmail.getText());
+			dto.setStatus((String) cbStatus.getValue());
+			dto.setType((String) cbType.getValue());
+
+			getDC().editGeselecteerdeGebruiker(dto);
+			
+		} catch (IllegalArgumentException e) {
 			lblError.setText(e.getMessage());
 		}
-    }
+	}
 }

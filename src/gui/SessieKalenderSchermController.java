@@ -57,7 +57,7 @@ public class SessieKalenderSchermController extends SchermController implements 
 			maakSessieTable(tblView, getDC().getSessiesFromVerantwoordelijke());
 			btnHoofdmenu.setText("Terug naar hoofdmenu");
 		}
-		geselecteerdeKalender.setText("Sessies voor kalender: "+getDC().getGeselecteerdeSessieKalenderAcademiejaar());
+		geselecteerdeKalender.setText("Sessies voor kalender: " + getDC().getGeselecteerdeSessieKalender().getAcademiejaar() );
 	}
 	
 	@FXML

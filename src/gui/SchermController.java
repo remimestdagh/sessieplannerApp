@@ -1,13 +1,12 @@
 package gui;
 
 import java.io.IOException;
-
-import domein.Aankondiging;
 import domein.DomeinController;
-import domein.Gebruiker;
-import domein.Media;
-import domein.Sessie;
-import domein.SessieKalender;
+import domein.IAankondiging;
+import domein.IGebruiker;
+import domein.IMedia;
+import domein.ISessie;
+import domein.ISessieKalender;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -75,22 +74,22 @@ public abstract class SchermController extends AnchorPane {
         stage.show();
 	}
 	
-	public void maakSessieTable(TableView tblView, ObservableList<Sessie> list) {
+	public void maakSessieTable(TableView tblView, ObservableList<ISessie> list) {
 		tblView.getColumns().clear();
 		
-		TableColumn<Sessie, String> verantwoordelijkeColumn = new TableColumn<>("Naam verantwoordelijke");
+		TableColumn<ISessie, String> verantwoordelijkeColumn = new TableColumn<>("Naam verantwoordelijke");
 		verantwoordelijkeColumn.setCellValueFactory(new PropertyValueFactory<>("sessieAanmaker"));
 		
-		TableColumn<Sessie, String> titelColumn = new TableColumn<>("Titel");
+		TableColumn<ISessie, String> titelColumn = new TableColumn<>("Titel");
 		titelColumn.setCellValueFactory(new PropertyValueFactory<>("titel"));
 		
-		TableColumn<Sessie, String> startDatumColumn = new TableColumn<>("Start datum");
+		TableColumn<ISessie, String> startDatumColumn = new TableColumn<>("Start datum");
 		startDatumColumn.setCellValueFactory(new PropertyValueFactory<>("startDatum"));
 		
-		TableColumn<Sessie, String> eindDatumColumn = new TableColumn<>("Eind datum");
+		TableColumn<ISessie, String> eindDatumColumn = new TableColumn<>("Eind datum");
 		eindDatumColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
 		
-		TableColumn<Sessie, String> plaatsenColumn = new TableColumn<>("Aanwezigen / Vrije plaatsen");
+		TableColumn<ISessie, String> plaatsenColumn = new TableColumn<>("Aanwezigen / Vrije plaatsen");
 		plaatsenColumn.setCellValueFactory(new PropertyValueFactory<>("aanwezigenOrVrijePlaatsen"));
 		
 		tblView.setItems(list);
@@ -99,20 +98,20 @@ public abstract class SchermController extends AnchorPane {
 		tblView.sort();
 	}
 	
-	public void maakGebruikerTable(TableView tblView, ObservableList<Gebruiker> list) {
+	public void maakGebruikerTable(TableView tblView, ObservableList<IGebruiker> list) {
 		tblView.getColumns().clear();
 		
-		TableColumn<Gebruiker, String> naamColumn = new TableColumn<>("Naam");
+		TableColumn<IGebruiker, String> naamColumn = new TableColumn<>("Naam");
 		naamColumn.setCellValueFactory(new PropertyValueFactory<>("naam"));
 		
-		TableColumn<Gebruiker, String> chamiloColumn = new TableColumn<>("Naam Chamilo");
+		TableColumn<IGebruiker, String> chamiloColumn = new TableColumn<>("Naam Chamilo");
 		chamiloColumn.setCellValueFactory(new PropertyValueFactory<>("naamChamilo"));
 		
 		
-		TableColumn<Gebruiker, String> statusColumn = new TableColumn<>("Status");
+		TableColumn<IGebruiker, String> statusColumn = new TableColumn<>("Status");
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		
-		TableColumn<Gebruiker,String> typeColumn = new TableColumn<>("Type");
+		TableColumn<IGebruiker,String> typeColumn = new TableColumn<>("Type");
 		typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
 		
 		
@@ -120,42 +119,42 @@ public abstract class SchermController extends AnchorPane {
 		tblView.getColumns().addAll(naamColumn, chamiloColumn, statusColumn,typeColumn);
 	}
 	
-	public void maakAankondigingTable(TableView tblView, ObservableList<Aankondiging> list) {
+	public void maakAankondigingTable(TableView tblView, ObservableList<IAankondiging> list) {
 		tblView.getColumns().clear();
 		
-		TableColumn<Aankondiging, String> inhoudColumn = new TableColumn<>("Inhoud");
+		TableColumn<IAankondiging, String> inhoudColumn = new TableColumn<>("Inhoud");
 		inhoudColumn.setCellValueFactory(new PropertyValueFactory<>("inhoud"));
 		
-		TableColumn<Aankondiging, String> auteurColumn = new TableColumn<>("Auteur");
+		TableColumn<IAankondiging, String> auteurColumn = new TableColumn<>("Auteur");
 		auteurColumn.setCellValueFactory(new PropertyValueFactory<>("auteurNaam"));
 		
-		TableColumn<Aankondiging, String> publicatieDatumColumn = new TableColumn<>("Publicatie Datum");
+		TableColumn<IAankondiging, String> publicatieDatumColumn = new TableColumn<>("Publicatie Datum");
 		publicatieDatumColumn.setCellValueFactory(new PropertyValueFactory<>("publicatieDatum"));
 		
 		tblView.setItems(list);
 		tblView.getColumns().addAll(inhoudColumn, auteurColumn, publicatieDatumColumn);
 	}
 	
-	public void maakMediaTable(TableView tblView, ObservableList<Media> list) {
+	public void maakMediaTable(TableView tblView, ObservableList<IMedia> list) {
 		tblView.getColumns().clear();
 		
-		TableColumn<Media, String> typeColumn = new TableColumn<>("Type");
+		TableColumn<IMedia, String> typeColumn = new TableColumn<>("Type");
 		typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
 		
 		tblView.setItems(list);
 		tblView.getColumns().addAll(typeColumn);
 	}
 	
-	public void maakKalenderTable(TableView tblView, ObservableList<SessieKalender> list) {
+	public void maakKalenderTable(TableView tblView, ObservableList<ISessieKalender> list) {
 		tblView.getColumns().clear();
 		
-		TableColumn<SessieKalender, String> academiejaarColumn = new TableColumn<>("Academiejaar");
+		TableColumn<ISessieKalender, String> academiejaarColumn = new TableColumn<>("Academiejaar");
 		academiejaarColumn.setCellValueFactory(new PropertyValueFactory<>("academiejaar"));
 		
-		TableColumn<SessieKalender, String> startdatumColumn = new TableColumn<>("Start Datum");
+		TableColumn<ISessieKalender, String> startdatumColumn = new TableColumn<>("Start Datum");
 		startdatumColumn.setCellValueFactory(new PropertyValueFactory<>("startdatum"));
 		
-		TableColumn<SessieKalender, String> einddatumColumn = new TableColumn<>("Eind Datum");
+		TableColumn<ISessieKalender, String> einddatumColumn = new TableColumn<>("Eind Datum");
 		einddatumColumn.setCellValueFactory(new PropertyValueFactory<>("einddatum"));
 		
 		tblView.setItems(list);

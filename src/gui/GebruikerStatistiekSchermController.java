@@ -42,7 +42,7 @@ public class GebruikerStatistiekSchermController extends SchermController implem
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
 		maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeGebruiker());
-		titleText.setText("Sessies waarvoor "+getDC().getGeselecteerdeGebruikerNaam()+" aanwezig was:");
+		titleText.setText("Sessies waarvoor " + getDC().getGeselecteerdeGebruiker().getNaam() + " aanwezig was:");
 	}
 	
 	@FXML

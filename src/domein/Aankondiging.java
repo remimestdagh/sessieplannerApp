@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Aankondiging")
-public class Aankondiging {
+public class Aankondiging implements IAankondiging{
 	
 	//PARAMETERS
 	@Id
@@ -26,7 +26,7 @@ public class Aankondiging {
 	//CONSTRUCTOR
 	protected Aankondiging() {}
 	public Aankondiging(String inhoud, String auteur, Date publicatieDatum) {
-		this.inhoud = inhoud;
+		setInhoud(inhoud);
 		this.auteur = auteur;
 		this.publicatieDatum = publicatieDatum;
 	}
@@ -43,6 +43,11 @@ public class Aankondiging {
 		return inhoud;
 	}
 	public void setInhoud(String inhoud) {
+		
+		if(inhoud.isBlank() || inhoud.isEmpty())
+		{
+			throw new IllegalArgumentException("Gelieve uw aankondiging te voorzien van tekst!");
+		}
 		this.inhoud = inhoud;
 	}
 	public String getAuteur() {

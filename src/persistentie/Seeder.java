@@ -59,22 +59,22 @@ public class Seeder {
 
 		//-- sessies opbouwen met alles er in, en dan enkel sessie storen --
 		
-		s1.setHerinneringen(Arrays.asList(h1,h2));
+		//s1.setHerinneringen(Arrays.asList(h1,h2));
 		//s1.setMedia(Arrays.asList(m1));
 		//s1.setGeplaatsteAankondigingen(Arrays.asList(a1));
-		s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
-		s1.setIngeschrevenGebruikers(Arrays.asList(g1,g2,g5,g6));
+		//s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
+		//s1.setIngeschrevenGebruikers(Arrays.asList(g1,g2,g5,g6));
 		
-		g1.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g2.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g5.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g6.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g1.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g2.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g5.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g6.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
 		
-		s2.setHerinneringen(Arrays.asList(h3));
+		//s2.setHerinneringen(Arrays.asList(h3));
 		//s2.setMedia(Arrays.asList(m2));
-		s3.setGeplaatstFeedback(Arrays.asList(f3));
+		//s3.setGeplaatstFeedback(Arrays.asList(f3));
 		
-		s4.setGeplaatstFeedback(Arrays.asList(f5,f4));
+		//s4.setGeplaatstFeedback(Arrays.asList(f5,f4));
 		//s4.setMedia(Arrays.asList(m3,m4));
 
 

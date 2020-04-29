@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -65,19 +66,20 @@ public class SessieTest {
 
 	}
 
+	@Test
 	public void sessieAanpassenMagNietSessieOpenen() {
 		sessie1.setGeopend();
 		// todo beter formaat van datums
 		//Assertions.assertThrows(IllegalArgumentException.class, () -> sessie1.editSessie("nieuwe titel",
 		//		"nieuwe gastspreker", "nieuwe code", 100, "2021-12-03T10:15:30", "2021-12-03T12:15:30", "GEOPEND"));
 	}
-	
+	@Test
 	public void sessieAanmakenJuisteManierGeenErrors() {
 		new Sessie("nieuwe titel",
 				"nieuwe gastspreker", "nieuwe code", 100, LocalDateTime.now().plusDays(2),LocalDateTime.now().plusDays(2).plusHours(2),"aanmaker");
 		
 	}
-	
+	@Test
 	public void sessieAanmakenDatumsNietMinstens1DagInToekomstGeeftException(String datum1) {
 		Assertions.assertThrows(IllegalArgumentException.class, ()->{
 			new Sessie("scrum tactics", "gastspreker", "lokaalcode",

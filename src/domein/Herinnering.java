@@ -25,8 +25,8 @@ public class Herinnering implements IHerinnering{
 	//CONSTRUCTOR
 	protected Herinnering() {}
 	public Herinnering(String bericht, int tijdstipOfVoorhand) {
-		this.bericht = bericht;
-		this.tijdstipOfVoorhand = tijdstipOfVoorhand;
+		setBericht(bericht);
+		setTijdstipOfVoorhand(tijdstipOfVoorhand);
 	}
 	
 	//METHODS
@@ -44,13 +44,19 @@ public class Herinnering implements IHerinnering{
 		return bericht;
 	}
 	public void setBericht(String bericht) {
-		this.bericht = bericht;
+		if(bericht.isBlank()||bericht.isEmpty()) {
+			throw new IllegalArgumentException("Het bericht mag niet leeg zijn");
+		}
+		this.bericht=bericht;
 	}
 	public int getTijdstipOfVoorhand() {
 		return tijdstipOfVoorhand;
 	}
 	public void setTijdstipOfVoorhand(int tijdstipOfVoorhand) {
-		this.tijdstipOfVoorhand = tijdstipOfVoorhand;
+		if(tijdstipOfVoorhand<1) {
+			throw new IllegalArgumentException("tijdstip moet groter dan 0 zijn");
+		}
+		this.tijdstipOfVoorhand=tijdstipOfVoorhand;
 	}
 	
 }

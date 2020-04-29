@@ -28,7 +28,7 @@ import javafx.collections.ObservableList;
 
 @Entity
 @Table(name = "Sessie")
-public class Sessie {
+public class Sessie implements ISessie{
 	// PARAMETERS
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -49,18 +49,18 @@ public class Sessie {
 	private ObservableList<Media> gebruikteMedia;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
-	private List<Herinnering> herinneringen;
+	private ObservableList<Herinnering> herinneringen;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
 	private ObservableList<Aankondiging> geplaatsteAankondigingen;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
-	private List<Feedback> geplaatstFeedback;
+	private ObservableList<Feedback> geplaatstFeedback;
 	@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
-	private List<Gebruiker> ingeschrevenGebruikers;
+	private ObservableList<Gebruiker> ingeschrevenGebruikers;
 	@OneToMany
 	@JoinColumn(name = "sessieId")
-	private List<Gebruiker> aanwezigeGebruikers;
+	private ObservableList<Gebruiker> aanwezigeGebruikers;
 	
 	//private boolean stuurtHerinnering;
 	//private List<Herinnering> herinneringen; is dit nodig?
@@ -88,8 +88,8 @@ public class Sessie {
 		gebruikteMedia = FXCollections.<Media>observableArrayList();
 		geplaatsteAankondigingen = FXCollections.<Aankondiging>observableArrayList();
 		geplaatstFeedback = FXCollections.<Feedback>observableArrayList();
-		ingeschrevenGebruikers = new ArrayList<>();
-		aanwezigeGebruikers = new ArrayList<>();
+		ingeschrevenGebruikers = FXCollections.<Gebruiker>observableArrayList();
+		aanwezigeGebruikers = FXCollections.<Gebruiker>observableArrayList();
 		//todo controle op datum
 		/*
 		if (DateUtils.addDays(new Date(), 1).before(startDatum)) {
@@ -99,6 +99,27 @@ public class Sessie {
 			throw new IllegalArgumentException("De startdatum moet minstends 30 minuten voor de einddatum liggen");
 		}
 		*/
+	}
+	
+	public Sessie(SessieDTO dto) {
+		
+		setTitel(dto.getTitel());
+		setNaamGastspreker(dto.getNaamGastspreker());
+		
+		setLokaalCode(dto.getLokaalCode());
+		setMAX_CAPACITEIT(dto.getMAX_CAPACITEIT());
+		
+		setStartDatum(dto.getStartDatum());
+		setEindDatum(dto.getEindDatum());
+		
+		setSessieAanmaker(dto.getSessieAanmaker());
+		status = SessieStatus.AANGEMAAKT;
+		
+		gebruikteMedia = FXCollections.<Media>observableArrayList();
+		geplaatsteAankondigingen = FXCollections.<Aankondiging>observableArrayList();
+		geplaatstFeedback = FXCollections.<Feedback>observableArrayList();
+		ingeschrevenGebruikers = FXCollections.<Gebruiker>observableArrayList();
+		aanwezigeGebruikers = FXCollections.<Gebruiker>observableArrayList();
 	}
 
 	// METHODS
@@ -122,7 +143,7 @@ public class Sessie {
 	/**
 	 * Initialiseert de lijst van herinneringen
 	 */
-	public void setHerinneringen(List<Herinnering> herinneringen)
+	public void setHerinneringen(ObservableList<Herinnering> herinneringen)
 	{
 		this.herinneringen = herinneringen;
 	}
@@ -204,18 +225,18 @@ public class Sessie {
 	}
 	
 	//sessie beheren/aanpassen methodes
-		public void editSessie(String titel, String naamGastspreker, String lokaalCode, int plaatsen, String startDatum,String eindDatum, String status) {
+		public void editSessie(SessieDTO dto) {
 			if (!isAangemaakt()) {
 				throw new IllegalArgumentException("De sessie is al geopend. Geen wijzigingen meer mogelijk");
 			}
-			setTitel(titel);
-			setNaamGastspreker(naamGastspreker);
-			setLokaalCode(lokaalCode);
-			setMAX_CAPACITEIT(plaatsen);
-			setStartDatum( LocalDateTime.parse(startDatum));
-			setEindDatum(LocalDateTime.parse(eindDatum));
+			setTitel(dto.getTitel());
+			setNaamGastspreker(dto.getNaamGastspreker());
+			setLokaalCode(dto.getLokaalCode());
+			setMAX_CAPACITEIT(dto.getMAX_CAPACITEIT());
+			setStartDatum(dto.getStartDatum());
+			setEindDatum(dto.getEindDatum());
 
-			switch(status) {
+			switch(dto.getStatus()) {
 			case"AANGEMAAKT":
 				this.status = SessieStatus.AANGEMAAKT;
 				break;
@@ -275,6 +296,9 @@ public class Sessie {
 		return naamGastspreker;
 	}
 	public void setNaamGastspreker(String naamGastspreker) {
+		if(naamGastspreker.isBlank()||naamGastspreker.isEmpty()){
+			throw new IllegalArgumentException("De gastspreker mag niet leeg zijn");
+		}
 		this.naamGastspreker = naamGastspreker;
 	}
 	public String getLokaalCode() {
@@ -298,22 +322,22 @@ public class Sessie {
 	public void setGeplaatsteAankondigingen(ObservableList<Aankondiging> geplaatsteAankondigingen) {
 		this.geplaatsteAankondigingen = geplaatsteAankondigingen;
 	}
-	public List<Feedback> getGeplaatstFeedback() {
+	public ObservableList<Feedback> getGeplaatstFeedback() {
 		return geplaatstFeedback;
 	}
-	public void setGeplaatstFeedback(List<Feedback> geplaatstFeedback) {
+	public void setGeplaatstFeedback(ObservableList<Feedback> geplaatstFeedback) {
 		this.geplaatstFeedback = geplaatstFeedback;
 	}
-	public List<Gebruiker> getIngeschrevenGebruikers() {
+	public ObservableList<Gebruiker> getIngeschrevenGebruikers() {
 		return ingeschrevenGebruikers;
 	}
-	public void setIngeschrevenGebruikers(List<Gebruiker> ingeschrevenGebruikers) {
+	public void setIngeschrevenGebruikers(ObservableList<Gebruiker> ingeschrevenGebruikers) {
 		this.ingeschrevenGebruikers = ingeschrevenGebruikers;
 	}
-	public List<Gebruiker> getAanwezigeGebruikers() {
+	public ObservableList<Gebruiker> getAanwezigeGebruikers() {
 		return aanwezigeGebruikers;
 	}
-	public void setAanwezigeGebruikers(List<Gebruiker> aanwezigeGebruikers) {
+	public void setAanwezigeGebruikers(ObservableList<Gebruiker> aanwezigeGebruikers) {
 		this.aanwezigeGebruikers = aanwezigeGebruikers;
 	}
 	public int getMAX_CAPACITEIT() {

@@ -4,34 +4,70 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="421.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateGebruikerSchermController">
+<AnchorPane prefHeight="421.0" prefWidth="503.0" style="-fx-background-color: #406E8E" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateGebruikerSchermController">
    <children>
       <Pane layoutX="-1.0" prefHeight="421.0" prefWidth="503.0">
          <children>
-            <Text layoutX="42.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voeg gebruiker toe" wrappingWidth="160.5367431640625">
+            <Text fill="WHITE" layoutX="84.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Sitka Text&quot;;" text="Hier kunt u een gebruiker toevoegen" wrappingWidth="335.7367401123047">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label layoutX="54.0" layoutY="97.0" text="Naam" />
-            <Label layoutX="56.0" layoutY="138.0" text="Chamilo naam" />
-            <Label layoutX="56.0" layoutY="182.0" text="Email" />
-            <Label layoutX="56.0" layoutY="227.0" text="Wachtwoord" />
-            <Label layoutX="57.0" layoutY="269.0" text="Type" />
-            <TextField fx:id="txNaam" layoutX="164.0" layoutY="93.0" />
-            <TextField fx:id="txChamilo" layoutX="164.0" layoutY="134.0" />
-            <TextField fx:id="txEmail" layoutX="164.0" layoutY="178.0" />
-            <TextField fx:id="txPassword" layoutX="164.0" layoutY="223.0" />
-            <Button fx:id="btnCreate" layoutX="54.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" text="Voeg gebruiker toe" />
-            <Button fx:id="btnCancel" layoutX="203.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="25.0" prefWidth="118.0" text="Cancel" />
-            <ChoiceBox fx:id="cbType" layoutX="163.0" layoutY="265.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="cbStatus" layoutX="163.0" layoutY="303.0" prefWidth="150.0" />
-            <Label layoutX="56.0" layoutY="307.0" text="Status" />
+            <Label layoutX="121.0" layoutY="106.0" text="Naam" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="123.0" layoutY="147.0" text="Chamilo naam" textFill="WHITE">
+                           <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="123.0" layoutY="191.0" text="Email" textFill="WHITE">
+                           <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="123.0" layoutY="236.0" text="Wachtwoord" textFill="WHITE">
+                           <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="124.0" layoutY="278.0" text="Type" textFill="WHITE">
+                           <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <TextField fx:id="txNaam" layoutX="231.0" layoutY="102.0" />
+            <TextField fx:id="txChamilo" layoutX="231.0" layoutY="143.0" />
+            <TextField fx:id="txEmail" layoutX="231.0" layoutY="187.0" />
+            <TextField fx:id="txPassword" layoutX="231.0" layoutY="232.0" />
+            <Button fx:id="btnCreate" layoutX="261.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" text="Voeg gebruiker toe">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Button>
+            <Button fx:id="btnCancel" layoutY="395.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="25.0" prefWidth="76.0" text="Annuleren">
+				               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Button>	           
+            <ChoiceBox fx:id="cbType" layoutX="230.0" layoutY="274.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="cbStatus" layoutX="230.0" layoutY="312.0" prefWidth="150.0" />
+            <Label layoutX="123.0" layoutY="316.0" text="Status" textFill="WHITE">
+                                       <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Label>
+            <ImageView fitHeight="40.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../fonts/itlablogoKlein.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="errorText" layoutX="123.0" layoutY="74.0" prefHeight="17.0" prefWidth="336.0" textFill="RED">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

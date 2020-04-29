@@ -38,10 +38,13 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	private TableView tblView;
 	
 	@FXML
-	private Button btnHoofmenu, btnCreate, btnEdit;
+	private Button btnHoofmenu, btnCreate, btnEdit, btnZoekGebruiker;
 	
 	@FXML
 	private BorderPane borderPane;
+	
+	@FXML
+	private TextField txtZoekGebruiker;
 	
 
 	@Override
@@ -61,6 +64,9 @@ public class BeheerGebruikersSchermController extends SchermController implement
         verranderScherm(btnHoofmenu, "Hoofd");
     }
 	
+	/**
+	 * Selecteren van een gebruiker
+	 */
 	@FXML
     private void handleEditGegevensAction(MouseEvent event) throws IOException{
 		Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
@@ -75,6 +81,9 @@ public class BeheerGebruikersSchermController extends SchermController implement
         
     }
 	
+	/**
+	 * Verwijderen van een gebruiker
+	 */
 	@FXML
     private void handleDeleteGebruikerAction(ActionEvent event){
     	Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
@@ -82,9 +91,19 @@ public class BeheerGebruikersSchermController extends SchermController implement
     	maakGebruikerTable(tblView, getDC().getGebruikers());
     }
 	
+	/**
+	 * Aanmaken nieuwe gebruiker
+	 */
 	@FXML
 	private void handleCreateGebruikerAction(ActionEvent event) throws IOException{
         creëerScherm("CreateGebruiker");
     }
 	
+	/**
+	 * Zoek gebruiker in lijst
+	 */
+	@FXML
+	private void handleZoekGebruikerAction(ActionEvent event) {
+		maakGebruikerTable(tblView, getDC().getGebruikersMetNaam(txtZoekGebruiker.getText()));
+	}
 }

@@ -1,14 +1,10 @@
 package domein;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class SessieKalender {
+public class SessieKalender implements ISessieKalender{
 	
 	//PARAMETERS
 	private String academiejaar;
@@ -24,6 +20,13 @@ public class SessieKalender {
 		sessieList = FXCollections.<Sessie>observableArrayList();
 	}
 	
+	public SessieKalender(SessieKalenderDTO dto) {
+		setAcademiejaar(dto.getAcademiejaar());
+		setStartdatum(dto.getStartdatum());
+		setEinddatum(dto.getEinddatum());
+		sessieList = FXCollections.<Sessie>observableArrayList();
+	}
+	
 	//METHODS
 	public void addSessie(Sessie sessie) {
 		sessieList.add(sessie);
@@ -31,10 +34,14 @@ public class SessieKalender {
 	public void removeSessie(Sessie sessie) {
 		sessieList.remove(sessie);
 	}
-	public void editSessieKalender(String academiejaar, LocalDateTime startdatum, LocalDateTime einddatum) {
-		setAcademiejaar(academiejaar);
-		setStartdatum(startdatum);
-		setEinddatum(einddatum);
+	
+	public void editSessieKalender(SessieKalenderDTO dto) {
+		if(dto.getEinddatum().isBefore(dto.getStartdatum())) {
+			throw new IllegalArgumentException("Startdatum moet voor einddatum plaatsvinden");
+		}
+		setAcademiejaar(dto.getAcademiejaar());
+		setStartdatum(dto.getStartdatum());
+		setEinddatum(dto.getEinddatum());
 	}
 	
 
@@ -43,6 +50,9 @@ public class SessieKalender {
 		return academiejaar;
 	}
 	public void setAcademiejaar(String academiejaar) {
+		if(academiejaar.isEmpty() || academiejaar.isBlank()) {
+			throw new IllegalArgumentException("Vul alle velden in!");
+		}
 		this.academiejaar = academiejaar;
 	}
 	public LocalDateTime getStartdatum() {

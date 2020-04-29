@@ -42,6 +42,8 @@ public class LoginSchermController extends SchermController implements Initializ
 	{
 		
 	}
+	
+	
 	//METHODS
     @FXML
     /*
@@ -51,7 +53,6 @@ public class LoginSchermController extends SchermController implements Initializ
     	try {
     		getDC().login(emailVeld.getText(), wachtwoordVeld.getText());
     		//dc.login("@", "p");
-    		
     		//vanuit dc.login kan verkeerdeInfo-error geworpen worden dus alles hieronder halen we niet noodzakelijk
     		verranderScherm(loginButton, "Hoofd");
     		
@@ -64,7 +65,7 @@ public class LoginSchermController extends SchermController implements Initializ
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		errorText.setStyle(" -fx-background-color: #3B0902; -fx-background-radius: 10;-fx-text-fill: #FAE1A7 ;-fx-font-size:30;-fx-font-family: '../fonts/FatWandalsPersonalUse-9Vj7';");
+		
 	}
 	
 }

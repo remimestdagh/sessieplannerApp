@@ -1,25 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="683.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessiesStatistiekSchermController">
+<AnchorPane prefHeight="803.0" prefWidth="905.0" style="-fx-background-color: #406E8E" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessiesStatistiekSchermController">
    <children>
-      <Pane prefHeight="683.0" prefWidth="905.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Text layoutX="78.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessies Statistieken">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Button fx:id="btnStatistiek" layoutX="315.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleStatistiekAction" text="Terug naar Statistieken" />
-            <TableView fx:id="tblView" layoutX="78.0" layoutY="108.0" prefHeight="430.0" prefWidth="595.0" />
-            <Button fx:id="btnAanwezigheden" layoutX="538.0" layoutY="584.0" mnemonicParsing="false" onAction="#handleAanwezighedenAction" text="Bekijk Aanwezigheden" />
-         </children>
-      </Pane>
+      <BorderPane fx:id="borderPane" prefHeight="691.0" prefWidth="961.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <Pane prefHeight="706.0" prefWidth="681.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnStatistiek" layoutY="679.0" mnemonicParsing="false" onAction="#handleStatistiekAction" text="Terug" />
+                  <TableView fx:id="tblView" layoutX="73.0" layoutY="83.0" onMouseClicked="#handleGebruikersAction" prefHeight="442.0" prefWidth="595.0" />
+                  <Label layoutX="73.0" layoutY="68.0" text="Sessies" textFill="WHITE">
+                     <font>
+                        <Font name="Franklin Gothic Medium Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </left>
+         <top>
+            <Pane prefHeight="97.0" prefWidth="906.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="WHITE" layoutX="313.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Sitka Text&quot;;" text="Hier kunt u per sessie de aanwezige gebruikers bekijken">
+                     <font>
+                        <Font name="System Italic" size="30.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="41.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../fonts/itlablogoKlein.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <Pane prefHeight="706.0" prefWidth="16.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

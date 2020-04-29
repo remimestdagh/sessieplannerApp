@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
+import domein.Gebruiker;
+import domein.ISessieKalender;
 import domein.Sessie;
 import domein.SessieKalender;
 import javafx.event.ActionEvent;
@@ -14,12 +16,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class SessieKalendersSchermController extends SchermController implements Initializable{
@@ -32,12 +36,16 @@ public class SessieKalendersSchermController extends SchermController implements
 	
 	@FXML
 	private BorderPane borderPane;
+	
+
 
 	@Override
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
 		
 		maakKalenderTable(tblView, getDC().getSessieKalenders());
+
+
 	}
 
 	@Override
@@ -52,6 +60,9 @@ public class SessieKalendersSchermController extends SchermController implements
         verranderScherm(btnHoofdmenu, "Hoofd");
     }
 	
+	/**
+	 * Het selecteren van een sessie
+	 */
 	@FXML
     private void handleBeheerSessieKalenderAction(MouseEvent event) throws IOException {
 		getDC().setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());
@@ -64,10 +75,31 @@ public class SessieKalendersSchermController extends SchermController implements
         borderPane.setCenter(root);
     }
 	
+	/**
+	 * Het aanpassen van een sessiekalender
+	 */
 	@FXML
     private void handleBeheerSessiesAction(ActionEvent event) throws IOException {
 		getDC().setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());
         
         verranderScherm(btnEdit, "SessieKalender");
+    }
+	
+	/**
+	 * Verwijderen van een sessiekalender
+	 */
+	@FXML
+    private void handleDeleteSessiekalenderAction(ActionEvent event){
+    	ISessieKalender kalender = (ISessieKalender) tblView.getSelectionModel().getSelectedItem();
+    	getDC().verwijderSessieKalender(kalender);
+    	maakKalenderTable(tblView, getDC().getSessieKalenders());
+    }
+	
+	/**
+	 * Aanmaken nieuwe sessiekalender
+	 */
+	@FXML
+	private void handleCreateSessiekalenderAction(ActionEvent event) throws IOException{
+        creëerScherm("CreateSessieKalender");
     }
 }

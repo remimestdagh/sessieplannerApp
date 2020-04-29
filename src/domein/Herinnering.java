@@ -10,7 +10,7 @@ import javax.persistence.TableGenerator;
 
 @Entity
 @TableGenerator(name = "Herinnering")
-public class Herinnering {
+public class Herinnering implements IHerinnering{
 	
 	
 	//PARAMETERS
@@ -21,8 +21,6 @@ public class Herinnering {
 	private String bericht;
 	//@Column(nullable = false)
 	private int tijdstipOfVoorhand;
-
-	
 	
 	//CONSTRUCTOR
 	protected Herinnering() {}
@@ -31,13 +29,28 @@ public class Herinnering {
 		this.tijdstipOfVoorhand = tijdstipOfVoorhand;
 	}
 	
-	
 	//METHODS
-	
 	
 	
 	//GETTERS AND SETTERS
 	
-	
+	public int getHerinneringId() {
+		return herinneringId;
+	}
+	public void setHerinneringId(int herinneringId) {
+		this.herinneringId = herinneringId;
+	}
+	public String getBericht() {
+		return bericht;
+	}
+	public void setBericht(String bericht) {
+		this.bericht = bericht;
+	}
+	public int getTijdstipOfVoorhand() {
+		return tijdstipOfVoorhand;
+	}
+	public void setTijdstipOfVoorhand(int tijdstipOfVoorhand) {
+		this.tijdstipOfVoorhand = tijdstipOfVoorhand;
+	}
 	
 }

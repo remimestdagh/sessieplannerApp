@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
+import domein.SessieDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,14 +44,17 @@ public class CreateSessieSchermController extends SchermController implements In
 	
 	@FXML
     private void handleSessieToevoegenAction(ActionEvent event) throws IOException {
-		String titel = txtTitel.getText();
-		String gastspreker = txtGastspreker.getText();
-		int maxCapaciteit = Integer.parseInt(txtMaxCapaciteit.getText());
-		String lokaal = txtLokaal.getText();
-		LocalDateTime startDatum = dateStartDatum.getValue().atStartOfDay();
-		LocalDateTime eindDatum = dateEindDatum.getValue().atStartOfDay();
 		
-		getDC().addSessieToGeselecteerdeSessieKalender(titel, gastspreker, lokaal, maxCapaciteit, startDatum, eindDatum);
+		SessieDTO dto = new SessieDTO();
+
+		dto.setTitel( txtTitel.getText() );
+		dto.setStartDatum( dateStartDatum.getValue().atStartOfDay() );
+		dto.setEindDatum( dateEindDatum.getValue().atStartOfDay() );
+		dto.setNaamGastspreker( txtGastspreker.getText() );
+		dto.setMAX_CAPACITEIT( Integer.parseInt(txtMaxCapaciteit.getText()) );
+		dto.setLokaalCode( txtLokaal.getText() );
+		
+		getDC().addSessieToGeselecteerdeSessieKalender(dto);
         
         sluitScherm(btnToevoegen);
     }

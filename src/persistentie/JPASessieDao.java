@@ -2,50 +2,31 @@ package persistentie;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import domein.Gebruiker;
 import domein.Sessie;
 import javafx.collections.ObservableList;
 
-public class JPASessieDao implements SessieDao{
+public class JPASessieDao extends JPADao implements SessieDao{
+	// PARAMETERS
 
-	@Override
-	public ObservableList<Sessie> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	// CONSTRUCTOR
+	public JPASessieDao() {
+		super(Sessie.class);
 	}
+	
+	
+	// METHODS
+	//Alle basis persistence methoden generiek in de parent gedefinieerd. Nu nog de Dao implementatie speciefieke:
+	/*
+	 * Vraagt een gebruiker op op email adres
+	 */
 
-	@Override
-	public Sessie get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Sessie update(Sessie object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(Sessie object) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void insert(Sessie object) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public ObservableList<Sessie> getSessiesFromVerantwoordelijke(String naamVerantwoordelijke) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

@@ -1,52 +1,30 @@
 package persistentie;
 
-import java.util.List;
-
+import javax.persistence.TypedQuery;
 import domein.Gebruiker;
-import javafx.collections.ObservableList;
 
-public class JPAGebruikerDao implements GebruikerDao{
+public class JPAGebruikerDao extends JPADao implements GebruikerDao{
 
-	@Override
-	public ObservableList<Gebruiker> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	// PARAMETERS
+
+	// CONSTRUCTOR
+	public JPAGebruikerDao() {
+		super(Gebruiker.class);
 	}
 
-	@Override
-	public Gebruiker get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Gebruiker update(Gebruiker object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(Gebruiker object) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void insert(Gebruiker object) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
+	// METHODS
+	// Alle basis persistence methoden generiek in de parent gedefinieerd. Nu nog de
+	// Dao implementatie speciefieke:
+	/*
+	 * Vraagt een gebruiker op op email adres
+	 */
+	
 	public Gebruiker getGebruikerByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		Gebruiker gebruiker = null;
+		TypedQuery<Gebruiker> query = em
+				.createQuery(String.format("SELECT * FROM gebruikers WHERE emailadress = %s", email), Gebruiker.class);
+		gebruiker = query.getSingleResult();
+		return gebruiker;
 	}
 
 }

@@ -4,23 +4,53 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="606.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginSchermController">
-   <children>
-      <Pane layoutY="-3.0" prefHeight="614.0" prefWidth="802.0">
-         <children>
-            <Text layoutX="297.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welkom op de HoGent sessieplanner!" wrappingWidth="207.7366943359375" style="-fx-font-family: 'Windlass'" />          
-            <TextField fx:id="emailVeld" layoutX="275.0" layoutY="161.0" prefHeight="25.0" prefWidth="253.0" promptText="voornaam.famillienaam@student.hogent.be" />
-            <PasswordField fx:id="wachtwoordVeld" layoutX="275.0" layoutY="245.0" prefHeight="25.0" prefWidth="253.0" />
-            <Button fx:id="loginButton" layoutX="352.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="25.0" prefWidth="99.0" text="Login" />
-            <Label layoutX="275.0" layoutY="134.0" prefHeight="17.0" prefWidth="116.0" text="Email-address" />
-            <Label layoutX="275.0" layoutY="218.0" prefHeight="17.0" prefWidth="77.0" text="Wachtwoord" />
-            <Text fx:id="errorText" fill="RED" layoutX="275.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="253.0000059931608" />
-         </children>
-      </Pane>
-   </children>
+<AnchorPane style="-fx-background-color: #406E8E" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginSchermController">
+	<children>
+		<!-- Body -->
+		<Pane layoutX="-3.0" layoutY="120.0" prefHeight="351.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300" AnchorPane.topAnchor="200">
+			<children>
+				<TextField fx:id="emailVeld" layoutX="327.0" layoutY="166.0" prefHeight="25.0" prefWidth="253.0" promptText="voornaam.famillienaam@student.hogent.be" />
+				<PasswordField fx:id="wachtwoordVeld" layoutX="327.0" layoutY="250.0" prefHeight="25.0" prefWidth="253.0" />
+				<Button fx:id="loginButton" layoutX="404.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="25.0" prefWidth="99.0" text="Login" textOverrun="WORD_ELLIPSIS">
+					<font>
+						<Font name="Franklin Gothic Medium Italic" size="12.0" />
+					</font>
+				</Button>
+				<Label layoutX="327.0" layoutY="139.0" prefHeight="17.0" prefWidth="116.0" text="Email-address" textFill="WHITE">
+					<font>
+						<Font name="Franklin Gothic Medium Italic" size="12.0" />
+					</font>
+				</Label>
+				<Label layoutX="327.0" layoutY="223.0" prefHeight="17.0" prefWidth="77.0" text="Wachtwoord" textFill="WHITE">
+					<font>
+						<Font name="Franklin Gothic Medium Italic" size="12.0" />
+					</font>
+				</Label>
+				<Text fx:id="errorText" fill="RED" layoutX="327.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="253.0000059931608">
+					<font>
+						<Font name="Franklin Gothic Medium Italic" size="12.0" />
+					</font>
+				</Text>
+      
+      
+      				<Text fill="WHITE" layoutX="161.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Sitka Text'" text="Welkom op de HoGent sessieplanner!" textAlignment="CENTER" wrappingWidth="558.1367797851562">
+      					<font>
+      						<Font name="Franklin Gothic Medium Italic" size="30.0" />
+      					</font>
+      				</Text>
+			</children>
+		</Pane>
+				<ImageView fitHeight="150.0" fitWidth="200.0" layoutX="659.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../fonts/itlablogoKlein.jpg" />
+					</image>
+				</ImageView>
+	</children>
 </AnchorPane>
-

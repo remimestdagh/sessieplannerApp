@@ -3,37 +3,65 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="691.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikersSchermController">
+<AnchorPane prefHeight="798.0" prefWidth="961.0" style="-fx-background-color: #406E8E" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikersSchermController">
    <children>
       <BorderPane fx:id="borderPane" prefHeight="691.0" prefWidth="961.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <Pane prefHeight="623.0" prefWidth="343.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="629.0" prefWidth="534.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="23.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleDeleteGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Delete gebruiker" />
-                  <Button fx:id="btnCreate" layoutX="23.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Voeg gebruiker toe" />
-                  <TableView fx:id="tblView" layoutX="14.0" layoutY="41.0" onMouseClicked="#handleEditGegevensAction" prefHeight="467.0" prefWidth="304.0" />
+                  <Button layoutX="359.0" layoutY="513.0" mnemonicParsing="false" onAction="#handleDeleteGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Delete gebruiker">
+                     <font>
+                        <Font name="Franklin Gothic Medium Italic" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnCreate" layoutX="56.0" layoutY="513.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" prefHeight="25.0" prefWidth="149.0" text="Voeg gebruiker toe">
+                     <font>
+                        <Font name="Franklin Gothic Medium Italic" size="12.0" />
+                     </font></Button>
+                  <TableView fx:id="tblView" layoutX="56.0" layoutY="43.0" onMouseClicked="#handleEditGegevensAction" prefHeight="467.0" prefWidth="452.0" />
+                  <Button fx:id="btnHoofmenu" layoutX="-1.0" layoutY="709.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" prefHeight="25.0" prefWidth="49.0" text="Terug">
+                     <font>
+                        <Font name="Franklin Gothic Medium Italic" size="12.0" />
+                     </font></Button>
+                  <ImageView fitHeight="40.0" fitWidth="133.0" layoutX="-1.0" layoutY="-61.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../fonts/itlablogoKlein.jpg" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="txtZoekGebruiker" layoutX="59.0" layoutY="14.0" />
+                  <Button fx:id="btnZoekGebruiker" layoutX="215.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleZoekGebruikerAction" text="Zoek gebruiker">
+                     <font>
+                        <Font name="Franklin Gothic Medium Italic" size="12.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </left>
          <top>
             <Pane prefHeight="62.0" prefWidth="698.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="46.0" layoutY="18.0" prefHeight="27.0" prefWidth="149.0" text="Beheer gebruikers">
+                  <Label layoutX="545.0" layoutY="9.0" prefHeight="45.0" prefWidth="526.0" style="-fx-font-family: &quot;Sitka Text&quot;;" text="Hier kunt u gebruikers beheren" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Italic" size="30.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnHoofmenu" layoutX="235.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleHoofdmenuAction" prefHeight="25.0" prefWidth="149.0" text="Terug naar Hoofdmenu" />
+                  <Label layoutX="59.0" layoutY="54.0" text="Gebruiker" textFill="WHITE">
+                     <font>
+                        <Font name="Franklin Gothic Medium" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </top>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="629.0" prefWidth="396.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

@@ -7,9 +7,12 @@ import domein.DomeinController;
 import gui.LoginSchermController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
@@ -27,8 +30,19 @@ public class Main extends Application {
         test.setDomeinController(dc);
         Scene scene = new Scene(root);
         
-        //styling toevoegen
-        scene.getStylesheets().add("application/generalStyling.css");
+        
+        stage.setMaximized(true);
+        stage.getIcons().add(new Image("/fonts/windowicon.jpg"));
+        stage.setTitle("IT-Lab Sessieplanner");
+        
+        //Maximizing screen
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
+        
         
         stage.setScene(scene);
         stage.show();

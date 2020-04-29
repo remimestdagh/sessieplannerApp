@@ -2,6 +2,7 @@ package persistentie;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import domein.Aankondiging;
@@ -30,7 +31,7 @@ public class PersistentieDummy {
 		
 		Gebruiker g1 = new Gebruiker("Maxim Van Cauwenberge", "862687mv", "maxim.vancauwenberge@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Verantwoordelijke);
 		Gebruiker g2 = new Gebruiker("Alexander De Baene", "862656ad", "alexander.debaene@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
-		Gebruiker g3 = new Gebruiker("Admin", "admin", "@", "p", GebruikerStatus.ACTIEF, GebruikerType.HoofdVerantwoordelijke);
+		Gebruiker g3 = new Gebruiker("Admin", "Admin", "@", "p", GebruikerStatus.ACTIEF, GebruikerType.HoofdVerantwoordelijke);
 		Gebruiker g4 = new Gebruiker("Jef Seys", "640431js", "jef.seys.y0431@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
 		Gebruiker g5 = new Gebruiker("Remi Mestdagh", "757957rm", "remi.mestdagh@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
 		Gebruiker g6 = new Gebruiker("Bert Suffys", "861835bs", "bert.suffys@student.hogent.be", "password", GebruikerStatus.ACTIEF, GebruikerType.Gewone_Gebruiker);
@@ -139,7 +140,7 @@ public class PersistentieDummy {
 	}
 	
 	public ObservableList<Gebruiker> getGebruikers(){
-		return gebruikers;
+		return gebruikers.sorted(Comparator.comparing(Gebruiker::getNaam));
 	}
 	
 	public void verwijderGebruiker(Gebruiker gebruiker) {
@@ -148,6 +149,14 @@ public class PersistentieDummy {
 	
 	public void addGebruiker(Gebruiker gebruiker) {
 		gebruikers.add(gebruiker);
+	}
+	
+	public void verwijderSessieKalender(SessieKalender kalender) {
+		sessieKalenders.remove(kalender);
+	}
+	
+	public void addSessieKalender(SessieKalender kalender) {
+		sessieKalenders.add(kalender);
 	}
 	
 	public SessieKalender getHuidigeSessieKalender() {

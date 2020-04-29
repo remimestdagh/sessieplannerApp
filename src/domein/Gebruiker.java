@@ -19,13 +19,18 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+
+
 @Entity
 @Table(name="Gebruiker")
-public class Gebruiker {
+public class Gebruiker implements IGebruiker{
 	
 	//PARAMETERS
 	@Id
-	@Column(name = "HerinerringId")
+	@Column(name = "GebruikerId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int gebruikerId;
 	private String naam;
@@ -42,12 +47,12 @@ public class Gebruiker {
 	//relation mapping
 	@JoinTable(name="GebruikerSessie") //ter herbenoeming tussentabel (match met dotnet)
 	@ManyToMany(cascade = CascadeType.PERSIST) //Tussentabel!
-	private List<Sessie> sessiesWaarvoorIngeschreven;
+	private ObservableList<Sessie> sessiesWaarvoorIngeschreven;
 	
 	//private String profielFoto;
 	//private Date inschrijvingsDatum;
 	@Transient //voorlopig niet gemapt, moet eigenlijk corresponderen met wasAanwezig in tussentabel!
-	private List<Sessie> sessiesWaarvoorAanwezig; 
+	private ObservableList<Sessie> sessiesWaarvoorAanwezig; 
 
 	
 	//CONSTRUCTOR
@@ -63,8 +68,8 @@ public class Gebruiker {
 		setStatus(status);
 		setType(type);
 		
-		sessiesWaarvoorIngeschreven = new ArrayList<>();
-		sessiesWaarvoorAanwezig = new ArrayList<>();
+		sessiesWaarvoorIngeschreven = FXCollections.<Sessie>observableArrayList();
+		sessiesWaarvoorAanwezig = FXCollections.<Sessie>observableArrayList();
 	}
 	
 	public Gebruiker(String naam,String naamChamilo, String emailadres, String wachtwoord,
@@ -78,8 +83,22 @@ public class Gebruiker {
 		setStatus(convertStatus(status));
 		setType(convertType(type));
 		
-		sessiesWaarvoorIngeschreven = new ArrayList<>();
-		sessiesWaarvoorAanwezig = new ArrayList<>();
+		sessiesWaarvoorIngeschreven = FXCollections.<Sessie>observableArrayList();
+		sessiesWaarvoorAanwezig = FXCollections.<Sessie>observableArrayList();
+	}
+	
+	public Gebruiker(GebruikerDTO dto) {
+		
+		setNaam(dto.getNaam());
+		setNaamChamilo(dto.getNaamChamilo());
+		setEmailadres(dto.getEmailadres());
+		setWachtwoord(dto.getWachtwoord());
+		
+		setStatus(convertStatus(dto.getStatus()));
+		setType(convertType(dto.getType()));
+		
+		sessiesWaarvoorIngeschreven = FXCollections.<Sessie>observableArrayList();
+		sessiesWaarvoorAanwezig = FXCollections.<Sessie>observableArrayList();
 	}
 
 	//METHODS
@@ -90,12 +109,12 @@ public class Gebruiker {
 	public void addAanwezigheid(Sessie sessie) {
 		sessiesWaarvoorAanwezig.add(sessie);
 	}
-	public void editGeselecteerdeGebruiker(String naam, String naamChamilo, String email, String status, String type) {
-		setNaam(naam);
-		setNaamChamilo(naamChamilo);
-		setEmailadres(email);
-		setStatus(convertStatus(status));
-		setType(convertType(type));
+	public void editGeselecteerdeGebruiker(GebruikerDTO dto) {
+		setNaam(dto.getNaam());
+		setNaamChamilo(dto.getNaamChamilo());
+		setEmailadres(dto.getEmailadres());
+		setStatus(convertStatus(dto.getStatus()));
+		setType(convertType(dto.getType()));
 	}
 	
 	private GebruikerStatus convertStatus(String status) {
@@ -179,16 +198,19 @@ public class Gebruiker {
 		}
 		this.type = type;
 	}
-	public List<Sessie> getSessiesWaarvoorIngeschreven() {
+	public ObservableList<Sessie> getSessiesWaarvoorIngeschreven() {
 		return sessiesWaarvoorIngeschreven;
 	}
-	public void setSessiesWaarvoorIngeschreven(List<Sessie> sessieList) {
+	public void setSessiesWaarvoorIngeschreven(ObservableList<Sessie> sessieList) {
 		this.sessiesWaarvoorIngeschreven = sessieList;
 	}
-	public List<Sessie> getSessiesWaarvoorAanwezig() {
+	public ObservableList<Sessie> getSessiesWaarvoorAanwezig() {
 		return sessiesWaarvoorAanwezig;
 	}
-	public void setSessiesWaarvoorAanwezig(List<Sessie> sessieList) {
+	public void setSessiesWaarvoorAanwezig(ObservableList<Sessie> sessieList) {
 		this.sessiesWaarvoorAanwezig = sessieList;
+	}
+	public String getTypeString() {
+		return this.type.toString();
 	}
 }

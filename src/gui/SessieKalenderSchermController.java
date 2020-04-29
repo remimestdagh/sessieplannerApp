@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,6 +38,9 @@ public class SessieKalenderSchermController extends SchermController implements 
 	
 	@FXML
 	private BorderPane borderPane;
+	
+	@FXML
+	private Text geselecteerdeKalender;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -53,6 +57,7 @@ public class SessieKalenderSchermController extends SchermController implements 
 			maakSessieTable(tblView, getDC().getSessiesFromVerantwoordelijke());
 			btnHoofdmenu.setText("Terug naar hoofdmenu");
 		}
+		geselecteerdeKalender.setText("Sessies voor kalender: " + getDC().getGeselecteerdeSessieKalender().getAcademiejaar() );
 	}
 	
 	@FXML

@@ -59,22 +59,22 @@ public class Seeder {
 
 		//-- sessies opbouwen met alles er in, en dan enkel sessie storen --
 		
-		s1.setHerinneringen(Arrays.asList(h1,h2));
+		//s1.setHerinneringen(Arrays.asList(h1,h2));
 		//s1.setMedia(Arrays.asList(m1));
 		//s1.setGeplaatsteAankondigingen(Arrays.asList(a1));
-		s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
-		s1.setIngeschrevenGebruikers(Arrays.asList(g1,g2,g5,g6));
+		//s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
+		//s1.setIngeschrevenGebruikers(Arrays.asList(g1,g2,g5,g6));
 		
-		g1.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g2.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g5.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g6.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g1.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g2.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g5.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g6.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
 		
-		s2.setHerinneringen(Arrays.asList(h3));
+		//s2.setHerinneringen(Arrays.asList(h3));
 		//s2.setMedia(Arrays.asList(m2));
-		s3.setGeplaatstFeedback(Arrays.asList(f3));
+		//s3.setGeplaatstFeedback(Arrays.asList(f3));
 		
-		s4.setGeplaatstFeedback(Arrays.asList(f5,f4));
+		//s4.setGeplaatstFeedback(Arrays.asList(f5,f4));
 		//s4.setMedia(Arrays.asList(m3,m4));
 
 
@@ -94,43 +94,6 @@ public class Seeder {
 		emf.close();
 		
 		
-		
-		/*
-		//Toe te voegen docenten
-		Docent a = new Docent( "Jan", "Baard", new BigDecimal(8000));
-		Docent b = new Docent( "Ros", "Beros", new BigDecimal(10000));
-		Docent c = new Docent( "Joris", "ZonderBaard", new BigDecimal(12000));
-		//op te vragen docent
-		Docent docent = new Docent("Bert", "Suffys", BigDecimal.TEN);
-		docent.opslag(BigDecimal.ONE);
-		
-		//factory maken en manager er uit halen
-		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory(); //Persistence unit naam is "school", zie de xml file.
-		EntityManager em = emf.createEntityManager();
-		
-		//transactie starten
-		em.getTransaction().begin();
-		//em.persist(a);
-		//em.persist(b);
-		//em.persist(c);
-		Stream.of(a,b,c).forEach(em::persist);
-		
-		//Nu gaan we iets zoeken
-		Docent x = em.find(Docent.class, docent.getId()); //zoekt in de database naar de entiteit en of die bestaat op de key = id?
-		if(x!=null) // ie zit er al in.
-		{ 
-			x.opslag(new BigDecimal(200)); // we voeren een update door.
-		} 
-		else // ie zat er nog niet in.
-		{
-		System.out.println("Docent 2 niet gevonden");
-		}
-		
-		em.getTransaction().commit();
-		
-		em.close();
-		emf.close();
-		*/
 		
 		
 	}

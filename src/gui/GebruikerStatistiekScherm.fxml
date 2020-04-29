@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="678.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GebruikerStatistiekSchermController">
+<AnchorPane prefHeight="678.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GebruikerStatistiekSchermController">
    <children>
-      <Pane prefHeight="678.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="-6.0" layoutY="-8.0" prefHeight="402.0" prefWidth="616.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="-8.0">
          <children>
-            <Text layoutX="84.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gebruiker Statistieken">
+            <Text fx:id="titleText" fill="WHITE" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font>
             </Text>
-            <Button fx:id="btnGebruikers" layoutX="302.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleGebruikersAction" text="Terug naar Gebruikers Statistieken" />
-            <TableView fx:id="tblView" layoutX="84.0" layoutY="110.0" prefHeight="441.0" prefWidth="600.0" />
+            <TableView fx:id="tblView" layoutY="21.0" prefHeight="464.0" prefWidth="600.0" />
          </children>
       </Pane>
    </children>

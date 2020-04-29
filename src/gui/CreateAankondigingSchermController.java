@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
@@ -33,6 +34,9 @@ public class CreateAankondigingSchermController extends SchermController impleme
 	
 	@FXML
 	private Button btnToevoegen;
+	
+	@FXML
+	private Label errorText;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -49,9 +53,13 @@ public class CreateAankondigingSchermController extends SchermController impleme
     private void handleAankondigingToevoegenAction(ActionEvent event) throws IOException {
 		
 		String inhoud = txaInhoud.getText();
-		
+		try {
 		getDC().addAankondigingToGeselecteerdeSessie(inhoud);
-        
         sluitScherm(btnToevoegen);
+		}
+		catch(IllegalArgumentException e)
+		{
+			errorText.setText(e.getMessage());
+		}
     }
 }

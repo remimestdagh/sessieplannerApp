@@ -1,7 +1,5 @@
 package persistentie;
 
-import java.util.List;
-
 import domein.SessieKalender;
 import javafx.collections.ObservableList;
 
@@ -24,21 +22,21 @@ public class DummySessieKalenderDao extends DummyDao<SessieKalender> implements 
 		return null;
 	}
 
-
-	public SessieKalender update(SessieKalender object) { //
-		pd.updateSessieKalender(object);
+	@Override
+	public SessieKalender update(Object kalender) { //
+		pd.updateSessieKalender((SessieKalender)kalender);
 		return null;
 	}
 
-	public void delete(SessieKalender object) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void delete(Object kalender) {
+		pd.verwijderSessieKalender((SessieKalender)kalender);
+		System.out.println("ping");
 	}
 
-
-	public void insert(SessieKalender object) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void insert(Object kalender) {
+		pd.addSessieKalender((SessieKalender)kalender);
 	}
 
 

@@ -109,6 +109,15 @@ public class DomeinController {
 		gebruikerDao.insert(gebruiker);
 	}
 	
+	public void addSessieKalender(SessieKalenderDTO dto) {
+		SessieKalender kalender = new SessieKalender(dto);
+		sessieKalenderDao.insert(kalender);
+	}
+	
+	public void verwijderSessieKalender(ISessieKalender kalender) {
+		sessieKalenderDao.delete(kalender);
+	}
+	
 	// geselecteerde gebruiker
 	private Gebruiker geselecteerdeGebruiker;
 	
@@ -183,6 +192,7 @@ public class DomeinController {
 		if(!gebruikerIsHoofdverantwoordelijke()) {
 			geselecteerdeSessieKalender = sessieKalenderDao.getHuidigeSessieKalender();
 		}
+		dto.setSessieAanmaker(ingelogdeGebruiker.getNaam());
 		Sessie sessie = new Sessie(dto);
 		geselecteerdeSessieKalender.addSessie(sessie);
 		sessieKalenderDao.update(geselecteerdeSessieKalender);

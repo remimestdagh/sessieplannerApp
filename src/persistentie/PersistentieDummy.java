@@ -151,6 +151,14 @@ public class PersistentieDummy {
 		gebruikers.add(gebruiker);
 	}
 	
+	public void verwijderSessieKalender(SessieKalender kalender) {
+		sessieKalenders.remove(kalender);
+	}
+	
+	public void addSessieKalender(SessieKalender kalender) {
+		sessieKalenders.add(kalender);
+	}
+	
 	public SessieKalender getHuidigeSessieKalender() {
 		for(SessieKalender kalender: sessieKalenders) {
 			LocalDateTime nu = LocalDateTime.now();

@@ -23,12 +23,14 @@ public class DummyGebruikerDao extends DummyDao<Gebruiker> implements GebruikerD
 		return pd.getGebruikers();
 	}
 	
-	public void delete(Gebruiker gebruiker) {
-		pd.verwijderGebruiker(gebruiker);
+	@Override
+	public void delete(Object gebruiker) {
+		pd.verwijderGebruiker((Gebruiker)gebruiker);
 	}
 
-	public void insert(Gebruiker gebruiker) { 
-		pd.addGebruiker(gebruiker);
+	@Override
+	public void insert(Object gebruiker) { 
+		pd.addGebruiker((Gebruiker)gebruiker);
 	}
 
 }

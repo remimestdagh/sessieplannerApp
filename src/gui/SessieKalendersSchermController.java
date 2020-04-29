@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
+import domein.Gebruiker;
+import domein.ISessieKalender;
 import domein.Sessie;
 import domein.SessieKalender;
 import javafx.event.ActionEvent;
@@ -81,5 +83,23 @@ public class SessieKalendersSchermController extends SchermController implements
 		getDC().setGeselecteerdeSessieKalender((SessieKalender)tblView.getSelectionModel().getSelectedItem());
         
         verranderScherm(btnEdit, "SessieKalender");
+    }
+	
+	/**
+	 * Verwijderen van een sessiekalender
+	 */
+	@FXML
+    private void handleDeleteSessiekalenderAction(ActionEvent event){
+    	ISessieKalender kalender = (ISessieKalender) tblView.getSelectionModel().getSelectedItem();
+    	getDC().verwijderSessieKalender(kalender);
+    	maakKalenderTable(tblView, getDC().getSessieKalenders());
+    }
+	
+	/**
+	 * Aanmaken nieuwe sessiekalender
+	 */
+	@FXML
+	private void handleCreateSessiekalenderAction(ActionEvent event) throws IOException{
+        creëerScherm("CreateSessieKalender");
     }
 }

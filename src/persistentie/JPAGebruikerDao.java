@@ -19,10 +19,11 @@ public class JPAGebruikerDao extends JPADao implements GebruikerDao{
 	 * Vraagt een gebruiker op op email adres
 	 */
 	
-	public Gebruiker getGebruikerByEmail(String email) {
+	public Gebruiker getGebruikerByEmail(String emailadres) {
 		Gebruiker gebruiker = null;
 		TypedQuery<Gebruiker> query = em
-				.createQuery(String.format("SELECT * FROM gebruikers WHERE emailadress = %s", email), Gebruiker.class);
+				.createQuery(String.format("SELECT g FROM Gebruiker AS g WHERE g.emailadres = 'admin@itlab.be'"/*, emailadres*/), Gebruiker.class);
+		System.out.println(query.toString());
 		gebruiker = query.getSingleResult();
 		return gebruiker;
 	}

@@ -33,6 +33,8 @@ public class DomeinController {
 	private SessieDao sessieDao;					//repo voor sessies (finaal type Dao?)
 	private SessieKalenderDao sessieKalenderDao;	//repo voor sessiekalenders (finaal type Dao?)
 	
+	private PropertyChangeSupport changes = new PropertyChangeSupport(this);
+	
 	
 	//CONSTRUCTOR
 	public DomeinController(){
@@ -101,6 +103,8 @@ public class DomeinController {
 	
 	public void verwijderGebruiker(IGebruiker gebruiker) {
 		gebruikerDao.delete(gebruiker);
+		changes.firePropertyChange("GebruikerList",0,1);
+		setGeselecteerdeGebruiker(null);
 	}
 	
 	/**
@@ -109,29 +113,41 @@ public class DomeinController {
 	public void addGebruiker(GebruikerDTO dto) {
 		Gebruiker gebruiker = new Gebruiker(dto);
 		gebruikerDao.insert(gebruiker);
+		setGeselecteerdeGebruiker(gebruiker);
+		changes.firePropertyChange("GebruikerList",0,1);
 	}
 	
 	public void addSessieKalender(SessieKalenderDTO dto) {
 		SessieKalender kalender = new SessieKalender(dto);
 		sessieKalenderDao.insert(kalender);
+		setGeselecteerdeSessieKalender(kalender);
+		changes.firePropertyChange("SessieKalenderList",0,1);
 	}
 	
 	public void verwijderSessieKalender(ISessieKalender kalender) {
 		sessieKalenderDao.delete(kalender);
+		changes.firePropertyChange("SessieKalenderList",0,1);
+		setGeselecteerdeSessieKalender(null);
+	}
+	
+	public void addGebruikerListListener(PropertyChangeListener gl) {
+		changes.addPropertyChangeListener("GebruikerList", gl);
+	}
+	
+	public void addSessieKalenderListListener(PropertyChangeListener gl) {
+		changes.addPropertyChangeListener("SessieKalenderList", gl);
 	}
 	
 	// geselecteerde gebruiker
 	private Gebruiker geselecteerdeGebruiker;
-	private PropertyChangeSupport gebruikerChanges = new PropertyChangeSupport(this);
 	
 	public void addGebruikerListener(PropertyChangeListener gl) {
-		gebruikerChanges.addPropertyChangeListener("geselecteerdeGebruiker", gl);
-		System.out.println("listener added");
+		changes.addPropertyChangeListener("geselecteerdeGebruiker", gl);
 	}
 	public void setGeselecteerdeGebruiker(Gebruiker gebruiker) {
 		Gebruiker oldGebruiker = this.geselecteerdeGebruiker;
 		this.geselecteerdeGebruiker = gebruiker;
-		gebruikerChanges.firePropertyChange("geselecteerdeGebruiker", oldGebruiker, gebruiker);
+		changes.firePropertyChange("geselecteerdeGebruiker", oldGebruiker, gebruiker);
 	}
 	public IGebruiker getGeselecteerdeGebruiker() {
 		return geselecteerdeGebruiker;
@@ -139,6 +155,7 @@ public class DomeinController {
 	public void editGeselecteerdeGebruiker(GebruikerDTO dto) {
 		geselecteerdeGebruiker.editGeselecteerdeGebruiker(dto);
 		gebruikerDao.update(geselecteerdeGebruiker);
+		changes.firePropertyChange("GebruikerList",0,1);
 	}
 	public ObservableList<ISessie> getSessiesfromGeselecteerdeGebruiker(){
 		return (ObservableList<ISessie>)(Object)geselecteerdeGebruiker.getSessiesWaarvoorAanwezig();
@@ -189,6 +206,10 @@ public class DomeinController {
 	
 	public void setGeselecteerdeSessieKalender(SessieKalender sessieKalender) {
 		this.geselecteerdeSessieKalender = sessieKalender;
+		changes.firePropertyChange("geselecteerdeSessieKalender", 0, sessieKalender);
+	}
+	public void addSessieKalenderListener(PropertyChangeListener listener) {
+		changes.addPropertyChangeListener("geselecteerdeSessieKalender", listener);
 	}
 	public ISessieKalender getGeselecteerdeSessieKalender() {
 		return geselecteerdeSessieKalender;
@@ -196,6 +217,7 @@ public class DomeinController {
 	public void editGeselecteerdeSessieKalender(SessieKalenderDTO dto) {
 		geselecteerdeSessieKalender.editSessieKalender(dto);
 		sessieKalenderDao.update(geselecteerdeSessieKalender);
+		changes.firePropertyChange("SessieKalenderList",0,1);
 	}
 	public void addSessieToGeselecteerdeSessieKalender(SessieDTO dto) {
 		if(!gebruikerIsHoofdverantwoordelijke()) {

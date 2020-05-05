@@ -64,7 +64,7 @@ public class SessieKalenderSchermController extends SchermController implements 
     private void handleHoofdmenuAction(ActionEvent event) throws IOException {
 
         if(getDC().gebruikerIsHoofdverantwoordelijke()) {
-        	verranderScherm(btnHoofdmenu, "SessieKalenders");
+        	verranderScherm(btnHoofdmenu, "SessieKalenderBeheer");
         }else {
         	verranderScherm(btnHoofdmenu, "Hoofd");
         }

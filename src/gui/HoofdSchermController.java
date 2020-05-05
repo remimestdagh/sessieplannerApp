@@ -62,7 +62,7 @@ public class HoofdSchermController extends SchermController implements Initializ
     private void handleBeheerGebruikersButtonAction(ActionEvent event) throws IOException {
 		if(getDC().gebruikerIsHoofdverantwoordelijke()) {
         	
-        	verranderScherm(btnBeheerGebruikers, "BeheerGebruikers");
+        	verranderScherm(btnBeheerGebruikers, "GebruikerBeheer");
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class HoofdSchermController extends SchermController implements Initializ
     private void handleSessieKalenderButtonAction(ActionEvent event) throws IOException {
         
         if(getDC().gebruikerIsHoofdverantwoordelijke()) {
-        	verranderScherm(btnKalender, "SessieKalenders");
+        	verranderScherm(btnKalender, "SessieKalenderBeheer");
         }else {
         	verranderScherm(btnKalender, "SessieKalender");
         }

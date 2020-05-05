@@ -32,7 +32,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class BeheerGebruikersSchermController extends SchermController implements Initializable{
+public class GebruikerBeheerSchermController extends SchermController implements Initializable{
 	
 	@FXML
 	private Button btnHoofmenu;
@@ -49,7 +49,7 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	@Override
 	public void setDomeinController(DomeinController dc){
 		super.setDomeinController(dc);
-		//maakGebruikerTable(tblView, getDC().getGebruikers());
+
 		try {
 		
 		FXMLLoader overzichtloader = new FXMLLoader(getClass().getResource("/gui/GebruikerOverzichtScherm.fxml"));

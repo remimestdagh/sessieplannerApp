@@ -1,11 +1,14 @@
 package gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
 import domein.Gebruiker;
+import domein.GebruikerDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class GebruikerOverzichtSchermController extends SchermController implements Initializable{
+public class GebruikerOverzichtSchermController extends SchermController implements Initializable, PropertyChangeListener{
 	
 	@FXML
 	private TableView tblView;
@@ -35,6 +38,7 @@ public class GebruikerOverzichtSchermController extends SchermController impleme
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
 		maakGebruikerTable(tblView, getDC().getGebruikers());
+		dc.addGebruikerListListener(this);
 	}
 	
 	/**
@@ -44,7 +48,6 @@ public class GebruikerOverzichtSchermController extends SchermController impleme
     private void handleEditGegevensAction(MouseEvent event) throws IOException{
 		Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
 		getDC().setGeselecteerdeGebruiker(gebruiker);
-		System.out.println("click geregistreerd");
     }
 	
 	/**
@@ -54,7 +57,6 @@ public class GebruikerOverzichtSchermController extends SchermController impleme
     private void handleDeleteGebruikerAction(ActionEvent event){
     	Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
     	getDC().verwijderGebruiker(gebruiker);
-    	maakGebruikerTable(tblView, getDC().getGebruikers());
     }
 	
 	/**
@@ -62,7 +64,16 @@ public class GebruikerOverzichtSchermController extends SchermController impleme
 	 */
 	@FXML
 	private void handleCreateGebruikerAction(ActionEvent event) throws IOException{
-        creëerScherm("CreateGebruiker");
+		GebruikerDTO dto = new GebruikerDTO();
+		
+		dto.setNaam("Nieuwe gebruiker");
+		dto.setNaamChamilo("Naam chamilo");
+		dto.setEmailadres("nieuw.email@hogent.be");
+		dto.setWachtwoord("password");
+		dto.setStatus("NIET_ACTIEF");
+		dto.setType("Gewone_Gebruiker");
+		
+		getDC().addGebruiker(dto);
     }
 	
 	/**
@@ -71,5 +82,10 @@ public class GebruikerOverzichtSchermController extends SchermController impleme
 	@FXML
 	private void handleZoekGebruikerAction(ActionEvent event) {
 		maakGebruikerTable(tblView, getDC().getGebruikersMetNaam(txtZoekGebruiker.getText()));
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		maakGebruikerTable(tblView, getDC().getGebruikers());
 	}
 }

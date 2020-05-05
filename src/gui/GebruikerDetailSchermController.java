@@ -79,19 +79,29 @@ public class GebruikerDetailSchermController extends SchermController implements
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		IGebruiker gebruiker = (IGebruiker) evt.getNewValue();
-
-		cbStatus.getItems().addAll("ACTIEF", "GEBLOKKEERD", "NIET_ACTIEF");
-		cbStatus.setValue(gebruiker.getStatus().toString());
-
-		cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "Gewone_Gebruiker");
-		cbType.setValue(gebruiker.getType().toString());
-
-		txtNaam.setText(gebruiker.getNaam());
-		txtChamilo.setText(gebruiker.getNaamChamilo());
-		txtEmail.setText(gebruiker.getEmailadres());
-
-		lblIntro.setText("Sessies waarvoor " + txtNaam.getText() + " aanwezig was:");
 		
-		maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeGebruiker());
+		if(gebruiker != null) {
+			cbStatus.getItems().addAll("ACTIEF", "GEBLOKKEERD", "NIET_ACTIEF");
+			cbStatus.setValue(gebruiker.getStatus().toString());
+
+			cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "Gewone_Gebruiker");
+			cbType.setValue(gebruiker.getType().toString());
+
+			txtNaam.setText(gebruiker.getNaam());
+			txtChamilo.setText(gebruiker.getNaamChamilo());
+			txtEmail.setText(gebruiker.getEmailadres());
+
+			lblIntro.setText("Sessies waarvoor " + txtNaam.getText() + " aanwezig was:");
+		
+			maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeGebruiker());
+		}else {
+			cbStatus.getItems().clear();
+			cbType.getItems().clear();
+			txtNaam.clear();
+			txtChamilo.clear();
+			txtEmail.clear();
+			lblIntro.setText("");
+			tblView.getItems().clear();
+		}
 	}
 }

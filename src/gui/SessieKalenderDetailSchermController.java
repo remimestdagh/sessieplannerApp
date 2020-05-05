@@ -1,5 +1,7 @@
 package gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -18,7 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class BeheerSessieKalenderSchermController extends SchermController implements Initializable {
+public class SessieKalenderDetailSchermController extends SchermController
+		implements Initializable, PropertyChangeListener {
 
 	@FXML
 	private TextField txtJaar;
@@ -35,12 +38,7 @@ public class BeheerSessieKalenderSchermController extends SchermController imple
 	@Override
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
-
-		ISessieKalender kalender = dc.getGeselecteerdeSessieKalender();
-
-		txtJaar.setText(kalender.getAcademiejaar());
-		dateStart.setValue(kalender.getStartdatum().toLocalDate());
-		dateEind.setValue(kalender.getEinddatum().toLocalDate());
+		dc.addSessieKalenderListener(this);
 	}
 
 	@Override
@@ -64,5 +62,20 @@ public class BeheerSessieKalenderSchermController extends SchermController imple
 			lblError.setText(e.getMessage());
 		}
 
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+
+		ISessieKalender kalender = (ISessieKalender) evt.getNewValue();
+		if (kalender != null) {
+			txtJaar.setText(kalender.getAcademiejaar());
+			dateStart.setValue(kalender.getStartdatum().toLocalDate());
+			dateEind.setValue(kalender.getEinddatum().toLocalDate());
+		} else {
+			txtJaar.clear();
+			dateStart.setValue(null);
+			dateEind.setValue(null);
+		}
 	}
 }

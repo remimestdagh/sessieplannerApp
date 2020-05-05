@@ -28,19 +28,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class SessieKalenderSchermController extends SchermController implements Initializable{
+public class SessieBeheerSchermController extends SchermController implements Initializable{
 	
 	@FXML
-	private TableView tblView;
-	
-	@FXML
-	private Button btnHoofdmenu, btnSessieToevoegen;
+	private Button btnHoofdmenu;
 	
 	@FXML
 	private BorderPane borderPane;
-	
-	@FXML
-	private Text geselecteerdeKalender;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -51,13 +45,27 @@ public class SessieKalenderSchermController extends SchermController implements 
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
 		
-		if(getDC().gebruikerIsHoofdverantwoordelijke()) {
-			maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeSessieKalender());
-		}else {
-			maakSessieTable(tblView, getDC().getSessiesFromVerantwoordelijke());
+		if(!getDC().gebruikerIsHoofdverantwoordelijke()) {
 			btnHoofdmenu.setText("Terug naar hoofdmenu");
 		}
-		geselecteerdeKalender.setText("Sessies voor kalender: " + getDC().getGeselecteerdeSessieKalender().getAcademiejaar() );
+		
+		try {
+
+			FXMLLoader overzichtloader = new FXMLLoader(getClass().getResource("/gui/SessieOverzichtScherm.fxml"));
+			Parent overzicht = (Parent) overzichtloader.load();
+			SchermController OverzichtSchermController = overzichtloader.getController();
+			OverzichtSchermController.setDomeinController(getDC());
+			borderPane.setLeft(overzicht);
+
+			FXMLLoader detailloader = new FXMLLoader(getClass().getResource("/gui/SessieDetailScherm.fxml"));
+			Parent detail = (Parent) detailloader.load();
+			SchermController detailSchermController = detailloader.getController();
+			detailSchermController.setDomeinController(getDC());
+			borderPane.setCenter(detail);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -69,21 +77,5 @@ public class SessieKalenderSchermController extends SchermController implements 
         	verranderScherm(btnHoofdmenu, "Hoofd");
         }
     }
-	
-	@FXML
-    private void handleSessieToevoegenAction(ActionEvent event) throws IOException {
-        creëerScherm("CreateSessie");
-    }
-	
-	@FXML
-    private void handleBeheerSessieAction(MouseEvent event) throws IOException {
-		getDC().setGeselecteerdeSessie((Sessie)tblView.getSelectionModel().getSelectedItem());
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerSessieScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController schermController = loader.getController();
-        schermController.setDomeinController(getDC());
-        
-        borderPane.setCenter(root);
-    }
+
 }

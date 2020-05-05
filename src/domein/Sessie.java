@@ -231,6 +231,7 @@ public class Sessie implements ISessie{
 			}
 			setTitel(dto.getTitel());
 			setNaamGastspreker(dto.getNaamGastspreker());
+			setSessieAanmaker(dto.getSessieAanmaker());
 			setLokaalCode(dto.getLokaalCode());
 			setMAX_CAPACITEIT(dto.getMAX_CAPACITEIT());
 			setStartDatum(dto.getStartDatum());

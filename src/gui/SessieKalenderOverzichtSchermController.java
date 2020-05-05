@@ -59,7 +59,7 @@ public class SessieKalenderOverzichtSchermController extends SchermController
 	private void handleBeheerSessiesAction(ActionEvent event) throws IOException {
 		getDC().setGeselecteerdeSessieKalender((SessieKalender) tblView.getSelectionModel().getSelectedItem());
 
-		verranderScherm(btnEdit, "SessieKalender");
+		verranderScherm(btnEdit, "SessieBeheer");
 	}
 
 	/**

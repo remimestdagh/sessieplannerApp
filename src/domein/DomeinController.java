@@ -1,5 +1,7 @@
 package domein;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Date;
 
 import java.util.List;
@@ -120,9 +122,16 @@ public class DomeinController {
 	
 	// geselecteerde gebruiker
 	private Gebruiker geselecteerdeGebruiker;
+	private PropertyChangeSupport gebruikerChanges = new PropertyChangeSupport(this);
 	
+	public void addGebruikerListener(PropertyChangeListener gl) {
+		gebruikerChanges.addPropertyChangeListener("geselecteerdeGebruiker", gl);
+		System.out.println("listener added");
+	}
 	public void setGeselecteerdeGebruiker(Gebruiker gebruiker) {
+		Gebruiker oldGebruiker = this.geselecteerdeGebruiker;
 		this.geselecteerdeGebruiker = gebruiker;
+		gebruikerChanges.firePropertyChange("geselecteerdeGebruiker", oldGebruiker, gebruiker);
 	}
 	public IGebruiker getGeselecteerdeGebruiker() {
 		return geselecteerdeGebruiker;

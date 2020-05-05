@@ -35,16 +35,10 @@ import javafx.stage.Stage;
 public class BeheerGebruikersSchermController extends SchermController implements Initializable{
 	
 	@FXML
-	private TableView tblView;
-	
-	@FXML
-	private Button btnHoofmenu, btnCreate, btnEdit, btnZoekGebruiker;
+	private Button btnHoofmenu;
 	
 	@FXML
 	private BorderPane borderPane;
-	
-	@FXML
-	private TextField txtZoekGebruiker;
 	
 
 	@Override
@@ -53,57 +47,30 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	}
 
 	@Override
-	public void setDomeinController(DomeinController dc) {
+	public void setDomeinController(DomeinController dc){
 		super.setDomeinController(dc);
-		maakGebruikerTable(tblView, getDC().getGebruikers());
+		//maakGebruikerTable(tblView, getDC().getGebruikers());
+		try {
+		
+		FXMLLoader overzichtloader = new FXMLLoader(getClass().getResource("/gui/GebruikerOverzichtScherm.fxml"));
+		Parent overzicht = (Parent)overzichtloader.load();
+        SchermController OverzichtSchermController = overzichtloader.getController();
+        OverzichtSchermController.setDomeinController(getDC());
+        borderPane.setLeft(overzicht);
+        
+        FXMLLoader detailloader = new FXMLLoader(getClass().getResource("/gui/GebruikerDetailScherm.fxml"));
+		Parent detail = (Parent)detailloader.load();
+        SchermController detailSchermController = detailloader.getController();
+        detailSchermController.setDomeinController(getDC());
+        borderPane.setCenter(detail);
+		
+		}catch(Exception e) {
+			
+		}
 	}
 	
 	@FXML
     private void handleHoofdmenuAction(ActionEvent event) throws IOException {
-
         verranderScherm(btnHoofmenu, "Hoofd");
     }
-	
-	/**
-	 * Selecteren van een gebruiker
-	 */
-	@FXML
-    private void handleEditGegevensAction(MouseEvent event) throws IOException{
-		Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
-		getDC().setGeselecteerdeGebruiker(gebruiker);
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikerScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController schermController = loader.getController();
-        schermController.setDomeinController(getDC());
-        
-        borderPane.setCenter(root);
-        
-    }
-	
-	/**
-	 * Verwijderen van een gebruiker
-	 */
-	@FXML
-    private void handleDeleteGebruikerAction(ActionEvent event){
-    	Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
-    	getDC().verwijderGebruiker(gebruiker);
-    	maakGebruikerTable(tblView, getDC().getGebruikers());
-    }
-	
-	/**
-	 * Aanmaken nieuwe gebruiker
-	 */
-	@FXML
-	private void handleCreateGebruikerAction(ActionEvent event) throws IOException{
-        creëerScherm("CreateGebruiker");
-    }
-	
-	/**
-	 * Zoek gebruiker in lijst
-	 */
-	@FXML
-	private void handleZoekGebruikerAction(ActionEvent event) {
-		maakGebruikerTable(tblView, getDC().getGebruikersMetNaam(txtZoekGebruiker.getText()));
-	}
 }

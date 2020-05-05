@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GebruikerOverzichtSchermController">
+   <children>
+      <Pane prefHeight="629.0" prefWidth="534.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView fx:id="tblView" layoutX="41.0" layoutY="81.0" onMouseClicked="#handleEditGegevensAction" prefHeight="467.0" prefWidth="452.0" />
+            <TextField fx:id="txtZoekGebruiker" layoutX="41.0" layoutY="56.0" />
+            <Button fx:id="btnZoekGebruiker" layoutX="190.0" layoutY="56.0" mnemonicParsing="false" onAction="#handleZoekGebruikerAction" text="Zoek Gebruiker" />
+            <Button fx:id="btnCreate" layoutX="41.0" layoutY="548.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" text="Voeg gebruiker toe " />
+            <Button layoutX="388.0" layoutY="548.0" mnemonicParsing="false" onAction="#handleDeleteGebruikerAction" text="Delete gebruiker" />
+            <Text layoutX="215.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gebruiker overzicht" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

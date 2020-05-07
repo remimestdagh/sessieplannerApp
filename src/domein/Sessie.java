@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,7 +27,7 @@ import javax.persistence.Transient;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+@Access(AccessType.FIELD)
 @Entity
 @Table(name = "Sessie")
 public class Sessie implements ISessie{
@@ -90,6 +92,7 @@ public class Sessie implements ISessie{
 		geplaatstFeedback = FXCollections.<Feedback>observableArrayList();
 		ingeschrevenGebruikers = FXCollections.<Gebruiker>observableArrayList();
 		aanwezigeGebruikers = FXCollections.<Gebruiker>observableArrayList();
+		herinneringen= FXCollections.<Herinnering>observableArrayList();
 		//todo controle op datum
 		/*
 		if (DateUtils.addDays(new Date(), 1).before(startDatum)) {
@@ -120,6 +123,7 @@ public class Sessie implements ISessie{
 		geplaatstFeedback = FXCollections.<Feedback>observableArrayList();
 		ingeschrevenGebruikers = FXCollections.<Gebruiker>observableArrayList();
 		aanwezigeGebruikers = FXCollections.<Gebruiker>observableArrayList();
+		herinneringen= FXCollections.<Herinnering>observableArrayList();
 	}
 
 	// METHODS
@@ -143,9 +147,9 @@ public class Sessie implements ISessie{
 	/**
 	 * Initialiseert de lijst van herinneringen
 	 */
-	public void setHerinneringen(ObservableList<Herinnering> herinneringen)
+	public void setHerinneringen(List<Herinnering> herinneringen)
 	{
-		this.herinneringen = herinneringen;
+		this.herinneringen = FXCollections.observableArrayList(herinneringen);
 	}
 	
 	public void addAanwezigheid(Gebruiker gebruiker) {
@@ -167,7 +171,7 @@ public class Sessie implements ISessie{
 	 * Overschrijft de gebruikte media met gekregenmedia
 	 */
 	public void setMedia(ObservableList<Media> media) {
-		gebruikteMedia = media;
+		gebruikteMedia = FXCollections.observableArrayList(media);
 	}
 
 	/**
@@ -311,35 +315,55 @@ public class Sessie implements ISessie{
 		}
 		this.lokaalCode = lokaalCode;
 	}
-	public ObservableList<Media> getGebruikteMedia() {
+	@Access(AccessType.PROPERTY)
+	public List<Media> getGebruikteMedia() {
 		return gebruikteMedia;
 	}
-	public void setGebruikteMedia(ObservableList<Media> gebruikteMedia) {
-		this.gebruikteMedia = gebruikteMedia;
+	public ObservableList<Media> getGebruikteMediaObservable() {
+		return gebruikteMedia;
 	}
-	public ObservableList<Aankondiging> getGeplaatsteAankondigingen() {
+	public void setGebruikteMedia(List<Media> gebruikteMedia) {
+		this.gebruikteMedia = FXCollections.observableArrayList(gebruikteMedia);
+	}
+	@Access(AccessType.PROPERTY)
+	public List<Aankondiging> getGeplaatsteAankondigingen() {
 		return geplaatsteAankondigingen;
 	}
-	public void setGeplaatsteAankondigingen(ObservableList<Aankondiging> geplaatsteAankondigingen) {
-		this.geplaatsteAankondigingen = geplaatsteAankondigingen;
+	public ObservableList<Aankondiging> getGeplaatsteAankondigingenObservable() {
+		return geplaatsteAankondigingen;
 	}
-	public ObservableList<Feedback> getGeplaatstFeedback() {
+	public void setGeplaatsteAankondigingen(List<Aankondiging> geplaatsteAankondigingen) {
+		this.geplaatsteAankondigingen = FXCollections.observableArrayList(geplaatsteAankondigingen);
+	}
+	@Access(AccessType.PROPERTY)
+	public List<Feedback> getGeplaatstFeedback() {
 		return geplaatstFeedback;
 	}
-	public void setGeplaatstFeedback(ObservableList<Feedback> geplaatstFeedback) {
-		this.geplaatstFeedback = geplaatstFeedback;
+	public ObservableList<Feedback> getGeplaatstFeedbackObservable() {
+		return geplaatstFeedback;
 	}
-	public ObservableList<Gebruiker> getIngeschrevenGebruikers() {
+	public void setGeplaatstFeedback(List<Feedback> geplaatstFeedback) {
+		this.geplaatstFeedback = FXCollections.observableArrayList( geplaatstFeedback);
+	}
+	@Access(AccessType.PROPERTY)
+	public List<Gebruiker> getIngeschrevenGebruikers() {
 		return ingeschrevenGebruikers;
 	}
-	public void setIngeschrevenGebruikers(ObservableList<Gebruiker> ingeschrevenGebruikers) {
-		this.ingeschrevenGebruikers = ingeschrevenGebruikers;
+	public ObservableList<Gebruiker> getIngeschrevenGebruikersObservable() {
+		return ingeschrevenGebruikers;
 	}
-	public ObservableList<Gebruiker> getAanwezigeGebruikers() {
+	public void setIngeschrevenGebruikers(List<Gebruiker> ingeschrevenGebruikers) {
+		this.ingeschrevenGebruikers = FXCollections.observableArrayList( ingeschrevenGebruikers);
+	}
+	@Access(AccessType.PROPERTY)
+	public List<Gebruiker> getAanwezigeGebruikers() {
 		return aanwezigeGebruikers;
 	}
-	public void setAanwezigeGebruikers(ObservableList<Gebruiker> aanwezigeGebruikers) {
-		this.aanwezigeGebruikers = aanwezigeGebruikers;
+	public ObservableList<Gebruiker> getAanwezigeGebruikersObservable() {
+		return aanwezigeGebruikers;
+	}
+	public void setAanwezigeGebruikers(List<Gebruiker> aanwezigeGebruikers) {
+		this.aanwezigeGebruikers = FXCollections.observableArrayList( aanwezigeGebruikers);
 	}
 	public int getMAX_CAPACITEIT() {
 		return MAX_CAPACITEIT;
@@ -355,5 +379,15 @@ public class Sessie implements ISessie{
 	}
 	public void setStatus(SessieStatus status) {
 		this.status = status;
+	}
+	@Access(AccessType.PROPERTY)
+	public List<Herinnering> getHerinneringen() {
+		return herinneringen;
+	}
+	public ObservableList<Herinnering> getHerinneringenObservable() {
+		return FXCollections.observableArrayList(herinneringen);
+	}
+	public void setHerinneringen(ObservableList<Herinnering> herinneringen) {
+		this.herinneringen = herinneringen;
 	}
 }

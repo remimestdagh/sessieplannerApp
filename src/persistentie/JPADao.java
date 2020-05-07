@@ -1,5 +1,7 @@
 package persistentie;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -23,9 +25,11 @@ public class JPADao<T> implements Dao {
 
 	// METHODS
 	@Override
-	public ObservableList findAll() {
-		return (ObservableList) em.createQuery("select entity from " + type.getName() + " entity", type)
+	public List<T> findAll() {
+		List<T> list = null;
+		list =  em.createQuery("select entity from " + type.getName() + " entity", type)
 				.getResultList();
+		return list;
 	}
 
 	

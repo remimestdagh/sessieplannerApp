@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +28,7 @@ import javafx.collections.ObservableList;
 
 @Entity
 @Table(name="Gebruiker")
+@Access(AccessType.FIELD)
 public class Gebruiker implements IGebruiker{
 	
 	//PARAMETERS
@@ -51,7 +54,7 @@ public class Gebruiker implements IGebruiker{
 	
 	//private String profielFoto;
 	//private Date inschrijvingsDatum;
-	@Transient //voorlopig niet gemapt, moet eigenlijk corresponderen met wasAanwezig in tussentabel!
+ //voorlopig niet gemapt, moet eigenlijk corresponderen met wasAanwezig in tussentabel!
 	private ObservableList<Sessie> sessiesWaarvoorAanwezig; 
 
 	
@@ -198,17 +201,25 @@ public class Gebruiker implements IGebruiker{
 		}
 		this.type = type;
 	}
-	public ObservableList<Sessie> getSessiesWaarvoorIngeschreven() {
+	public ObservableList<Sessie> getSessiesWaarvoorIngeschrevenObservable() {
 		return sessiesWaarvoorIngeschreven;
 	}
-	public void setSessiesWaarvoorIngeschreven(ObservableList<Sessie> sessieList) {
-		this.sessiesWaarvoorIngeschreven = sessieList;
+	@Access(AccessType.PROPERTY)
+	public List<Sessie> getSessiesWaarvoorIngeschreven(){
+		return sessiesWaarvoorIngeschreven;
 	}
-	public ObservableList<Sessie> getSessiesWaarvoorAanwezig() {
+	@Access(AccessType.PROPERTY)
+	public List<Sessie> getSessiesWaarvoorAanwezig(){
 		return sessiesWaarvoorAanwezig;
 	}
-	public void setSessiesWaarvoorAanwezig(ObservableList<Sessie> sessieList) {
-		this.sessiesWaarvoorAanwezig = sessieList;
+	public void setSessiesWaarvoorIngeschreven(List<Sessie> sessieList) {
+		this.sessiesWaarvoorIngeschreven = FXCollections.observableArrayList(sessieList);
+	}
+	public ObservableList<Sessie> getSessiesWaarvoorAanwezigObservable() {
+		return sessiesWaarvoorAanwezig;
+	}
+	public void setSessiesWaarvoorAanwezig(List<Sessie> sessieList) {
+		this.sessiesWaarvoorAanwezig = FXCollections.observableArrayList(sessieList);
 	}
 	public String getTypeString() {
 		return this.type.toString();

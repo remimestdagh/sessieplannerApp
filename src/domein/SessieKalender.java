@@ -1,9 +1,16 @@
 package domein;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import persistentie.JPADao;
 
+@Access(AccessType.FIELD)
 public class SessieKalender implements ISessieKalender{
 	
 	//PARAMETERS
@@ -29,7 +36,9 @@ public class SessieKalender implements ISessieKalender{
 	
 	//METHODS
 	public void addSessie(Sessie sessie) {
+
 		sessieList.add(sessie);
+
 	}
 	public void removeSessie(Sessie sessie) {
 		sessieList.remove(sessie);
@@ -67,10 +76,14 @@ public class SessieKalender implements ISessieKalender{
 	public void setEinddatum(LocalDateTime einddatum) {
 		this.einddatum = einddatum;
 	}
-	public ObservableList<Sessie> getSessieList() {
+	@Access(AccessType.PROPERTY)
+	public List<Sessie> getSessieList() {
 		return sessieList;
 	}
 	public void setSessieList(ObservableList<Sessie> sessieList) {
 		this.sessieList = sessieList;
+	}
+	public ObservableList<Sessie> getSessieListObservable(){
+		return sessieList;
 	}
 }

@@ -87,6 +87,7 @@ public class Seeder {
 		
 		em.getTransaction().begin();
 		Stream.of(s1,s2,s3,s4,s5,s6).forEach(em::persist);
+		Stream.of(g1,g2,g3).forEach(em::persist);
 		em.getTransaction().commit();
 		
 		//--Persistence tools afsluiten--

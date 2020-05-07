@@ -30,21 +30,21 @@ public class DomeinController {
 	
 	//PARAMETERS
 	private Gebruiker ingelogdeGebruiker;
-	private GebruikerDao gebruikerDao;				//repo voor gebruikers (finaal type Dao?)
-	private SessieDao sessieDao;					//repo voor sessies (finaal type Dao?)
-	private SessieKalenderDao sessieKalenderDao;	//repo voor sessiekalenders (finaal type Dao?)
+	private JPAGebruikerDao gebruikerDao;				//repo voor gebruikers (finaal type Dao?)
+	private JPASessieDao sessieDao;					//repo voor sessies (finaal type Dao?)
+	private JPASessieKalenderDao sessieKalenderDao;	//repo voor sessiekalenders (finaal type Dao?)
 	
 	private PropertyChangeSupport changes = new PropertyChangeSupport(this);
 	
 	
 	//CONSTRUCTOR
 	public DomeinController(){
-		
+		/*
 		if(USE_DUMMY) {
 			this.gebruikerDao = new DummyGebruikerDao();
 			this.sessieDao = new DummySessieDao();
 			this.sessieKalenderDao = new DummySessieKalenderDao();
-		}
+		}*/
 		
 		if(USE_JPA) {
 			this.gebruikerDao = new JPAGebruikerDao();

@@ -12,7 +12,7 @@ public class JPASessieKalenderDao extends JPADao implements SessieKalenderDao{
 
 	// CONSTRUCTOR
 	public JPASessieKalenderDao() {
-		super(Gebruiker.class);
+		super(SessieKalender.class);
 	}
 
 	// METHODS
@@ -24,7 +24,23 @@ public class JPASessieKalenderDao extends JPADao implements SessieKalenderDao{
 
 	public SessieKalender getHuidigeSessieKalender() {
 		return null;
+	}/*
+
+
+	@Override
+	public List<SessieKalender> findAll() {
+		List<SessieKalender> list = null;
+		list =  em.createQuery(String.format("SELECT s FROM SessieKalender s"), SessieKalender.class).getResultList();
+		return list;
+	}
+	
+	@Override
+	public void delete(Object sessieKalender) {
+		em.remove(sessieKalender);
 	}
 
-
+	@Override
+	public void insert(Object sessieKalender) { 
+		em.persist(sessieKalender);
+	}*/
 }

@@ -17,6 +17,7 @@ import domein.GebruikerType;
 import domein.Herinnering;
 import domein.Media;
 import domein.Sessie;
+import domein.SessieKalender;
 import util.JPAUtil;
 
 public class Seeder {
@@ -38,6 +39,9 @@ public class Seeder {
 		Sessie s4 = new Sessie("Linux Is Just Amazing!", "Bert Suffys", "B0.00", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g3.getNaam());
 		Sessie s5 = new Sessie("Linux Is pretty average", "Alexander De Baene", "B3.33", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g4.getNaam());
 		Sessie s6 = new Sessie("The saddening history of Ubuntu", "Hugh Mungus", "B6.66", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g5.getNaam());
+		
+		//--SessieKalenders--
+		SessieKalender sk1 = new SessieKalender("2019-2020", LocalDateTime.now(), LocalDateTime.now().plusYears(1));
 		
 		//--Sessie relaties--
 		Herinnering h1 = new Herinnering("Het zal fijn worden!", 1);
@@ -76,6 +80,11 @@ public class Seeder {
 		
 		//s4.setGeplaatstFeedback(Arrays.asList(f5,f4));
 		//s4.setMedia(Arrays.asList(m3,m4));
+		
+		
+		
+		//--SessieKalenders vullen met sessies--
+		sk1.addSessie(s1);
 
 
 		
@@ -88,11 +97,11 @@ public class Seeder {
 		em.getTransaction().begin();
 		Stream.of(s1,s2,s3,s4,s5,s6).forEach(em::persist);
 		Stream.of(g1,g2,g3).forEach(em::persist);
+		em.persist(sk1);
 		em.getTransaction().commit();
 		
 		//--Persistence tools afsluiten--
 		em.close();
-		emf.close();
 		
 		
 		

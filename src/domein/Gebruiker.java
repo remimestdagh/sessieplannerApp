@@ -54,7 +54,7 @@ public class Gebruiker implements IGebruiker{
 	
 	//private String profielFoto;
 	//private Date inschrijvingsDatum;
- //voorlopig niet gemapt, moet eigenlijk corresponderen met wasAanwezig in tussentabel!
+	//voorlopig niet gemapt, moet eigenlijk corresponderen met wasAanwezig in tussentabel!
 	private ObservableList<Sessie> sessiesWaarvoorAanwezig; 
 
 	

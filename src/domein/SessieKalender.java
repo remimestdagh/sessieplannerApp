@@ -5,21 +5,36 @@ import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.TableGenerator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import persistentie.JPADao;
 
+@Entity
+@TableGenerator(name = "SessieKalender")
 @Access(AccessType.FIELD)
 public class SessieKalender implements ISessieKalender{
 	
 	//PARAMETERS
+	@Id
+	@Column(name = "SessieKalenderId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int sessieKalenderId;
 	private String academiejaar;
 	private LocalDateTime startdatum;
 	private LocalDateTime einddatum;
+	@ManyToMany
 	private ObservableList<Sessie> sessieList;
 
 	//CONSTRUCTOR
+	public SessieKalender() {}
 	public SessieKalender(String academiejaar, LocalDateTime startdatum, LocalDateTime einddatum) {
 		setAcademiejaar(academiejaar);
 		setStartdatum(startdatum);
@@ -79,6 +94,9 @@ public class SessieKalender implements ISessieKalender{
 	@Access(AccessType.PROPERTY)
 	public List<Sessie> getSessieList() {
 		return sessieList;
+	}
+	public void setSessieList(List<Sessie> sessieList) {
+		this.sessieList = FXCollections.observableList(sessieList);
 	}
 	public void setSessieList(ObservableList<Sessie> sessieList) {
 		this.sessieList = sessieList;

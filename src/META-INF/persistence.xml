@@ -13,6 +13,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
 	<class>domein.Aankondiging</class>
 	<class>domein.Feedback</class>
 	<class>domein.Gebruiker</class>
+	<class>domein.GebruikerSessie</class>
 	<class>domein.SessieKalender</class>
 
 

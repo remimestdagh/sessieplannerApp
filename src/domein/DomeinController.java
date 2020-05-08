@@ -237,7 +237,7 @@ public class DomeinController {
 		Sessie sessie = new Sessie(dto);
 		geselecteerdeSessieKalender.addSessie(sessie);
 		sessieKalenderDao.update(geselecteerdeSessieKalender);
-		setGeselecteerdeSessie(sessie);
+		//setGeselecteerdeSessie(sessie);
 		changes.firePropertyChange("SessieList",0,1);
 	}
 	public void verwijderSessieFromGeselecteerdeSessieKalender(ISessie sessie) {

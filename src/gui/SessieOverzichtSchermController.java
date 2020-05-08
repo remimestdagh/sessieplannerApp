@@ -57,9 +57,12 @@ public class SessieOverzichtSchermController extends SchermController implements
 		dto.setStartDatum( LocalDateTime.now() );
 		dto.setEindDatum( LocalDateTime.now() );
 		dto.setNaamGastspreker( "Naam gastspreker" );
+		dto.setSessieAanmaker(getDC().getNaamIngelogdeGebruiker());
 		dto.setMAX_CAPACITEIT( 1 );
 		dto.setLokaalCode( "Lokaal code" );
+		
 		getDC().addSessieToGeselecteerdeSessieKalender(dto);
+		
     }
 	
 	@FXML

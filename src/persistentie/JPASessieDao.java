@@ -3,6 +3,7 @@ package persistentie;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import domein.Gebruiker;
 import domein.Sessie;

@@ -7,6 +7,7 @@ import domein.IGebruiker;
 import domein.IMedia;
 import domein.ISessie;
 import domein.ISessieKalender;
+import domein.SessieDTO;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

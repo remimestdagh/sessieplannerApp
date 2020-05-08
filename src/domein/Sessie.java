@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,6 +28,7 @@ import javax.persistence.Transient;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 @Access(AccessType.FIELD)
 @Entity
 @Table(name = "Sessie")
@@ -34,6 +36,7 @@ public class Sessie implements ISessie{
 	// PARAMETERS
 	private static final long serialVersionUID = 1L;
 	@Id
+	@Column(name = "SESSIEID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int sessieId;
 	private String titel;
@@ -60,13 +63,20 @@ public class Sessie implements ISessie{
 	private ObservableList<Feedback> geplaatstFeedback;
 	@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
 	private ObservableList<Gebruiker> ingeschrevenGebruikers;
-	@OneToMany
-	@JoinColumn(name = "sessieId")
+	//@ManyToMany
+	//@JoinColumn(name = "sessieId")
+	@Transient
 	private ObservableList<Gebruiker> aanwezigeGebruikers;
 	
 	//private boolean stuurtHerinnering;
 	//private List<Herinnering> herinneringen; is dit nodig?
 
+	/*@JoinTable(name = "GEBRUIKERSESSIE",
+    joinColumns = @JoinColumn(name = "SESSIEID"),
+    inverseJoinColumns = @JoinColumn(name = "GEBRUIKERID"))*/
+	@OneToMany(cascade = {CascadeType.PERSIST,
+	        CascadeType.MERGE})
+	private List<GebruikerSessie> gebruikerSessieAanwezig;
 	
 	//CONSTRUCTOR
 	protected Sessie() {}
@@ -86,6 +96,8 @@ public class Sessie implements ISessie{
 		
 		setSessieAanmaker(sessieAanmaker);
 		status = SessieStatus.AANGEMAAKT;
+		
+		gebruikerSessieAanwezig = new ArrayList<>();
 		
 		gebruikteMedia = FXCollections.<Media>observableArrayList();
 		geplaatsteAankondigingen = FXCollections.<Aankondiging>observableArrayList();
@@ -127,6 +139,13 @@ public class Sessie implements ISessie{
 	}
 
 	// METHODS
+	public int getSessieId() {
+		return sessieId;
+	}
+	
+	public void setSessieId(int id) {
+		this.sessieId =id;
+	}
 	
 	public String getNaamAanmaker() {
 		return sessieAanmaker;
@@ -153,6 +172,7 @@ public class Sessie implements ISessie{
 	}
 	
 	public void addAanwezigheid(Gebruiker gebruiker) {
+		gebruikerSessieAanwezig.add(new GebruikerSessie(gebruiker.getGebruikerId(), this.getSessieId(), true));
 		aanwezigeGebruikers.add(gebruiker);
 	}
 	
@@ -355,7 +375,7 @@ public class Sessie implements ISessie{
 	public void setIngeschrevenGebruikers(List<Gebruiker> ingeschrevenGebruikers) {
 		this.ingeschrevenGebruikers = FXCollections.observableArrayList( ingeschrevenGebruikers);
 	}
-	@Access(AccessType.PROPERTY)
+	//@Access(AccessType.PROPERTY)
 	public List<Gebruiker> getAanwezigeGebruikers() {
 		return aanwezigeGebruikers;
 	}
@@ -390,4 +410,13 @@ public class Sessie implements ISessie{
 	public void setHerinneringen(ObservableList<Herinnering> herinneringen) {
 		this.herinneringen = herinneringen;
 	}
+	//@Access(AccessType.PROPERTY)
+	public List<GebruikerSessie> getGebruikerSessieAanwezig() {
+		return gebruikerSessieAanwezig;
+	}
+	public void setGebruikerSessieAanwezig(List<GebruikerSessie> gebruikerSessieAanwezig) {
+		this.gebruikerSessieAanwezig = gebruikerSessieAanwezig;
+	}
+	
+	
 }

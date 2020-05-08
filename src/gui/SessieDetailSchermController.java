@@ -113,7 +113,6 @@ public class SessieDetailSchermController extends SchermController implements In
 		if (sessie != null) {
 			maakAankondigingTable(tblAankondigingen, getDC().getAankondigingenfromGeselecteerdeSessie());
 			maakMediaTable(tblMedia, getDC().getMediafromGeselecteerdeSessie());
-			maakGebruikerTable(tblGebruikers, getDC().getGebruikersFromGeselecteerdeSessie());
 			txtTitel.setText(sessie.getTitel());
 			txtVerantwoordelijke.setText(sessie.getSessieAanmaker());
 			txtStartDatum.setText(sessie.getStartDatum().toString());
@@ -123,6 +122,7 @@ public class SessieDetailSchermController extends SchermController implements In
 			txtLokaal.setText(sessie.getLokaalCode());
 			cbStatus.getItems().addAll("AANGEMAAKT", "GEOPEND", "GESTART", "GESLOTEN");
 			cbStatus.setValue(sessie.getStatus().toString());
+			//maakGebruikerTable(tblGebruikers, getDC().getGebruikersFromGeselecteerdeSessie());
 		}else {
 			
 		}

@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.QueryHint;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -50,8 +51,9 @@ public class Gebruiker implements IGebruiker{
 	@Column(name = "Type")
 	private GebruikerType type;
 	//relation mapping
-	@JoinTable(name="GebruikerSessieIngeschreven") //ter herbenoeming tussentabel (match met dotnet)
-	@ManyToMany(cascade = CascadeType.PERSIST) //Tussentabel!
+	//@JoinTable(name="GebruikerSessieIngeschreven") //ter herbenoeming tussentabel (match met dotnet)
+	//@ManyToMany(cascade = CascadeType.PERSIST) //Tussentabel!
+	@Transient
 	private ObservableList<Sessie> sessiesWaarvoorIngeschreven;
 	
 	//private String profielFoto;
@@ -63,8 +65,8 @@ public class Gebruiker implements IGebruiker{
 	/*@JoinTable(name = "GEBRUIKERSESSIE",
     joinColumns = @JoinColumn(name = "GEBRUIKERID"),
     inverseJoinColumns = @JoinColumn(name = "SESSIEID"))*/
-	@OneToMany(cascade = {CascadeType.PERSIST,
-	        CascadeType.MERGE})
+	//@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@Transient
 	private List<GebruikerSessie> gebruikerSessieAanwezig;
 	
 	
@@ -224,7 +226,7 @@ public class Gebruiker implements IGebruiker{
 	public ObservableList<Sessie> getSessiesWaarvoorIngeschrevenObservable() {
 		return sessiesWaarvoorIngeschreven;
 	}
-	@Access(AccessType.PROPERTY)
+	//@Access(AccessType.PROPERTY)
 	public List<Sessie> getSessiesWaarvoorIngeschreven(){
 		return sessiesWaarvoorIngeschreven;
 	}

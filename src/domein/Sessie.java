@@ -61,7 +61,8 @@ public class Sessie implements ISessie{
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sessieId")
 	private ObservableList<Feedback> geplaatstFeedback;
-	@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
+	//@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
+	@Transient
 	private ObservableList<Gebruiker> ingeschrevenGebruikers;
 	//@ManyToMany
 	//@JoinColumn(name = "sessieId")
@@ -74,8 +75,7 @@ public class Sessie implements ISessie{
 	/*@JoinTable(name = "GEBRUIKERSESSIE",
     joinColumns = @JoinColumn(name = "SESSIEID"),
     inverseJoinColumns = @JoinColumn(name = "GEBRUIKERID"))*/
-	@OneToMany(cascade = {CascadeType.PERSIST,
-	        CascadeType.MERGE})
+	@Transient
 	private List<GebruikerSessie> gebruikerSessieAanwezig;
 	
 	//CONSTRUCTOR
@@ -136,6 +136,7 @@ public class Sessie implements ISessie{
 		ingeschrevenGebruikers = FXCollections.<Gebruiker>observableArrayList();
 		aanwezigeGebruikers = FXCollections.<Gebruiker>observableArrayList();
 		herinneringen= FXCollections.<Herinnering>observableArrayList();
+		
 	}
 
 	// METHODS
@@ -153,8 +154,14 @@ public class Sessie implements ISessie{
 	
 	public String getAanwezigenOrVrijePlaatsen() {
 		if(status == SessieStatus.AANGEMAAKT) {
-			return "" + (MAX_CAPACITEIT - ingeschrevenGebruikers.size());
+			if (ingeschrevenGebruikers != null) {
+				return "" + (MAX_CAPACITEIT - ingeschrevenGebruikers.size());
+			}
+			return "" + MAX_CAPACITEIT;
 		}else {
+			if(aanwezigeGebruikers != null) {
+				return "" + aanwezigeGebruikers.size();
+			}
 			return "" + aanwezigeGebruikers.size();
 		}
 	}
@@ -365,7 +372,7 @@ public class Sessie implements ISessie{
 	public void setGeplaatstFeedback(List<Feedback> geplaatstFeedback) {
 		this.geplaatstFeedback = FXCollections.observableArrayList( geplaatstFeedback);
 	}
-	@Access(AccessType.PROPERTY)
+	//@Access(AccessType.PROPERTY)
 	public List<Gebruiker> getIngeschrevenGebruikers() {
 		return ingeschrevenGebruikers;
 	}

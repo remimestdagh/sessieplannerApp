@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import domein.Aankondiging;
 import domein.Feedback;
@@ -77,25 +79,26 @@ public class Seeder {
 
 		//-- sessies opbouwen met alles er in, en dan enkel sessie storen --
 		
+		
 		s1.setHerinneringen(Arrays.asList(h1,h2));
 		s1.setGebruikteMedia(Arrays.asList(m1));
 		s1.setGeplaatsteAankondigingen(Arrays.asList(a1));
 		s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
-		s1.setIngeschrevenGebruikers(Arrays.asList(g1,g2,g5,g6));
+		//s1.setIngeschrevenGebruikers(Arrays.asList(g1,g2,g5,g6));
 		
-		g1.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g2.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g3.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g4.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g5.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		g6.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g1.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g2.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g3.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g4.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g5.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		//g6.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
 
-		g1.addAanwezigheid(s2);
-		g2.addAanwezigheid(s2);
-		g3.addAanwezigheid(s2);
-		g4.addAanwezigheid(s2);
-		g5.addAanwezigheid(s2);
-		g6.addAanwezigheid(s2);
+		//g1.addAanwezigheid(s2);
+		//g2.addAanwezigheid(s2);
+		//g3.addAanwezigheid(s2);
+		//g4.addAanwezigheid(s2);
+		//g5.addAanwezigheid(s2);
+		//g6.addAanwezigheid(s2);
 		
 		s2.setHerinneringen(Arrays.asList(h3));
 		s2.setGebruikteMedia(Arrays.asList(m2));
@@ -113,16 +116,25 @@ public class Seeder {
 		sk1.addSessie(s4);
 		sk1.addSessie(s5);
 		sk1.addSessie(s6);
-
-
-		
-
 		
 		//--Persistentie tools ophalen--
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory(); //Persistence unit naam is "school", zie de xml file.
 		EntityManager em = emf.createEntityManager();
-		
 		em.getTransaction().begin();
+
+		Query query1 = em.createNativeQuery(String.format("insert into GebruikerSessie values (1,2,0)"));
+		Query query2 = em.createNativeQuery(String.format("insert into GebruikerSessie values (2,2,1)"));
+		Query query3 = em.createNativeQuery(String.format("insert into GebruikerSessie values (4,1,1)"));
+		Query query4 = em.createNativeQuery(String.format("insert into GebruikerSessie values (5,1,0)"));
+		Query query5 = em.createNativeQuery(String.format("insert into GebruikerSessie values (6,4,1)"));
+		Query query6 = em.createNativeQuery(String.format("insert into GebruikerSessie values (3,4,0)"));
+		query1.executeUpdate();
+		query2.executeUpdate();
+		query3.executeUpdate();
+		query4.executeUpdate();
+		query5.executeUpdate();
+		query6.executeUpdate();
+		
 		Stream.of(s1,s2,s3,s4,s5,s6).forEach(em::persist);
 		Stream.of(g1,g2,g3, g4, g5, g6).forEach(em::persist);
 		Stream.of(h1,h2,h3).forEach(em::persist);

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.TableGenerator;
 
 import javafx.collections.FXCollections;
@@ -30,7 +31,7 @@ public class SessieKalender implements ISessieKalender{
 	private String academiejaar;
 	private LocalDateTime startdatum;
 	private LocalDateTime einddatum;
-	@ManyToMany
+	@OneToMany
 	private ObservableList<Sessie> sessieList;
 
 	//CONSTRUCTOR

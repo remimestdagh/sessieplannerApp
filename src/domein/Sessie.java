@@ -59,7 +59,7 @@ public class Sessie implements ISessie{
 	@JoinColumn(name = "sessieId")
 	private ObservableList<Aankondiging> geplaatsteAankondigingen;
 	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "sessieId")
+	//@JoinColumn(name = "SessieId")
 	private ObservableList<Feedback> geplaatstFeedback;
 	//@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
 	@Transient
@@ -362,7 +362,17 @@ public class Sessie implements ISessie{
 	public void setGeplaatsteAankondigingen(List<Aankondiging> geplaatsteAankondigingen) {
 		this.geplaatsteAankondigingen = FXCollections.observableArrayList(geplaatsteAankondigingen);
 	}
+	
+	public void addFeedback(Feedback f) {
+		geplaatstFeedback.add(f);
+		f.setSessie(this);
+	}
+	public void removeFeedback(Feedback f) {
+		geplaatstFeedback.remove(f);
+		f.setSessie(null);
+	}
 	@Access(AccessType.PROPERTY)
+	@OneToMany(cascade = CascadeType.PERSIST)
 	public List<Feedback> getGeplaatstFeedback() {
 		return geplaatstFeedback;
 	}
@@ -417,7 +427,7 @@ public class Sessie implements ISessie{
 	public void setHerinneringen(ObservableList<Herinnering> herinneringen) {
 		this.herinneringen = herinneringen;
 	}
-	//@Access(AccessType.PROPERTY)
+	@Access(AccessType.PROPERTY)
 	public List<GebruikerSessie> getGebruikerSessieAanwezig() {
 		return gebruikerSessieAanwezig;
 	}

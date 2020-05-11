@@ -49,13 +49,13 @@ public class Seeder {
 		Sessie s4 = new Sessie("Linux Is Just Amazing!", "Bert Suffys", "B0.00", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g3.getNaam());
 		Sessie s5 = new Sessie("Linux Is pretty average", "Alexander De Baene", "B3.33", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g4.getNaam());
 		Sessie s6 = new Sessie("The saddening history of Ubuntu", "Hugh Mungus", "B6.66", 25, LocalDateTime.of(2020,3,13,14,30), LocalDateTime.of(2020,3,13,17,0), g5.getNaam());
-
+/*
 		s1.setSessieId(1);
 		s2.setSessieId(2);
 		s3.setSessieId(3);
 		s4.setSessieId(4);
 		s5.setSessieId(5);
-		s6.setSessieId(6);
+		s6.setSessieId(6);*/
 		//--SessieKalenders--
 		SessieKalender sk1 = new SessieKalender("2019-2020", LocalDateTime.now(), LocalDateTime.now().plusYears(1));
 		
@@ -79,11 +79,14 @@ public class Seeder {
 
 		//-- sessies opbouwen met alles er in, en dan enkel sessie storen --
 		
+		//Feedback
+		s1.addFeedback(f1);
+		s1.addFeedback(f3);
 		
 		s1.setHerinneringen(Arrays.asList(h1,h2));
 		s1.setGebruikteMedia(Arrays.asList(m1));
 		s1.setGeplaatsteAankondigingen(Arrays.asList(a1));
-		s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
+		//s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
 		//s1.setIngeschrevenGebruikers(Arrays.asList(g1,g2,g5,g6));
 		
 		//g1.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
@@ -102,9 +105,9 @@ public class Seeder {
 		
 		s2.setHerinneringen(Arrays.asList(h3));
 		s2.setGebruikteMedia(Arrays.asList(m2));
-		s3.setGeplaatstFeedback(Arrays.asList(f3));
+		//s3.setGeplaatstFeedback(Arrays.asList(f3));
 		
-		s4.setGeplaatstFeedback(Arrays.asList(f5,f4));
+		//s4.setGeplaatstFeedback(Arrays.asList(f5,f4));
 		s4.setGebruikteMedia(Arrays.asList(m3,m4));
 		
 		

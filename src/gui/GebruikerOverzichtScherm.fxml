@@ -5,18 +5,34 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GebruikerOverzichtSchermController">
+<AnchorPane prefHeight="587.0" prefWidth="477.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GebruikerOverzichtSchermController">
    <children>
-      <Pane prefHeight="629.0" prefWidth="534.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="587.0" prefWidth="567.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tblView" layoutX="41.0" layoutY="81.0" onMouseClicked="#handleEditGegevensAction" prefHeight="467.0" prefWidth="452.0" />
-            <TextField fx:id="txtZoekGebruiker" layoutX="41.0" layoutY="56.0" />
-            <Button fx:id="btnZoekGebruiker" layoutX="190.0" layoutY="56.0" mnemonicParsing="false" onAction="#handleZoekGebruikerAction" text="Zoek Gebruiker" />
-            <Button fx:id="btnCreate" layoutX="41.0" layoutY="548.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" text="Voeg gebruiker toe " />
-            <Button layoutX="388.0" layoutY="548.0" mnemonicParsing="false" onAction="#handleDeleteGebruikerAction" text="Delete gebruiker" />
-            <Text layoutX="215.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gebruiker overzicht" />
+            <TableView fx:id="tblView" layoutX="14.0" layoutY="84.0" onMouseClicked="#handleEditGegevensAction" prefHeight="467.0" prefWidth="452.0" />
+            <TextField fx:id="txtZoekGebruiker" layoutX="219.0" layoutY="59.0" />
+            <Button fx:id="btnZoekGebruiker" layoutX="368.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleZoekGebruikerAction" text="Zoek Gebruiker">
+                         <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCreate" layoutX="14.0" layoutY="551.0" mnemonicParsing="false" onAction="#handleCreateGebruikerAction" text="Voeg gebruiker toe ">
+                         <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="361.0" layoutY="551.0" mnemonicParsing="false" onAction="#handleDeleteGebruikerAction" text="Delete gebruiker">
+             <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gebruiker overzicht">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font></Text>
          </children>
       </Pane>
    </children>

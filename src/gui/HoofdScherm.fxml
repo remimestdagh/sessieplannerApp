@@ -22,7 +22,7 @@
       <HBox prefHeight="483.0" prefWidth="731.0" VBox.vgrow="ALWAYS">
          <children>
             <Region HBox.hgrow="ALWAYS" />
-            <Pane prefHeight="587.0" prefWidth="966.0" HBox.hgrow="ALWAYS">
+            <Pane prefHeight="587.0" prefWidth="960.0" HBox.hgrow="ALWAYS">
                <children>
       				<Text fill="WHITE" fontSmoothingType="LCD" layoutX="204.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Sitka Text';" text="Welkom op het hoofdmenu," wrappingWidth="406.39996337890625">
       					<font>

@@ -31,17 +31,20 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         
         
-        stage.setMaximized(true);
+       
         stage.getIcons().add(new Image("/fonts/windowicon.jpg"));
         stage.setTitle("IT-Lab Sessieplanner");
         
         //Maximizing screen
+        /*
+        stage.setMaximized(true);
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         stage.setX(bounds.getMinX());
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
+        */
         
         
         stage.setScene(scene);

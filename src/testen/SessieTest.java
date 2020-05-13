@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import domein.Sessie;
+import domein.SessieDTO;
 
 public class SessieTest {
 
@@ -70,8 +71,15 @@ public class SessieTest {
 	public void sessieAanpassenMagNietSessieOpenen() {
 		sessie1.setGeopend();
 		// todo beter formaat van datums
-		//Assertions.assertThrows(IllegalArgumentException.class, () -> sessie1.editSessie("nieuwe titel",
-		//		"nieuwe gastspreker", "nieuwe code", 100, "2021-12-03T10:15:30", "2021-12-03T12:15:30", "GEOPEND"));
+		SessieDTO dtojamin = new SessieDTO();
+		dtojamin.setTitel("nieuwe titel");
+		dtojamin.setNaamGastspreker("nieuwe gastSpreker");
+		dtojamin.setLokaalCode("nieuwe code");
+		dtojamin.setStartDatum(LocalDateTime.now().plusDays(5));
+		dtojamin.setEindDatum(LocalDateTime.now().plusDays(5).plusHours(5));
+		dtojamin.setStatus("GEOPEND");
+		
+		Assertions.assertThrows(IllegalArgumentException.class, () -> sessie1.editSessie(dtojamin));
 	}
 	@Test
 	public void sessieAanmakenJuisteManierGeenErrors() {
@@ -79,13 +87,14 @@ public class SessieTest {
 				"nieuwe gastspreker", "nieuwe code", 100, LocalDateTime.now().plusDays(2),LocalDateTime.now().plusDays(2).plusHours(2),"aanmaker");
 		
 	}
+	/*
 	@Test
 	public void sessieAanmakenDatumsNietMinstens1DagInToekomstGeeftException(String datum1) {
 		Assertions.assertThrows(IllegalArgumentException.class, ()->{
 			new Sessie("scrum tactics", "gastspreker", "lokaalcode",
 				100, LocalDateTime.now(), LocalDateTime.now().plusHours(1), "aanmaker");
 		});
-	}
+	}*/
 	
 
 }

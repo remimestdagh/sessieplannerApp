@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessieKalenderOverzichtSchermController">
+   <children>
+      <TableView fx:id="tblView" layoutX="13.0" layoutY="102.0" onMouseClicked="#handleSessieKalenderDetailAction" prefHeight="531.0" prefWidth="486.0" />
+      <Text layoutX="189.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessie kalender overzicht" />
+      <Button layoutX="12.0" layoutY="634.0" mnemonicParsing="false" onAction="#handleCreateSessiekalenderAction" text="Niewe sessie kalender" />
+      <Button fx:id="btnEdit" layoutX="406.0" layoutY="634.0" mnemonicParsing="false" onAction="#handleBeheerSessiesAction" text="Beheer sessies" />
+      <Button layoutX="182.0" layoutY="634.0" mnemonicParsing="false" onAction="#handleDeleteSessiekalenderAction" text="Verwijder sessie kalender" />
+   </children>
+</AnchorPane>

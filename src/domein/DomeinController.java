@@ -1,5 +1,7 @@
 package domein;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Date;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import persistentie.GebruikerDao;
 import persistentie.JPAGebruikerDao;
 import persistentie.JPASessieDao;
 import persistentie.JPASessieKalenderDao;
+import persistentie.Seeder;
 import persistentie.SessieDao;
 import persistentie.SessieKalenderDao;
 
@@ -30,6 +33,8 @@ public class DomeinController {
 	private GebruikerDao gebruikerDao;				//repo voor gebruikers (finaal type Dao?)
 	private SessieDao sessieDao;					//repo voor sessies (finaal type Dao?)
 	private SessieKalenderDao sessieKalenderDao;	//repo voor sessiekalenders (finaal type Dao?)
+	
+	private PropertyChangeSupport changes = new PropertyChangeSupport(this);
 	
 	
 	//CONSTRUCTOR
@@ -45,7 +50,7 @@ public class DomeinController {
 			this.gebruikerDao = new JPAGebruikerDao();
 			this.sessieDao = new JPASessieDao();
 			this.sessieKalenderDao = new JPASessieKalenderDao();
-			//Seeder.seedDatabase();									//dummy for data
+			Seeder.seedDatabase();									//dummy for data
 		}
 	}
 	
@@ -59,7 +64,7 @@ public class DomeinController {
 	}
 	
 	public ObservableList<ISessie> getSessiesFromVerantwoordelijke() {
-		return (ObservableList<ISessie>)(Object)sessieDao.getSessiesFromVerantwoordelijke(ingelogdeGebruiker.getNaam());
+		return FXCollections.observableArrayList(sessieDao.getSessiesFromVerantwoordelijke(ingelogdeGebruiker.getNaam()));
 	}
 	
 	/*
@@ -82,23 +87,25 @@ public class DomeinController {
 	}
 	
 	public ObservableList<ISessie> getSessies(){
-		return sessieDao.findAll();
+		return FXCollections.observableArrayList(sessieDao.findAll());
 	}
 	
 	public ObservableList<IGebruiker> getGebruikers(){
-		return gebruikerDao.findAll();
+		return FXCollections.observableArrayList(gebruikerDao.findAll());
 	}
 	
 	public ObservableList<IGebruiker> getGebruikersMetNaam(String naam){
-		return (ObservableList<IGebruiker>)(Object)new FilteredList<Gebruiker>(gebruikerDao.findAll(), g -> g.getNaam().toLowerCase().contains(naam.toLowerCase()));
+		return (ObservableList<IGebruiker>) new  FilteredList<IGebruiker>(FXCollections.observableArrayList( gebruikerDao.findAll()), g -> g.getNaam().toLowerCase().contains(naam.toLowerCase()));
 	}
 	
 	public ObservableList<ISessieKalender> getSessieKalenders(){
-		return sessieKalenderDao.findAll();
+		return FXCollections.observableArrayList(sessieKalenderDao.findAll());
 	}
 	
 	public void verwijderGebruiker(IGebruiker gebruiker) {
 		gebruikerDao.delete(gebruiker);
+		changes.firePropertyChange("GebruikerList",0,1);
+		setGeselecteerdeGebruiker(null);
 	}
 	
 	/**
@@ -107,22 +114,45 @@ public class DomeinController {
 	public void addGebruiker(GebruikerDTO dto) {
 		Gebruiker gebruiker = new Gebruiker(dto);
 		gebruikerDao.insert(gebruiker);
+		setGeselecteerdeGebruiker(gebruiker);
+		changes.firePropertyChange("GebruikerList",0,1);
 	}
 	
 	public void addSessieKalender(SessieKalenderDTO dto) {
 		SessieKalender kalender = new SessieKalender(dto);
 		sessieKalenderDao.insert(kalender);
+		setGeselecteerdeSessieKalender(kalender);
+		changes.firePropertyChange("SessieKalenderList",0,1);
 	}
 	
 	public void verwijderSessieKalender(ISessieKalender kalender) {
 		sessieKalenderDao.delete(kalender);
+		changes.firePropertyChange("SessieKalenderList",0,1);
+		setGeselecteerdeSessieKalender(null);
+	}
+	
+	public void addGebruikerListListener(PropertyChangeListener listener) {
+		changes.addPropertyChangeListener("GebruikerList", listener);
+	}
+	
+	public void addSessieKalenderListListener(PropertyChangeListener listener) {
+		changes.addPropertyChangeListener("SessieKalenderList", listener);
+	}
+	
+	public void addSessieListListener(PropertyChangeListener listener) {
+		changes.addPropertyChangeListener("SessieList", listener);
 	}
 	
 	// geselecteerde gebruiker
 	private Gebruiker geselecteerdeGebruiker;
 	
+	public void addGebruikerListener(PropertyChangeListener listener) {
+		changes.addPropertyChangeListener("geselecteerdeGebruiker", listener);
+	}
 	public void setGeselecteerdeGebruiker(Gebruiker gebruiker) {
+		Gebruiker oldGebruiker = this.geselecteerdeGebruiker;
 		this.geselecteerdeGebruiker = gebruiker;
+		changes.firePropertyChange("geselecteerdeGebruiker", oldGebruiker, gebruiker);
 	}
 	public IGebruiker getGeselecteerdeGebruiker() {
 		return geselecteerdeGebruiker;
@@ -130,17 +160,22 @@ public class DomeinController {
 	public void editGeselecteerdeGebruiker(GebruikerDTO dto) {
 		geselecteerdeGebruiker.editGeselecteerdeGebruiker(dto);
 		gebruikerDao.update(geselecteerdeGebruiker);
+		changes.firePropertyChange("GebruikerList",0,1);
 	}
 	public ObservableList<ISessie> getSessiesfromGeselecteerdeGebruiker(){
-		return (ObservableList<ISessie>)(Object)geselecteerdeGebruiker.getSessiesWaarvoorAanwezig();
+		return FXCollections.observableArrayList(geselecteerdeGebruiker.getSessiesWaarvoorAanwezig());
 	}
 	
 	//geselecteerde Sessie
 	
 	private Sessie geselecteerdeSessie;
 	
+	public void addSessieListener(PropertyChangeListener listener) {
+		changes.addPropertyChangeListener("geselecteerdeSessie", listener);
+	}
 	public void setGeselecteerdeSessie(Sessie sessie) {
 		this.geselecteerdeSessie = sessie;
+		changes.firePropertyChange("geselecteerdeSessie", 0, sessie);
 	}
 	public ISessie getGeselecteerdeSessie() {
 		return geselecteerdeSessie;
@@ -148,6 +183,7 @@ public class DomeinController {
 	public void editGeselecteerdeSessie(SessieDTO dto) {
 		geselecteerdeSessie.editSessie(dto);
 		sessieDao.update(geselecteerdeSessie);
+		changes.firePropertyChange("SessieList",0,1);
 	}
 	public void addAankondigingToGeselecteerdeSessie(String inhoud) {
 		geselecteerdeSessie.addAankondiging(new Aankondiging(inhoud, ingelogdeGebruiker.getNaam(), new Date()));
@@ -165,13 +201,13 @@ public class DomeinController {
 		sessieDao.update(geselecteerdeSessie);
 	}
 	public ObservableList<IMedia> getMediafromGeselecteerdeSessie(){
-		return (ObservableList<IMedia>) (Object)geselecteerdeSessie.getGebruikteMedia();
+		return FXCollections.observableArrayList(geselecteerdeSessie.getGebruikteMedia());
 	}
 	public ObservableList<IAankondiging> getAankondigingenfromGeselecteerdeSessie(){
-		return (ObservableList<IAankondiging>)(Object)geselecteerdeSessie.getGeplaatsteAankondigingen();
+		return FXCollections.observableArrayList(geselecteerdeSessie.getGeplaatsteAankondigingen());
 	}
 	public ObservableList<IGebruiker> getGebruikersFromGeselecteerdeSessie(){
-		return (ObservableList<IGebruiker>)(Object)geselecteerdeSessie.getAanwezigeGebruikers();
+		return FXCollections.observableArrayList(geselecteerdeSessie.getAanwezigeGebruikers());
 	}
 	
 	//geselecteerde Sessie Kalender
@@ -180,6 +216,10 @@ public class DomeinController {
 	
 	public void setGeselecteerdeSessieKalender(SessieKalender sessieKalender) {
 		this.geselecteerdeSessieKalender = sessieKalender;
+		changes.firePropertyChange("geselecteerdeSessieKalender", 0, sessieKalender);
+	}
+	public void addSessieKalenderListener(PropertyChangeListener listener) {
+		changes.addPropertyChangeListener("geselecteerdeSessieKalender", listener);
 	}
 	public ISessieKalender getGeselecteerdeSessieKalender() {
 		return geselecteerdeSessieKalender;
@@ -187,6 +227,7 @@ public class DomeinController {
 	public void editGeselecteerdeSessieKalender(SessieKalenderDTO dto) {
 		geselecteerdeSessieKalender.editSessieKalender(dto);
 		sessieKalenderDao.update(geselecteerdeSessieKalender);
+		changes.firePropertyChange("SessieKalenderList",0,1);
 	}
 	public void addSessieToGeselecteerdeSessieKalender(SessieDTO dto) {
 		if(!gebruikerIsHoofdverantwoordelijke()) {
@@ -196,9 +237,18 @@ public class DomeinController {
 		Sessie sessie = new Sessie(dto);
 		geselecteerdeSessieKalender.addSessie(sessie);
 		sessieKalenderDao.update(geselecteerdeSessieKalender);
+		//setGeselecteerdeSessie(sessie);
+		changes.firePropertyChange("SessieList",0,1);
+	}
+	public void verwijderSessieFromGeselecteerdeSessieKalender(ISessie sessie) {
+		if(!gebruikerIsHoofdverantwoordelijke()) {
+			geselecteerdeSessieKalender = sessieKalenderDao.getHuidigeSessieKalender();
+		}
+		geselecteerdeSessieKalender.removeSessie((Sessie) sessie);
+		changes.firePropertyChange("SessieList",0,1);
 	}
 	public ObservableList<ISessie> getSessiesfromGeselecteerdeSessieKalender(){
-		return (ObservableList<ISessie>)(Object)geselecteerdeSessieKalender.getSessieList();
+		return FXCollections.observableArrayList(geselecteerdeSessieKalender.getSessieList());
 	}
 	
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessieOverzichtSchermController">
+   <children>
+      <TableView fx:id="tblView" layoutX="11.0" layoutY="94.0" onMouseClicked="#handleBeheerSessieAction" prefHeight="532.0" prefWidth="490.0" />
+      <Text layoutX="214.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessie overzicht" />
+      <Button fx:id="btnSessieToevoegen" layoutX="11.0" layoutY="626.0" mnemonicParsing="false" onAction="#handleSessieToevoegenAction" text="Sessie toevoegen" />
+      <Button layoutX="199.0" layoutY="626.0" mnemonicParsing="false" onAction="#handleSessieVerwijderenAction" text="Sessie verwijderen" />
+      <Text fx:id="geselecteerdeKalender" layoutX="11.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="sessie" />
+   </children>
+</AnchorPane>

@@ -1,8 +1,13 @@
 package gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.concurrent.Flow.Subscriber;
 
 import domein.DomeinController;
 import domein.GebruikerDTO;
@@ -24,7 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class BeheerGebruikerSchermController extends SchermController implements Initializable {
+public class GebruikerDetailSchermController extends SchermController implements Initializable, PropertyChangeListener {
 
 	@FXML
 	private Button btnTerug, btnEdit;
@@ -44,22 +49,7 @@ public class BeheerGebruikerSchermController extends SchermController implements
 	@Override
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
-
-		maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeGebruiker());
-
-		IGebruiker gebruiker = dc.getGeselecteerdeGebruiker();
-
-		cbStatus.getItems().addAll("ACTIEF", "GEBLOKKEERD", "NIET_ACTIEF");
-		cbStatus.setValue(gebruiker.getStatus().toString());
-
-		cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "Gewone_Gebruiker");
-		cbType.setValue(gebruiker.getType().toString());
-
-		txtNaam.setText(gebruiker.getNaam());
-		txtChamilo.setText(gebruiker.getNaamChamilo());
-		txtEmail.setText(gebruiker.getEmailadres());
-
-		lblIntro.setText("Sessies waarvoor " + txtNaam.getText() + " aanwezig was:");
+		dc.addGebruikerListener(this);
 	}
 
 	@Override
@@ -83,6 +73,35 @@ public class BeheerGebruikerSchermController extends SchermController implements
 			
 		} catch (IllegalArgumentException e) {
 			lblError.setText(e.getMessage());
+		}
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		IGebruiker gebruiker = (IGebruiker) evt.getNewValue();
+		
+		if(gebruiker != null) {
+			cbStatus.getItems().addAll("ACTIEF", "GEBLOKKEERD", "NIET_ACTIEF");
+			cbStatus.setValue(gebruiker.getStatus().toString());
+
+			cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "Gewone_Gebruiker");
+			cbType.setValue(gebruiker.getType().toString());
+
+			txtNaam.setText(gebruiker.getNaam());
+			txtChamilo.setText(gebruiker.getNaamChamilo());
+			txtEmail.setText(gebruiker.getEmailadres());
+
+			lblIntro.setText("Sessies waarvoor " + txtNaam.getText() + " aanwezig was:");
+		
+			maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeGebruiker());
+		}else {
+			cbStatus.getItems().clear();
+			cbType.getItems().clear();
+			txtNaam.clear();
+			txtChamilo.clear();
+			txtEmail.clear();
+			lblIntro.setText("");
+			tblView.getItems().clear();
 		}
 	}
 }

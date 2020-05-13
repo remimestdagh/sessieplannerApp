@@ -13,15 +13,18 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
 	<class>domein.Aankondiging</class>
 	<class>domein.Feedback</class>
 	<class>domein.Gebruiker</class>
+	<class>domein.GebruikerSessie</class>
+	<class>domein.SessieKalender</class>
 
 
 	<properties>
-		<property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://52.232.120.84:1433 ; database= SessiePlanner2 "></property>
-		<property name="javax.persistence.jdbc.user" value="remi.mestdagh"/>
-		<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-		<property name="javax.persistence.jdbc.password" value="1FA545.87be3"/>
+		<property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+		<property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://52.232.120.84:1433;DatabaseName=javadb;integratedSecurity=false;"/>
+		<property name="javax.persistence.jdbc.user" value="jef.seys.y0431"/>
+		<property name="javax.persistence.jdbc.password" value="0B@57FB0e840"/>
 		<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 	</properties>
+	
 	
 	
 </persistence-unit>

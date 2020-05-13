@@ -1,5 +1,7 @@
 package persistentie;
 
+import java.util.List;
+
 import domein.Sessie;
 import javafx.collections.ObservableList;
 /*
@@ -10,7 +12,7 @@ import javafx.collections.ObservableList;
 
 public interface Dao<T> {
 	
-	public ObservableList<T> findAll();  
+	public List<T> findAll();  
 	
 	public T get(Long id);
 	

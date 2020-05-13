@@ -1,5 +1,7 @@
 package gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -29,7 +31,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class BeheerSessieSchermController extends SchermController implements Initializable {
+public class SessieDetailSchermController extends SchermController implements Initializable, PropertyChangeListener {
 
 	@FXML
 	private Button btnEditSessie, btnAankondiging, btnCreateMedia, btnDeleteMedia;
@@ -57,23 +59,7 @@ public class BeheerSessieSchermController extends SchermController implements In
 	@Override
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
-
-		maakAankondigingTable(tblAankondigingen, getDC().getAankondigingenfromGeselecteerdeSessie());
-		maakMediaTable(tblMedia, getDC().getMediafromGeselecteerdeSessie());
-		maakGebruikerTable(tblGebruikers, getDC().getGebruikersFromGeselecteerdeSessie());
-
-		ISessie sessie = dc.getGeselecteerdeSessie();
-
-		txtTitel.setText(sessie.getTitel());
-		txtVerantwoordelijke.setText(sessie.getSessieAanmaker());
-		txtStartDatum.setText(sessie.getStartDatum().toString());
-		txtEindDatum.setText(sessie.getEindDatum().toString());
-		txtSpreker.setText(sessie.getNaamGastspreker());
-		txtCapaciteit.setText("" + sessie.getMAX_CAPACITEIT());
-		txtLokaal.setText(sessie.getLokaalCode());
-
-		cbStatus.getItems().addAll("AANGEMAAKT", "GEOPEND", "GESTART", "GESLOTEN");
-		cbStatus.setValue(sessie.getStatus().toString());
+		dc.addSessieListener(this);
 	}
 
 	@FXML
@@ -106,6 +92,7 @@ public class BeheerSessieSchermController extends SchermController implements In
 			dto.setTitel(txtTitel.getText());
 			dto.setStartDatum(LocalDateTime.parse(txtStartDatum.getText()));
 			dto.setEindDatum(LocalDateTime.parse(txtEindDatum.getText()));
+			dto.setSessieAanmaker(txtVerantwoordelijke.getText());
 			dto.setNaamGastspreker(txtSpreker.getText());
 			dto.setMAX_CAPACITEIT(Integer.parseInt(txtCapaciteit.getText()));
 			dto.setLokaalCode(txtLokaal.getText());
@@ -116,6 +103,28 @@ public class BeheerSessieSchermController extends SchermController implements In
 
 		} catch (IllegalArgumentException e) {
 			lblError.setText(e.getMessage());
+		}
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		ISessie sessie = (ISessie) evt.getNewValue();
+
+		if (sessie != null) {
+			maakAankondigingTable(tblAankondigingen, getDC().getAankondigingenfromGeselecteerdeSessie());
+			maakMediaTable(tblMedia, getDC().getMediafromGeselecteerdeSessie());
+			txtTitel.setText(sessie.getTitel());
+			txtVerantwoordelijke.setText(sessie.getSessieAanmaker());
+			txtStartDatum.setText(sessie.getStartDatum().toString());
+			txtEindDatum.setText(sessie.getEindDatum().toString());
+			txtSpreker.setText(sessie.getNaamGastspreker());
+			txtCapaciteit.setText("" + sessie.getMAX_CAPACITEIT());
+			txtLokaal.setText(sessie.getLokaalCode());
+			cbStatus.getItems().addAll("AANGEMAAKT", "GEOPEND", "GESTART", "GESLOTEN");
+			cbStatus.setValue(sessie.getStatus().toString());
+			//maakGebruikerTable(tblGebruikers, getDC().getGebruikersFromGeselecteerdeSessie());
+		}else {
+			
 		}
 	}
 }

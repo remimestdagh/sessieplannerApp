@@ -1,47 +1,29 @@
 package gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
 import domein.Gebruiker;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import domein.GebruikerDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class BeheerGebruikersSchermController extends SchermController implements Initializable{
+public class GebruikerOverzichtSchermController extends SchermController implements Initializable, PropertyChangeListener{
 	
 	@FXML
 	private TableView tblView;
 	
 	@FXML
-	private Button btnHoofmenu, btnCreate, btnEdit, btnZoekGebruiker;
-	
-	@FXML
-	private BorderPane borderPane;
+	private Button btnCreate, btnEdit, btnZoekGebruiker;
 	
 	@FXML
 	private TextField txtZoekGebruiker;
@@ -56,13 +38,8 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
 		maakGebruikerTable(tblView, getDC().getGebruikers());
+		dc.addGebruikerListListener(this);
 	}
-	
-	@FXML
-    private void handleHoofdmenuAction(ActionEvent event) throws IOException {
-
-        verranderScherm(btnHoofmenu, "Hoofd");
-    }
 	
 	/**
 	 * Selecteren van een gebruiker
@@ -71,14 +48,6 @@ public class BeheerGebruikersSchermController extends SchermController implement
     private void handleEditGegevensAction(MouseEvent event) throws IOException{
 		Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
 		getDC().setGeselecteerdeGebruiker(gebruiker);
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BeheerGebruikerScherm.fxml"));
-		Parent root = (Parent)loader.load();
-        SchermController schermController = loader.getController();
-        schermController.setDomeinController(getDC());
-        
-        borderPane.setCenter(root);
-        
     }
 	
 	/**
@@ -88,7 +57,6 @@ public class BeheerGebruikersSchermController extends SchermController implement
     private void handleDeleteGebruikerAction(ActionEvent event){
     	Gebruiker gebruiker = (Gebruiker) tblView.getSelectionModel().getSelectedItem();
     	getDC().verwijderGebruiker(gebruiker);
-    	maakGebruikerTable(tblView, getDC().getGebruikers());
     }
 	
 	/**
@@ -96,7 +64,16 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	 */
 	@FXML
 	private void handleCreateGebruikerAction(ActionEvent event) throws IOException{
-        creëerScherm("CreateGebruiker");
+		GebruikerDTO dto = new GebruikerDTO();
+		
+		dto.setNaam("Nieuwe gebruiker");
+		dto.setNaamChamilo("Naam chamilo");
+		dto.setEmailadres("nieuw.email@hogent.be");
+		dto.setWachtwoord("password");
+		dto.setStatus("NIET_ACTIEF");
+		dto.setType("Gewone_Gebruiker");
+		
+		getDC().addGebruiker(dto);
     }
 	
 	/**
@@ -105,5 +82,10 @@ public class BeheerGebruikersSchermController extends SchermController implement
 	@FXML
 	private void handleZoekGebruikerAction(ActionEvent event) {
 		maakGebruikerTable(tblView, getDC().getGebruikersMetNaam(txtZoekGebruiker.getText()));
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		maakGebruikerTable(tblView, getDC().getGebruikers());
 	}
 }

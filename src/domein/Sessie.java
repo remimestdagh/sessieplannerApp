@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,12 +29,14 @@ import javax.persistence.Transient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+@Access(AccessType.FIELD)
 @Entity
 @Table(name = "Sessie")
 public class Sessie implements ISessie{
 	// PARAMETERS
 	private static final long serialVersionUID = 1L;
 	@Id
+	@Column(name = "SESSIEID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int sessieId;
 	private String titel;
@@ -54,17 +59,24 @@ public class Sessie implements ISessie{
 	@JoinColumn(name = "sessieId")
 	private ObservableList<Aankondiging> geplaatsteAankondigingen;
 	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "sessieId")
+	//@JoinColumn(name = "SessieId")
 	private ObservableList<Feedback> geplaatstFeedback;
-	@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
+	//@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
+	@Transient
 	private ObservableList<Gebruiker> ingeschrevenGebruikers;
-	@OneToMany
-	@JoinColumn(name = "sessieId")
+	//@ManyToMany
+	//@JoinColumn(name = "sessieId")
+	@Transient
 	private ObservableList<Gebruiker> aanwezigeGebruikers;
 	
 	//private boolean stuurtHerinnering;
 	//private List<Herinnering> herinneringen; is dit nodig?
 
+	/*@JoinTable(name = "GEBRUIKERSESSIE",
+    joinColumns = @JoinColumn(name = "SESSIEID"),
+    inverseJoinColumns = @JoinColumn(name = "GEBRUIKERID"))*/
+	@Transient
+	private List<GebruikerSessie> gebruikerSessieAanwezig;
 	
 	//CONSTRUCTOR
 	protected Sessie() {}
@@ -85,11 +97,14 @@ public class Sessie implements ISessie{
 		setSessieAanmaker(sessieAanmaker);
 		status = SessieStatus.AANGEMAAKT;
 		
+		gebruikerSessieAanwezig = new ArrayList<>();
+		
 		gebruikteMedia = FXCollections.<Media>observableArrayList();
 		geplaatsteAankondigingen = FXCollections.<Aankondiging>observableArrayList();
 		geplaatstFeedback = FXCollections.<Feedback>observableArrayList();
 		ingeschrevenGebruikers = FXCollections.<Gebruiker>observableArrayList();
 		aanwezigeGebruikers = FXCollections.<Gebruiker>observableArrayList();
+		herinneringen= FXCollections.<Herinnering>observableArrayList();
 		//todo controle op datum
 		/*
 		if (DateUtils.addDays(new Date(), 1).before(startDatum)) {
@@ -120,9 +135,18 @@ public class Sessie implements ISessie{
 		geplaatstFeedback = FXCollections.<Feedback>observableArrayList();
 		ingeschrevenGebruikers = FXCollections.<Gebruiker>observableArrayList();
 		aanwezigeGebruikers = FXCollections.<Gebruiker>observableArrayList();
+		herinneringen= FXCollections.<Herinnering>observableArrayList();
+		
 	}
 
 	// METHODS
+	public int getSessieId() {
+		return sessieId;
+	}
+	
+	public void setSessieId(int id) {
+		this.sessieId =id;
+	}
 	
 	public String getNaamAanmaker() {
 		return sessieAanmaker;
@@ -130,8 +154,14 @@ public class Sessie implements ISessie{
 	
 	public String getAanwezigenOrVrijePlaatsen() {
 		if(status == SessieStatus.AANGEMAAKT) {
-			return "" + (MAX_CAPACITEIT - ingeschrevenGebruikers.size());
+			if (ingeschrevenGebruikers != null) {
+				return "" + (MAX_CAPACITEIT - ingeschrevenGebruikers.size());
+			}
+			return "" + MAX_CAPACITEIT;
 		}else {
+			if(aanwezigeGebruikers != null) {
+				return "" + aanwezigeGebruikers.size();
+			}
 			return "" + aanwezigeGebruikers.size();
 		}
 	}
@@ -143,12 +173,13 @@ public class Sessie implements ISessie{
 	/**
 	 * Initialiseert de lijst van herinneringen
 	 */
-	public void setHerinneringen(ObservableList<Herinnering> herinneringen)
+	public void setHerinneringen(List<Herinnering> herinneringen)
 	{
-		this.herinneringen = herinneringen;
+		this.herinneringen = FXCollections.observableArrayList(herinneringen);
 	}
 	
 	public void addAanwezigheid(Gebruiker gebruiker) {
+		gebruikerSessieAanwezig.add(new GebruikerSessie(gebruiker.getGebruikerId(), this.getSessieId(), true));
 		aanwezigeGebruikers.add(gebruiker);
 	}
 	
@@ -167,7 +198,7 @@ public class Sessie implements ISessie{
 	 * Overschrijft de gebruikte media met gekregenmedia
 	 */
 	public void setMedia(ObservableList<Media> media) {
-		gebruikteMedia = media;
+		gebruikteMedia = FXCollections.observableArrayList(media);
 	}
 
 	/**
@@ -231,6 +262,7 @@ public class Sessie implements ISessie{
 			}
 			setTitel(dto.getTitel());
 			setNaamGastspreker(dto.getNaamGastspreker());
+			setSessieAanmaker(dto.getSessieAanmaker());
 			setLokaalCode(dto.getLokaalCode());
 			setMAX_CAPACITEIT(dto.getMAX_CAPACITEIT());
 			setStartDatum(dto.getStartDatum());
@@ -310,35 +342,65 @@ public class Sessie implements ISessie{
 		}
 		this.lokaalCode = lokaalCode;
 	}
-	public ObservableList<Media> getGebruikteMedia() {
+	@Access(AccessType.PROPERTY)
+	public List<Media> getGebruikteMedia() {
 		return gebruikteMedia;
 	}
-	public void setGebruikteMedia(ObservableList<Media> gebruikteMedia) {
-		this.gebruikteMedia = gebruikteMedia;
+	public ObservableList<Media> getGebruikteMediaObservable() {
+		return gebruikteMedia;
 	}
-	public ObservableList<Aankondiging> getGeplaatsteAankondigingen() {
+	public void setGebruikteMedia(List<Media> gebruikteMedia) {
+		this.gebruikteMedia = FXCollections.observableArrayList(gebruikteMedia);
+	}
+	@Access(AccessType.PROPERTY)
+	public List<Aankondiging> getGeplaatsteAankondigingen() {
 		return geplaatsteAankondigingen;
 	}
-	public void setGeplaatsteAankondigingen(ObservableList<Aankondiging> geplaatsteAankondigingen) {
-		this.geplaatsteAankondigingen = geplaatsteAankondigingen;
+	public ObservableList<Aankondiging> getGeplaatsteAankondigingenObservable() {
+		return geplaatsteAankondigingen;
 	}
-	public ObservableList<Feedback> getGeplaatstFeedback() {
+	public void setGeplaatsteAankondigingen(List<Aankondiging> geplaatsteAankondigingen) {
+		this.geplaatsteAankondigingen = FXCollections.observableArrayList(geplaatsteAankondigingen);
+	}
+	
+	public void addFeedback(Feedback f) {
+		geplaatstFeedback.add(f);
+		f.setSessie(this);
+	}
+	public void removeFeedback(Feedback f) {
+		geplaatstFeedback.remove(f);
+		f.setSessie(null);
+	}
+	@Access(AccessType.PROPERTY)
+	@OneToMany(cascade = CascadeType.PERSIST)
+	public List<Feedback> getGeplaatstFeedback() {
 		return geplaatstFeedback;
 	}
-	public void setGeplaatstFeedback(ObservableList<Feedback> geplaatstFeedback) {
-		this.geplaatstFeedback = geplaatstFeedback;
+	public ObservableList<Feedback> getGeplaatstFeedbackObservable() {
+		return geplaatstFeedback;
 	}
-	public ObservableList<Gebruiker> getIngeschrevenGebruikers() {
+	public void setGeplaatstFeedback(List<Feedback> geplaatstFeedback) {
+		this.geplaatstFeedback = FXCollections.observableArrayList( geplaatstFeedback);
+	}
+	//@Access(AccessType.PROPERTY)
+	public List<Gebruiker> getIngeschrevenGebruikers() {
 		return ingeschrevenGebruikers;
 	}
-	public void setIngeschrevenGebruikers(ObservableList<Gebruiker> ingeschrevenGebruikers) {
-		this.ingeschrevenGebruikers = ingeschrevenGebruikers;
+	public ObservableList<Gebruiker> getIngeschrevenGebruikersObservable() {
+		return ingeschrevenGebruikers;
 	}
-	public ObservableList<Gebruiker> getAanwezigeGebruikers() {
+	public void setIngeschrevenGebruikers(List<Gebruiker> ingeschrevenGebruikers) {
+		this.ingeschrevenGebruikers = FXCollections.observableArrayList( ingeschrevenGebruikers);
+	}
+	//@Access(AccessType.PROPERTY)
+	public List<Gebruiker> getAanwezigeGebruikers() {
 		return aanwezigeGebruikers;
 	}
-	public void setAanwezigeGebruikers(ObservableList<Gebruiker> aanwezigeGebruikers) {
-		this.aanwezigeGebruikers = aanwezigeGebruikers;
+	public ObservableList<Gebruiker> getAanwezigeGebruikersObservable() {
+		return aanwezigeGebruikers;
+	}
+	public void setAanwezigeGebruikers(List<Gebruiker> aanwezigeGebruikers) {
+		this.aanwezigeGebruikers = FXCollections.observableArrayList( aanwezigeGebruikers);
 	}
 	public int getMAX_CAPACITEIT() {
 		return MAX_CAPACITEIT;
@@ -355,4 +417,23 @@ public class Sessie implements ISessie{
 	public void setStatus(SessieStatus status) {
 		this.status = status;
 	}
+	@Access(AccessType.PROPERTY)
+	public List<Herinnering> getHerinneringen() {
+		return herinneringen;
+	}
+	public ObservableList<Herinnering> getHerinneringenObservable() {
+		return FXCollections.observableArrayList(herinneringen);
+	}
+	public void setHerinneringen(ObservableList<Herinnering> herinneringen) {
+		this.herinneringen = herinneringen;
+	}
+	@Access(AccessType.PROPERTY)
+	public List<GebruikerSessie> getGebruikerSessieAanwezig() {
+		return gebruikerSessieAanwezig;
+	}
+	public void setGebruikerSessieAanwezig(List<GebruikerSessie> gebruikerSessieAanwezig) {
+		this.gebruikerSessieAanwezig = gebruikerSessieAanwezig;
+	}
+	
+	
 }

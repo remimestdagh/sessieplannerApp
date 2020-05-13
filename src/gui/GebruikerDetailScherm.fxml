@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="523.0" prefWidth="869.0" style="-fx-background-color: #406E8E" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerGebruikerSchermController">
+<AnchorPane prefHeight="720.0" prefWidth="768.0" style="-fx-background-color: #406E8E" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GebruikerDetailSchermController">
    <children>
-      <Pane layoutX="59.0" prefHeight="687.0" prefWidth="898.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="-59.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="687.0" prefWidth="898.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TextField fx:id="txtNaam" layoutX="61.0" layoutY="136.0" />
             <TextField fx:id="txtChamilo" layoutX="61.0" layoutY="198.0" />

@@ -9,30 +9,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BeheerSessieKalenderSchermController">
+<AnchorPane prefHeight="720.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SessieKalenderDetailSchermController">
    <children>
-      <Pane prefHeight="476.0" prefWidth="264.0">
+      <Pane prefHeight="720.0" prefWidth="768.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text fill="WHITE" layoutX="58.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer sessie kalender">
-               <font>
-                  <Font name="Franklin Gothic Medium Italic" size="15.0" />
-               </font></Text>
-            <TextField fx:id="txtJaar" layoutX="57.0" layoutY="182.0" />
-            <DatePicker fx:id="dateStart" layoutX="57.0" layoutY="233.0" />
-            <DatePicker fx:id="dateEind" layoutX="57.0" layoutY="285.0" />
-            <Button fx:id="btnSave" layoutX="58.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleEditSessieKalenderAction" text="Verander">
+            <TextField fx:id="txtJaar" layoutX="309.0" layoutY="191.0" />
+            <DatePicker fx:id="dateStart" layoutX="309.0" layoutY="273.0" />
+            <DatePicker fx:id="dateEind" layoutX="309.0" layoutY="360.0" />
+            <Button fx:id="btnSave" layoutX="355.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleEditSessieKalenderAction" text="Verander">
                <font>
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font></Button>
-            <Label layoutX="57.0" layoutY="167.0" text="Academiejaar" textFill="WHITE">
+            <Label layoutX="309.0" layoutY="176.0" text="Academiejaar" textFill="WHITE">
                <font>
                   <Font name="Franklin Gothic Medium Italic" size="13.0" />
                </font></Label>
-            <Label layoutX="57.0" layoutY="216.0" text="Start datum" textFill="WHITE">
+            <Label layoutX="309.0" layoutY="257.0" text="Start datum" textFill="WHITE">
                <font>
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font></Label>
-            <Label layoutX="59.0" layoutY="271.0" text="Eind datum" textFill="WHITE">
+            <Label layoutX="310.0" layoutY="346.0" text="Eind datum" textFill="WHITE">
                <font>
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font></Label>
@@ -41,6 +37,7 @@
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font>
             </Label>
+            <Text layoutX="327.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessie kalender detail" />
          </children>
       </Pane>
    </children>

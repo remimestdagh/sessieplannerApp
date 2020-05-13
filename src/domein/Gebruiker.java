@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +16,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.QueryHint;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -26,6 +31,7 @@ import javafx.collections.ObservableList;
 
 @Entity
 @Table(name="Gebruiker")
+@Access(AccessType.FIELD)
 public class Gebruiker implements IGebruiker{
 	
 	//PARAMETERS
@@ -45,15 +51,24 @@ public class Gebruiker implements IGebruiker{
 	@Column(name = "Type")
 	private GebruikerType type;
 	//relation mapping
-	@JoinTable(name="GebruikerSessie") //ter herbenoeming tussentabel (match met dotnet)
-	@ManyToMany(cascade = CascadeType.PERSIST) //Tussentabel!
+	//@JoinTable(name="GebruikerSessieIngeschreven") //ter herbenoeming tussentabel (match met dotnet)
+	//@ManyToMany(cascade = CascadeType.PERSIST) //Tussentabel!
+	@Transient
 	private ObservableList<Sessie> sessiesWaarvoorIngeschreven;
 	
 	//private String profielFoto;
 	//private Date inschrijvingsDatum;
-	@Transient //voorlopig niet gemapt, moet eigenlijk corresponderen met wasAanwezig in tussentabel!
-	private ObservableList<Sessie> sessiesWaarvoorAanwezig; 
-
+	//voorlopig niet gemapt, moet eigenlijk corresponderen met wasAanwezig in tussentabel!
+	@Transient
+	private ObservableList<Sessie> sessiesWaarvoorAanwezig;
+	
+	/*@JoinTable(name = "GEBRUIKERSESSIE",
+    joinColumns = @JoinColumn(name = "GEBRUIKERID"),
+    inverseJoinColumns = @JoinColumn(name = "SESSIEID"))*/
+	//@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@Transient
+	private List<GebruikerSessie> gebruikerSessieAanwezig;
+	
 	
 	//CONSTRUCTOR
 	protected Gebruiker() {}
@@ -70,6 +85,7 @@ public class Gebruiker implements IGebruiker{
 		
 		sessiesWaarvoorIngeschreven = FXCollections.<Sessie>observableArrayList();
 		sessiesWaarvoorAanwezig = FXCollections.<Sessie>observableArrayList();
+		gebruikerSessieAanwezig = new ArrayList<>();
 	}
 	
 	public Gebruiker(String naam,String naamChamilo, String emailadres, String wachtwoord,
@@ -107,6 +123,7 @@ public class Gebruiker implements IGebruiker{
 		sessiesWaarvoorIngeschreven.add(sessie);
 	}
 	public void addAanwezigheid(Sessie sessie) {
+		gebruikerSessieAanwezig.add(new GebruikerSessie(this.getGebruikerId(), sessie.getSessieId(), true));
 		sessiesWaarvoorAanwezig.add(sessie);
 	}
 	public void editGeselecteerdeGebruiker(GebruikerDTO dto) {
@@ -144,6 +161,14 @@ public class Gebruiker implements IGebruiker{
 	}
 	
 	//GETTERS AND SETTERS
+	public int getGebruikerId() {
+		return gebruikerId;
+	}
+
+	public void setGebruikerId(int id) {
+		this.gebruikerId = id;
+	}
+	
 	public String getNaam() {
 		return naam;
 	}
@@ -198,19 +223,37 @@ public class Gebruiker implements IGebruiker{
 		}
 		this.type = type;
 	}
-	public ObservableList<Sessie> getSessiesWaarvoorIngeschreven() {
+	public ObservableList<Sessie> getSessiesWaarvoorIngeschrevenObservable() {
 		return sessiesWaarvoorIngeschreven;
 	}
-	public void setSessiesWaarvoorIngeschreven(ObservableList<Sessie> sessieList) {
-		this.sessiesWaarvoorIngeschreven = sessieList;
+	//@Access(AccessType.PROPERTY)
+	public List<Sessie> getSessiesWaarvoorIngeschreven(){
+		return sessiesWaarvoorIngeschreven;
 	}
-	public ObservableList<Sessie> getSessiesWaarvoorAanwezig() {
+	//@Access(AccessType.PROPERTY)
+	public List<Sessie> getSessiesWaarvoorAanwezig(){
 		return sessiesWaarvoorAanwezig;
 	}
-	public void setSessiesWaarvoorAanwezig(ObservableList<Sessie> sessieList) {
-		this.sessiesWaarvoorAanwezig = sessieList;
+	public void setSessiesWaarvoorIngeschreven(List<Sessie> sessieList) {
+		this.sessiesWaarvoorIngeschreven = FXCollections.observableArrayList(sessieList);
+	}
+	public ObservableList<Sessie> getSessiesWaarvoorAanwezigObservable() {
+		return sessiesWaarvoorAanwezig;
+	}
+	public void setSessiesWaarvoorAanwezig(List<Sessie> sessieList) {
+		this.sessiesWaarvoorAanwezig = FXCollections.observableArrayList(sessieList);
 	}
 	public String getTypeString() {
 		return this.type.toString();
 	}
+	
+	//@Access(AccessType.PROPERTY)
+	public List<GebruikerSessie> getGebruikerSessieAanwezig() {
+		return gebruikerSessieAanwezig;
+	}
+	public void setGebruikerSessieAanwezig(List<GebruikerSessie> gebruikerSessieAanwezig) {
+		this.gebruikerSessieAanwezig = gebruikerSessieAanwezig;
+	}
+	
+	
 }

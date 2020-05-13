@@ -1,10 +1,15 @@
 package domein;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,10 +19,15 @@ public class Feedback implements IFeedback{
 	// PARAMETERS
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "FeedbackId")
 	private int feedbackId;
 	@Column(name = "AuteursNaam")
-	private String feedbackTekst;
 	private String feedbackAuteur;
+	@Column(name = "FeedbackTekst")
+	private String feedbackTekst;
+	@ManyToOne
+	//@JoinColumn(name="SessieId")
+	private Sessie sessie;
 
 	// CONSTRUCTORS
 	protected Feedback() {}
@@ -52,4 +62,12 @@ public class Feedback implements IFeedback{
 		}
 		this.feedbackAuteur = feedbackAuteur;
 	}
+	public Sessie getSessie() {
+		return sessie;
+	}
+	public void setSessie(Sessie sessie) {
+		this.sessie = sessie;
+	}
+	
+	
 }

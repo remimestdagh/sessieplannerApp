@@ -3,9 +3,11 @@ package persistentie;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import domein.Gebruiker;
 import domein.Sessie;
+import domein.SessieKalender;
 import javafx.collections.ObservableList;
 
 public class JPASessieDao extends JPADao implements SessieDao{
@@ -29,5 +31,36 @@ public class JPASessieDao extends JPADao implements SessieDao{
 		
 		return null;
 	}
+
+
+	@Override
+	public List<Sessie> findAll() {
+		List<Sessie> list = null;
+		list =  em.createQuery(String.format("SELECT s FROM Sessie s"), Sessie.class).getResultList();
+		for(int i = 0; i< list.size(); i++) {
+			TypedQuery<Gebruiker> querySessiesWaarvoorAanwezig = em.createQuery(String.format("SELECT g FROM Gebruiker g join GebruikerSessie gs on g.gebruikerId = gs.gebruikerId WHERE gs.sessieId = %d and gs.gebruikerWasAanwezig = 1", list.get(i).getSessieId()), Gebruiker.class);
+			List<Gebruiker> lijstAanwezig = querySessiesWaarvoorAanwezig.getResultList();
+			list.get(i).setAanwezigeGebruikers(lijstAanwezig);
+			TypedQuery<Gebruiker> querySessiesWaarvoorIngeschreven = em.createQuery(String.format("SELECT g FROM Gebruiker g join GebruikerSessie gs on g.gebruikerId = gs.gebruikerId WHERE gs.sessieId = %d and gs.gebruikerWasAanwezig = 0", list.get(i).getSessieId()), Gebruiker.class);
+			List<Gebruiker> lijstIngeschreven = querySessiesWaarvoorIngeschreven.getResultList();
+			lijstIngeschreven.addAll(lijstAanwezig);
+			list.get(i).setIngeschrevenGebruikers(lijstIngeschreven);
+		}
+		return list;
+	}
+	
+	@Override
+	public void delete(Object sessie) {
+		Sessie s = (Sessie)sessie;
+		startTransaction();
+		em.remove(sessie);
+		em.createNativeQuery(String.format("delete from GebruikerSessie gs where gs.sessieId = %d", s.getSessieId())).executeUpdate();
+		commitTransaction();
+	}/*
+
+	@Override
+	public void insert(Object sessie) { 
+		em.persist(sessie);
+	}*/
 
 }

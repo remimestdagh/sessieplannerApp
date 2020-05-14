@@ -71,7 +71,7 @@ public abstract class SchermController extends AnchorPane {
         Stage stage = (Stage) button.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        //stage.show();
+        stage.show();
 	}
 	
 	public void maakSessieTable(TableView tblView, ObservableList<ISessie> list) {

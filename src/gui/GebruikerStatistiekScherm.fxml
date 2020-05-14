@@ -6,16 +6,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="678.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GebruikerStatistiekSchermController">
+<AnchorPane prefHeight="551.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GebruikerStatistiekSchermController">
    <children>
-      <Pane layoutX="-6.0" layoutY="-8.0" prefHeight="402.0" prefWidth="616.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="-8.0">
+      <Pane layoutX="-6.0" layoutY="-8.0" prefHeight="560.0" prefWidth="613.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-8.0">
          <children>
-            <Text fx:id="titleText" fill="WHITE" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
+            <Text fx:id="titleText" fill="WHITE" layoutX="7.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
                <font>
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font>
             </Text>
-            <TableView fx:id="tblView" layoutY="21.0" prefHeight="464.0" prefWidth="600.0" />
+            <TableView fx:id="tblView" layoutX="7.0" layoutY="54.0" prefHeight="464.0" prefWidth="600.0" />
          </children>
       </Pane>
    </children>

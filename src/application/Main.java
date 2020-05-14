@@ -36,8 +36,9 @@ public class Main extends Application {
         stage.setTitle("IT-Lab Sessieplanner");
         
         //Maximizing screen
+        //stage.setMaximized(true);
         /*
-        stage.setMaximized(true);
+        
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         stage.setX(bounds.getMinX());

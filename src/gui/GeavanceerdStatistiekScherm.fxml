@@ -3,15 +3,23 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="627.0" prefWidth="1012.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GeavanceerdStatistiekSchermController">
+
+<VBox prefHeight="650.0" prefWidth="940.0" style="-fx-background-color: #406E8E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GeavanceerdStatistiekSchermController">
    <children>
-      <BorderPane layoutX="57.0" prefHeight="200.0" prefWidth="200.0">
-         <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../fonts/itlablogoKlein.jpg" />
+         </image>
+      </ImageView>
+      <HBox VBox.vgrow="ALWAYS">
+         <children>
+            <Region layoutX="210.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
+            <Pane>
                <children>
                   <ImageView fx:id="imgViewPowerBI" fitHeight="588.0" fitWidth="920.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -20,8 +28,9 @@
                   </ImageView>
                </children>
             </Pane>
-         </center>
-      </BorderPane>
-      <Button fx:id="btnKeerTerug" layoutX="85.0" layoutY="565.0" mnemonicParsing="false" onAction="#handleKeerTerugAction" text="Keer terug" />
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <Button fx:id="btnKeerTerug" mnemonicParsing="false" onAction="#handleKeerTerugAction" text="Keer terug" />
    </children>
-</AnchorPane>
+</VBox>

@@ -54,7 +54,7 @@
             <Region HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <Button fx:id="btnStatistiek" mnemonicParsing="false" onAction="#handleStatistiekAction" text="Terug">
+      <Button fx:id="btnStatistiek" mnemonicParsing="false" onAction="#handleStatistiekAction" prefHeight="25.0" prefWidth="86.0" text="Terug">
          <font>
             <Font name="Franklin Gothic Medium Italic" size="12.0" />
          </font>

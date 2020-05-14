@@ -37,7 +37,7 @@ public class Main extends Application {
         
         //Maximizing screen
         //stage.setMaximized(true);
-        /*
+        
         
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
@@ -45,7 +45,7 @@ public class Main extends Application {
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
-        */
+        
         
         
         stage.setScene(scene);

@@ -372,7 +372,7 @@ public class Sessie implements ISessie{
 		f.setSessie(null);
 	}
 	@Access(AccessType.PROPERTY)
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	public List<Feedback> getGeplaatstFeedback() {
 		return geplaatstFeedback;
 	}

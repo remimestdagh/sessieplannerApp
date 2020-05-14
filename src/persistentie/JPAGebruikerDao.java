@@ -2,11 +2,7 @@ package persistentie;
 
 import java.util.Arrays;
 import java.util.List;
-
 import javax.persistence.TypedQuery;
-
-import com.mysql.cj.Query;
-
 import domein.Gebruiker;
 import domein.Sessie;
 import domein.SessieKalender;

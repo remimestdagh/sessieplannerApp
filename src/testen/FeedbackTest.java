@@ -9,7 +9,7 @@ import domein.Feedback;
 
 public class FeedbackTest {
 	private Feedback feedback1;
-	/*
+	
 	@BeforeEach
 	public void before() {
 		feedback1 = new Feedback("Boris Bever","Super interessante sessie");	
@@ -30,5 +30,5 @@ public class FeedbackTest {
 			new Feedback(auteur,"Super interessant!");
 		});
 		
-	}*/
+	}
 }

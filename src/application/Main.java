@@ -30,26 +30,26 @@ public class Main extends Application {
         test.setDomeinController(dc);
         Scene scene = new Scene(root);
         
-        
-       
         stage.getIcons().add(new Image("/fonts/windowicon.jpg"));
         stage.setTitle("IT-Lab Sessieplanner");
         
-        //Maximizing screen
-        //stage.setMaximized(true);
         
-        
+        //Maximizing screen (best afblijven, wisselvallig gedrag)
+        /*
+        stage.setMaximized(true);
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         stage.setX(bounds.getMinX());
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
+        */
         
         
-        
+
         stage.setScene(scene);
         stage.show();
+        
 	}
 	
 	public static void main(String[] args) {
@@ -59,21 +59,3 @@ public class Main extends Application {
 	}
 }
 
-/*
-try {
-			//scherm maken
-			LoginScherm root = new LoginScherm(new DomeinController());
-			//scherm aan scene toevoegen
-			Scene scene = new Scene(root,800,630);
-			//stylesheets opzetten
-			scene.getStylesheets().add(getClass().getResource("loginScherm.css").toExternalForm());
-			//scene aan stage toevoegen
-			primaryStage.setScene(scene);
-			//stage tonen
-			primaryStage.show();
-			
-			 root.setScene(scene);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-*/

@@ -64,14 +64,22 @@ public abstract class SchermController extends AnchorPane {
 	 * Super method waarvan elk scherm erft. elk scherm dat zichzelf van scherm doet veranderen roept dit aan.
 	 */
 	public void verranderScherm(Button button, String scherm) throws IOException {
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/" + scherm + "Scherm.fxml"));
 		Parent root = (Parent)loader.load();
         SchermController schermController = loader.getController();
         schermController.setDomeinController(dc);
         Stage stage = (Stage) button.getScene().getWindow();
-        Scene scene = new Scene(root);
+        
+        
+        double x = stage.getWidth()-14.4000244140625; //horizontale alignment gap
+        double y= stage.getHeight()-38;				  //verticale alignment gap
+        
+
+        Scene scene = new Scene(root,x,y);
         stage.setScene(scene);
         stage.show();
+        
 	}
 	
 	public void maakSessieTable(TableView tblView, ObservableList<ISessie> list) {

@@ -36,7 +36,7 @@ public class SessieStatistiekSchermController extends SchermController implement
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 	}
-
+	//
 	@Override
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);

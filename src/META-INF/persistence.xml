@@ -23,7 +23,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
 		<property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://52.232.120.84:1433;DatabaseName=javadb;integratedSecurity=false;"/>
 		<property name="javax.persistence.jdbc.user" value="jef.seys.y0431"/>
 		<property name="javax.persistence.jdbc.password" value="0B@57FB0e840"/>
-		<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+		<property name="javax.persistence.schema-generation.database.action" value="none"/>
 	</properties>
 	
 	

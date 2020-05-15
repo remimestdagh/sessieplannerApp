@@ -50,7 +50,7 @@ public class DomeinController {
 			this.gebruikerDao = new JPAGebruikerDao();
 			this.sessieDao = new JPASessieDao();
 			this.sessieKalenderDao = new JPASessieKalenderDao();
-			Seeder.seedDatabase();									//dummy for data
+			//Seeder.seedDatabase();									//dummy for data
 		}
 	}
 	

@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.persistence.NoResultException;
+
 import application.Main;
 import domein.DomeinController;
 import javafx.application.Platform;
@@ -60,6 +62,9 @@ public class LoginSchermController extends SchermController implements Initializ
     		errorText.setText(e.getMessage());
     	}catch(IllegalAccessError e){
     		errorText.setText(e.getMessage());
+    	}
+    	catch(NoResultException e) {
+    		errorText.setText("Geen account gevonden met dit emailadres.");
     	}
     }
 

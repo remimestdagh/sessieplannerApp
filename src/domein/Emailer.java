@@ -43,6 +43,7 @@ public class Emailer {
 		{
 			toAddresses[i] = new InternetAddress(toAddress[i]);
 		}
+		//
 		//InternetAddress[] toAddresses =  {new InternetAddress(toAddress)} ;
 		
 		msg.setRecipients(Message.RecipientType.TO, toAddresses);

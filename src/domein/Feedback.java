@@ -26,7 +26,6 @@ public class Feedback implements IFeedback{
 	@Column(name = "FeedbackTekst")
 	private String feedbackTekst;
 	@ManyToOne
-	//@JoinColumn(name="SessieId")
 	private Sessie sessie;
 
 	// CONSTRUCTORS

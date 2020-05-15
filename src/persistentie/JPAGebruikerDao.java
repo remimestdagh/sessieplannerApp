@@ -30,8 +30,15 @@ public class JPAGebruikerDao extends JPADao implements GebruikerDao{
 				.createQuery(String.format("SELECT g FROM Gebruiker AS g WHERE g.emailadres = '%s'", emailadres), Gebruiker.class);
 		gebruiker = query.getSingleResult();
 		
-		TypedQuery<Sessie> querySessiesWaarvoorAanwezig = em.createQuery(String.format("SELECT s FROM GebruikerSessie AS s WHERE s.sessieId = %d and s.gebruikerWasAanwezig = 1", gebruiker.getGebruikerId()), Sessie.class);
-		gebruiker.setSessiesWaarvoorAanwezig(querySessiesWaarvoorAanwezig.getResultList());
+		TypedQuery<Sessie> querySessiesWaarvoorAanwezig = em.createQuery(String.format("SELECT s FROM Sessie s join GebruikerSessie gs on s.sessieId = gs.SessieId WHERE gs.GebruikerId = %d and gs.GebruikerWasAanwezig = 1", gebruiker.getGebruikerId()), Sessie.class);
+		List<Sessie> lijstAanwezig = querySessiesWaarvoorAanwezig.getResultList();
+		gebruiker.setSessiesWaarvoorAanwezig(lijstAanwezig);
+		
+		TypedQuery<Sessie> querySessiesWaarvoorIngeschreven = em.createQuery(String.format("SELECT s FROM Sessie s join GebruikerSessie gs on s.sessieId = gs.SessieId WHERE gs.GebruikerId = %d and gs.GebruikerWasAanwezig = 0", gebruiker.getGebruikerId()), Sessie.class);
+		List<Sessie> lijstIngeschreven = querySessiesWaarvoorIngeschreven.getResultList();
+		lijstIngeschreven.addAll(lijstAanwezig);
+		gebruiker.setSessiesWaarvoorIngeschreven(lijstIngeschreven);
+		
 		return gebruiker;
 	}
 
@@ -41,10 +48,10 @@ public class JPAGebruikerDao extends JPADao implements GebruikerDao{
 		List<Gebruiker> list = null;
 		list =  em.createQuery(String.format("SELECT g FROM Gebruiker g"), Gebruiker.class).getResultList();
 		for(int i = 0; i< list.size(); i++) {
-			TypedQuery<Sessie> querySessiesWaarvoorAanwezig = em.createQuery(String.format("SELECT s FROM Sessie s join GebruikerSessie gs on s.sessieId = gs.sessieId WHERE gs.gebruikerId = %d and gs.gebruikerWasAanwezig = 1", list.get(i).getGebruikerId()), Sessie.class);
+			TypedQuery<Sessie> querySessiesWaarvoorAanwezig = em.createQuery(String.format("SELECT s FROM Sessie s join GebruikerSessie gs on s.sessieId = gs.SessieId WHERE gs.GebruikerId = %d and gs.GebruikerWasAanwezig = 1", list.get(i).getGebruikerId()), Sessie.class);
 			List<Sessie> lijstAanwezig = querySessiesWaarvoorAanwezig.getResultList();
 			list.get(i).setSessiesWaarvoorAanwezig(lijstAanwezig);
-			TypedQuery<Sessie> querySessiesWaarvoorIngeschreven = em.createQuery(String.format("SELECT s FROM Sessie s join GebruikerSessie gs on s.sessieId = gs.sessieId WHERE gs.gebruikerId = %d and gs.gebruikerWasAanwezig = 0", list.get(i).getGebruikerId()), Sessie.class);
+			TypedQuery<Sessie> querySessiesWaarvoorIngeschreven = em.createQuery(String.format("SELECT s FROM Sessie s join GebruikerSessie gs on s.sessieId = gs.SessieId WHERE gs.GebruikerId = %d and gs.GebruikerWasAanwezig = 0", list.get(i).getGebruikerId()), Sessie.class);
 			List<Sessie> lijstIngeschreven = querySessiesWaarvoorIngeschreven.getResultList();
 			lijstIngeschreven.addAll(lijstAanwezig);
 			list.get(i).setSessiesWaarvoorIngeschreven(lijstIngeschreven);

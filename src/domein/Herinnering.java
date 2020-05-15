@@ -6,21 +6,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 @Entity
-@TableGenerator(name = "Herinnering")
+@Table(name = "Herinnering")
 public class Herinnering implements IHerinnering{
 	
 	
 	//PARAMETERS
 	@Id
-	@Column(name = "HerinerringId")
+	@Column(name = "HerinneringId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int herinneringId;
+	@Column(name = "Bericht")
 	private String bericht;
-	//@Column(nullable = false)
+	@Column(name = "TijdstipOpVoorhand")
 	private int tijdstipOfVoorhand;
+
+	@ManyToOne
+	private Sessie sessie;
+	
 	
 	//CONSTRUCTOR
 	protected Herinnering() {}
@@ -57,6 +64,12 @@ public class Herinnering implements IHerinnering{
 			throw new IllegalArgumentException("tijdstip moet groter dan 0 zijn");
 		}
 		this.tijdstipOfVoorhand=tijdstipOfVoorhand;
+	}
+	public Sessie getSessie() {
+		return sessie;
+	}
+	public void setSessie(Sessie sessie) {
+		this.sessie = sessie;
 	}
 	
 }

@@ -73,7 +73,7 @@ public class DomeinController {
 	 */
 	public void login(String emailadres, String password){
 		Gebruiker gebruiker = gebruikerDao.getGebruikerByEmail(emailadres);
-		if(!gebruiker.getWachtwoord().equals(password)) {
+		if(gebruiker.getWachtwoord() !=password.hashCode()) {
 			throw new IllegalArgumentException("Verkeerd wachtwoord!");
 		}
 		if(gebruiker.getType() == GebruikerType.Gewone_Gebruiker) {

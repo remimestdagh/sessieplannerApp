@@ -81,34 +81,27 @@ public class Seeder {
 		
 		//Feedback
 		s1.addFeedback(f1);
-		s1.addFeedback(f3);
+		s1.addFeedback(f2);
+		s2.addFeedback(f3);
 		
-		s1.setHerinneringen(Arrays.asList(h1,h2));
-		s1.setGebruikteMedia(Arrays.asList(m1));
-		s1.setGeplaatsteAankondigingen(Arrays.asList(a1));
-		//s1.setGeplaatstFeedback(Arrays.asList(f1,f2));
-		//s1.setIngeschrevenGebruikers(Arrays.asList(g1,g2,g5,g6));
-		
-		//g1.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		//g2.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		//g3.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		//g4.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		//g5.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
-		//g6.setSessiesWaarvoorIngeschreven(Arrays.asList(s1));
+		s1.addAankondiging(a1);
+		s1.addAankondiging(a2);
+		s2.addAankondiging(a3);
 
-		//g1.addAanwezigheid(s2);
-		//g2.addAanwezigheid(s2);
-		//g3.addAanwezigheid(s2);
-		//g4.addAanwezigheid(s2);
-		//g5.addAanwezigheid(s2);
-		//g6.addAanwezigheid(s2);
+		s1.addMedia(m1);
+		s1.addMedia(m2);
+		s1.addMedia(m3);
+		s2.addMedia(m4);
 		
-		s2.setHerinneringen(Arrays.asList(h3));
-		s2.setGebruikteMedia(Arrays.asList(m2));
-		//s3.setGeplaatstFeedback(Arrays.asList(f3));
-		
-		//s4.setGeplaatstFeedback(Arrays.asList(f5,f4));
-		s4.setGebruikteMedia(Arrays.asList(m3,m4));
+		s1.addHerinnering(h1);
+
+		g1.addAanwezigheid(s2);
+		g2.addAanwezigheid(s2);
+		g3.addAanwezigheid(s2);
+		g4.addAanwezigheid(s2);
+		g5.addAanwezigheid(s2);
+		g6.addAanwezigheid(s2);
+
 		
 		
 		
@@ -124,7 +117,7 @@ public class Seeder {
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory(); //Persistence unit naam is "school", zie de xml file.
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-
+		/*
 		Query query1 = em.createNativeQuery(String.format("insert into GebruikerSessie values (1,2,0)"));
 		Query query2 = em.createNativeQuery(String.format("insert into GebruikerSessie values (2,2,1)"));
 		Query query3 = em.createNativeQuery(String.format("insert into GebruikerSessie values (4,1,1)"));
@@ -137,7 +130,7 @@ public class Seeder {
 		query4.executeUpdate();
 		query5.executeUpdate();
 		query6.executeUpdate();
-		
+		*/
 		Stream.of(s1,s2,s3,s4,s5,s6).forEach(em::persist);
 		Stream.of(g1,g2,g3, g4, g5, g6).forEach(em::persist);
 		Stream.of(h1,h2,h3).forEach(em::persist);

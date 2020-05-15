@@ -49,34 +49,24 @@ public class Sessie implements ISessie{
 	//relaties 
 	@Enumerated
 	private SessieStatus status;// Aangemaakt, Geopent, Gestart, Gesloten
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "sessieId") //(Joincolumn, anders automatisch tussentabel bij OneToMany)
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	private ObservableList<Media> gebruikteMedia;
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "sessieId")
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	private ObservableList<Herinnering> herinneringen;
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "sessieId")
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	private ObservableList<Aankondiging> geplaatsteAankondigingen;
-	@OneToMany(cascade = CascadeType.PERSIST)
-	//@JoinColumn(name = "SessieId")
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	private ObservableList<Feedback> geplaatstFeedback;
-	//@ManyToMany(mappedBy="sessiesWaarvoorIngeschreven",cascade=CascadeType.PERSIST) //Tussentabel!
+
 	@Transient
 	private ObservableList<Gebruiker> ingeschrevenGebruikers;
-	//@ManyToMany
-	//@JoinColumn(name = "sessieId")
+	
 	@Transient
 	private ObservableList<Gebruiker> aanwezigeGebruikers;
 	
 	//private boolean stuurtHerinnering;
 	//private List<Herinnering> herinneringen; is dit nodig?
-
-	/*@JoinTable(name = "GEBRUIKERSESSIE",
-    joinColumns = @JoinColumn(name = "SESSIEID"),
-    inverseJoinColumns = @JoinColumn(name = "GEBRUIKERID"))*/
-	@Transient
-	private List<GebruikerSessie> gebruikerSessieAanwezig;
+	
 	
 	//CONSTRUCTOR
 	protected Sessie() {}
@@ -96,8 +86,6 @@ public class Sessie implements ISessie{
 		
 		setSessieAanmaker(sessieAanmaker);
 		status = SessieStatus.AANGEMAAKT;
-		
-		gebruikerSessieAanwezig = new ArrayList<>();
 		
 		gebruikteMedia = FXCollections.<Media>observableArrayList();
 		geplaatsteAankondigingen = FXCollections.<Aankondiging>observableArrayList();
@@ -179,12 +167,12 @@ public class Sessie implements ISessie{
 	}
 	
 	public void addAanwezigheid(Gebruiker gebruiker) {
-		gebruikerSessieAanwezig.add(new GebruikerSessie(gebruiker.getGebruikerId(), this.getSessieId(), true));
 		aanwezigeGebruikers.add(gebruiker);
 	}
 	
 	public void addAankondiging(Aankondiging aankondiging) {
 		geplaatsteAankondigingen.add(aankondiging);
+		aankondiging.setSessie(this);
 	}
 
 	/**
@@ -192,6 +180,7 @@ public class Sessie implements ISessie{
 	 */
 	public void addMedia(Media media) {
 		gebruikteMedia.add(media);
+		media.setSessie(this);
 	}
 
 	/**
@@ -343,6 +332,7 @@ public class Sessie implements ISessie{
 		this.lokaalCode = lokaalCode;
 	}
 	@Access(AccessType.PROPERTY)
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	public List<Media> getGebruikteMedia() {
 		return gebruikteMedia;
 	}
@@ -353,6 +343,7 @@ public class Sessie implements ISessie{
 		this.gebruikteMedia = FXCollections.observableArrayList(gebruikteMedia);
 	}
 	@Access(AccessType.PROPERTY)
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	public List<Aankondiging> getGeplaatsteAankondigingen() {
 		return geplaatsteAankondigingen;
 	}
@@ -370,6 +361,11 @@ public class Sessie implements ISessie{
 	public void removeFeedback(Feedback f) {
 		geplaatstFeedback.remove(f);
 		f.setSessie(null);
+	}
+
+	public void addHerinnering(Herinnering h) {
+		herinneringen.add(h);
+		h.setSessie(this);
 	}
 	@Access(AccessType.PROPERTY)
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
@@ -418,6 +414,7 @@ public class Sessie implements ISessie{
 		this.status = status;
 	}
 	@Access(AccessType.PROPERTY)
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	public List<Herinnering> getHerinneringen() {
 		return herinneringen;
 	}
@@ -426,13 +423,6 @@ public class Sessie implements ISessie{
 	}
 	public void setHerinneringen(ObservableList<Herinnering> herinneringen) {
 		this.herinneringen = herinneringen;
-	}
-	@Access(AccessType.PROPERTY)
-	public List<GebruikerSessie> getGebruikerSessieAanwezig() {
-		return gebruikerSessieAanwezig;
-	}
-	public void setGebruikerSessieAanwezig(List<GebruikerSessie> gebruikerSessieAanwezig) {
-		this.gebruikerSessieAanwezig = gebruikerSessieAanwezig;
 	}
 	
 	

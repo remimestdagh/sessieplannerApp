@@ -10,7 +10,7 @@ public interface IGebruiker {
 	
 	public String getEmailadres();
 	
-	public String getWachtwoord();
+	public int getWachtwoord();
 	
 	public GebruikerStatus getStatus();
 	

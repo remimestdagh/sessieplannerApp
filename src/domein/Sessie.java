@@ -182,13 +182,6 @@ public class Sessie implements ISessie{
 		gebruikteMedia.add(media);
 		media.setSessie(this);
 	}
-	
-	/**
-	 * Voegt 1 herinnering toe aan de lijst van herinneringen
-	 */
-	public void addHerinnering(Herinnering herinnering) {
-		herinneringen.add(herinnering);
-	}
 
 	/**
 	 * Overschrijft de gebruikte media met gekregenmedia

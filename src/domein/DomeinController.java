@@ -196,10 +196,26 @@ public class DomeinController {
 		geselecteerdeSessie.addMedia(new Media(type));
 		sessieDao.update(geselecteerdeSessie);
 	}
+	/**
+	 * Deze methode voegt een herinnering toe aan een sessie en controleert of opgegeven string geldig is.
+	 */
+	public void addHerinneringToGeselecteerdeSessie(String type) {
+		geselecteerdeSessie.addHerinnering(new Herinnering(type,1));
+		sessieDao.update(geselecteerdeSessie);
+	}
+	
+	public void verstuurHerinneringAlsEmail(String headerMessage, String herinnering)
+	{
+		mailHerinneringNaarGebruikers(headerMessage+herinnering);// verzend een email met herinneringen
+	}
+	
+	
 	public void verwijderMediaFromGeselecteerdeSessie(Media media) {
 		geselecteerdeSessie.removeMedia(media);
 		sessieDao.update(geselecteerdeSessie);
 	}
+	
+	//getters
 	public ObservableList<IMedia> getMediafromGeselecteerdeSessie(){
 		return FXCollections.observableArrayList(geselecteerdeSessie.getGebruikteMedia());
 	}
@@ -209,15 +225,21 @@ public class DomeinController {
 	public ObservableList<IGebruiker> getGebruikersFromGeselecteerdeSessie(){
 		return FXCollections.observableArrayList(geselecteerdeSessie.getAanwezigeGebruikers());
 	}
+	public ObservableList<IHerinnering> getHerinneringenFromGeselecteerdeSessie(){
+		return FXCollections.observableArrayList(geselecteerdeSessie.getHerinneringen());
+	}
 	
 	//geselecteerde Sessie Kalender
-	
 	private SessieKalender geselecteerdeSessieKalender;
+	
+	
 	
 	public void setGeselecteerdeSessieKalender(SessieKalender sessieKalender) {
 		this.geselecteerdeSessieKalender = sessieKalender;
 		changes.firePropertyChange("geselecteerdeSessieKalender", 0, sessieKalender);
 	}
+	
+	
 	public void addSessieKalenderListener(PropertyChangeListener listener) {
 		changes.addPropertyChangeListener("geselecteerdeSessieKalender", listener);
 	}
@@ -249,6 +271,38 @@ public class DomeinController {
 	}
 	public ObservableList<ISessie> getSessiesfromGeselecteerdeSessieKalender(){
 		return FXCollections.observableArrayList(geselecteerdeSessieKalender.getSessieList());
+	}
+	
+	private void mailHerinneringNaarGebruikers(String herinnering)
+	{
+		
+		String host = "smtp.gmail.com"; // google SMTP Server voor het versturen van email adressen.
+		String port = "587"; // standaard smtp poort voor wanneer een email via goede mail server verstuurd
+								// word
+		String mailFrom = "noreply.itlabhogent@gmail.com";
+		String password = "Groep25Proj";
+
+
+		//bouw lijst van alle recipients dmv hun emailaddress in string formaat
+		String[] mailTo = new String[getGebruikersFromGeselecteerdeSessie().size()];
+		int i = 0;
+		for (IGebruiker gebruiker : getGebruikersFromGeselecteerdeSessie()) {
+		    mailTo[i]=gebruiker.getEmailadres();
+		    i++;
+		}
+		//bouw het mail bericht op
+		String subject = "U hebt een nieuwe herinnering ontvangen van het IT-Lab!";
+		String message = herinnering;
+
+		//emailer object
+		Emailer mailer = new Emailer();
+		try {
+			mailer.sendPlainTextEmail(host, port, mailFrom, password, mailTo, subject, message);
+			System.out.println("Het verzenden van de herinnering is succesvol!");
+		} catch (Exception ex) {
+			System.out.println("Het verzenden van de herinnering is mislukt.");
+			ex.printStackTrace();
+		}
 	}
 	
 

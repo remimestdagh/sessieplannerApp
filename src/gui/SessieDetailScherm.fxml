@@ -20,8 +20,8 @@
                   <Font name="Franklin Gothic Medium Italic" size="20.0" />
                </font>
             </Text>
-            <TableView fx:id="tblAankondigingen" layoutX="457.0" layoutY="398.0" prefHeight="215.0" prefWidth="436.0" />
-            <Text fx:id="txtAankondigingen" fill="WHITE" layoutX="458.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aankondigingen">
+            <TableView fx:id="tblAankondigingen" layoutX="454.0" layoutY="274.0" prefHeight="186.0" prefWidth="436.0" />
+            <Text fx:id="txtAankondigingen" fill="WHITE" layoutX="455.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aankondigingen">
                <font>
                   <Font name="Franklin Gothic Medium Italic" size="14.0" />
                </font>
@@ -67,7 +67,7 @@
                </font></Button>
             	
             
-            <Button fx:id="btnAankondiging" layoutX="752.0" layoutY="372.0" mnemonicParsing="false" onAction="#handleAankondigingAction" text="Voeg aankondiging toe">
+            <Button fx:id="btnAankondiging" layoutX="756.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleAankondigingAction" text="Voeg aankondiging toe">
                            <font>
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font></Button>
@@ -76,7 +76,7 @@
                                                    <font>
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font></Label>
-            <TableView fx:id="tblGebruikers" layoutX="454.0" layoutY="39.0" prefHeight="253.0" prefWidth="436.0" />
+            <TableView fx:id="tblGebruikers" layoutX="454.0" layoutY="39.0" prefHeight="202.0" prefWidth="436.0" />
             <TableView fx:id="tblMedia" layoutX="45.0" layoutY="400.0" prefHeight="215.0" prefWidth="323.0" />
             <Text fx:id="txtGebruikers" fill="WHITE" layoutX="454.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingeschreven Gebruikers">
                <font>
@@ -101,8 +101,19 @@
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font>
             </Label>
-            <Line endX="458.20001220703125" layoutX="430.0" layoutY="338.0" startX="-387.3999938964844" stroke="WHITE" />
+            <Line endX="-21.5" layoutX="430.0" layoutY="338.0" startX="-387.3999938964844" stroke="WHITE" />
             <Line endX="-100.0" endY="223.4000244140625" layoutX="509.0" layoutY="387.0" startX="-100.0" startY="-348.6000061035156" stroke="WHITE" />
+            <TableView fx:id="tblHerinnering" layoutX="454.0" layoutY="494.0" prefHeight="120.0" prefWidth="436.0" />
+            <Text fx:id="txtHerinnering" fill="WHITE" layoutX="454.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Herinneringen">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="14.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnHerinnering" layoutX="769.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleHerinneringAction" text="Verstuur herinnering">
+               <font>
+                  <Font name="Franklin Gothic Medium Italic" size="12.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import domein.DomeinController;
 import domein.IAankondiging;
 import domein.IGebruiker;
+import domein.IHerinnering;
 import domein.IMedia;
 import domein.ISessie;
 import domein.ISessieKalender;
@@ -56,6 +57,9 @@ public abstract class SchermController extends AnchorPane {
         case "CreateGebruiker" : stage.setTitle("Gebruiker Toevoegen");
         case "CreateAankondiging" : stage.setTitle("Aankondiging Toevoegen"); break;
         case "CreateMedia" : stage.setTitle("Media Toevoegen"); break;
+        case "CreateHerinnering" : stage.setTitle("Herinnering versturen"); break;
+        
+        case "CreateFeedback" : stage.setTitle("Feedback Toevoegen");
         }
         stage.show();
 	}
@@ -70,13 +74,7 @@ public abstract class SchermController extends AnchorPane {
         SchermController schermController = loader.getController();
         schermController.setDomeinController(dc);
         Stage stage = (Stage) button.getScene().getWindow();
-        
-        
-        double x = stage.getWidth()-14.4000244140625; //horizontale alignment gap
-        double y= stage.getHeight()-38;				  //verticale alignment gap
-        
-
-        Scene scene = new Scene(root,x,y);
+        Scene scene = new Scene(root,getInnerWindowWidthBounds(stage),getInnerWindowHeightBounds(stage)); // keeps scene size same
         stage.setScene(scene);
         stage.show();
         
@@ -122,7 +120,6 @@ public abstract class SchermController extends AnchorPane {
 		TableColumn<IGebruiker,String> typeColumn = new TableColumn<>("Type");
 		typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
 		
-		
 		tblView.setItems(list);
 		tblView.getColumns().addAll(naamColumn, chamiloColumn, statusColumn,typeColumn);
 	}
@@ -151,7 +148,21 @@ public abstract class SchermController extends AnchorPane {
 		
 		tblView.setItems(list);
 		tblView.getColumns().addAll(typeColumn);
+		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
+	
+	
+	//opbouwen van de herinneringen en 
+	public void maakHerinneringTable(TableView tblView, ObservableList<IHerinnering> list) {
+		tblView.getColumns().clear();
+		TableColumn<IHerinnering, String> typeColumn = new TableColumn<>("Bericht");
+		typeColumn.setCellValueFactory(new PropertyValueFactory<>("bericht"));
+		tblView.setItems(list);
+		tblView.getColumns().addAll(typeColumn);
+		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
+	}
+	
 	
 	public void maakKalenderTable(TableView tblView, ObservableList<ISessieKalender> list) {
 		tblView.getColumns().clear();
@@ -169,6 +180,13 @@ public abstract class SchermController extends AnchorPane {
 		tblView.getColumns().addAll(academiejaarColumn, startdatumColumn, einddatumColumn);
 	}
 	
-	
+	private double getInnerWindowHeightBounds(Stage s)
+	{
+		return s.getHeight()-38;
+	}
+	private double getInnerWindowWidthBounds(Stage s)
+	{
+		return s.getWidth()-14.4000244140625;
+	}
 
 }

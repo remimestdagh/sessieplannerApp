@@ -34,10 +34,10 @@ import javafx.stage.Stage;
 public class SessieDetailSchermController extends SchermController implements Initializable, PropertyChangeListener {
 
 	@FXML
-	private Button btnEditSessie, btnAankondiging, btnCreateMedia, btnDeleteMedia;
+	private Button btnEditSessie, btnAankondiging, btnCreateMedia, btnDeleteMedia, btnHerinnering;
 
 	@FXML
-	private TableView tblAankondigingen, tblGebruikers, tblMedia;
+	private TableView tblAankondigingen, tblGebruikers, tblMedia, tblHerinnering;
 
 	@FXML
 	private TextField txtLokaal, txtCapaciteit, txtSpreker, txtEindDatum, txtStartDatum, txtVerantwoordelijke, txtTitel;
@@ -46,7 +46,7 @@ public class SessieDetailSchermController extends SchermController implements In
 	private ChoiceBox<String> cbStatus;
 
 	@FXML
-	private Text txtGebruikers, txtAankondigingen;
+	private Text txtGebruikers, txtAankondigingen, txtHerinnering;
 
 	@FXML
 	private Label lblError;
@@ -64,8 +64,9 @@ public class SessieDetailSchermController extends SchermController implements In
 
 	@FXML
 	private void handleCreateMediaAction(ActionEvent event) throws IOException {
-
-		creëerScherm("CreateMedia");
+		if (getDC().getGeselecteerdeSessie() != null) {
+			creëerScherm("CreateMedia");
+		}
 	}
 
 	@FXML
@@ -76,12 +77,34 @@ public class SessieDetailSchermController extends SchermController implements In
 	}
 
 	/**
+	 * Button event dat het scherm ter aanmaak van Herinneringen opent
+	 */
+	@FXML
+	private void handleHerinneringAction(ActionEvent event) throws IOException {
+		if (getDC().getGeselecteerdeSessie() != null) {
+			creëerScherm("CreateHerinnering");
+		}
+
+	}
+
+	/**
 	 * Button event dat het scherm ter aanmaak van aankondigingen opent
 	 */
 	@FXML
 	private void handleAankondigingAction(ActionEvent event) throws IOException {
 
-		creëerScherm("CreateAankondiging");
+		if (getDC().getGeselecteerdeSessie() != null) {
+			creëerScherm("CreateAankondiging");
+		}
+
+	}
+
+	/**
+	 * Button event dat het scherm ter aanmaak van feedback opent
+	 */
+	@FXML
+	private void handleFeedbackAction(ActionEvent event) throws IOException {
+		// creëerScherm("CreateFeedback");
 	}
 
 	@FXML
@@ -113,6 +136,7 @@ public class SessieDetailSchermController extends SchermController implements In
 		if (sessie != null) {
 			maakAankondigingTable(tblAankondigingen, getDC().getAankondigingenfromGeselecteerdeSessie());
 			maakMediaTable(tblMedia, getDC().getMediafromGeselecteerdeSessie());
+			maakHerinneringTable(tblHerinnering, getDC().getHerinneringenFromGeselecteerdeSessie());
 			txtTitel.setText(sessie.getTitel());
 			txtVerantwoordelijke.setText(sessie.getSessieAanmaker());
 			txtStartDatum.setText(sessie.getStartDatum().toString());
@@ -122,9 +146,10 @@ public class SessieDetailSchermController extends SchermController implements In
 			txtLokaal.setText(sessie.getLokaalCode());
 			cbStatus.getItems().addAll("AANGEMAAKT", "GEOPEND", "GESTART", "GESLOTEN");
 			cbStatus.setValue(sessie.getStatus().toString());
-			//maakGebruikerTable(tblGebruikers, getDC().getGebruikersFromGeselecteerdeSessie());
-		}else {
-			
+			maakGebruikerTable(tblGebruikers,getDC().getGebruikersFromGeselecteerdeSessie());
+			 
+		} else {
+
 		}
 	}
 }

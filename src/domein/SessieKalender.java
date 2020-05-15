@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 import javafx.collections.FXCollections;
@@ -19,7 +20,7 @@ import javafx.collections.ObservableList;
 import persistentie.JPADao;
 
 @Entity
-@TableGenerator(name = "SessieKalender")
+@Table(name = "SessieKalender")
 @Access(AccessType.FIELD)
 public class SessieKalender implements ISessieKalender{
 	

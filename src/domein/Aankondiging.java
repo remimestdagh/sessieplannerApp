@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,9 +19,15 @@ public class Aankondiging implements IAankondiging{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Id")
 	private int aankondigingId;
+	@Column(name="PublicatieDatum")
 	private Date publicatieDatum;
+	@Column(name="Inhoud")
 	private String inhoud;
+	@Column(name="Auteur")
 	private String auteur;
+
+	@ManyToOne
+	private Sessie sessie;
 
 	
 	//CONSTRUCTOR
@@ -72,4 +79,18 @@ public class Aankondiging implements IAankondiging{
 	public void setPublicatieDatum(Date publicatieDatum) {
 		this.publicatieDatum = publicatieDatum;
 	}
+	public int getAankondigingId() {
+		return aankondigingId;
+	}
+	public void setAankondigingId(int aankondigingId) {
+		this.aankondigingId = aankondigingId;
+	}
+	public Sessie getSessie() {
+		return sessie;
+	}
+	public void setSessie(Sessie sessie) {
+		this.sessie = sessie;
+	}
+	
+	
 }

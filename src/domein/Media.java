@@ -3,6 +3,7 @@ package domein;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +14,8 @@ public class Media implements IMedia{
 	@Id
 	@Column(name = "Type")
 	private String type;
+	@ManyToOne
+	private Sessie sessie;
 	
 	//CONSTRUCTOR
 	protected Media() {}
@@ -35,6 +38,12 @@ public class Media implements IMedia{
 			throw new IllegalArgumentException("Gelieve een naam voor het type media op te geven!");
 		}
 		this.type = type;
+	}
+	public Sessie getSessie() {
+		return sessie;
+	}
+	public void setSessie(Sessie sessie) {
+		this.sessie = sessie;
 	}
 	
 }

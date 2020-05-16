@@ -43,7 +43,9 @@ public class JPASessieDao extends JPADao implements SessieDao{
 			list.get(i).setAanwezigeGebruikers(lijstAanwezig);
 			TypedQuery<Gebruiker> querySessiesWaarvoorIngeschreven = em.createQuery(String.format("SELECT g FROM Gebruiker g join GebruikerSessie gs on g.gebruikerId = gs.GebruikerId WHERE gs.SessieId = %d and gs.GebruikerWasAanwezig = 0", list.get(i).getSessieId()), Gebruiker.class);
 			List<Gebruiker> lijstIngeschreven = querySessiesWaarvoorIngeschreven.getResultList();
-			lijstIngeschreven.addAll(lijstAanwezig);
+			if(lijstAanwezig != null) {
+				lijstIngeschreven.addAll(lijstAanwezig);
+			}
 			list.get(i).setIngeschrevenGebruikers(lijstIngeschreven);
 		}
 		return list;

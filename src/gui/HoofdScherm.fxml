@@ -27,7 +27,7 @@
       						<Font name="Franklin Gothic Medium Italic" size="30.0" />
       					</font>
       				</Text>
-      				<Text fx:id="textName" fill="WHITE" layoutX="618.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Sitka Text';" wrappingWidth="142.13671875">
+      				<Text fx:id="textName" fill="WHITE" layoutX="261.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Sitka Text';" wrappingWidth="421.13671875">
       					<font>
       						<Font name="Franklin Gothic Medium Italic" size="30.0" />
       					</font>

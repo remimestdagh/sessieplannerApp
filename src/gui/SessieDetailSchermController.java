@@ -46,7 +46,7 @@ public class SessieDetailSchermController extends SchermController implements In
 	private ChoiceBox<String> cbStatus;
 
 	@FXML
-	private Text txtGebruikers, txtAankondigingen, txtHerinnering;
+	private Text txtGebruikers, txtAankondigingen, txtHerinnering,txtError;
 
 	@FXML
 	private Label lblError;
@@ -121,7 +121,11 @@ public class SessieDetailSchermController extends SchermController implements In
 			dto.setLokaalCode(txtLokaal.getText());
 			dto.setStatus((String) cbStatus.getValue());
 
-			getDC().editGeselecteerdeSessie(dto);
+			try {
+				getDC().editGeselecteerdeSessie(dto);
+			} catch (IllegalAccessException e) {
+				txtError.setText("U bent de eigenaar van deze sessie niet");
+			}
 			lblError.setText("");
 
 		} catch (IllegalArgumentException e) {
@@ -137,7 +141,7 @@ public class SessieDetailSchermController extends SchermController implements In
 			maakAankondigingTable(tblAankondigingen, getDC().getAankondigingenfromGeselecteerdeSessie());
 			maakMediaTable(tblMedia, getDC().getMediafromGeselecteerdeSessie());
 			if(!sessie.getEindDatum().isAfter(LocalDateTime.now())) {
-				maakHerinneringTable(tblHerinnering, getDC().getFeedbackFromGeselecteerdeSessie());
+				maakFeedbackTable(tblHerinnering, getDC().getFeedbackFromGeselecteerdeSessie());
 				txtHerinnering.setText("Feedback");
 				btnHerinnering.setDisable(true);
 			}

@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +35,10 @@ public class SessieKalender implements ISessieKalender{
 	private LocalDateTime einddatum;
 	@OneToMany
 	private ObservableList<Sessie> sessieList;
+	
+	//huidige gebruiker
+	@Transient
+	private Gebruiker huidigeGebruiker;
 
 	//CONSTRUCTOR
 	public SessieKalender() {}
@@ -70,6 +75,20 @@ public class SessieKalender implements ISessieKalender{
 		setEinddatum(dto.getEinddatum());
 	}
 	
+	//
+	public void editSessie(Sessie sessie, SessieDTO dto) throws IllegalAccessException {
+		if(this.huidigeGebruiker.getType()==GebruikerType.HoofdVerantwoordelijke) {
+		sessie.editSessie(dto);
+		}
+		else {
+			if(this.huidigeGebruiker.getType()==GebruikerType.Verantwoordelijke&&sessie.getSessieAanmaker().equals(this.huidigeGebruiker.getNaam())) {
+				sessie.editSessie(dto);
+			}
+			throw new IllegalAccessException();
+		}
+		
+	}
+	//
 
 	//GETTERS AND SETTERS
 	public String getAcademiejaar() {
@@ -105,5 +124,9 @@ public class SessieKalender implements ISessieKalender{
 	}
 	public ObservableList<Sessie> getSessieListObservable(){
 		return sessieList;
+	}
+	public void setHuidigeGebruiker(Gebruiker ingelogdeGebruiker) {
+		this.huidigeGebruiker=ingelogdeGebruiker;
+		
 	}
 }

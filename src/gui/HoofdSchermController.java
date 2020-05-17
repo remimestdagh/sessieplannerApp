@@ -84,7 +84,8 @@ public class HoofdSchermController extends SchermController implements Initializ
         if(getDC().gebruikerIsHoofdverantwoordelijke()) {
         	verranderScherm(btnKalender, "SessieKalenderBeheer");
         }else {
-        	verranderScherm(btnKalender, "SessieKalender");
+        	//verranderScherm(btnKalender, "SessieKalender");
+        	verranderScherm(btnKalender, "SessieKalenderBeheer");
         }
 	}
 	

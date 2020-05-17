@@ -174,14 +174,24 @@ public class DomeinController {
 		changes.addPropertyChangeListener("geselecteerdeSessie", listener);
 	}
 	public void setGeselecteerdeSessie(Sessie sessie) {
+		Sessie oudesessie=null;
+		if(!(this.geselecteerdeSessie==null)) {
+			oudesessie=this.geselecteerdeSessie;
+		}
 		this.geselecteerdeSessie = sessie;
-		changes.firePropertyChange("geselecteerdeSessie", 0, sessie);
+		changes.firePropertyChange("geselecteerdeSessie", oudesessie, sessie);
+		
 	}
 	public ISessie getGeselecteerdeSessie() {
 		return geselecteerdeSessie;
 	}
-	public void editGeselecteerdeSessie(SessieDTO dto) {
-		geselecteerdeSessie.editSessie(dto);
+	public void editGeselecteerdeSessie(SessieDTO dto) throws IllegalAccessException {
+		try {
+			geselecteerdeSessieKalender.editSessie(this.geselecteerdeSessie , dto);
+		} catch (IllegalAccessException e) {
+			throw new IllegalAccessException();
+		}
+		//geselecteerdeSessie.editSessie(dto);
 		sessieDao.update(geselecteerdeSessie);
 		changes.firePropertyChange("SessieList",0,1);
 	}
@@ -223,7 +233,13 @@ public class DomeinController {
 		return FXCollections.observableArrayList(geselecteerdeSessie.getGeplaatsteAankondigingen());
 	}
 	public ObservableList<IGebruiker> getGebruikersFromGeselecteerdeSessie(){
-		return FXCollections.observableArrayList(geselecteerdeSessie.getAanwezigeGebruikers());
+		if(geselecteerdeSessie.getAanwezigeGebruikers().isEmpty()) {
+			return FXCollections.emptyObservableList();
+		}
+		return FXCollections.observableArrayList(geselecteerdeSessie.getAanwezigeGebruikersObservable());
+		
+		
+		
 	}
 	public ObservableList<IHerinnering> getHerinneringenFromGeselecteerdeSessie(){
 		return FXCollections.observableArrayList(geselecteerdeSessie.getHerinneringen());
@@ -238,6 +254,7 @@ public class DomeinController {
 	
 	
 	public void setGeselecteerdeSessieKalender(SessieKalender sessieKalender) {
+		sessieKalender.setHuidigeGebruiker(this.ingelogdeGebruiker);
 		this.geselecteerdeSessieKalender = sessieKalender;
 		changes.firePropertyChange("geselecteerdeSessieKalender", 0, sessieKalender);
 	}

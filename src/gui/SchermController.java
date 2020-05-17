@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import domein.DomeinController;
 import domein.IAankondiging;
+import domein.IFeedback;
 import domein.IGebruiker;
 import domein.IHerinnering;
 import domein.IMedia;
@@ -157,6 +158,15 @@ public abstract class SchermController extends AnchorPane {
 		tblView.getColumns().clear();
 		TableColumn<IHerinnering, String> typeColumn = new TableColumn<>("Bericht");
 		typeColumn.setCellValueFactory(new PropertyValueFactory<>("bericht"));
+		tblView.setItems(list);
+		tblView.getColumns().addAll(typeColumn);
+		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
+	}
+	public <E> void maakFeedbackTable(TableView tblView, ObservableList<E> list){
+		tblView.getColumns().clear();
+		TableColumn<IFeedback, String> typeColumn = new TableColumn<>("Feedback");
+		typeColumn.setCellValueFactory(new PropertyValueFactory<>("FeedbackTekst"));
 		tblView.setItems(list);
 		tblView.getColumns().addAll(typeColumn);
 		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);

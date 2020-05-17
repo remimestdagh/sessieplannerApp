@@ -114,6 +114,7 @@
                   <Font name="Franklin Gothic Medium Italic" size="12.0" />
                </font>
             </Button>
+            <Text fx:id="txtError" layoutX="79.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="314.0" />
          </children>
       </Pane>
    </children>

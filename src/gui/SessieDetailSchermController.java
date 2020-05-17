@@ -136,7 +136,16 @@ public class SessieDetailSchermController extends SchermController implements In
 		if (sessie != null) {
 			maakAankondigingTable(tblAankondigingen, getDC().getAankondigingenfromGeselecteerdeSessie());
 			maakMediaTable(tblMedia, getDC().getMediafromGeselecteerdeSessie());
-			maakHerinneringTable(tblHerinnering, getDC().getHerinneringenFromGeselecteerdeSessie());
+			if(!sessie.getEindDatum().isAfter(LocalDateTime.now())) {
+				maakHerinneringTable(tblHerinnering, getDC().getFeedbackFromGeselecteerdeSessie());
+				txtHerinnering.setText("Feedback");
+				btnHerinnering.setDisable(true);
+			}
+			else {
+				maakHerinneringTable(tblHerinnering, getDC().getHerinneringenFromGeselecteerdeSessie());
+				txtHerinnering.setText("Herinneringen");
+			}
+			
 			txtTitel.setText(sessie.getTitel());
 			txtVerantwoordelijke.setText(sessie.getSessieAanmaker());
 			txtStartDatum.setText(sessie.getStartDatum().toString());

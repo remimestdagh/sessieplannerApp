@@ -56,7 +56,7 @@ public class JPASessieDao extends JPADao implements SessieDao{
 		Sessie s = (Sessie)sessie;
 		startTransaction();
 		em.remove(sessie);
-		em.createNativeQuery(String.format("delete from GebruikerSessie gs where gs.sessieId = %d", s.getSessieId())).executeUpdate();
+		em.createNativeQuery(String.format("delete from GebruikerSessie where sessieId = %d", s.getSessieId())).executeUpdate();
 		commitTransaction();
 	}/*
 

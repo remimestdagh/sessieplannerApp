@@ -72,8 +72,9 @@ public class JPAGebruikerDao extends JPADao implements GebruikerDao{
 	public void delete(Object gebruiker) {
 		Gebruiker g = (Gebruiker)gebruiker;
 		startTransaction();
+		em.createNativeQuery(String.format("delete from gebruikerwachtwoord where gebruiker_gebruikerid = %d", g.getGebruikerId())).executeUpdate();
+		em.createNativeQuery(String.format("delete from GebruikerSessie where gebruikerid = %d", g.getGebruikerId())).executeUpdate();
 		em.remove(gebruiker);
-		em.createNativeQuery(String.format("delete from GebruikerSessie gs where gs.sessieId = %d", g.getGebruikerId())).executeUpdate();
 		commitTransaction();
 	}/*
 

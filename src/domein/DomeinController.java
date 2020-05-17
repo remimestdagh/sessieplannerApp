@@ -228,6 +228,9 @@ public class DomeinController {
 	public ObservableList<IHerinnering> getHerinneringenFromGeselecteerdeSessie(){
 		return FXCollections.observableArrayList(geselecteerdeSessie.getHerinneringen());
 	}
+	public ObservableList<IFeedback> getFeedbackFromGeselecteerdeSessie(){
+		return FXCollections.observableArrayList(geselecteerdeSessie.getGeplaatstFeedback());
+	}
 	
 	//geselecteerde Sessie Kalender
 	private SessieKalender geselecteerdeSessieKalender;
@@ -267,6 +270,8 @@ public class DomeinController {
 			geselecteerdeSessieKalender = sessieKalenderDao.getHuidigeSessieKalender();
 		}
 		geselecteerdeSessieKalender.removeSessie((Sessie) sessie);
+		sessieDao.delete(sessie);
+		
 		changes.firePropertyChange("SessieList",0,1);
 	}
 	public ObservableList<ISessie> getSessiesfromGeselecteerdeSessieKalender(){

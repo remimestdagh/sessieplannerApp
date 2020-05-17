@@ -153,7 +153,7 @@ public abstract class SchermController extends AnchorPane {
 	
 	
 	//opbouwen van de herinneringen en 
-	public void maakHerinneringTable(TableView tblView, ObservableList<IHerinnering> list) {
+	public <E> void maakHerinneringTable(TableView tblView, ObservableList<E> list) {
 		tblView.getColumns().clear();
 		TableColumn<IHerinnering, String> typeColumn = new TableColumn<>("Bericht");
 		typeColumn.setCellValueFactory(new PropertyValueFactory<>("bericht"));

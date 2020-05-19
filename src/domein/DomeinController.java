@@ -199,7 +199,7 @@ public class DomeinController {
 			throw new IllegalAccessException();
 		}
 		geselecteerdeSessie.editSessie(dto);
-		//sessieDao.update(geselecteerdeSessie);
+		sessieDao.update(geselecteerdeSessie);
 		changes.firePropertyChange("SessieList",0,1);
 	}
 	public void addAankondigingToGeselecteerdeSessie(String inhoud) {

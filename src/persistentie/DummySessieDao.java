@@ -33,8 +33,6 @@ public class DummySessieDao extends DummyDao<Sessie> implements SessieDao{
 
 
 	public void delete(Sessie object) {
-		// TODO Auto-generated method stub
-		
 	}
 
 

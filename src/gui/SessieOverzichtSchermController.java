@@ -43,11 +43,12 @@ public class SessieOverzichtSchermController extends SchermController implements
 		
 		if(getDC().gebruikerIsHoofdverantwoordelijke()) {
 			maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeSessieKalender());
+			geselecteerdeKalender.setText("Sessies voor kalender: " + getDC().getGeselecteerdeSessieKalender().getAcademiejaar() );
 		}else {
-			maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeSessieKalender());
+			maakSessieTable(tblView, getDC().getSessiesFromVerantwoordelijke());
 		}
 		
-		geselecteerdeKalender.setText("Sessies voor kalender: " + getDC().getGeselecteerdeSessieKalender().getAcademiejaar() );
+		
 	}
 	
 	@FXML

@@ -103,6 +103,9 @@ public class DomeinController {
 	}
 	
 	public void verwijderGebruiker(IGebruiker gebruiker) {
+		if(ingelogdeGebruiker.getType() != GebruikerType.HoofdVerantwoordelijke) {
+			throw new IllegalAccessError("Actie gewijgerd, niet gemachtigd!");
+		}
 		gebruikerDao.delete(gebruiker);
 		changes.firePropertyChange("GebruikerList",0,1);
 		setGeselecteerdeGebruiker(null);
@@ -126,6 +129,9 @@ public class DomeinController {
 	}
 	
 	public void verwijderSessieKalender(ISessieKalender kalender) {
+		if(ingelogdeGebruiker.getType() != GebruikerType.HoofdVerantwoordelijke) {
+			throw new IllegalAccessError("Actie gewijgerd, niet gemachtigd!");
+		}
 		sessieKalenderDao.delete(kalender);
 		changes.firePropertyChange("SessieKalenderList",0,1);
 		setGeselecteerdeSessieKalender(null);
@@ -192,8 +198,8 @@ public class DomeinController {
 		} catch (IllegalAccessException e) {
 			throw new IllegalAccessException();
 		}
-		//geselecteerdeSessie.editSessie(dto);
-		sessieDao.update(geselecteerdeSessie);
+		geselecteerdeSessie.editSessie(dto);
+		//sessieDao.update(geselecteerdeSessie);
 		changes.firePropertyChange("SessieList",0,1);
 	}
 	public void addAankondigingToGeselecteerdeSessie(String inhoud) {
@@ -222,9 +228,12 @@ public class DomeinController {
 	
 	
 	public void verwijderMediaFromGeselecteerdeSessie(Media media) {
+		if(ingelogdeGebruiker.getType() != GebruikerType.HoofdVerantwoordelijke 
+				&& !ingelogdeGebruiker.getNaam().equals(geselecteerdeSessie.getNaamAanmaker())) {
+			throw new IllegalAccessError("Actie gewijgerd, niet gemachtigd!");
+		}
 		geselecteerdeSessie.removeMedia(media);
 		sessieDao.update(geselecteerdeSessie);
-		
 	}
 	
 	//getters
@@ -253,7 +262,9 @@ public class DomeinController {
 	
 	
 	public void setGeselecteerdeSessieKalender(SessieKalender sessieKalender) {
-		sessieKalender.setHuidigeGebruiker(this.ingelogdeGebruiker);
+		if(sessieKalender != null) {
+			sessieKalender.setHuidigeGebruiker(this.ingelogdeGebruiker);
+		}
 		this.geselecteerdeSessieKalender = sessieKalender;
 		changes.firePropertyChange("geselecteerdeSessieKalender", 0, sessieKalender);
 	}
@@ -278,10 +289,14 @@ public class DomeinController {
 		Sessie sessie = new Sessie(dto);
 		geselecteerdeSessieKalender.addSessie(sessie);
 		sessieKalenderDao.update(geselecteerdeSessieKalender);
-		//setGeselecteerdeSessie(sessie);
+		setGeselecteerdeSessie(sessie);
 		changes.firePropertyChange("SessieList",0,1);
 	}
 	public void verwijderSessieFromGeselecteerdeSessieKalender(ISessie sessie) {
+		if(ingelogdeGebruiker.getType() != GebruikerType.HoofdVerantwoordelijke 
+				&& !ingelogdeGebruiker.getNaam().equals(geselecteerdeSessie.getNaamAanmaker())) {
+			throw new IllegalAccessError("Actie gewijgerd, niet gemachtigd!");
+		}
 		if(!gebruikerIsHoofdverantwoordelijke()) {
 			geselecteerdeSessieKalender = sessieKalenderDao.getHuidigeSessieKalender();
 		}

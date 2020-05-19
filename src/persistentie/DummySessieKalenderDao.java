@@ -31,7 +31,6 @@ public class DummySessieKalenderDao extends DummyDao<SessieKalender> implements 
 	@Override
 	public void delete(Object kalender) {
 		pd.verwijderSessieKalender((SessieKalender)kalender);
-		System.out.println("ping");
 	}
 
 	@Override

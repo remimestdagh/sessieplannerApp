@@ -1,5 +1,7 @@
 package domein;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 @Entity
 @Table(name = "Feedback")
 public class Feedback implements IFeedback{
@@ -22,9 +27,9 @@ public class Feedback implements IFeedback{
 	@Column(name = "FeedbackId")
 	private int feedbackId;
 	@Column(name = "AuteursNaam")
-	private String feedbackAuteur;
+	private StringProperty feedbackAuteur;
 	@Column(name = "FeedbackTekst")
-	private String feedbackTekst;
+	private StringProperty feedbackTekst;
 	@ManyToOne
 	private Sessie sessie;
 
@@ -39,27 +44,37 @@ public class Feedback implements IFeedback{
 	
 
 	// GETTERS AND SETTERS
+	@Access(AccessType.PROPERTY)
 	public String getFeedbackTekst() {
-		return feedbackTekst;
+		return feedbackTekst.get();
 	}
-
+	
+	@Access(AccessType.PROPERTY)
 	public String getFeedbackAuteur() {
-		return feedbackAuteur;
+		return feedbackAuteur.get();
 	}
+	
+	public StringProperty textProperty() {
+        return feedbackTekst;
+    }
+	
+	public StringProperty auteurProperty() {
+        return feedbackAuteur;
+    }
 
 	public void setFeedbackTekst(String feedbackTekst) {
 		if (feedbackTekst.isEmpty() || feedbackTekst.isBlank()) {
 			throw new IllegalArgumentException("De feedback mag niet leeg zijn");
 
 		}
-		this.feedbackTekst = feedbackTekst;
+		this.feedbackTekst = new SimpleStringProperty(feedbackTekst);
 	}
 
 	public void setFeedbackAuteur(String feedbackAuteur) {
 		if (feedbackAuteur.isBlank() || feedbackAuteur.isEmpty()) {
 			throw new IllegalArgumentException("De auteur moet ingevuld zijn bij feedback");
 		}
-		this.feedbackAuteur = feedbackAuteur;
+		this.feedbackAuteur = new SimpleStringProperty(feedbackAuteur);
 	}
 	public Sessie getSessie() {
 		return sessie;

@@ -171,10 +171,12 @@ public abstract class SchermController extends AnchorPane {
 		tblView.getColumns().clear();
 		
 		TableColumn<IFeedback, String> tekstColumn = new TableColumn<>("Tekst");
-		tekstColumn.setCellValueFactory(new PropertyValueFactory<>("FeedbackTekst"));
+		tekstColumn.setCellValueFactory(celldata -> celldata.getValue().textProperty());
+		//tekstColumn.setCellValueFactory(new PropertyValueFactory<>("FeedbackTekst"));
 		
 		TableColumn<IFeedback, String> auteurColumn = new TableColumn<>("Auteur");
-		auteurColumn.setCellValueFactory(new PropertyValueFactory<>("feedbackAuteur"));
+		auteurColumn.setCellValueFactory(celldata -> celldata.getValue().auteurProperty());
+		//auteurColumn.setCellValueFactory(new PropertyValueFactory<>("feedbackAuteur"));
 		
 		tblView.setItems(list);
 		tblView.getColumns().addAll(tekstColumn, auteurColumn);

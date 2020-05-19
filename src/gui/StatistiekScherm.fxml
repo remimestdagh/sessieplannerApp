@@ -30,17 +30,17 @@
                      </font>
                   </Label>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="265.0" layoutX="353.0" layoutY="217.0" stroke="WHITE" strokeType="INSIDE" width="210.0" />
-                  <Button fx:id="btnGebruikers" layoutX="396.0" layoutY="258.0" mnemonicParsing="false" onAction="#handleGebruikersAction" prefHeight="40.0" prefWidth="127.0" text="Gebruikers Statistieken">
+                  <Button fx:id="btnGebruikers" layoutX="373.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleGebruikersAction" prefHeight="40.0" prefWidth="170.0" text="Gebruiker Statistieken">
                            <font>
             <Font name="Franklin Gothic Medium Italic" size="12.0" />
          </font>
       </Button>
-                  <Button fx:id="btnSessies" layoutX="395.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleSessiesAction" prefHeight="40.0" prefWidth="127.0" text="Sessies Statistieken">
+                  <Button fx:id="btnSessies" layoutX="373.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleSessiesAction" prefHeight="40.0" prefWidth="170.0" text="Sessie Statistieken">
                            <font>
             <Font name="Franklin Gothic Medium Italic" size="12.0" />
          </font>
       </Button>
-                  <Button fx:id="btnGeavanceerd" layoutX="396.0" layoutY="399.0" mnemonicParsing="false" onAction="#handleGeavanceerdAction" prefHeight="40.0" prefWidth="127.0" text="Geavanceerde Satistieken">
+                  <Button fx:id="btnGeavanceerd" layoutX="373.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleGeavanceerdAction" prefHeight="40.0" prefWidth="170.0" text="Geavanceerde Statistieken">
                            <font>
             <Font name="Franklin Gothic Medium Italic" size="12.0" />
          </font>

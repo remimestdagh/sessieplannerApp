@@ -223,6 +223,7 @@ public class DomeinController {
 	public void verwijderMediaFromGeselecteerdeSessie(Media media) {
 		geselecteerdeSessie.removeMedia(media);
 		sessieDao.update(geselecteerdeSessie);
+		
 	}
 	
 	//getters

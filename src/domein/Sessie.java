@@ -49,13 +49,9 @@ public class Sessie implements ISessie{
 	//relaties 
 	@Enumerated
 	private SessieStatus status;// Aangemaakt, Geopent, Gestart, Gesloten
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	private ObservableList<Media> gebruikteMedia;
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	private ObservableList<Herinnering> herinneringen;
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	private ObservableList<Aankondiging> geplaatsteAankondigingen;
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
 	private ObservableList<Feedback> geplaatstFeedback;
 
 	@Transient
@@ -332,7 +328,7 @@ public class Sessie implements ISessie{
 		this.lokaalCode = lokaalCode;
 	}
 	@Access(AccessType.PROPERTY)
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie", orphanRemoval = true)
 	public List<Media> getGebruikteMedia() {
 		return gebruikteMedia;
 	}
@@ -343,7 +339,7 @@ public class Sessie implements ISessie{
 		this.gebruikteMedia = FXCollections.observableArrayList(gebruikteMedia);
 	}
 	@Access(AccessType.PROPERTY)
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie", orphanRemoval = true)
 	public List<Aankondiging> getGeplaatsteAankondigingen() {
 		return geplaatsteAankondigingen;
 	}
@@ -368,7 +364,7 @@ public class Sessie implements ISessie{
 		h.setSessie(this);
 	}
 	@Access(AccessType.PROPERTY)
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie", orphanRemoval = true)
 	public List<Feedback> getGeplaatstFeedback() {
 		return geplaatstFeedback;
 	}
@@ -414,7 +410,7 @@ public class Sessie implements ISessie{
 		this.status = status;
 	}
 	@Access(AccessType.PROPERTY)
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie")
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "sessie", orphanRemoval = true)
 	public List<Herinnering> getHerinneringen() {
 		return herinneringen;
 	}

@@ -178,8 +178,8 @@ public class DomeinController {
 		if(!(this.geselecteerdeSessie==null)) {
 			oudesessie=this.geselecteerdeSessie;
 		}
-		this.geselecteerdeSessie = sessie;
-		//this.geselecteerdeSessie = sessieDao.getSessieById(sessie.getSessieId());
+		//this.geselecteerdeSessie = sessie;
+		this.geselecteerdeSessie = sessieDao.getSessieById(sessie.getSessieId());
 		changes.firePropertyChange("geselecteerdeSessie", oudesessie, sessie);
 		
 	}

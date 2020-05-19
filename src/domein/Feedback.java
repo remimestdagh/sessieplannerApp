@@ -1,5 +1,10 @@
 package domein;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -19,7 +24,7 @@ import javafx.beans.property.StringProperty;
 
 @Entity
 @Table(name = "Feedback")
-public class Feedback implements IFeedback{
+public class Feedback implements IFeedback {
 
 	// PARAMETERS
 	@Id
@@ -27,9 +32,9 @@ public class Feedback implements IFeedback{
 	@Column(name = "FeedbackId")
 	private int feedbackId;
 	@Column(name = "AuteursNaam")
-	private StringProperty feedbackAuteur;
+	private String feedbackAuteur;
 	@Column(name = "FeedbackTekst")
-	private StringProperty feedbackTekst;
+	private String feedbackTekst;
 	@ManyToOne
 	private Sessie sessie;
 
@@ -44,37 +49,27 @@ public class Feedback implements IFeedback{
 	
 
 	// GETTERS AND SETTERS
-	@Access(AccessType.PROPERTY)
 	public String getFeedbackTekst() {
-		return feedbackTekst.get();
+		return feedbackTekst;
 	}
 	
-	@Access(AccessType.PROPERTY)
 	public String getFeedbackAuteur() {
-		return feedbackAuteur.get();
+		return feedbackAuteur;
 	}
-	
-	public StringProperty textProperty() {
-        return feedbackTekst;
-    }
-	
-	public StringProperty auteurProperty() {
-        return feedbackAuteur;
-    }
 
 	public void setFeedbackTekst(String feedbackTekst) {
 		if (feedbackTekst.isEmpty() || feedbackTekst.isBlank()) {
 			throw new IllegalArgumentException("De feedback mag niet leeg zijn");
 
 		}
-		this.feedbackTekst = new SimpleStringProperty(feedbackTekst);
+		this.feedbackTekst = feedbackTekst;
 	}
 
 	public void setFeedbackAuteur(String feedbackAuteur) {
 		if (feedbackAuteur.isBlank() || feedbackAuteur.isEmpty()) {
 			throw new IllegalArgumentException("De auteur moet ingevuld zijn bij feedback");
 		}
-		this.feedbackAuteur = new SimpleStringProperty(feedbackAuteur);
+		this.feedbackAuteur = feedbackAuteur;
 	}
 	public Sessie getSessie() {
 		return sessie;
@@ -82,6 +77,4 @@ public class Feedback implements IFeedback{
 	public void setSessie(Sessie sessie) {
 		this.sessie = sessie;
 	}
-	
-	
 }

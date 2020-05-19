@@ -52,6 +52,13 @@ public class DummySessieDao extends DummyDao<Sessie> implements SessieDao{
 		return pd.getSessiesFromVerantwoordelijke(naamVerantwoordelijke);
 	}
 
+
+	@Override
+	public Sessie getSessieById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 }

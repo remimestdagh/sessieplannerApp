@@ -61,7 +61,6 @@ public class Sessie implements ISessie{
 	private ObservableList<Gebruiker> aanwezigeGebruikers;
 	
 	//private boolean stuurtHerinnering;
-	//private List<Herinnering> herinneringen; is dit nodig?
 	
 	
 	//CONSTRUCTOR

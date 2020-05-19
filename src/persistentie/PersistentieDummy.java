@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import domein.Aankondiging;
+import domein.Feedback;
 import domein.Gebruiker;
 import domein.GebruikerType;
 import domein.Sessie;
@@ -47,6 +48,10 @@ public class PersistentieDummy {
 		SessieKalender sk = new SessieKalender("2019-2020", LocalDateTime.of(2019,8,1,12,0), LocalDateTime.of(2020,6,1,12,0));
 		SessieKalender sk2 = new SessieKalender("2018-2019", LocalDateTime.of(2018,8,1,12,0), LocalDateTime.of(2019,6,1,12,0));
 		SessieKalender sk3 = new SessieKalender("2020-2021", LocalDateTime.of(2020,8,1,12,0), LocalDateTime.of(2021,6,1,12,0));
+		
+		Feedback f = new Feedback("John Steel", "Twas de max!!!");
+		
+		s1.addFeedback(f);
 		
 		sk.addSessie(s1);
 		sk.addSessie(s2);

@@ -42,9 +42,9 @@ public class SessieOverzichtSchermController extends SchermController implements
 		dc.addSessieListListener(this);
 		
 		if(getDC().gebruikerIsHoofdverantwoordelijke()) {
-			maakSessieTable(tblView, getDC().getSessies());
+			maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeSessieKalender());
 		}else {
-			maakSessieTable(tblView, getDC().getSessies());
+			maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeSessieKalender());
 		}
 		
 		geselecteerdeKalender.setText("Sessies voor kalender: " + getDC().getGeselecteerdeSessieKalender().getAcademiejaar() );

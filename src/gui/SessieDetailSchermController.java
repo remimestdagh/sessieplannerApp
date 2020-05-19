@@ -148,6 +148,7 @@ public class SessieDetailSchermController extends SchermController implements In
 			else {
 				maakHerinneringTable(tblHerinnering, getDC().getHerinneringenFromGeselecteerdeSessie());
 				txtHerinnering.setText("Herinneringen");
+				btnHerinnering.setDisable(false);
 			}
 			
 			txtTitel.setText(sessie.getTitel());
@@ -157,6 +158,7 @@ public class SessieDetailSchermController extends SchermController implements In
 			txtSpreker.setText(sessie.getNaamGastspreker());
 			txtCapaciteit.setText("" + sessie.getMAX_CAPACITEIT());
 			txtLokaal.setText(sessie.getLokaalCode());
+			cbStatus.getItems().clear();
 			cbStatus.getItems().addAll("AANGEMAAKT", "GEOPEND", "GESTART", "GESLOTEN");
 			cbStatus.setValue(sessie.getStatus().toString());
 			maakGebruikerTable(tblGebruikers,getDC().getGebruikersFromGeselecteerdeSessie());

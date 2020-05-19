@@ -49,11 +49,12 @@
             						<Font name="Franklin Gothic Medium Italic" size="30.0" />
             					</font>
             				</Text>
-                  <ImageView fitHeight="89.0" fitWidth="200.0" layoutX="370.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="90.0" fitWidth="122.0" layoutX="426.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../fonts/itlablogoKlein.jpg" />
+                        <Image url="@../fonts/windowiconalpha.png" />
                      </image>
                   </ImageView>
+
       			</children>
       		</Pane>
             <Region HBox.hgrow="ALWAYS" />

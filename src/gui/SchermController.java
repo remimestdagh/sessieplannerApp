@@ -103,6 +103,7 @@ public abstract class SchermController extends AnchorPane {
 		tblView.getColumns().addAll(verantwoordelijkeColumn, titelColumn, startDatumColumn, eindDatumColumn, plaatsenColumn);
 		tblView.getSortOrder().addAll(startDatumColumn,verantwoordelijkeColumn);
 		tblView.sort();
+		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 	
 	public void maakGebruikerTable(TableView tblView, ObservableList<IGebruiker> list) {
@@ -123,6 +124,7 @@ public abstract class SchermController extends AnchorPane {
 		
 		tblView.setItems(list);
 		tblView.getColumns().addAll(naamColumn, chamiloColumn, statusColumn,typeColumn);
+		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 	
 	public void maakAankondigingTable(TableView tblView, ObservableList<IAankondiging> list) {
@@ -139,6 +141,7 @@ public abstract class SchermController extends AnchorPane {
 		
 		tblView.setItems(list);
 		tblView.getColumns().addAll(inhoudColumn, auteurColumn, publicatieDatumColumn);
+		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 	
 	public void maakMediaTable(TableView tblView, ObservableList<IMedia> list) {
@@ -163,12 +166,18 @@ public abstract class SchermController extends AnchorPane {
 		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		
 	}
+	
 	public <E> void maakFeedbackTable(TableView tblView, ObservableList<E> list){
 		tblView.getColumns().clear();
-		TableColumn<IFeedback, String> typeColumn = new TableColumn<>("Feedback");
-		typeColumn.setCellValueFactory(new PropertyValueFactory<>("FeedbackTekst"));
+		
+		TableColumn<IFeedback, String> tekstColumn = new TableColumn<>("Tekst");
+		tekstColumn.setCellValueFactory(new PropertyValueFactory<>("FeedbackTekst"));
+		
+		TableColumn<IFeedback, String> auteurColumn = new TableColumn<>("Auteur");
+		auteurColumn.setCellValueFactory(new PropertyValueFactory<>("feedbackAuteur"));
+		
 		tblView.setItems(list);
-		tblView.getColumns().addAll(typeColumn);
+		tblView.getColumns().addAll(tekstColumn, auteurColumn);
 		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		
 	}
@@ -188,6 +197,7 @@ public abstract class SchermController extends AnchorPane {
 		
 		tblView.setItems(list);
 		tblView.getColumns().addAll(academiejaarColumn, startdatumColumn, einddatumColumn);
+		tblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 	
 	private double getInnerWindowHeightBounds(Stage s)

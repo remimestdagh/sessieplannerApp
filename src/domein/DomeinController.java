@@ -163,7 +163,7 @@ public class DomeinController {
 		changes.firePropertyChange("GebruikerList",0,1);
 	}
 	public ObservableList<ISessie> getSessiesfromGeselecteerdeGebruiker(){
-		return FXCollections.observableArrayList(geselecteerdeGebruiker.getSessiesWaarvoorAanwezig());
+		return (ObservableList<ISessie>)(Object)geselecteerdeGebruiker.getSessiesWaarvoorAanwezigObservable();
 	}
 	
 	//geselecteerde Sessie
@@ -178,7 +178,8 @@ public class DomeinController {
 		if(!(this.geselecteerdeSessie==null)) {
 			oudesessie=this.geselecteerdeSessie;
 		}
-		this.geselecteerdeSessie = sessie;
+		//this.geselecteerdeSessie = sessie;
+		this.geselecteerdeSessie = sessieDao.getSessieById(sessie.getSessieId());
 		changes.firePropertyChange("geselecteerdeSessie", oudesessie, sessie);
 		
 	}
@@ -228,25 +229,22 @@ public class DomeinController {
 	
 	//getters
 	public ObservableList<IMedia> getMediafromGeselecteerdeSessie(){
-		return FXCollections.observableArrayList(geselecteerdeSessie.getGebruikteMedia());
+		return (ObservableList<IMedia>)(Object)geselecteerdeSessie.getGebruikteMediaObservable();
 	}
 	public ObservableList<IAankondiging> getAankondigingenfromGeselecteerdeSessie(){
-		return FXCollections.observableArrayList(geselecteerdeSessie.getGeplaatsteAankondigingen());
+		return (ObservableList<IAankondiging>)(Object)geselecteerdeSessie.getGeplaatsteAankondigingenObservable();
 	}
 	public ObservableList<IGebruiker> getGebruikersFromGeselecteerdeSessie(){
-		if(geselecteerdeSessie.getAanwezigeGebruikers().isEmpty()) {
+		return (ObservableList<IGebruiker>)(Object)geselecteerdeSessie.getAanwezigeGebruikersObservable();
+		/*if(geselecteerdeSessie.getAanwezigeGebruikers().isEmpty()) {
 			return FXCollections.emptyObservableList();
-		}
-		return FXCollections.observableArrayList(geselecteerdeSessie.getAanwezigeGebruikersObservable());
-		
-		
-		
+		}*/
 	}
 	public ObservableList<IHerinnering> getHerinneringenFromGeselecteerdeSessie(){
-		return FXCollections.observableArrayList(geselecteerdeSessie.getHerinneringen());
+		return (ObservableList<IHerinnering>)(Object)geselecteerdeSessie.getHerinneringenObservable();
 	}
 	public ObservableList<IFeedback> getFeedbackFromGeselecteerdeSessie(){
-		return FXCollections.observableArrayList(geselecteerdeSessie.getGeplaatstFeedback());
+		return (ObservableList<IFeedback>)(Object)geselecteerdeSessie.getGeplaatstFeedbackObservable();
 	}
 	
 	//geselecteerde Sessie Kalender
@@ -292,8 +290,9 @@ public class DomeinController {
 		
 		changes.firePropertyChange("SessieList",0,1);
 	}
+	
 	public ObservableList<ISessie> getSessiesfromGeselecteerdeSessieKalender(){
-		return FXCollections.observableArrayList(geselecteerdeSessieKalender.getSessieList());
+		return (ObservableList<ISessie>)(Object)geselecteerdeSessieKalender.getSessieListObservable();
 	}
 	
 	private void mailHerinneringNaarGebruikers(String herinnering)

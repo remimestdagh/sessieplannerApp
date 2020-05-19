@@ -37,8 +37,8 @@ public class CreateMediaSchermController extends SchermController implements Ini
     private void handleCreateMediaAction(ActionEvent event) throws IOException {
 		String type = txtType.getText();
 		try {
-		getDC().addMediaToGeselecteerdeSessie(type);
-        sluitScherm(btnCreate);
+			getDC().addMediaToGeselecteerdeSessie(type);
+			sluitScherm(btnCreate);
 		}
 		catch(IllegalArgumentException e)
 		{

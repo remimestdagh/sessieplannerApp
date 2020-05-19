@@ -81,9 +81,11 @@ public class GebruikerDetailSchermController extends SchermController implements
 		IGebruiker gebruiker = (IGebruiker) evt.getNewValue();
 		
 		if(gebruiker != null) {
+			cbStatus.getItems().clear();
 			cbStatus.getItems().addAll("ACTIEF", "GEBLOKKEERD", "NIET_ACTIEF");
 			cbStatus.setValue(gebruiker.getStatus().toString());
 
+			cbType.getItems().clear();
 			cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "Gewone_Gebruiker");
 			cbType.setValue(gebruiker.getType().toString());
 

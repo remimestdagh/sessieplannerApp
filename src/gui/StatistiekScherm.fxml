@@ -12,13 +12,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="650.0" prefWidth="940.0" style="-fx-background-color: #406E8E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StatistiekSchermController">
+<VBox prefHeight="650.0" prefWidth="940.0" style="-fx-background-image: url('fonts/Background.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StatistiekSchermController">
    <children>
-      <ImageView fitHeight="40.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../fonts/itlablogoKlein.jpg" />
-         </image>
-      </ImageView>
+
       <HBox prefWidth="940.0" VBox.vgrow="ALWAYS">
          <children>
             <Region HBox.hgrow="ALWAYS" />

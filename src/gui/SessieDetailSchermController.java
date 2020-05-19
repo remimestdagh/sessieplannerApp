@@ -148,6 +148,7 @@ public class SessieDetailSchermController extends SchermController implements In
 			else {
 				maakHerinneringTable(tblHerinnering, getDC().getHerinneringenFromGeselecteerdeSessie());
 				txtHerinnering.setText("Herinneringen");
+				btnHerinnering.setDisable(false);
 			}
 			
 			txtTitel.setText(sessie.getTitel());

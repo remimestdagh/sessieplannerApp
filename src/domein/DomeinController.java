@@ -76,7 +76,7 @@ public class DomeinController {
 		if(gebruiker.getWachtwoord() !=password.hashCode()) {
 			throw new IllegalArgumentException("Verkeerd wachtwoord!");
 		}
-		if(gebruiker.getType() == GebruikerType.Gewone_Gebruiker) {
+		if(gebruiker.getType() == GebruikerType.GewoneGebruiker) {
 			throw new IllegalAccessError("Toegang gewijgerd, niet gemachtigd!");
 		}
 		ingelogdeGebruiker = gebruiker;
@@ -185,7 +185,9 @@ public class DomeinController {
 			oudesessie=this.geselecteerdeSessie;
 		}
 		//this.geselecteerdeSessie = sessie;
-		this.geselecteerdeSessie = sessieDao.getSessieById(sessie.getSessieId());
+		if(sessie != null) {
+			this.geselecteerdeSessie = sessieDao.getSessieById(sessie.getSessieId());
+		}
 		changes.firePropertyChange("geselecteerdeSessie", oudesessie, sessie);
 		
 	}

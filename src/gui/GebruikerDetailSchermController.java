@@ -86,7 +86,7 @@ public class GebruikerDetailSchermController extends SchermController implements
 			cbStatus.setValue(gebruiker.getStatus().toString());
 
 			cbType.getItems().clear();
-			cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "Gewone_Gebruiker");
+			cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "GewoneGebruiker");
 			cbType.setValue(gebruiker.getType().toString());
 
 			txtNaam.setText(gebruiker.getNaam());

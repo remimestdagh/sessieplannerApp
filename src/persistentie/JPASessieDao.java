@@ -49,6 +49,7 @@ public class JPASessieDao extends JPADao implements SessieDao{
 			lijstIngeschreven.addAll(lijstAanwezig);
 		}
 		s.setIngeschrevenGebruikers(lijstIngeschreven);
+		s.initialiseerSessieStatus();
 		
 		return s;
 	}
@@ -69,6 +70,7 @@ public class JPASessieDao extends JPADao implements SessieDao{
 				lijstIngeschreven.addAll(lijstAanwezig);
 			}
 			list.get(i).setIngeschrevenGebruikers(lijstIngeschreven);
+			list.get(i).initialiseerSessieStatus();
 		}
 		return list;
 	}

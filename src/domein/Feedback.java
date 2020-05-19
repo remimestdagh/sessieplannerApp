@@ -29,13 +29,14 @@ public class Feedback implements IFeedback {
 	// PARAMETERS
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "FeedbackId")
+	@Column(name = "Id")
 	private int feedbackId;
 	@Column(name = "AuteursNaam")
 	private String feedbackAuteur;
 	@Column(name = "FeedbackTekst")
 	private String feedbackTekst;
 	@ManyToOne
+    @JoinColumn(name = "SessieId")
 	private Sessie sessie;
 
 	// CONSTRUCTORS

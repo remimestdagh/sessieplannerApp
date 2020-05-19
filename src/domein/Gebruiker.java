@@ -144,8 +144,8 @@ public class Gebruiker implements IGebruiker{
 			return GebruikerType.HoofdVerantwoordelijke;
 		case "Verantwoordelijke":
 			return GebruikerType.Verantwoordelijke;
-		case "Gewone_Gebruiker":
-			return GebruikerType.Gewone_Gebruiker;
+		case "GewoneGebruiker":
+			return GebruikerType.GewoneGebruiker;
 		default:
 			throw new IllegalArgumentException("Geen geldig type!");
 		}

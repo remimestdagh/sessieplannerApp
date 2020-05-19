@@ -20,7 +20,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
 
 	<properties>
 		<property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-		<property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://52.232.120.84:1433;DatabaseName=javadb;integratedSecurity=false;"/>
+		<property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://52.232.120.84:1433;DatabaseName=SessiePlanner;integratedSecurity=false;"/>
 		<property name="javax.persistence.jdbc.user" value="jef.seys.y0431"/>
 		<property name="javax.persistence.jdbc.password" value="0B@57FB0e840"/>
 		<property name="javax.persistence.schema-generation.database.action" value="none"/>

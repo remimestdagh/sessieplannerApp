@@ -3,6 +3,7 @@ package domein;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,6 +16,7 @@ public class Media implements IMedia{
 	@Column(name = "Type")
 	private String type;
 	@ManyToOne
+    @JoinColumn(name = "SessieId")
 	private Sessie sessie;
 	
 	//CONSTRUCTOR

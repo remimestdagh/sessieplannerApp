@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -47,8 +48,12 @@ public class Sessie implements ISessie{
 	private LocalDateTime eindDatum;
 	private String sessieAanmaker;
 	//relaties 
-	@Enumerated
+	//@Enumerated
+	@Transient
 	private SessieStatus status;// Aangemaakt, Geopent, Gestart, Gesloten
+	private boolean isGestart;
+	private boolean isGeopend;
+	private boolean isVolzet;
 	private ObservableList<Media> gebruikteMedia;
 	private ObservableList<Herinnering> herinneringen;
 	private ObservableList<Aankondiging> geplaatsteAankondigingen;
@@ -123,6 +128,31 @@ public class Sessie implements ISessie{
 	}
 
 	// METHODS
+
+	
+	public void initialiseerSessieStatus() {
+		if (this.eindDatum.isBefore(LocalDateTime.now())) {
+			this.status = SessieStatus.GESLOTEN;
+		} else if (this.isGestart == true) {
+			this.status = SessieStatus.GESTART;
+		} else if (this.isGeopend == true) {
+			this.status = SessieStatus.GEOPEND;
+		} else {
+			this.status = SessieStatus.AANGEMAAKT;
+		}
+	}
+	public boolean isVolzet() {
+		return isVolzet;
+	}
+	public void setVolzet(boolean isVolzet) {
+		this.isVolzet = isVolzet;
+	}
+	public void setGestart(boolean isGestart) {
+		this.isGestart = isGestart;
+	}
+	public void setGeopend(boolean isGeopend) {
+		this.isGeopend = isGeopend;
+	}
 	public int getSessieId() {
 		return sessieId;
 	}
@@ -145,8 +175,9 @@ public class Sessie implements ISessie{
 			if(aanwezigeGebruikers != null) {
 				return "" + aanwezigeGebruikers.size();
 			}
-			return "" + aanwezigeGebruikers.size();
+			//return "" + aanwezigeGebruikers.size();
 		}
+		return "";
 	}
 	
 	public void addInschrijving(Gebruiker gebruiker) {
@@ -217,21 +248,21 @@ public class Sessie implements ISessie{
 		}
 		return false;
 	}
-	
+
 	public boolean isGesloten() {
 		if(status == SessieStatus.GESLOTEN) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean isGestart() {
 		if(status == SessieStatus.GESTART) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean isAangemaakt() {
 		if(status == SessieStatus.AANGEMAAKT) {
 			return true;

@@ -71,7 +71,8 @@ public class GebruikerOverzichtSchermController extends SchermController impleme
 		dto.setEmailadres("nieuw.email@hogent.be");
 		dto.setWachtwoord("password");
 		dto.setStatus("NIET_ACTIEF");
-		dto.setType("Gewone_Gebruiker");
+		dto.setType("GewoneGebruiker");
+		
 		
 		getDC().addGebruiker(dto);
     }

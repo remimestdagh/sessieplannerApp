@@ -143,12 +143,12 @@ public class SessieDetailSchermController extends SchermController implements In
 			if(!sessie.getEindDatum().isAfter(LocalDateTime.now())) {
 				maakFeedbackTable(tblHerinnering, getDC().getFeedbackFromGeselecteerdeSessie());
 				txtHerinnering.setText("Feedback");
-				btnHerinnering.setDisable(true);
+				btnHerinnering.setVisible(false);
 			}
 			else {
 				maakHerinneringTable(tblHerinnering, getDC().getHerinneringenFromGeselecteerdeSessie());
 				txtHerinnering.setText("Herinneringen");
-				btnHerinnering.setDisable(false);
+				btnHerinnering.setVisible(true);
 			}
 			
 			txtTitel.setText(sessie.getTitel());

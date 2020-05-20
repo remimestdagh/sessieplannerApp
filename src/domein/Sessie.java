@@ -282,23 +282,8 @@ public class Sessie implements ISessie{
 			setMAX_CAPACITEIT(dto.getMAX_CAPACITEIT());
 			setStartDatum(dto.getStartDatum());
 			setEindDatum(dto.getEindDatum());
-
-			switch(dto.getStatus()) {
-			case"AANGEMAAKT":
-				this.status = SessieStatus.AANGEMAAKT;
-				break;
-			case"GEOPEND":
-				this.status = SessieStatus.GEOPEND;
-				break;
-			case"GESTART":
-				this.status = SessieStatus.GESTART;
-				break;
-			case"GESLOTEN":
-				this.status = SessieStatus.GESLOTEN;
-				break;
-			default:
-				throw new IllegalArgumentException("Geen geldige status!");
-			}
+			setStatus(dto.getStatus());
+			
 		}
 
 	// Getters and setters

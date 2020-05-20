@@ -103,8 +103,8 @@ public class Gebruiker implements IGebruiker{
 		setEmailadres(dto.getEmailadres());
 		this.wachtwoord = new GebruikerWachtwoord(dto.getWachtwoord(), this);
 		
-		setStatus(convertStatus(dto.getStatus()));
-		setType(convertType(dto.getType()));
+		setStatus(dto.getStatus());
+		setType(dto.getType());
 		
 		sessiesWaarvoorIngeschreven = FXCollections.<Sessie>observableArrayList();
 		sessiesWaarvoorAanwezig = FXCollections.<Sessie>observableArrayList();
@@ -122,8 +122,8 @@ public class Gebruiker implements IGebruiker{
 		setNaam(dto.getNaam());
 		setNaamChamilo(dto.getNaamChamilo());
 		setEmailadres(dto.getEmailadres());
-		setStatus(convertStatus(dto.getStatus()));
-		setType(convertType(dto.getType()));
+		setStatus(dto.getStatus());
+		setType(dto.getType());
 	}
 	
 	private GebruikerStatus convertStatus(String status) {

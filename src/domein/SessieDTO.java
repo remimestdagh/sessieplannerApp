@@ -13,7 +13,7 @@ public class SessieDTO {
 	private LocalDateTime startDatum;
 	private LocalDateTime eindDatum;
 	private String sessieAanmaker;
-	private String status;
+	private SessieStatus status;
 
 	// CONSTRUCTOR
 
@@ -77,11 +77,11 @@ public class SessieDTO {
 		this.MAX_CAPACITEIT = max;
 	}
 
-	public String getStatus() {
+	public SessieStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(SessieStatus status) {
 		this.status = status;
 	}
 }

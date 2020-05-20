@@ -11,6 +11,8 @@ import java.util.concurrent.Flow.Subscriber;
 
 import domein.DomeinController;
 import domein.GebruikerDTO;
+import domein.GebruikerStatus;
+import domein.GebruikerType;
 import domein.IGebruiker;
 import domein.Sessie;
 import javafx.event.ActionEvent;
@@ -38,7 +40,10 @@ public class GebruikerDetailSchermController extends SchermController implements
 	private TextField txtNaam, txtChamilo, txtEmail;
 
 	@FXML
-	private ChoiceBox cbStatus, cbType;
+	private ChoiceBox<GebruikerType> cbType;
+	
+	@FXML
+	private ChoiceBox<GebruikerStatus> cbStatus;
 
 	@FXML
 	private TableView tblView;
@@ -69,8 +74,8 @@ public class GebruikerDetailSchermController extends SchermController implements
 			dto.setNaam(txtNaam.getText());
 			dto.setNaamChamilo(txtChamilo.getText());
 			dto.setEmailadres(txtEmail.getText());
-			dto.setStatus((String) cbStatus.getValue());
-			dto.setType((String) cbType.getValue());
+			dto.setStatus((GebruikerStatus) cbStatus.getValue());
+			dto.setType((GebruikerType) cbType.getValue());
 
 
 			String bericht = String.format(
@@ -91,13 +96,11 @@ public class GebruikerDetailSchermController extends SchermController implements
 		IGebruiker gebruiker = (IGebruiker) evt.getNewValue();
 
 		if (gebruiker != null) {
-			cbStatus.getItems().clear();
-			cbStatus.getItems().addAll("ACTIEF", "GEBLOKKEERD", "NIET_ACTIEF");
-			cbStatus.setValue(gebruiker.getStatus().toString());
+			cbStatus.getItems().setAll(GebruikerStatus.values());
+			cbStatus.setValue(gebruiker.getStatus());
 
-			cbType.getItems().clear();
-			cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "GewoneGebruiker");
-			cbType.setValue(gebruiker.getType().toString());
+			cbType.getItems().setAll(GebruikerType.values());
+			cbType.setValue(gebruiker.getType());
 
 			txtNaam.setText(gebruiker.getNaam());
 			txtChamilo.setText(gebruiker.getNaamChamilo());

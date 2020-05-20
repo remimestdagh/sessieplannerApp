@@ -63,7 +63,7 @@ public class SessieOverzichtSchermController extends SchermController implements
 		dto.setNaamGastspreker( "Naam gastspreker" );
 		dto.setSessieAanmaker(getDC().getNaamIngelogdeGebruiker());
 		dto.setMAX_CAPACITEIT( 1 );
-		dto.setStatus("AANGEMAAKT");
+		dto.setStatus(SessieStatus.AANGEMAAKT);
 		dto.setLokaalCode( "Lokaal code" );
 		
 		getDC().addSessieToGeselecteerdeSessieKalender(dto);

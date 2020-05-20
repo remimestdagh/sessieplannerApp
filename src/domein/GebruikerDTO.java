@@ -6,8 +6,8 @@ public class GebruikerDTO {
 	private String naamChamilo;
 	private String emailadres;
 	private String wachtwoord;
-	private String status;
-	private String type;
+	private GebruikerStatus status;
+	private GebruikerType type;
 	private String unhashed;
 
 	// private String profielFoto;
@@ -53,19 +53,19 @@ public class GebruikerDTO {
 		this.wachtwoord = wachtwoord;
 	}
 
-	public String getStatus() {
+	public GebruikerStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(GebruikerStatus status) {
 		this.status = status;
 	}
 
-	public String getType() {
+	public GebruikerType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(GebruikerType type) {
 		this.type = type;
 	}
 

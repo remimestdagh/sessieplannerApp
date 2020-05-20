@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import domein.DomeinController;
 import domein.GebruikerDTO;
+import domein.GebruikerStatus;
+import domein.GebruikerType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,7 +24,10 @@ public class CreateGebruikerSchermController extends SchermController implements
 	private TextField txNaam, txChamilo, txEmail, txPassword;
 
 	@FXML
-	private ChoiceBox<String> cbType, cbStatus;
+	private ChoiceBox<GebruikerType> cbType;
+	
+	@FXML
+	private ChoiceBox<GebruikerStatus> cbStatus;
 
 	@FXML
 	private Label errorText;
@@ -36,11 +41,11 @@ public class CreateGebruikerSchermController extends SchermController implements
 	public void setDomeinController(DomeinController dc) {
 		super.setDomeinController(dc);
 
-		cbStatus.getItems().addAll("ACTIEF", "GEBLOKKEERD", "NIET_ACTIEF");
-		cbStatus.setValue("ACTIEF");
+		cbStatus.getItems().setAll(GebruikerStatus.values());
+		cbStatus.setValue(GebruikerStatus.ACTIEF);
 
-		cbType.getItems().addAll("HoofdVerantwoordelijke", "Verantwoordelijke", "Gewone_Gebruiker");
-		cbType.setValue("Gewone_Gebruiker");
+		cbType.getItems().setAll(GebruikerType.values());
+		cbType.setValue(GebruikerType.GewoneGebruiker);
 	}
 
 	@FXML
@@ -53,8 +58,8 @@ public class CreateGebruikerSchermController extends SchermController implements
 			dto.setNaamChamilo(txChamilo.getText());
 			dto.setEmailadres(txEmail.getText());
 			dto.setWachtwoord(txPassword.getText());
-			dto.setStatus((String) cbStatus.getValue());
-			dto.setType((String) cbType.getValue());
+			dto.setStatus((GebruikerStatus) cbStatus.getValue());
+			dto.setType((GebruikerType) cbType.getValue());
 
 			getDC().addGebruiker(dto);
 			sluitScherm(btnCreate);

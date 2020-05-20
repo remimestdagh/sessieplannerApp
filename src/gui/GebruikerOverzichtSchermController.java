@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import domein.DomeinController;
 import domein.Gebruiker;
 import domein.GebruikerDTO;
+import domein.GebruikerStatus;
+import domein.GebruikerType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -78,8 +80,8 @@ public class GebruikerOverzichtSchermController extends SchermController impleme
 		dto.setUnhashed(pw);
 		dto.setWachtwoord(pw);
 		
-		dto.setStatus("NIET_ACTIEF");
-		dto.setType("GewoneGebruiker");
+		dto.setStatus(GebruikerStatus.NIET_ACTIEF);
+		dto.setType(GebruikerType.GewoneGebruiker);
 		
 		
 		getDC().addGebruiker(dto);

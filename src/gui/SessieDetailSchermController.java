@@ -14,6 +14,7 @@ import domein.ISessie;
 import domein.Media;
 import domein.Sessie;
 import domein.SessieDTO;
+import domein.SessieStatus;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +44,7 @@ public class SessieDetailSchermController extends SchermController implements In
 	private TextField txtLokaal, txtCapaciteit, txtSpreker, txtEindDatum, txtStartDatum, txtVerantwoordelijke, txtTitel;
 
 	@FXML
-	private ChoiceBox<String> cbStatus;
+	private ChoiceBox<SessieStatus> cbStatus;
 
 	@FXML
 	private Text txtGebruikers, txtAankondigingen, txtHerinnering,txtError;
@@ -119,7 +120,7 @@ public class SessieDetailSchermController extends SchermController implements In
 			dto.setNaamGastspreker(txtSpreker.getText());
 			dto.setMAX_CAPACITEIT(Integer.parseInt(txtCapaciteit.getText()));
 			dto.setLokaalCode(txtLokaal.getText());
-			dto.setStatus((String) cbStatus.getValue());
+			dto.setStatus((SessieStatus) cbStatus.getValue());
 
 			try {
 				getDC().editGeselecteerdeSessie(dto);
@@ -158,9 +159,8 @@ public class SessieDetailSchermController extends SchermController implements In
 			txtSpreker.setText(sessie.getNaamGastspreker());
 			txtCapaciteit.setText("" + sessie.getMAX_CAPACITEIT());
 			txtLokaal.setText(sessie.getLokaalCode());
-			cbStatus.getItems().clear();
-			cbStatus.getItems().addAll("AANGEMAAKT", "GEOPEND", "GESTART", "GESLOTEN");
-			cbStatus.setValue(sessie.getStatus().toString());
+			cbStatus.getItems().setAll(SessieStatus.values());
+			cbStatus.setValue(sessie.getStatus());
 			maakGebruikerTable(tblGebruikers,getDC().getGebruikersFromGeselecteerdeSessie());
 			 
 		} else {

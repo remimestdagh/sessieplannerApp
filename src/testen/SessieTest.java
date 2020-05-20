@@ -14,6 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import domein.Sessie;
 import domein.SessieDTO;
+import domein.SessieStatus;
 
 public class SessieTest {
 
@@ -77,7 +78,7 @@ public class SessieTest {
 		dtojamin.setLokaalCode("nieuwe code");
 		dtojamin.setStartDatum(LocalDateTime.now().plusDays(5));
 		dtojamin.setEindDatum(LocalDateTime.now().plusDays(5).plusHours(5));
-		dtojamin.setStatus("GEOPEND");
+		dtojamin.setStatus(SessieStatus.GEOPEND);
 		
 		Assertions.assertThrows(IllegalArgumentException.class, () -> sessie1.editSessie(dtojamin));
 	}

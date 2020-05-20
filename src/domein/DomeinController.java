@@ -184,7 +184,6 @@ public class DomeinController {
 		if(!(this.geselecteerdeSessie==null)) {
 			oudesessie=this.geselecteerdeSessie;
 		}
-		//this.geselecteerdeSessie = sessie;
 		if(sessie != null) {
 			this.geselecteerdeSessie = sessieDao.getSessieById(sessie.getSessieId());
 		}
@@ -288,7 +287,7 @@ public class DomeinController {
 		Sessie sessie = new Sessie(dto);
 		geselecteerdeSessieKalender.addSessie(sessie);
 		sessieKalenderDao.update(geselecteerdeSessieKalender);
-		setGeselecteerdeSessie(sessie);
+		//setGeselecteerdeSessie(sessie);
 		changes.firePropertyChange("SessieList",0,1);
 	}
 	public void verwijderSessieFromGeselecteerdeSessieKalender(ISessie sessie) {

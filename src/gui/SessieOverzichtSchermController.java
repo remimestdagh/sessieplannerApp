@@ -7,10 +7,13 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+import javax.persistence.NoResultException;
+
 import domein.DomeinController;
 import domein.ISessie;
 import domein.Sessie;
 import domein.SessieDTO;
+import domein.SessieStatus;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,11 +58,12 @@ public class SessieOverzichtSchermController extends SchermController implements
     private void handleSessieToevoegenAction(ActionEvent event) throws IOException {
 		SessieDTO dto = new SessieDTO();
 		dto.setTitel( "Nieuwe sessie" );
-		dto.setStartDatum( LocalDateTime.now() );
-		dto.setEindDatum( LocalDateTime.now() );
+		dto.setStartDatum( LocalDateTime.now().plusDays(1) );
+		dto.setEindDatum( LocalDateTime.now().plusDays(1).plusHours(1) );
 		dto.setNaamGastspreker( "Naam gastspreker" );
 		dto.setSessieAanmaker(getDC().getNaamIngelogdeGebruiker());
 		dto.setMAX_CAPACITEIT( 1 );
+		dto.setStatus("AANGEMAAKT");
 		dto.setLokaalCode( "Lokaal code" );
 		
 		getDC().addSessieToGeselecteerdeSessieKalender(dto);
@@ -73,7 +77,12 @@ public class SessieOverzichtSchermController extends SchermController implements
 	
 	@FXML
     private void handleBeheerSessieAction(MouseEvent event) throws IOException {
-		getDC().setGeselecteerdeSessie((Sessie)tblView.getSelectionModel().getSelectedItem());
+		try {
+			getDC().setGeselecteerdeSessie((Sessie)tblView.getSelectionModel().getSelectedItem());
+		}catch(NoResultException e) {
+			
+		}
+		
     }
 
 	@Override

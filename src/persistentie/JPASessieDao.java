@@ -3,6 +3,7 @@ package persistentie;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import domein.Gebruiker;
@@ -37,11 +38,11 @@ public class JPASessieDao extends JPADao implements SessieDao{
 		Sessie s = null;
 		TypedQuery<Sessie> query = em
 				.createQuery(String.format("SELECT s FROM Sessie AS s WHERE s.sessieId = %d", id), Sessie.class);
+		
 		s = query.getSingleResult();
 		
 		TypedQuery<Gebruiker> querySessiesWaarvoorAanwezig = em.createQuery(String.format("SELECT g FROM Gebruiker g join GebruikerSessie gs on g.gebruikerId = gs.GebruikerId WHERE gs.SessieId = %d and gs.GebruikerWasAanwezig = 1", id), Gebruiker.class);
 		List<Gebruiker> lijstAanwezig = querySessiesWaarvoorAanwezig.getResultList();
-		System.out.println(lijstAanwezig);
 		s.setAanwezigeGebruikers(lijstAanwezig);
 		TypedQuery<Gebruiker> querySessiesWaarvoorIngeschreven = em.createQuery(String.format("SELECT g FROM Gebruiker g join GebruikerSessie gs on g.gebruikerId = gs.GebruikerId WHERE gs.SessieId = %d and gs.GebruikerWasAanwezig = 0", id), Gebruiker.class);
 		List<Gebruiker> lijstIngeschreven = querySessiesWaarvoorIngeschreven.getResultList();
@@ -62,7 +63,6 @@ public class JPASessieDao extends JPADao implements SessieDao{
 		for(int i = 0; i< list.size(); i++) {
 			TypedQuery<Gebruiker> querySessiesWaarvoorAanwezig = em.createQuery(String.format("SELECT g FROM Gebruiker g join GebruikerSessie gs on g.gebruikerId = gs.GebruikerId WHERE gs.SessieId = %d and gs.GebruikerWasAanwezig = 1", list.get(i).getSessieId()), Gebruiker.class);
 			List<Gebruiker> lijstAanwezig = querySessiesWaarvoorAanwezig.getResultList();
-			System.out.println(lijstAanwezig);
 			list.get(i).setAanwezigeGebruikers(lijstAanwezig);
 			TypedQuery<Gebruiker> querySessiesWaarvoorIngeschreven = em.createQuery(String.format("SELECT g FROM Gebruiker g join GebruikerSessie gs on g.gebruikerId = gs.GebruikerId WHERE gs.SessieId = %d and gs.GebruikerWasAanwezig = 0", list.get(i).getSessieId()), Gebruiker.class);
 			List<Gebruiker> lijstIngeschreven = querySessiesWaarvoorIngeschreven.getResultList();

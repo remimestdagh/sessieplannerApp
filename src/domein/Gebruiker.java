@@ -197,6 +197,9 @@ public class Gebruiker implements IGebruiker{
 		if(wachtwoord.isBlank()|wachtwoord.isEmpty()) {
 			throw new IllegalArgumentException("Het wachtwoord mag niet leeg zijn");
 		}
+		if(this.wachtwoord==null) {
+			this.wachtwoord = new GebruikerWachtwoord(wachtwoord, this);
+		}
 		this.wachtwoord.setWachtwoord(wachtwoord);
 		this.wachtwoord.setGebruiker(this);
 	}

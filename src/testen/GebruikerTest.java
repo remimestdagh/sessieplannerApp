@@ -16,7 +16,7 @@ public class GebruikerTest {
 	@BeforeEach
 	public void before() {
 		gebruiker1 = new Gebruiker("Boris Hamster", "bhamstr1", "boris.hamster@student.hogent.be", "Kaas1234!",
-				"ACTIEF", "Gewone_Gebruiker");
+				"ACTIEF", "GewoneGebruiker");
 		gebruiker1.addInschrijving(new Sessie("Scrum tactics", "gastspreker", "lokaalcode", 100, LocalDateTime.now().plusDays(1),
 				LocalDateTime.now().plusDays(1).plusHours(1), "aanmaker"));
 

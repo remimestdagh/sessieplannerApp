@@ -58,6 +58,9 @@ public class GebruikerDetailSchermController extends SchermController implements
 
 	}
 
+	/**
+	 * Veranderen van een geselecteerde gebruiker's data.
+	 */
 	@FXML
 	private void handleEditAction(ActionEvent event) throws IOException {
 		try {
@@ -69,8 +72,15 @@ public class GebruikerDetailSchermController extends SchermController implements
 			dto.setStatus((String) cbStatus.getValue());
 			dto.setType((String) cbType.getValue());
 
+
+			String bericht = String.format(
+					"Uw gegevens, op email-adres: %s werden aangepast.%n%nWe geven u graag een overzicht van de huidige toestand van uw profiel:%n     Naam : %s%n     Naam Chamillo : %s%n     Email-adres : %s%n     Wachtwoord : %s%n",
+					dto.getEmailadres(), dto.getNaam(), dto.getNaamChamilo(),dto.getEmailadres(), getDC().getGeselecteerdeGebruiker().getUnhashed());
+
 			getDC().editGeselecteerdeGebruiker(dto);
-			
+			String[] recipient = {dto.getEmailadres()};
+			getDC().mailNaarGebruikers(bericht, "update", recipient);
+
 		} catch (IllegalArgumentException e) {
 			lblError.setText(e.getMessage());
 		}
@@ -79,8 +89,8 @@ public class GebruikerDetailSchermController extends SchermController implements
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		IGebruiker gebruiker = (IGebruiker) evt.getNewValue();
-		
-		if(gebruiker != null) {
+
+		if (gebruiker != null) {
 			cbStatus.getItems().clear();
 			cbStatus.getItems().addAll("ACTIEF", "GEBLOKKEERD", "NIET_ACTIEF");
 			cbStatus.setValue(gebruiker.getStatus().toString());
@@ -94,9 +104,9 @@ public class GebruikerDetailSchermController extends SchermController implements
 			txtEmail.setText(gebruiker.getEmailadres());
 
 			lblIntro.setText("Sessies waarvoor " + txtNaam.getText() + " aanwezig was:");
-		
+
 			maakSessieTable(tblView, getDC().getSessiesfromGeselecteerdeGebruiker());
-		}else {
+		} else {
 			cbStatus.getItems().clear();
 			cbType.getItems().clear();
 			txtNaam.clear();

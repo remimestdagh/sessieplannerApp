@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import domein.IGebruiker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,7 +64,16 @@ public class CreateHerinneringSchermController extends SchermController implemen
 			// 1. herinneringen doormailen indien checkbox geselecteerd was
 			if (cbVerstuurMail.isSelected()) {
 				lblMailText.setText("Het venster zal worden gesloten eens de mail verzonden werd...");
-				getDC().verstuurHerinneringAlsEmail(headerMessage, herinnering);
+				
+				String[] mailTo = new String[getDC().getGebruikersFromGeselecteerdeSessie().size()];
+				int i = 0;
+				for (IGebruiker gebruiker : getDC().getGebruikersFromGeselecteerdeSessie()) {
+				    mailTo[i]=gebruiker.getEmailadres();
+				    i++;
+				}
+				
+				
+				getDC().mailNaarGebruikers(headerMessage + herinnering, "herinnering", mailTo);
 			}
 
 			// 2. herinneringen storen

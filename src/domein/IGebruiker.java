@@ -8,6 +8,8 @@ public interface IGebruiker {
 	
 	public String getNaamChamilo();
 	
+	public String getUnhashed();
+	
 	public String getEmailadres();
 	
 	public int getWachtwoord();

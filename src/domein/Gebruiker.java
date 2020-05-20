@@ -61,7 +61,8 @@ public class Gebruiker implements IGebruiker{
 	@Transient
 	private ObservableList<Sessie> sessiesWaarvoorAanwezig;
 	
-	
+	@Transient 
+	private String unhashed;
 	
 	//CONSTRUCTOR
 	protected Gebruiker() {}
@@ -96,7 +97,7 @@ public class Gebruiker implements IGebruiker{
 	}
 	
 	public Gebruiker(GebruikerDTO dto) {
-		
+		setUnhashed(dto.getUnhashed());
 		setNaam(dto.getNaam());
 		setNaamChamilo(dto.getNaamChamilo());
 		setEmailadres(dto.getEmailadres());
@@ -242,5 +243,13 @@ public class Gebruiker implements IGebruiker{
 		return this.type.toString();
 	}
 	
+	private void setUnhashed(String password)
+	{
+		this.unhashed=password;
+	}
 	
+	public String getUnhashed()
+	{
+		return unhashed;
+	}
 }

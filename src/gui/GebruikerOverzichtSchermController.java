@@ -4,6 +4,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
@@ -69,12 +71,19 @@ public class GebruikerOverzichtSchermController extends SchermController impleme
 		dto.setNaam("Nieuwe gebruiker");
 		dto.setNaamChamilo("Naam chamilo");
 		dto.setEmailadres("nieuw.email@hogent.be");
-		dto.setWachtwoord("password");
+		
+		
+		//dto.setWachtwoord("password");
+		String pw = generatePassword();
+		dto.setUnhashed(pw);
+		dto.setWachtwoord(pw);
+		
 		dto.setStatus("NIET_ACTIEF");
 		dto.setType("GewoneGebruiker");
 		
 		
 		getDC().addGebruiker(dto);
+
     }
 	
 	/**
@@ -88,5 +97,21 @@ public class GebruikerOverzichtSchermController extends SchermController impleme
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		maakGebruikerTable(tblView, getDC().getGebruikers());
+	}
+	
+	/**
+	 * Genereert een random 7 digit string
+	 */
+	private String generatePassword()
+	{
+		String mogelijks ="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzkaas1234567890";
+		int maxPasswordLength = 7;
+		Random random = new Random();
+		
+        char[] text = new char[maxPasswordLength];
+        for (int i = 0; i < maxPasswordLength; i++) {
+            text[i] = mogelijks.charAt(random.nextInt(mogelijks.length()));
+        }
+        return new String(text);
 	}
 }

@@ -8,6 +8,7 @@ public class GebruikerDTO {
 	private String wachtwoord;
 	private String status;
 	private String type;
+	private String unhashed;
 
 	// private String profielFoto;
 	// private LocalDateTime inschrijvingsDatum;
@@ -17,6 +18,7 @@ public class GebruikerDTO {
 	public GebruikerDTO() {
 	}
 
+	
 	// GETTERS AND SETTERS
 
 	public String getNaam() {
@@ -69,5 +71,14 @@ public class GebruikerDTO {
 
 	public String getTypeString() {
 		return this.type.toString();
+	}
+	
+	public String getUnhashed()
+	{
+		return unhashed;
+	}
+	public void setUnhashed(String pw)
+	{
+		this.unhashed=pw;
 	}
 }

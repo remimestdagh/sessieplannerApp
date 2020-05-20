@@ -223,11 +223,8 @@ public class DomeinController {
 		sessieDao.update(geselecteerdeSessie);
 	}
 	
-	public void verstuurHerinneringAlsEmail(String headerMessage, String herinnering)
-	{
-		mailHerinneringNaarGebruikers(headerMessage+herinnering);// verzend een email met herinneringen
-	}
-	
+
+
 	
 	public void verwijderMediaFromGeselecteerdeSessie(Media media) {
 		if(ingelogdeGebruiker.getType() != GebruikerType.HoofdVerantwoordelijke 
@@ -312,7 +309,7 @@ public class DomeinController {
 		return (ObservableList<ISessie>)(Object)geselecteerdeSessieKalender.getSessieListObservable();
 	}
 	
-	private void mailHerinneringNaarGebruikers(String herinnering)
+	public void mailNaarGebruikers(String bericht, String type, String[] recipients)
 	{
 		
 		String host = "smtp.gmail.com"; // google SMTP Server voor het versturen van email adressen.
@@ -323,23 +320,23 @@ public class DomeinController {
 
 
 		//bouw lijst van alle recipients dmv hun emailaddress in string formaat
+		/*
 		String[] mailTo = new String[getGebruikersFromGeselecteerdeSessie().size()];
 		int i = 0;
 		for (IGebruiker gebruiker : getGebruikersFromGeselecteerdeSessie()) {
 		    mailTo[i]=gebruiker.getEmailadres();
 		    i++;
 		}
+		*/
 		//bouw het mail bericht op
-		String subject = "U hebt een nieuwe herinnering ontvangen van het IT-Lab!";
-		String message = herinnering;
+		String subject = String.format("U hebt een nieuwe %s ontvangen van het IT-Lab!", type);
+		String message = bericht;
 
 		//emailer object
 		Emailer mailer = new Emailer();
 		try {
-			mailer.sendPlainTextEmail(host, port, mailFrom, password, mailTo, subject, message);
-			System.out.println("Het verzenden van de herinnering is succesvol!");
+			mailer.sendPlainTextEmail(host, port, mailFrom, password, recipients, subject, message);
 		} catch (Exception ex) {
-			System.out.println("Het verzenden van de herinnering is mislukt.");
 			ex.printStackTrace();
 		}
 	}
